@@ -1,4 +1,4 @@
-import com.jme3.
+import com.jme3.opencl.Program;
 
 public class Main {
 }
