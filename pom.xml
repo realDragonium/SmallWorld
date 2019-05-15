@@ -14,31 +14,6 @@
             <artifactId>firebase-admin</artifactId>
             <version>6.8.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.jmonkeyengine</groupId>
-            <artifactId>jme3-plugins</artifactId>
-            <version>3.3.0-alpha1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jmonkeyengine</groupId>
-            <artifactId>jme3-desktop</artifactId>
-            <version>3.2.2-stable</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jmonkeyengine</groupId>
-            <artifactId>jme3-bullet-native</artifactId>
-            <version>3.2.2-stable</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jmonkeyengine</groupId>
-            <artifactId>jme3-core</artifactId>
-            <version>3.3.0-alpha1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jmonkeyengine</groupId>
-            <artifactId>jme3-lwjgl3</artifactId>
-            <version>3.3.0-alpha1</version>
-        </dependency>
     </dependencies>
 
 </project>
