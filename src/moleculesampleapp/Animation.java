@@ -2,32 +2,35 @@ package moleculesampleapp;
 
 import java.util.ArrayList;
 
+import javafx.collections.ObservableList;
 import javafx.scene.Group;
+import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Translate;
 
 public class Animation {
 
 	private double playRate = 0.1;
 	private ArrayList<AnimPoint> animationPoints = new ArrayList<AnimPoint>();
-	private Transform objectBeginTransform;
+	private Translate objectBeginTransform;
 	private AnimPoint nextPoint = null;
 	private AnimPoint lastPoint;
-	private Vector3 deltaPosition;
+	private Translate deltaPosition;
+	private double deltaRotationX;
+	private double deltaRotationY;
+	private double deltaRotationZ;
 	private double animFrame = 0;
 	
 	public Animation() {
-		Transform beginPoint = new Transform();
-		beginPoint.position = new Vector3(0.0,0.0,0.0);
-		beginPoint.rotation = new Rotation(0.0,0.0,0.0);
-		animationPoints.add(new AnimPoint(beginPoint, 0.0));
+		
+		animationPoints.add(new AnimPoint(new Translate(0, 0, 0), new Rotate(0), new Rotate(0), new Rotate(0), 0.0));
 	}
 	
-	public void addAnimationPoint(Transform transform, double time) {
-		System.out.println(time);
-		animationPoints.add(new AnimPoint(transform, time));
+	public void addAnimationPoint(Translate pos, double rotX, double rotY, double rotZ, double time) {
+		animationPoints.add(new AnimPoint(pos, new Rotate(rotX), new Rotate(rotY), new Rotate(rotZ), time));
 	}
 	
-	public void playAnimation(Object model, boolean loop) {
-		objectBeginTransform = model.transform; 
+	public void playAnimation(Xform model, boolean loop) {
+		objectBeginTransform = model.t; 
 		if(loop) {
 			
 		}
@@ -35,37 +38,48 @@ public class Animation {
 		else {
 			
 			if(nextPoint == null) {
-				findNextAnimPoint();
-				deltaPosition = confPosChange(model.transform);
+				findNextAnimPoint(model);
 			}
 			else if(animFrame >= nextPoint.time) {
-				System.out.println("volgende");
-				findNextAnimPoint();
-				deltaPosition = confPosChange(model.transform);
+				findNextAnimPoint(model);
 			}
 			nextAnimFrame(model);
 			animFrame += playRate;
 		}
 	}
 	
-	public void nextAnimFrame(Object model) {
-		model.transform.position.plus(deltaPosition);
-		model.updatePosition();
+	public void nextAnimFrame(Xform model) {
+		model.t.setX(model.t.getX() + deltaPosition.getX());
+		model.t.setY(model.t.getY() + deltaPosition.getY());
+		model.t.setZ(model.t.getZ() + deltaPosition.getZ());
+		model.rx.setAngle(model.rx.getAngle() + deltaRotationX); 
+		model.ry.setAngle(model.ry.getAngle() + deltaRotationY); 
+		model.rz.setAngle(model.rz.getAngle() + deltaRotationZ); 
 	}
 	
-	public Vector3 confPosChange(Transform transform) {
+	public Translate getPosChange() {
 		double animTime = nextPoint.time - lastPoint.time;
-		double deltaX = nextPoint.transform.position.x - lastPoint.transform.position.x;
-		double deltaY = nextPoint.transform.position.y - lastPoint.transform.position.y;
-		double deltaZ = nextPoint.transform.position.z - lastPoint.transform.position.z;
+		double deltaX = nextPoint.translate.getX() - lastPoint.translate.getX();
+		double deltaY = nextPoint.translate.getY() - lastPoint.translate.getY();
+		double deltaZ = nextPoint.translate.getZ() - lastPoint.translate.getZ();
 		double positionStepX = deltaX / (animTime / playRate);
 		double positionStepY = deltaY / (animTime / playRate);
 		double positionStepZ = deltaZ / (animTime / playRate);
-		return new Vector3(positionStepX, positionStepY, positionStepZ);
+		return new Translate(positionStepX, positionStepY, positionStepZ);
 		
 	}
 	
-	public void findNextAnimPoint() {
+	public void confRotChange() {
+		double animTime = nextPoint.time - lastPoint.time;
+		double deltaX = nextPoint.rotateX.getAngle() - lastPoint.rotateX.getAngle();
+		double deltaY = nextPoint.rotateY.getAngle() - lastPoint.rotateY.getAngle();
+		double deltaZ = nextPoint.rotateZ.getAngle() - lastPoint.rotateZ.getAngle();
+		deltaRotationX = deltaX / (animTime / playRate);
+		deltaRotationY = deltaY / (animTime / playRate);
+		deltaRotationZ = deltaZ / (animTime / playRate);
+	}
+	
+	public void findNextAnimPoint(Xform model) {
 		lastPoint = nextPoint;
 		double time = 1000;
 		if(nextPoint == null) {
@@ -75,11 +89,11 @@ public class Animation {
 		}
 		for(int i = 2; i < animationPoints.size(); i++) {
 			if(animationPoints.get(i).time < time && animationPoints.get(i).time > lastPoint.time) {
-				System.out.println(animationPoints.get(i).time);
 				nextPoint = animationPoints.get(i);
 				time = nextPoint.time;
 			}
 		}
-		System.out.println(nextPoint.transform.position.y);
+		deltaPosition = getPosChange();
+		confRotChange();
 	}
 }

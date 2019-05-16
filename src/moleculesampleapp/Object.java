@@ -3,7 +3,9 @@ package moleculesampleapp;
 import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point3D;
 import javafx.scene.Group;
+import javafx.scene.transform.Rotate;
 
 public class Object {
 	Transform transform;
@@ -23,9 +25,11 @@ public class Object {
 		return graphic;
 	}
 	
-	public void updatePosition() {
+	public void updateTransform(Rotation deltaRot) {
 		graphic.setTranslateX(transform.position.x);
 		graphic.setTranslateY(transform.position.y);
 		graphic.setTranslateZ(transform.position.z);
+		System.out.println("x as: " + deltaRot.x + " y as: " + deltaRot.y + " z as: " + deltaRot.z);
+		graphic.getTransforms().add(new Rotate(deltaRot.x, deltaRot.y, deltaRot.z));
 	}
 }

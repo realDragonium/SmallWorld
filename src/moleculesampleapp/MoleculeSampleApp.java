@@ -46,6 +46,7 @@ import javafx.scene.shape.Box;
 import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Translate;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.KeyEvent;
@@ -59,7 +60,7 @@ import javafx.scene.input.PickResult;
  */
 public class MoleculeSampleApp extends Application {
 	
-	private Object Zeb;
+	private Xform Zeb;
 	private Animation anim1;
 
     final Group root = new Group();
@@ -302,25 +303,21 @@ public class MoleculeSampleApp extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
     	
-    	Zeb = new Object();
-    	Zeb.importFXMl("zeb.fxml");
+    	Zeb = new Xform();
+    	FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(this.getClass().getResource("zeb.fxml"));
+        Group graphic = fxmlLoader.<Group>load(); 
+    	Zeb.getChildren().add(graphic);
+    	
         anim1 = new Animation();
-        Transform animTrans = new Transform();
-        animTrans.position = new Vector3(0.0, 100.0, 0.0);
-        anim1.addAnimationPoint(animTrans, 1.0);
-
-        Transform animTrans2 = new Transform();
-        animTrans2.position = new Vector3(0.0, 20.0, 0.0);
-        anim1.addAnimationPoint(animTrans2, 8.0);
-        
-        Transform animTrans3 = new Transform();
-        animTrans3.position = new Vector3(0.0, 50.0, 0.0);
-        anim1.addAnimationPoint(animTrans3, 20.0);
-        
-        
-        Transform animTrans4 = new Transform();
-        animTrans4.position = new Vector3(70.0, 40.0, 0.0);
-        anim1.addAnimationPoint(animTrans4, 10.0);
+        anim1.addAnimationPoint(new Translate(0,105,0), 0, 0, 0, 5);
+        anim1.addAnimationPoint(new Translate(0,95,0), 0, 0, 45, 6);
+        anim1.addAnimationPoint(new Translate(0,105,0), 0, 0, 90, 7);
+        anim1.addAnimationPoint(new Translate(0,95,0), 0, 0, 90, 9);
+        anim1.addAnimationPoint(new Translate(0,105,0), 0, 0, 90, 10.0);
+        anim1.addAnimationPoint(new Translate(0,100,0), 0, 0, 90, 11.0);
+        anim1.addAnimationPoint(new Translate(-30,100,0), 0, 0, 90, 12.0);
+        anim1.addAnimationPoint(new Translate(1000,100,0), 0, 0, 90, 13.0);
         
         root.getChildren().add(world);
         root.setDepthTest(DepthTest.ENABLE);
@@ -329,7 +326,7 @@ public class MoleculeSampleApp extends Application {
         buildCamera();
         //buildAxes();
         //buildMolecule();
-    	world.getChildren().add(Zeb.getGraphic());
+    	world.getChildren().add(Zeb);
     	//graphic.;
         
         Scene scene = new Scene(root, 1024, 768, true);
