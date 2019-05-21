@@ -44,6 +44,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
 import javafx.scene.shape.Cylinder;
+import javafx.scene.shape.Shape3D;
 import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
@@ -57,7 +58,7 @@ import java.io.IOException;
  */
 public class MoleculeSampleApp extends Application {
 
-    private Xform Zeb;
+    private Xform World;
     private Animation anim1;
 
     final Group root = new Group();
@@ -68,8 +69,8 @@ public class MoleculeSampleApp extends Application {
     final Xform cameraXform = new Xform();
     final Xform cameraXform2 = new Xform();
     final Xform cameraXform3 = new Xform();
-    private static final double CAMERA_INITIAL_DISTANCE = -450;
-    private static final double CAMERA_INITIAL_X_ANGLE = 70.0;
+    private static final double CAMERA_INITIAL_DISTANCE = -150;
+    private static final double CAMERA_INITIAL_X_ANGLE = -90.0;
     private static final double CAMERA_INITIAL_Y_ANGLE = 320.0;
     private static final double CAMERA_NEAR_CLIP = 0.1;
     private static final double CAMERA_FAR_CLIP = 10000.0;
@@ -197,7 +198,7 @@ public class MoleculeSampleApp extends Application {
                         break;
 
                     case A:
-                        anim1.playAnimation(Zeb, false);
+                        anim1.playAnimation(World, false);
                 }
             }
         });
@@ -300,11 +301,11 @@ public class MoleculeSampleApp extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-        Zeb = new Xform();
+        World = new Xform();
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(this.getClass().getResource("/zeb.fxml"));
+        fxmlLoader.setLocation(this.getClass().getResource("/map2.fxml"));
         Group graphic = fxmlLoader.load();
-        Zeb.getChildren().add(graphic);
+        World.getChildren().add(graphic);
 
         anim1 = new Animation();
         anim1.addAnimationPoint(new Translate(0, 105, 0), 0, 0, 0, 5);
@@ -316,9 +317,25 @@ public class MoleculeSampleApp extends Application {
         anim1.addAnimationPoint(new Translate(-30, 100, 0), 0, 0, 90, 12.0);
         anim1.addAnimationPoint(new Translate(1000, 100, 0), 0, 0, 90, 13.0);
 
+        for (Node mesh : graphic.getChildren()) {
+
+            mesh.setOnMouseClicked(e -> {
+                System.out.println(mesh.getId());
+            });
+
+            mesh.setOnMouseEntered(e -> {
+                PhongMaterial curMaterial = (PhongMaterial) ((Shape3D) e.getSource()).getMaterial();
+                curMaterial.setDiffuseColor(curMaterial.getDiffuseColor().brighter());
+            });
+
+            mesh.setOnMouseExited(e -> {
+                PhongMaterial curMaterial = (PhongMaterial) ((Shape3D) e.getSource()).getMaterial();
+                curMaterial.setDiffuseColor(curMaterial.getDiffuseColor().darker());
+            });
+        }
 //        root.getChildren().add(world);
 //        root.setDepthTest(DepthTest.ENABLE);
-        world.getChildren().add(Zeb);
+        world.getChildren().add(World);
 
 
         //buildScene();
