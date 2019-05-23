@@ -17,6 +17,4 @@ public class AnimPoint {
         rotateZ = z;
         this.time = time;
     }
-
-
 }
