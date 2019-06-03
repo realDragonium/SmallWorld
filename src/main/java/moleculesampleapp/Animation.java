@@ -5,11 +5,11 @@ import javafx.scene.transform.Translate;
 
 import java.util.ArrayList;
 
-public class Animation {
+public class Animation implements Cloneable {
 
-    private double playRate = 0.1;
+    private float playRate = 0.1f;
     private ArrayList<AnimPoint> animationPoints = new ArrayList<AnimPoint>();
-    private Translate objectBeginTransform;
+    private Translate objectBeginTranslate;
     private AnimPoint nextPoint = null;
     private AnimPoint lastPoint;
     private Translate deltaPosition;
@@ -17,18 +17,25 @@ public class Animation {
     private double deltaRotationY;
     private double deltaRotationZ;
     private double animFrame = 0;
+    private Xform model;
+    public boolean playing;
 
     public Animation() {
-
         animationPoints.add(new AnimPoint(new Translate(0, 0, 0), new Rotate(0), new Rotate(0), new Rotate(0), 0.0));
     }
 
     public void addAnimationPoint(Translate pos, double rotX, double rotY, double rotZ, double time) {
         animationPoints.add(new AnimPoint(pos, new Rotate(rotX), new Rotate(rotY), new Rotate(rotZ), time));
     }
+    
+    public void setAnimatedObject(Xform model) {
+    	this.model = model;
+    	objectBeginTranslate = new Translate(model.t.getX(), model.t.getY(), model.t.getZ());
+    	
+    }
 
-    public void playAnimation(Xform model, boolean loop) {
-        objectBeginTransform = model.t;
+    public void playAnimation(boolean loop) {
+        
         if (loop) {
 
         } else {
@@ -38,7 +45,13 @@ public class Animation {
             } else if (animFrame >= nextPoint.time) {
                 findNextAnimPoint(model);
             }
-            nextAnimFrame(model);
+            if(lastPoint.time == nextPoint.time) {
+
+            	AnimationController.animations.remove(this);
+            }
+            else {
+            	nextAnimFrame(model);
+            }
             animFrame += playRate;
         }
     }
@@ -91,4 +104,9 @@ public class Animation {
         deltaPosition = getPosChange();
         confRotChange();
     }
+    
+    public Object clone() throws CloneNotSupportedException 
+    { 
+    	return super.clone(); 
+    } 
 }
