@@ -1,4 +1,4 @@
-package controlers;
+package views;
 
 public class AnimationControler {
 
