@@ -1,4 +1,4 @@
-package Views;
+package views;
 
 import java.util.HashMap;
 
@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 
 public class LoginView {
 	
-	private HashMap<Integer, Player> Players;
+	//private HashMap<Integer, Player> Players;
 	
 	private int frameWidth;
 	private int frameHeight;

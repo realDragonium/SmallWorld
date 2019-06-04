@@ -1,6 +1,5 @@
-package Views;
+package views;
 
 public class GameModel {
 
-	private 
 }
