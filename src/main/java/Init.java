@@ -1,3 +1,4 @@
+import controlers.ApplicatieController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import moleculesampleapp.Main;
@@ -11,7 +12,7 @@ public class Init extends Application{
     @Override
     public void start(Stage primaryStage) {
 
-        ApplicatieView b = new ApplicatieView(primaryStage);
+        ApplicatieController b = new ApplicatieController(primaryStage);
 
     }
 

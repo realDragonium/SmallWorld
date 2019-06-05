@@ -1,14 +1,9 @@
 package views;
 
 import controlers.ApplicatieController;
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import observers.ApplicatieObserable;
 import observers.ApplicatieObserver;
@@ -26,9 +21,9 @@ public class ApplicatieView implements ApplicatieObserver {
     GridPane gPane = new GridPane();
 
 
-    public ApplicatieView(Stage s){
+    public ApplicatieView(Stage s, ApplicatieController appCon){
         primaryStage = s;
-        applicatieController = new ApplicatieController();
+        applicatieController = appCon;
         applicatieController.registerObserver(this);
         Button button = new Button("switch");
         gPane.add(button, 0, 0);
