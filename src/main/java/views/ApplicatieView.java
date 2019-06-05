@@ -3,6 +3,7 @@ package views;
 import controlers.ApplicatieController;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -12,7 +13,6 @@ import javafx.stage.Stage;
 import observers.ApplicatieObserable;
 import observers.ApplicatieObserver;
 
-import java.awt.*;
 
 public class ApplicatieView implements ApplicatieObserver {
 
@@ -23,12 +23,16 @@ public class ApplicatieView implements ApplicatieObserver {
 
     Stage primaryStage;
     ApplicatieController applicatieController;
+    GridPane gPane = new GridPane();
+
 
     public ApplicatieView(Stage s){
         primaryStage = s;
         applicatieController = new ApplicatieController();
         applicatieController.registerObserver(this);
-        loadPrimaryStageWithGridPane(new GridPane());
+        Button button = new Button("switch");
+        gPane.add(button, 0, 0);
+        loadPrimaryStageWithGridPane(gPane);
     }
 
     private void loadPrimaryStageWithGridPane(GridPane gp) {
@@ -47,6 +51,6 @@ public class ApplicatieView implements ApplicatieObserver {
 
     @Override
     public void update(ApplicatieObserable ao) {
-        loadPrimaryStageWithGridPane(ao.getGripPane());
+        primaryStage.setScene(ao.getScene());
     }
 }
