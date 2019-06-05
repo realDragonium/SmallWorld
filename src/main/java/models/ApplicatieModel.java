@@ -37,6 +37,7 @@ public class ApplicatieModel implements ApplicatieObserable{
 
     public void setScene(Scene scene){
         this.scene = scene;
+        notifyAllObservers();
     }
 
 }
