@@ -4,8 +4,15 @@ import java.util.LinkedList;
 
 public class ShopModel {
 
-	//private LinkedList<Volk> beschikbaarVolk;
-	//private Kracht kracht;
-	//private Volk volk;
-	private int kostZoveelTokens;
+	//private Map<Combo, int>fichesList;
+	private boolean viewActive;
+	//private UITypeEnum UIType;
+
+	private void addNewCombo(){
+		return;
+	}
+
+	//public Map<Combo, int> getCombos(){}
+
+	//public Combo removeCombo(){	}
 }

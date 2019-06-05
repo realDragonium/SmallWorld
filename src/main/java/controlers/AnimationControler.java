@@ -5,8 +5,8 @@ import models.AnimationModel;
 import moleculesampleapp.Xform;
 
 public class AnimationControler{
-	AnimationModel model;
-	controlers.AnimationsControler animsControler;
+	public AnimationModel model;
+	public controlers.AnimationsControler animsControler;
 	
 	
 	public AnimationControler(String animName) {

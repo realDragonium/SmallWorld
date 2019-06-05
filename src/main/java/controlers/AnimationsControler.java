@@ -40,8 +40,8 @@ public class AnimationsControler {
 		}
 	}
 	
-	public AnimationControler getAnimation(String name) {
-		for(AnimationControler anim : animations) {
+	public views.AnimationControler getAnimation(String name) {
+		for(views.AnimationControler anim : animations) {
 			System.out.println(anim.getName());
 			if(anim.getName().equals(name)) {
 				return anim;

@@ -7,6 +7,7 @@ import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
@@ -67,6 +68,8 @@ public class Main extends Application {
     //   private void buildScene() {
     //       root.getChildren().add(world);
     //   }
+
+
     private void buildCamera() {
         System.out.println("buildCamera()");
         root.getChildren().add(cameraXform);
@@ -82,6 +85,12 @@ public class Main extends Application {
         cameraXform.rx.setAngle(CAMERA_INITIAL_X_ANGLE);
 
     }
+
+
+
+
+
+
 
     private void handleMouse(Scene scene, final Node root) {
         scene.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -258,6 +267,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+
+
+        /////////
         
         animControler.createAnimation("Coin Falling");
         CoinFalling = animControler.getAnimation("Coin Falling");
@@ -285,6 +297,7 @@ public class Main extends Application {
         primaryStage.setTitle("Game View");
         primaryStage.setScene(scene);
         primaryStage.show();
+
     }
 
     public static void run(String[] args) {
