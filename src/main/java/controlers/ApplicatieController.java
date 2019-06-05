@@ -8,10 +8,16 @@ import views.ApplicatieView;
 
 public class ApplicatieController{
     private ApplicatieModel applicatieModel;
+    private HomeScreenController hsController;
+    private AreaControler areaCon;
+    private TestController testCon;
+
 
     public ApplicatieController(Stage s){
         applicatieModel = new ApplicatieModel();
         new ApplicatieView(s, this);
+        hsController = new HomeScreenController(this);
+        testCon = new TestController(this);
     }
 
     public void registerObserver(ApplicatieObserver ao){
@@ -22,5 +28,8 @@ public class ApplicatieController{
         applicatieModel.setScene(s);
     }
 
+    public void changeSceneToTest() {
+        testCon.loadScene();
+    }
 
 }

@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import observers.ApplicatieObserable;
+import observers.ApplicatieObservable;
 import observers.ApplicatieObserver;
 
 
@@ -45,7 +45,9 @@ public class ApplicatieView implements ApplicatieObserver {
     }
 
     @Override
-    public void update(ApplicatieObserable ao) {
+    public void update(ApplicatieObservable ao) {
+//        primaryStage.close();
         primaryStage.setScene(ao.getScene());
+//        primaryStage.show();
     }
 }

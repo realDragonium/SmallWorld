@@ -1,15 +1,13 @@
 package models;
 
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
-import observers.ApplicatieObserable;
+import observers.ApplicatieObservable;
 import observers.ApplicatieObserver;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApplicatieModel implements ApplicatieObserable{
+public class ApplicatieModel implements ApplicatieObservable {
     private List<ApplicatieObserver> observers = new ArrayList<>();
     Scene scene;
 

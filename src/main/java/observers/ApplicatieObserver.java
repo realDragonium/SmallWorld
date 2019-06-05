@@ -1,5 +1,5 @@
 package observers;
 
 public interface ApplicatieObserver {
-    public void update(ApplicatieObserable ao);
+    public void update(ApplicatieObservable ao);
 }
