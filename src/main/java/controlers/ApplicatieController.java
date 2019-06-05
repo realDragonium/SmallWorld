@@ -1,5 +1,6 @@
 package controlers;
 
+import javafx.scene.Scene;
 import models.ApplicatieModel;
 import observers.ApplicatieObserver;
 
@@ -14,6 +15,9 @@ public class ApplicatieController{
         applicatieModel.register(ao);
     }
 
+    public void setActiveScene(Scene s){
+        applicatieModel.setScene(s);
+    }
 
 
 }
