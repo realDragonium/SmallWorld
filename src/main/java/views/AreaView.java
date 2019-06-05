@@ -18,7 +18,6 @@ public class AreaView implements AreaObserver {
 		controler.configureTerrainData(mesh);
 		controler.registerObserver(this);
 		confActions();
-		
 	}
 	
 	public void confActions() {
