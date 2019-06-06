@@ -1,12 +1,38 @@
 package views;
 
-import moleculesampleapp.Xform;
+import java.io.IOException;
 
-public class RaceFicheView {
+import controlers.FicheControler;
+import controlers.RaceFicheControler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
+import moleculesampleapp.Xform;
+import observers.FicheObservable;
+import observers.FicheObserver;
+
+public class RaceFicheView implements FicheObserver{
 	
-	Xform fiche3Dmodel;
+	Xform fiche3dModel;
+	RaceFicheControler controler;
 	
-	public RaceFicheView(Xform fiche) {
-		this.fiche3Dmodel = fiche;
+	public RaceFicheView(String race) {
+		get3dModel(race);
+		controler.registerObserver(this);
 	}
+	
+	public void get3dModel(String race) {
+		try {
+		FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(this.getClass().getResource("/" + race + "Fiche.fxml"));
+		Group graphic = fxmlLoader.load();
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void update(FicheObservable fo) {
+		fiche3dModel.setTranslate(fo.getPosition());
+	}
+
 }

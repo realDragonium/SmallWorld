@@ -40,6 +40,5 @@ public class FicheControler {
 
 	public void registerObserver(FicheView ficheView) {
 		model.register(ficheView);
-		
 	}
 }

@@ -92,7 +92,6 @@ public class AreaView implements AreaObserver {
 		
 		System.out.println("ras fiches zijn: " + ao.getRaceFichesAmount());
 		if(ao.getRaceFichesAmount() > 0) {
-			System.out.println("number is visable");
 			number.setVisible(true);
 		}
 		else{
