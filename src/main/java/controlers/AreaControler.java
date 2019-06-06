@@ -1,16 +1,43 @@
 package controlers;
 
-import javafx.scene.shape.MeshView;
 import javafx.scene.shape.Shape3D;
+import javafx.scene.transform.Translate;
 import models.AreaModel;
-import models.FicheModel.ficheType;
 import observers.AreaObserver;
 
 public class AreaControler {
 	private AreaModel model = new AreaModel();
+	AnimationsControler animControler;
 	
-	public AreaControler() {
-		
+	public void setCenterPoint(Translate point) {
+		model.setCenterPoint(point);
+	}
+	
+	public Translate getCenterPoint() {
+		return model.getCenterPoint();
+	}
+	
+	public void playFichePlacingAnimation(FicheControler fiche) {
+		fiche.setAnimation("Coin Falling");
+	}
+	
+	public void setAnimationsControler(AnimationsControler animControler) {
+		this.animControler = animControler;
+	}
+	
+	public AnimationsControler getAnimControler() {
+		return animControler;
+	}
+	
+	public void setFichePosition(FicheControler fiche) {
+		fiche.setPosition(new Translate(model.getCenterPoint().getX(), model.getCenterPoint().getY() - (model.getFichesOnArea().size() - 1) * 0.2, model.getCenterPoint().getZ()));
+	}
+	
+	public void addFicheToArea(FicheControler controler) {
+		model.addFiche(controler);
+		System.out.println("Aantal fiches: " + model.getFichesOnArea().size());
+		setFichePosition(controler);
+		playFichePlacingAnimation(controler);
 	}
 	
 	public void configureTerrainData(Shape3D mesh) {

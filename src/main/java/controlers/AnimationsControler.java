@@ -13,11 +13,13 @@ public class AnimationsControler {
 		animations.add(anim);
 	}
 	
-	public void createAnimation(String animName) {
-		initAnimation(new AnimationControler(animName));
+	public AnimationControler createAnimation(String animName) {
+		AnimationControler newAnim = new AnimationControler(animName);
+		initAnimation(newAnim);
+		return newAnim;
 	}
 	
-	public void animateObject(AnimationControler anim, Xform animObject) throws CloneNotSupportedException{
+	public void animateObject(AnimationControler anim, Xform animObject){
 		AnimationControler temp_anim = new AnimationControler();
 		temp_anim.model.AnimPoints = anim.model.AnimPoints;
 		temp_anim.model.animObject = animObject;

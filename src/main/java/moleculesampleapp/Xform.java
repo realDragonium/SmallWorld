@@ -109,6 +109,12 @@ public class Xform extends Group {
         t.setZ(z);
     }
     
+    public void setTranslate(Translate pos) {
+        t.setX(pos.getX());
+        t.setY(pos.getY());
+        t.setZ(pos.getZ());
+    }
+    
     public double getRotateX() {
     	return rx.getAngle();
     }

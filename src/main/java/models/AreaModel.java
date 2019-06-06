@@ -6,6 +6,7 @@ import java.util.List;
 import controlers.FicheControler;
 import javafx.scene.shape.Shape3D;
 import javafx.scene.transform.Translate;
+import models.FicheModel.ficheType;
 import observers.AreaObservable;
 import observers.AreaObserver;
 
@@ -19,9 +20,29 @@ public class AreaModel implements AreaObservable{
 	List<AreaObserver> observers = new ArrayList<AreaObserver>();
 	boolean hovering;
 	boolean selected;
+	int raceFichesAmount = 0;
 	
 	public List<FicheControler> getFichesOnArea() {
 		return fiches;
+	}
+	
+	public void setCenterPoint(Translate point) {
+		centerPoint = point;
+	}
+	
+	public Translate getCenterPoint(){
+		return centerPoint;
+	}
+	
+	public void addFiche(FicheControler ficheControler) {
+		fiches.add(ficheControler);
+		if(true) {
+			raceFichesAmount++;
+		}
+		if(ficheControler.getMyType() == ficheType.RAS) {
+			raceFichesAmount++;
+		}
+		notifyAllObservers();
 	}
 	
 	public void configureData(Shape3D mesh) {
@@ -46,7 +67,6 @@ public class AreaModel implements AreaObservable{
 	
 	public void changeStateHovering() {
 		hovering = !hovering;
-		System.out.println(hovering);
 		notifyAllObservers();
 	}
 
@@ -58,6 +78,11 @@ public class AreaModel implements AreaObservable{
 	@Override
 	public boolean isSelected() {
 		return selected;
+	}
+
+	@Override
+	public int getRaceFichesAmount() {
+		return raceFichesAmount;
 	}
 	
 	
