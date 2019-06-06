@@ -7,5 +7,5 @@ public interface AreaObservable {
 	public void notifyAllObservers();
 	public boolean isHovering();
 	public boolean isSelected();
-
+	public int getRaceFichesAmount();
 }

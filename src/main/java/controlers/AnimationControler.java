@@ -70,8 +70,6 @@ public class AnimationControler{
     
     public void nextFrame() {
     	//System.out.println(model.animObject.t);
-    	System.out.println(model.animObject);
-    	System.out.println(model.deltaPosition);
     	
     	
     	model.animObject.t.setX(model.animObject.t.getX() + model.deltaPosition.getX());
@@ -89,9 +87,7 @@ public class AnimationControler{
     		confRotChange();
     		confPosChange();
     	}
-    	System.out.println(model.nextAnimPoint);
     	if(model.nextAnimPoint == model.AnimPoints.size() - 1 && model.AnimPoints.get(model.nextAnimPoint).model.time == model.curFrame) {
-    		System.out.println("ja");
     		animsControler.stopAnimation(this);
     		//resetAnimation();
     	}

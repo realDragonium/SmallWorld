@@ -7,6 +7,9 @@ import Observable.AreaObservable;
 import Observer.AreaObserver;
 import javafx.scene.shape.Shape3D;
 import javafx.scene.transform.Translate;
+import models.FicheModel.ficheType;
+import observers.AreaObservable;
+import observers.AreaObserver;
 
 public class AreaModel implements AreaObservable{
 	enum Terrain { forest, swamp, sea, mountain, hill, field };
@@ -17,19 +20,42 @@ public class AreaModel implements AreaObservable{
 	List<AreaObserver> observers = new ArrayList<AreaObserver>();
 	boolean hovering;
 	boolean selected;
+	int raceFichesAmount = 0;
 
-	
+	public List<FicheControler> getFichesOnArea() {
+		return fiches;
+	}
+
+	public void setCenterPoint(Translate point) {
+		centerPoint = point;
+	}
+
+	public Translate getCenterPoint(){
+		return centerPoint;
+	}
+
+	public void addFiche(FicheControler ficheControler) {
+		fiches.add(ficheControler);
+		if(true) {
+			raceFichesAmount++;
+		}
+		if(ficheControler.getMyType() == ficheType.RAS) {
+			raceFichesAmount++;
+		}
+		notifyAllObservers();
+	}
+
 	public void configureData(Shape3D mesh) {
 		String type = mesh.getId().split("_")[1];
 		terrain = Terrain.valueOf(type);
 		specialType = SpecialType.NONE;
 	}
-	
+
 
 	@Override
 	public void register(AreaObserver ao) {
 		observers.add(ao);
-		
+
 	}
 
 	@Override
@@ -38,10 +64,9 @@ public class AreaModel implements AreaObservable{
 			obs.update(this);
 		}
 	}
-	
+
 	public void changeStateHovering() {
 		hovering = !hovering;
-		System.out.println(hovering);
 		notifyAllObservers();
 	}
 
@@ -54,5 +79,11 @@ public class AreaModel implements AreaObservable{
 	public boolean isSelected() {
 		return selected;
 	}
+
+	@Override
+	public int getRaceFichesAmount() {
+		return raceFichesAmount;
+	}
+
 
 }
