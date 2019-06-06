@@ -1,7 +1,7 @@
-package Observable;
+package observable;
 
-import Observer.SceneObserver;
 import javafx.scene.Scene;
+import observers.SceneObserver;
 
 public interface SceneObservable {
     void registerSO(SceneObserver so);

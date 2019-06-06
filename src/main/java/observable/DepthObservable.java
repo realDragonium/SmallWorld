@@ -1,7 +1,7 @@
-package Observable;
+package observable;
 
-import Observer.DepthObserver;
 import javafx.scene.Group;
+import observers.DepthObserver;
 
 public interface DepthObservable {	
 	void notifyObserver();

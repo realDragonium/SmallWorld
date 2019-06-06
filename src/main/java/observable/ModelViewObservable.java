@@ -1,7 +1,6 @@
-package Observable;
+package observable;
 
-import Observer.ModelViewObserver;
-import javafx.scene.Scene;
+import observers.ModelViewObserver;
 
 public interface ModelViewObservable {
     void register(ModelViewObserver mvo);

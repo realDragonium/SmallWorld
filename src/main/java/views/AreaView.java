@@ -1,6 +1,7 @@
 package views;
 
-import Observer.DepthObserver;
+import observable.DepthObservable;
+import observers.DepthObserver;
 import javafx.scene.Group;
 import observable.AreaObservable;
 import controlers.AreaControler;
@@ -9,11 +10,10 @@ import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
 import javafx.scene.shape.Shape3D;
 import javafx.scene.transform.Translate;
-import moleculesampleapp.Main;
 import moleculesampleapp.Xform;
 import observers.AreaObserver;
 
-public class AreaView implements AreaObserver, Observable.DepthObservable {
+public class AreaView implements AreaObserver, DepthObservable {
 	private DepthObserver observer;
 	Shape3D mesh;
 	PhongMaterial material;

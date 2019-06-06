@@ -1,6 +1,6 @@
-package Observer;
+package observers;
 
-import Observable.ModelViewObservable;
+import observable.ModelViewObservable;
 
 public interface ModelViewObserver {
 	void update(ModelViewObservable mvo);

@@ -1,7 +1,7 @@
 package controlers;
 
 import models.ApplicatieModel;
-import Observer.ModelViewObserver;
+import observers.ModelViewObserver;
 import javafx.scene.Scene;
 
 public class ApplicatieController {

@@ -1,7 +1,7 @@
-package Observable;
+package observable;
 
-import Observer.GameObserver;
 import javafx.scene.SubScene;
+import observers.GameObserver;
 
 public interface GameObservable {
 	void notifyObserver();

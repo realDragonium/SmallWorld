@@ -1,7 +1,7 @@
 package controlers;
 
 import models.HomeScreenModel;
-import Observer.ModelViewObserver;
+import observers.ModelViewObserver;
 
 public class HomeScreenController {
 

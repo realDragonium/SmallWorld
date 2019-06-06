@@ -1,7 +1,7 @@
 package controlers;
 
 import models.GameModel;
-import Observer.ModelViewObserver;
+import observers.ModelViewObserver;
 
 public class GameController {
 	private controlers.ApplicatieController appCon = controlers.ApplicatieController.getInstance();
