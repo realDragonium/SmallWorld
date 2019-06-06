@@ -80,7 +80,7 @@ public class AreaView implements AreaObserver, DepthObservable {
             fiche.setScale(0.1);
             group.getChildren().add(fiche);
             notifyObserver();
-            RaceFicheView ficheView = new RaceFicheView("");
+            FicheView ficheView = new FicheView("");
             ficheView.controler.setAnimationControler(controler.getAnimControler());
             controler.addFicheToArea(ficheView.controler);
 		});

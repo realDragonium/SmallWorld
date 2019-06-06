@@ -3,14 +3,14 @@ package controlers;
 import javafx.scene.transform.Translate;
 import models.FicheModel;
 import moleculesampleapp.Xform;
-import views.RaceFicheView;
+import views.FicheView;
 
-public class RaceFicheControler {
+public class FicheControler {
 
 	FicheModel model;
 	AnimationsControler animControler;
 	
-	public RaceFicheControler(Xform xform) {
+	public FicheControler(Xform xform) {
 		model = new FicheModel(xform);
 	}
 	
@@ -35,7 +35,7 @@ public class RaceFicheControler {
 		model.setPosition(pos);
 	}
 
-	public void registerObserver(RaceFicheView ficheView) {
+	public void registerObserver(FicheView ficheView) {
 		model.register(ficheView);
 	}
 }

@@ -33,6 +33,7 @@ public class GameView implements ModelViewObserver, SceneObservable, GameObserve
 	}
 	
 	private void groupToScene(Node subScene) {
+		world = new Group();
 		world.getChildren().add(subScene);
 		scene = new Scene(world, 1600, 800);
 		notifyObserverSO();

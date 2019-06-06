@@ -2,19 +2,19 @@ package views;
 
 import java.io.IOException;
 
-import controlers.RaceFicheControler;
+import controlers.FicheControler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import moleculesampleapp.Xform;
 import observable.FicheObservable;
 import observers.FicheObserver;
 
-public class RaceFicheView implements FicheObserver{
+public class FicheView implements FicheObserver{
 	
 	Xform fiche3dModel;
-	RaceFicheControler controler;
+	FicheControler controler;
 	
-	public RaceFicheView(String race) {
+	public FicheView(String race) {
 		get3dModel(race);
 		controler.registerObserver(this);
 	}
