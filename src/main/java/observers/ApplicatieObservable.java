@@ -3,8 +3,8 @@ package observers;
 import javafx.scene.Scene;
 
 public interface ApplicatieObservable {
-    public void register(ApplicatieObserver ao);
-    public void unregister(ApplicatieObserver ao);
-    public void notifyAllObservers();
-    public Scene getScene();
+    void register(ApplicatieObserver ao);
+    void unregister(ApplicatieObserver ao);
+    void notifyAllObservers();
+    Scene getActiveScene();
 }

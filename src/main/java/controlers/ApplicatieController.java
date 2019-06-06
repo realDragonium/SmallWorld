@@ -1,35 +1,23 @@
 package controlers;
 
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import models.ApplicatieModel;
-import observers.ApplicatieObserver;
-import views.ApplicatieView;
+import Observer.ModelViewObserver;
+import javafx.scene.Scene;
 
-public class ApplicatieController{
-    private ApplicatieModel applicatieModel;
-    private HomeScreenController hsController;
-    private AreaControler areaCon;
-    private TestController testCon;
+public class ApplicatieController {
+	
+	static ApplicatieController appCon = new ApplicatieController();
+	
+	private ApplicatieModel appModel = new ApplicatieModel();
+	
+	public void registerObserver(ModelViewObserver mvo) {
+		appModel.register(mvo);
+	}
+	
+	public static ApplicatieController getInstance() {
+		return appCon;
+	}
 
-
-    public ApplicatieController(Stage s){
-        applicatieModel = new ApplicatieModel();
-        new ApplicatieView(s, this);
-        hsController = new HomeScreenController(this);
-        testCon = new TestController(this);
-    }
-
-    public void registerObserver(ApplicatieObserver ao){
-        applicatieModel.register(ao);
-    }
-
-    public void setActiveScene(Scene s){
-        applicatieModel.setScene(s);
-    }
-
-    public void changeSceneToTest() {
-        testCon.loadScene();
-    }
-
+	public void setActiveScene(Scene scene) {
+	}
 }

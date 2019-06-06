@@ -1,11 +1,10 @@
 package views;
 
 import controlers.AreaControler;
+import Observable.AreaObservable;
+import Observer.AreaObserver;
 import javafx.scene.paint.PhongMaterial;
-import javafx.scene.shape.MeshView;
 import javafx.scene.shape.Shape3D;
-import observers.AreaObservable;
-import observers.AreaObserver;
 
 public class AreaView implements AreaObserver {
 	Shape3D mesh;

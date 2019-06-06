@@ -6,38 +6,40 @@ import javafx.scene.layout.GridPane;
 import observers.ApplicatieObservable;
 import observers.ApplicatieObserver;
 
-public class TestModel implements ApplicatieObservable {
+import java.util.ArrayList;
+import java.util.List;
 
-    Scene scene;
+public class TestModel implements ApplicatieObservable {
+    private List<ApplicatieObserver> observers = new ArrayList<>();
 
     public TestModel(){
-        loadScene();
+
     }
 
-    private void loadScene(){
-        GridPane gPane = new GridPane();
-        Button button = new Button("BOE!!!");
-        gPane.add(button, 0, 0);
-        scene = new Scene(gPane, 400, 400);
+    public void changeScene(){
+        notifyAllObservers();
     }
 
     @Override
     public void register(ApplicatieObserver ao) {
-
+        observers.add(ao);
     }
 
     @Override
     public void unregister(ApplicatieObserver ao) {
-
+        observers.remove(ao);
     }
 
     @Override
     public void notifyAllObservers() {
-
+        for(ApplicatieObserver ao : observers){
+            ao.update(this);
+        }
     }
 
     @Override
-    public Scene getScene() {
-        return scene;
+    public Scene getActiveScene() {
+        return null;
     }
+
 }

@@ -20,6 +20,6 @@ public class TestController {
     }
 
     public void loadScene(){
-        appCon.setActiveScene(testModel.getScene());
+        testModel.changeScene();
     }
 }

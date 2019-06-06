@@ -1,41 +1,29 @@
 package models;
 
-import javafx.scene.Scene;
-import observers.ApplicatieObservable;
-import observers.ApplicatieObserver;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApplicatieModel implements ApplicatieObservable {
-    private List<ApplicatieObserver> observers = new ArrayList<>();
-    Scene scene;
+import Observable.ModelViewObservable;
+import Observer.ModelViewObserver;
 
-    @Override
-    public void register(ApplicatieObserver ao) {
-        observers.add(ao);
-    }
+public class ApplicatieModel implements ModelViewObservable{
+	private List<ModelViewObserver> observers = new ArrayList<>();
+	
+	@Override
+	public void register(ModelViewObserver mvo) {
+		observers.add(mvo);
+	}
 
-    @Override
-    public void unregister(ApplicatieObserver ao) {
-        observers.remove(ao);
-    }
+	@Override
+	public void unregister(ModelViewObserver mvo) {
+		observers.remove(mvo);
+	}
 
-    @Override
-    public void notifyAllObservers() {
-        for(ApplicatieObserver ao : observers){
-            ao.update(this);
-        }
-    }
-
-    @Override
-    public Scene getScene() {
-        return this.scene;
-    }
-
-    public void setScene(Scene scene){
-        this.scene = scene;
-        notifyAllObservers();
-    }
+	@Override
+	public void notifyAllObservers() {
+		for(ModelViewObserver mvo: observers) {
+			mvo.update(this);
+		}
+	}
 
 }

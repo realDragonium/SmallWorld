@@ -4,8 +4,10 @@ import controlers.TestController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import observers.ApplicatieObservable;
+import observers.ApplicatieObserver;
 
-public class TestView {
+public class TestView implements ApplicatieObserver {
     Scene scene;
     TestController testCon;
 
@@ -13,6 +15,7 @@ public class TestView {
         this.testCon = testCon;
         loadScene();
     }
+
     private void loadScene(){
         GridPane gPane = new GridPane();
         Button button = new Button("TestSCENE!!!");
@@ -21,4 +24,9 @@ public class TestView {
         scene = new Scene(gPane, 400, 400);
     }
 
+
+    @Override
+    public void update(ApplicatieObservable ao) {
+        testCon.changeScene(scene);
+    }
 }

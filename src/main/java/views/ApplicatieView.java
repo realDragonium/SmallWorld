@@ -1,41 +1,41 @@
 package views;
 
 import controlers.ApplicatieController;
+import Observable.ModelViewObservable;
+import Observable.SceneObservable;
+import Observer.ModelViewObserver;
+import Observer.SceneObserver;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import observers.ApplicatieObservable;
-import observers.ApplicatieObserver;
 
-
-public class ApplicatieView implements ApplicatieObserver {
-
+public class ApplicatieView implements ModelViewObserver, SceneObserver{
     private double width = 1600;
     private double height = 900;
     private double windowAnchorX = 50;
     private double windowAnchorY= 50;
-
-    Stage primaryStage;
-    ApplicatieController applicatieController;
-    GridPane gPane = new GridPane();
-
-
-    public ApplicatieView(Stage s, ApplicatieController appCon){
-        primaryStage = s;
-        applicatieController = appCon;
-        applicatieController.registerObserver(this);
-        Button button = new Button("switch");
-        gPane.add(button, 0, 0);
-        loadPrimaryStageWithGridPane(gPane);
-    }
-
-    private void loadPrimaryStageWithGridPane(GridPane gp) {
+	private Stage primaryStage;
+	private ApplicatieController appCon = ApplicatieController.getInstance();
+	
+	public ApplicatieView(Stage primaryStage) {
+		this.primaryStage = primaryStage;
+		appCon.registerObserver(this);
+		loadPrimaryStage();
+	}
+	
+	private void loadPrimaryStage() {
         try {
-            GridPane root = gp;
+            GridPane root = new GridPane();
+            Button button = new Button("Go to HomeScreen");
+            button.setOnAction(e -> {
+            	System.out.println("button pressed!");
+            	new HomeScreenView(this);
+            });
+            root.add(button, 0, 0);
             Scene scene = new Scene(root,width,height);
             primaryStage.setScene(scene);
-            primaryStage.setTitle("WELCOME TO THE GAME");
+            primaryStage.setTitle("Small World");
             primaryStage.setX(windowAnchorX);
             primaryStage.setY(windowAnchorY);
             primaryStage.show();
@@ -44,10 +44,21 @@ public class ApplicatieView implements ApplicatieObserver {
         }
     }
 
-    @Override
-    public void update(ApplicatieObservable ao) {
-//        primaryStage.close();
-        primaryStage.setScene(ao.getScene());
-//        primaryStage.show();
-    }
+	private void changeScene(Scene scene) {
+		primaryStage.setScene(scene);
+	}
+
+	@Override
+	public void update(ModelViewObservable mvo) {
+		System.out.println("update mvo applicatie test");
+	}
+
+	@Override
+	public void update(SceneObservable so) {
+		System.out.println("update so applicatie test");
+		changeScene(so.getSceneSO());
+	}
+	
+	
+	
 }

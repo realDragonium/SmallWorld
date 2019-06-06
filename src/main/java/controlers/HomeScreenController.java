@@ -1,23 +1,20 @@
 package controlers;
 
-import javafx.scene.Scene;
 import models.HomeScreenModel;
-import views.HomeScreenView;
+import Observer.ModelViewObserver;
 
-public class HomeScreenController{
+public class HomeScreenController {
+
     private ApplicatieController appCon;
-    private HomeScreenModel hsModel;
+    private HomeScreenModel hsModel = new HomeScreenModel();
 
-    HomeScreenController(ApplicatieController appCon){
-        this.appCon = appCon;
-        new HomeScreenView(this);
-        hsModel = new HomeScreenModel();
+    public HomeScreenController(){
+        this.appCon = ApplicatieController.getInstance();
+    }
+    
+    public void register(ModelViewObserver mvo) {
+    	hsModel.register(mvo);
     }
 
-    public void changeScene(Scene scene){
-        appCon.setActiveScene(scene);
-    }
-    public void changeSceneToTest() {
-        appCon.changeSceneToTest();
-    }
+    
 }

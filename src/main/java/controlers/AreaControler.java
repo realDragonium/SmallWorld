@@ -1,10 +1,8 @@
 package controlers;
 
-import javafx.scene.shape.MeshView;
-import javafx.scene.shape.Shape3D;
 import models.AreaModel;
-import models.FicheModel.ficheType;
-import observers.AreaObserver;
+import Observer.AreaObserver;
+import javafx.scene.shape.Shape3D;
 
 public class AreaControler {
 	private AreaModel model = new AreaModel();
@@ -17,13 +15,7 @@ public class AreaControler {
 		model.configureData(mesh);
 	}
 	
-	public int getAreaDefenceValue() {
-		int defenceValue = 0;
-		for(FicheControler fiche : model.getFichesOnArea()) {
-			defenceValue += fiche.getDefenceValue();
-		}
-		return defenceValue;
-	}
+
 	
 	public void changeStateHovering() {
 		model.changeStateHovering();
@@ -40,4 +32,5 @@ public class AreaControler {
 //			}
 //		}
 //	}
+
 }

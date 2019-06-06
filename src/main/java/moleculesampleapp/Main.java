@@ -14,7 +14,6 @@ import javafx.scene.shape.Shape3D;
 import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
 import moleculesampleapp.Xform;
-import views.AreaView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -177,7 +176,7 @@ public class Main extends Application {
 // 	                PhongMaterial curMaterial = (PhongMaterial) ((Shape3D) e.getSource()).getMaterial();
 // 	                curMaterial.setDiffuseColor(curMaterial.getDiffuseColor().darker());
 // 	            });
-         		new AreaView(((Shape3D) mesh));
+//         		new AreaView(((Shape3D) mesh));
          	}
          }
          world.getChildren().add(World);
