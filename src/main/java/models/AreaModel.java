@@ -3,9 +3,9 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-import Observable.AreaObservable;
-import Observer.AreaObserver;
-import controlers.FicheControler;
+import controlers.RaceFicheControler;
+import observable.AreaObservable;
+import observers.AreaObserver;
 import javafx.scene.shape.Shape3D;
 import javafx.scene.transform.Translate;
 import models.FicheModel.ficheType;
@@ -20,9 +20,9 @@ public class AreaModel implements AreaObservable{
 	boolean hovering;
 	boolean selected;
 	int raceFichesAmount = 0;
-	private List<FicheControler> fiches = new ArrayList<>();
+	private List<RaceFicheControler> fiches = new ArrayList<>();
 
-	public List<FicheControler> getFichesOnArea() {
+	public List<RaceFicheControler> getFichesOnArea() {
 		return fiches;
 	}
 
@@ -34,7 +34,7 @@ public class AreaModel implements AreaObservable{
 		return centerPoint;
 	}
 
-	public void addFiche(FicheControler ficheControler) {
+	public void addFiche(RaceFicheControler ficheControler) {
 		fiches.add(ficheControler);
 		if(true) {
 			raceFichesAmount++;

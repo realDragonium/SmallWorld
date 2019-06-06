@@ -1,6 +1,6 @@
 package observers;
 
-import Observable.AreaObservable;
+import observable.AreaObservable;
 
 public interface AreaObserver {
 	public void update(AreaObservable ao);

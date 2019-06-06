@@ -17,7 +17,7 @@ public class AreaControler {
 		return model.getCenterPoint();
 	}
 
-	public void playFichePlacingAnimation(FicheControler fiche) {
+	public void playFichePlacingAnimation(RaceFicheControler fiche) {
 		fiche.setAnimation("Coin Falling");
 	}
 
@@ -29,11 +29,11 @@ public class AreaControler {
 		return animControler;
 	}
 
-	public void setFichePosition(FicheControler fiche) {
+	public void setFichePosition(RaceFicheControler fiche) {
 		fiche.setPosition(new Translate(model.getCenterPoint().getX(), model.getCenterPoint().getY() - (model.getFichesOnArea().size() - 1) * 0.2, model.getCenterPoint().getZ()));
 	}
 
-	public void addFicheToArea(FicheControler controler) {
+	public void addFicheToArea(RaceFicheControler controler) {
 		model.addFiche(controler);
 		System.out.println("Aantal fiches: " + model.getFichesOnArea().size());
 		setFichePosition(controler);
@@ -44,8 +44,6 @@ public class AreaControler {
 		model.configureData(mesh);
 	}
 
-
-
 	public void changeStateHovering() {
 		model.changeStateHovering();
 	}
@@ -55,7 +53,7 @@ public class AreaControler {
 	}
 
 //	public RaceControler getAreaOwner() {
-//		for(FicheControler fiche : model.getFichesOnArea()) {
+//		for(RaceFicheControler fiche : model.getFichesOnArea()) {
 //			if(fiche.getMyType() == ficheType.RAS) {
 //				return fiche.getMyRace();
 //			}

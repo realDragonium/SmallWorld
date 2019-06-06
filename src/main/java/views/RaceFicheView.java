@@ -2,12 +2,11 @@ package views;
 
 import java.io.IOException;
 
-import controlers.FicheControler;
 import controlers.RaceFicheControler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import moleculesampleapp.Xform;
-import observers.FicheObservable;
+import observable.FicheObservable;
 import observers.FicheObserver;
 
 public class RaceFicheView implements FicheObserver{

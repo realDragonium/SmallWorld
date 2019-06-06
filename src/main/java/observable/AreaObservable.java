@@ -1,6 +1,6 @@
-package Observable;
+package observable;
 
-import Observer.AreaObserver;
+import observers.AreaObserver;
 
 public interface AreaObservable {
 	public void register(AreaObserver ao);

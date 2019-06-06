@@ -5,7 +5,7 @@ import java.util.List;
 
 import javafx.scene.transform.Translate;
 import moleculesampleapp.Xform;
-import observers.FicheObservable;
+import observable.FicheObservable;
 import observers.FicheObserver;
 
 public class FicheModel implements FicheObservable{

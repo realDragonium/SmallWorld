@@ -1,6 +1,8 @@
 package views;
 
-import Observable.AreaObservable;
+import Observer.DepthObserver;
+import javafx.scene.Group;
+import observable.AreaObservable;
 import controlers.AreaControler;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
@@ -11,13 +13,17 @@ import moleculesampleapp.Main;
 import moleculesampleapp.Xform;
 import observers.AreaObserver;
 
-public class AreaView implements AreaObserver {
+public class AreaView implements AreaObserver, Observable.DepthObservable {
+	private DepthObserver observer;
 	Shape3D mesh;
 	PhongMaterial material;
 	Color selectedColor;
 	Color normalColor;
 	public AreaControler controler;
 	Xform number;
+	Group group = new Group();
+
+
 
 	public AreaView(Shape3D mesh, Translate centerPoint) {
 		this.mesh = mesh;
@@ -43,7 +49,7 @@ public class AreaView implements AreaObserver {
         redMaterial.setSpecularColor(Color.WHITE);
         box.setMaterial(redMaterial);
         number.setOpacity(0.1);
-        Main.World.getChildren().add(number);
+        group.getChildren().add(number);
 
         number.setScale(0.15);
         number.setTranslate(controler.getCenterPoint());
@@ -72,7 +78,7 @@ public class AreaView implements AreaObserver {
 
             fiche.setScale(0.1);
             Main.World.getChildren().add(fiche);
-            FicheView ficheView = new FicheView(fiche);
+            RaceFicheView ficheView = new RaceFicheView("");
             ficheView.controler.setAnimationControler(controler.getAnimControler());
             controler.addFicheToArea(ficheView.controler);
 		});
@@ -104,5 +110,20 @@ public class AreaView implements AreaObserver {
 
 	private void makeNotHighlighted() {
 		material.setDiffuseColor(normalColor);
+	}
+
+	@Override
+	public void notifyObserver() {
+		observer
+	}
+
+	@Override
+	public void register(DepthObserver depthO) {
+		observer = depthO;
+	}
+
+	@Override
+	public Group getGroup() {
+		return group;
 	}
 }

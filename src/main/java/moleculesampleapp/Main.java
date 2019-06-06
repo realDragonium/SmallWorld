@@ -23,6 +23,7 @@ import java.util.Map;
 
 import controlers.AnimationControler;
 import controlers.AnimationsControler;
+import views.AreaView;
 
 
 /**

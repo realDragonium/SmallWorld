@@ -17,7 +17,7 @@ import moleculesampleapp.Xform;
 public class DepthView implements DepthObserver, GameObservable{
     private GameObserver gameObserver;
     private SubScene world;
-    private Xform World = new Xform();
+    public Xform World = new Xform();
 
     final PerspectiveCamera camera = new PerspectiveCamera(true);
     final Xform cameraXform = new Xform();
@@ -44,6 +44,10 @@ public class DepthView implements DepthObserver, GameObservable{
         register(go);
         buildCamera();
         generateWorld();
+    }
+
+    public void addToWorld(Node item){
+        World.getChildren().add(item);
     }
 
     private void generateWorld(){
