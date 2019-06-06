@@ -25,7 +25,8 @@ public class AreaView implements AreaObserver, Observable.DepthObservable {
 
 
 
-	public AreaView(Shape3D mesh, Translate centerPoint) {
+	public AreaView(Shape3D mesh, Translate centerPoint, DepthObserver depthO) {
+		register(depthO);
 		this.mesh = mesh;
 		material = (PhongMaterial) mesh.getMaterial();
 		controler = new AreaControler();
@@ -77,7 +78,8 @@ public class AreaView implements AreaObserver, Observable.DepthObservable {
             box.setMaterial(redMaterial);
 
             fiche.setScale(0.1);
-            Main.World.getChildren().add(fiche);
+            group.getChildren().add(fiche);
+            notifyObserver();
             RaceFicheView ficheView = new RaceFicheView("");
             ficheView.controler.setAnimationControler(controler.getAnimControler());
             controler.addFicheToArea(ficheView.controler);
@@ -114,7 +116,7 @@ public class AreaView implements AreaObserver, Observable.DepthObservable {
 
 	@Override
 	public void notifyObserver() {
-		observer
+		observer.update(this);
 	}
 
 	@Override

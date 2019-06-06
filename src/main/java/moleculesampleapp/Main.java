@@ -143,8 +143,8 @@ public class Main extends Application {
          	mesh.setId(mesh.getId().substring(14, mesh.getId().length()));
          	if(mesh.getId().length() > 6) {
 
-         		AreaView areaView = new AreaView(((Shape3D) mesh), AreaPoints.get(mesh.getId()));
-         		areaView.controler.setAnimationsControler(animControler);
+//         		AreaView areaView = new AreaView(((Shape3D) mesh), AreaPoints.get(mesh.getId()), );
+//         		areaView.controler.setAnimationsControler(animControler);
          	}
          }
          world.getChildren().add(World);
