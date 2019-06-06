@@ -1,13 +1,17 @@
-import moleculesampleapp.Main;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class Init {
+
+public class Init extends Application{
 
     public static void main(String[] args) {
-//        MoleculeSampleApp app = new MoleculeSampleApp();
-//        new Thread(app).start();
-    	System.out.println("yeet");
-    	
-    	Main.run(args);
+        launch(args);
+
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        new views.ApplicatieView(primaryStage);
 
     }
 }
