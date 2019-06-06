@@ -1,8 +1,5 @@
 package views;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import controlers.GameController;
 import Observable.GameObservable;
 import Observable.ModelViewObservable;
@@ -11,8 +8,8 @@ import Observer.GameObserver;
 import Observer.ModelViewObserver;
 import Observer.SceneObserver;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.SubScene;
 
 public class GameView implements ModelViewObserver, SceneObservable, GameObserver{
 
@@ -35,7 +32,7 @@ public class GameView implements ModelViewObserver, SceneObservable, GameObserve
 		new DepthView(this);
 	}
 	
-	private void groupToScene(SubScene subScene) {
+	private void groupToScene(Node subScene) {
 		world.getChildren().add(subScene);
 		scene = new Scene(world, 1600, 800);
 		notifyObserverSO();

@@ -1,6 +1,7 @@
-package observers;
+package observable;
 
 import javafx.scene.Scene;
+import observers.ApplicatieObserver;
 
 public interface ApplicatieObservable {
     void register(ApplicatieObserver ao);

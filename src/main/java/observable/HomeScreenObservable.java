@@ -1,4 +1,4 @@
-package observers;
+package observable;
 
 public interface HomeScreenObservable {
 }

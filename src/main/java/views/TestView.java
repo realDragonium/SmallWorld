@@ -4,7 +4,7 @@ import controlers.TestController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import observers.ApplicatieObservable;
+import observable.ApplicatieObservable;
 import observers.ApplicatieObserver;
 
 public class TestView implements ApplicatieObserver {

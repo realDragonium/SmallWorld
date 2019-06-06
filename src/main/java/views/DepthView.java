@@ -42,6 +42,7 @@ public class DepthView implements DepthObserver, GameObservable{
 
     public DepthView(GameObserver go) {
         register(go);
+        buildCamera();
         generateWorld();
     }
 
@@ -51,16 +52,18 @@ public class DepthView implements DepthObserver, GameObservable{
 
     private void addGroup(Group group) {
         World.getChildren().add(group);
-        buildCamera();
+        remakeSubScene();
+        notifyObserver();
+    }
+
+    public void remakeSubScene(){
         world = new SubScene(World, 1600, 900, true, SceneAntialiasing.BALANCED);
         world.setCamera(camera);
         world.setDepthTest(DepthTest.ENABLE);
         handleMouse(world, World);
-        notifyObserver();
     }
 
     private void buildCamera() {
-        System.out.println("buildCamera()");
         World.getChildren().add(cameraXform);
         cameraXform.getChildren().add(cameraXform2);
         cameraXform2.getChildren().add(cameraXform3);
