@@ -69,7 +69,7 @@ public class AreaView implements AreaObserver, observable.DepthObservable {
 		mesh.setOnMouseClicked(e ->{
 			RaceFicheView ficheView = new RaceFicheView("RatMensen", observer);
 	        controler.addFicheToArea(ficheView.controler.fiche);
-            notifyObserver();
+            //notifyObserver();
 		});
 	}
 
