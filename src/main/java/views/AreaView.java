@@ -1,7 +1,7 @@
 package views;
 
+import Observable.AreaObservable;
 import controlers.AreaControler;
-import controlers.FicheControler;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
@@ -9,7 +9,6 @@ import javafx.scene.shape.Shape3D;
 import javafx.scene.transform.Translate;
 import moleculesampleapp.Main;
 import moleculesampleapp.Xform;
-import observers.AreaObservable;
 import observers.AreaObserver;
 
 public class AreaView implements AreaObserver {
@@ -106,5 +105,4 @@ public class AreaView implements AreaObserver {
 	private void makeNotHighlighted() {
 		material.setDiffuseColor(normalColor);
 	}
-
 }
