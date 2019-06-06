@@ -1,5 +1,5 @@
 package controlers;
 
-public class RaceFicheControler {
+public class RaceFicheControler extends FicheControler {
 	
 }

@@ -131,10 +131,19 @@ public class Main extends Application {
     
     private void generateWorld() throws IOException {
     	 World = new Xform();
+         
+         FXMLLoader fxmlLoader2 = new FXMLLoader();
+         fxmlLoader2.setLocation(this.getClass().getResource("/Fiches/RatMensen.fxml"));
+ 		Group graphic2 = fxmlLoader2.load();
+ 		
          FXMLLoader fxmlLoader = new FXMLLoader();
-         fxmlLoader.setLocation(this.getClass().getResource("/map2.fxml"));
+         fxmlLoader.setLocation(this.getClass().getResource("/map/map2.fxml"));
          Group graphic = fxmlLoader.load();
-         World.getChildren().add(graphic);
+         
+
+ 		World.getChildren().add(graphic2);
+ 		
+ 		World.getChildren().add(graphic);
          
          AreaPoints = new HashMap<String, Translate>();
          generateRegionPoints();
@@ -143,8 +152,8 @@ public class Main extends Application {
          	mesh.setId(mesh.getId().substring(14, mesh.getId().length()));
          	if(mesh.getId().length() > 6) {
          		
-         		AreaView areaView = new AreaView(((Shape3D) mesh), AreaPoints.get(mesh.getId()));
-         		areaView.controler.setAnimationsControler(animControler);
+         		//AreaView areaView = new AreaView(((Shape3D) mesh), AreaPoints.get(mesh.getId()));
+         		//areaView.controler.setAnimationsControler(animControler);
          	}
          }
          world.getChildren().add(World);

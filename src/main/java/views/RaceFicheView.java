@@ -12,7 +12,7 @@ import observers.FicheObserver;
 
 public class RaceFicheView implements FicheObserver{
 	
-	Xform fiche3dModel;
+	Xform fiche3dModel = new Xform();
 	RaceFicheControler controler;
 	
 	public RaceFicheView(String race) {
@@ -25,6 +25,7 @@ public class RaceFicheView implements FicheObserver{
 		FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(this.getClass().getResource("/" + race + "Fiche.fxml"));
 		Group graphic = fxmlLoader.load();
+		fiche3dModel.getChildren().add(graphic);
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -34,5 +35,4 @@ public class RaceFicheView implements FicheObserver{
 	public void update(FicheObservable fo) {
 		fiche3dModel.setTranslate(fo.getPosition());
 	}
-
 }
