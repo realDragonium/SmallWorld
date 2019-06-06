@@ -1,4 +1,4 @@
-package Observer;
+package observers;
 
 import Observable.AreaObservable;
 
