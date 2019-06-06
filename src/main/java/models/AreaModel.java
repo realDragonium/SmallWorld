@@ -5,11 +5,10 @@ import java.util.List;
 
 import Observable.AreaObservable;
 import Observer.AreaObserver;
+import controlers.FicheControler;
 import javafx.scene.shape.Shape3D;
 import javafx.scene.transform.Translate;
 import models.FicheModel.ficheType;
-import observers.AreaObservable;
-import observers.AreaObserver;
 
 public class AreaModel implements AreaObservable{
 	enum Terrain { forest, swamp, sea, mountain, hill, field };
@@ -21,6 +20,7 @@ public class AreaModel implements AreaObservable{
 	boolean hovering;
 	boolean selected;
 	int raceFichesAmount = 0;
+	private List<FicheControler> fiches = new ArrayList<>();
 
 	public List<FicheControler> getFichesOnArea() {
 		return fiches;
