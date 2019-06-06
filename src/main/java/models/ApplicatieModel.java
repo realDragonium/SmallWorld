@@ -3,8 +3,8 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-import Observable.ModelViewObservable;
-import Observer.ModelViewObserver;
+import observable.ModelViewObservable;
+import observers.ModelViewObserver;
 
 public class ApplicatieModel implements ModelViewObservable{
 	private List<ModelViewObserver> observers = new ArrayList<>();

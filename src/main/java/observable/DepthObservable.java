@@ -1,6 +1,6 @@
-package Observable;
+package observable;
 
-import Observer.DepthObserver;
+import observers.DepthObserver;
 import javafx.scene.Group;
 
 public interface DepthObservable {	

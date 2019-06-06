@@ -1,6 +1,6 @@
-package Observable;
+package observable;
 
-import Observer.ModelViewObserver;
+import observers.ModelViewObserver;
 import javafx.scene.Scene;
 
 public interface ModelViewObservable {

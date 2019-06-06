@@ -1,6 +1,6 @@
-package Observer;
+package observers;
 
-import Observable.DepthObservable;
+import observable.DepthObservable;
 
 public interface DepthObserver {
 	void update(DepthObservable depthO);

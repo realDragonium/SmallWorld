@@ -1,6 +1,6 @@
 package views;
 
-import Observer.DepthObserver;
+import observers.DepthObserver;
 import javafx.scene.Group;
 import observable.AreaObservable;
 import controlers.AreaControler;
@@ -13,7 +13,7 @@ import moleculesampleapp.Main;
 import moleculesampleapp.Xform;
 import observers.AreaObserver;
 
-public class AreaView implements AreaObserver, Observable.DepthObservable {
+public class AreaView implements AreaObserver, observable.DepthObservable {
 	private DepthObserver observer;
 	Shape3D mesh;
 	PhongMaterial material;
@@ -67,22 +67,9 @@ public class AreaView implements AreaObserver, Observable.DepthObservable {
 		});
 
 		mesh.setOnMouseClicked(e ->{
-			Xform fiche = new Xform();
-            Box box = new Box();
-	        fiche.getChildren().add(box);
-
-	        final PhongMaterial redMaterial = new PhongMaterial();
-	        redMaterial.setDiffuseColor(Color.DARKRED);
-            redMaterial.setSpecularColor(Color.RED);
-
-            box.setMaterial(redMaterial);
-
-            fiche.setScale(0.1);
-            group.getChildren().add(fiche);
+			RaceFicheView ficheView = new RaceFicheView("RatMensen", observer);
+	        controler.addFicheToArea(ficheView.controler.fiche);
             notifyObserver();
-            RaceFicheView ficheView = new RaceFicheView("");
-            ficheView.controler.setAnimationControler(controler.getAnimControler());
-            controler.addFicheToArea(ficheView.controler);
 		});
 	}
 

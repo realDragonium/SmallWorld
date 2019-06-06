@@ -1,6 +1,6 @@
-package Observer;
+package observers;
 
-import Observable.GameObservable;
+import observable.GameObservable;
 
 public interface GameObserver {
 	void update(GameObservable go);

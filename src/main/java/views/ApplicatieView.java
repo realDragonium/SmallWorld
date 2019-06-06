@@ -1,10 +1,10 @@
 package views;
 
 import controlers.ApplicatieController;
-import Observable.ModelViewObservable;
-import Observable.SceneObservable;
-import Observer.ModelViewObserver;
-import Observer.SceneObserver;
+import observable.ModelViewObservable;
+import observable.SceneObservable;
+import observers.ModelViewObserver;
+import observers.SceneObserver;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;

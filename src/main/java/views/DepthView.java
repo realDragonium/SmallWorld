@@ -1,9 +1,9 @@
 package views;
 
-import Observable.DepthObservable;
-import Observable.GameObservable;
-import Observer.DepthObserver;
-import Observer.GameObserver;
+import observable.DepthObservable;
+import observable.GameObservable;
+import observers.DepthObserver;
+import observers.GameObserver;
 import javafx.event.EventHandler;
 import javafx.scene.DepthTest;
 import javafx.scene.Group;

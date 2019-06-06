@@ -7,7 +7,7 @@ import moleculesampleapp.Xform;
 
 public class AnimationsControler {
 	List<AnimationControler> animations = new ArrayList<>();
-	List<AnimationControler> activeAnimations = new ArrayList<>();
+	List<AnimationControler> activeAnimations = new ArrayList<>(); 
 
 	public void initAnimation(AnimationControler anim) {
 		animations.add(anim);

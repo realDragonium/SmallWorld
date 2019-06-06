@@ -1,12 +1,12 @@
 package views;
 
 import controlers.GameController;
-import Observable.GameObservable;
-import Observable.ModelViewObservable;
-import Observable.SceneObservable;
-import Observer.GameObserver;
-import Observer.ModelViewObserver;
-import Observer.SceneObserver;
+import observable.GameObservable;
+import observable.ModelViewObservable;
+import observable.SceneObservable;
+import observers.GameObserver;
+import observers.ModelViewObserver;
+import observers.SceneObserver;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
