@@ -1,7 +1,7 @@
 package controlers;
 
 import models.HomeScreenModel;
-import observers.ModelViewObserver;
+import observers.HomeScreenObserver;
 
 public class HomeScreenController {
 	
@@ -11,7 +11,7 @@ public class HomeScreenController {
         
     }
     
-    public void register(ModelViewObserver mvo) {
+    public void register(HomeScreenObserver mvo) {
     	hsModel.register(mvo);
     }
 }
