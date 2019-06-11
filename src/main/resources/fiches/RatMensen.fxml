@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright/License : unknown -->
+<!-- FXML specification : JRE/JavaFX 8.0 early access build b128 -->
+<!-- Generator : ModelImporterJFX 0.4.1 of InteractiveMesh, www.interactivemesh.org/models/jfx3dbrowser.html -->
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.PointLight?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.PhongMaterial?>
+<?import javafx.scene.shape.MeshView?>
+<?import javafx.scene.shape.TriangleMesh?>
+<?import javafx.scene.transform.Affine?>
+
+<Group id="AddedRootGroup_1559814903964">
+  <children>
+    <PointLight id="Infinite_Light_1" lightOn="true">
+      <transforms>
+        <Affine mxx="0.99563676" mxy="0.0" mxz="0.09331366" tx="-101.11865" myx="0.055400852" myy="0.80468225" myz="-0.59111524" ty="123.888565" mzx="-0.07508784" mzy="0.5937057" mzz="0.80117124" tz="148.29411"/>
+      </transforms>
+      <color>
+        <Color red="1.0" green="1.0" blue="1.0"/>
+      </color>
+    </PointLight>
+    <PointLight id="Image_Based_Light_1" lightOn="true">
+      <color>
+        <Color red="0.1" green="0.1" blue="0.1"/>
+      </color>
+    </PointLight>
+    <Group id="Background_1">
+      <transforms>
+        <Affine mxx="1.0" mxy="0.0" mxz="0.0" tx="-93.0002" myx="0.0" myy="1.0" myz="0.0" ty="92.4998" mzx="0.0" mzy="0.0" mzz="1.0" tz="-92.4975"/>
+      </transforms>
+      <children>
+        <MeshView id="Background-0" cullFace="BACK" drawMode="FILL">
+          <material>
+            <PhongMaterial specularPower="25.6">
+              <diffuseColor>
+                <Color red="1.0" green="1.0" blue="1.0" opacity="1.0"/>
+              </diffuseColor>
+              <diffuseMap>
+                <Image url="@./Background.JPG"/>
+              </diffuseMap>
+              <specularColor>
+                <Color red="0.2" green="0.2" blue="0.2" opacity="1.0"/>
+              </specularColor>
+            </PhongMaterial>
+          </material>
+          <mesh>
+            <TriangleMesh>
+              <points>92.996 -73.6903 75.4547 92.2251 -72.9194 75.4547 92.2251 -74.4611 75.4547 93.7752 -74.4611 75.4547 93.0043 -73.6903 75.4547 93.7752 -72.9194 75.4547 92.2251 -72.9194 75.4547 92.2251 -74.4611 75.4547 92.2251 -72.9194 75.6627 92.2251 -74.4611 75.6627 92.2251 -74.4611 75.4547 93.7752 -74.4611 75.4547 92.2251 -74.4611 75.6627 93.7752 -74.4611 75.6627 93.7752 -74.4611 75.4547 93.7752 -72.9194 75.4547 93.7752 -74.4611 75.6627 93.7752 -72.9194 75.6627 93.7752 -72.9194 75.4547 92.2251 -72.9194 75.4547 93.7752 -72.9194 75.6627 92.2251 -72.9194 75.6627 92.996 -73.6903 75.6627 92.2251 -72.9194 75.6627 92.2251 -74.4611 75.6627 93.7752 -74.4611 75.6627 93.0043 -73.6903 75.6627 93.7752 -72.9194 75.6627</points>
+              <texCoords>0.497316 0.499996 0.0 1.0 0.0 0.0 1.0 0.0 0.502687 0.499999 1.0 1.0 1.0 0.0 0.750674 0.0 1.0 1.0 0.750674 1.0 0.750674 0.0 0.5 0.0 0.750674 1.0 0.5 1.0 0.5 0.0 0.250674 0.0 0.5 1.0 0.250674 1.0 0.250674 0.0 0.0 0.0 0.250674 1.0 0.0 1.0 0.497316 0.499996 0.0 1.0 0.0 0.0 1.0 0.0 0.502687 0.499999 1.0 1.0</texCoords>
+              <faces>2 2 1 1 0 0 4 4 3 3 0 0 5 5 3 3 4 4 0 0 1 1 4 4 2 2 0 0 3 3 5 5 4 4 1 1</faces>
+              <faceSmoothingGroups>1 1 1 1 1 1</faceSmoothingGroups>
+            </TriangleMesh>
+          </mesh>
+        </MeshView>
+        <MeshView id="Background-1" cullFace="BACK" drawMode="FILL">
+          <material>
+            <PhongMaterial specularPower="25.6">
+              <diffuseColor>
+                <Color red="1.0" green="1.0" blue="1.0" opacity="1.0"/>
+              </diffuseColor>
+              <diffuseMap>
+                <Image url="@./Background.JPG"/>
+              </diffuseMap>
+              <specularColor>
+                <Color red="0.2" green="0.2" blue="0.2" opacity="1.0"/>
+              </specularColor>
+            </PhongMaterial>
+          </material>
+          <mesh>
+            <TriangleMesh>
+              <points>92.996 -73.6903 75.4547 92.2251 -72.9194 75.4547 92.2251 -74.4611 75.4547 93.7752 -74.4611 75.4547 93.0043 -73.6903 75.4547 93.7752 -72.9194 75.4547 92.2251 -72.9194 75.4547 92.2251 -74.4611 75.4547 92.2251 -72.9194 75.6627 92.2251 -74.4611 75.6627 92.2251 -74.4611 75.4547 93.7752 -74.4611 75.4547 92.2251 -74.4611 75.6627 93.7752 -74.4611 75.6627 93.7752 -74.4611 75.4547 93.7752 -72.9194 75.4547 93.7752 -74.4611 75.6627 93.7752 -72.9194 75.6627 93.7752 -72.9194 75.4547 92.2251 -72.9194 75.4547 93.7752 -72.9194 75.6627 92.2251 -72.9194 75.6627 92.996 -73.6903 75.6627 92.2251 -72.9194 75.6627 92.2251 -74.4611 75.6627 93.7752 -74.4611 75.6627 93.0043 -73.6903 75.6627 93.7752 -72.9194 75.6627</points>
+              <texCoords>0.497316 0.499996 0.0 1.0 0.0 0.0 1.0 0.0 0.502687 0.499999 1.0 1.0 1.0 0.0 0.750674 0.0 1.0 1.0 0.750674 1.0 0.750674 0.0 0.5 0.0 0.750674 1.0 0.5 1.0 0.5 0.0 0.250674 0.0 0.5 1.0 0.250674 1.0 0.250674 0.0 0.0 0.0 0.250674 1.0 0.0 1.0 0.497316 0.499996 0.0 1.0 0.0 0.0 1.0 0.0 0.502687 0.499999 1.0 1.0</texCoords>
+              <faces>0 0 0 0 0 0</faces>
+              <faceSmoothingGroups>0</faceSmoothingGroups>
+            </TriangleMesh>
+          </mesh>
+        </MeshView>
+        <MeshView id="Background-2" cullFace="BACK" drawMode="FILL">
+          <material>
+            <PhongMaterial specularPower="25.6">
+              <diffuseColor>
+                <Color red="1.0" green="1.0" blue="1.0" opacity="1.0"/>
+              </diffuseColor>
+              <diffuseMap>
+                <Image url="@./Background%20Extrusion%20Material%20-%20Default%20Texture.JPG"/>
+              </diffuseMap>
+              <specularColor>
+                <Color red="0.2" green="0.2" blue="0.2" opacity="1.0"/>
+              </specularColor>
+            </PhongMaterial>
+          </material>
+          <mesh>
+            <TriangleMesh>
+              <points>92.996 -73.6903 75.4547 92.2251 -72.9194 75.4547 92.2251 -74.4611 75.4547 93.7752 -74.4611 75.4547 93.0043 -73.6903 75.4547 93.7752 -72.9194 75.4547 92.2251 -72.9194 75.4547 92.2251 -74.4611 75.4547 92.2251 -72.9194 75.6627 92.2251 -74.4611 75.6627 92.2251 -74.4611 75.4547 93.7752 -74.4611 75.4547 92.2251 -74.4611 75.6627 93.7752 -74.4611 75.6627 93.7752 -74.4611 75.4547 93.7752 -72.9194 75.4547 93.7752 -74.4611 75.6627 93.7752 -72.9194 75.6627 93.7752 -72.9194 75.4547 92.2251 -72.9194 75.4547 93.7752 -72.9194 75.6627 92.2251 -72.9194 75.6627 92.996 -73.6903 75.6627 92.2251 -72.9194 75.6627 92.2251 -74.4611 75.6627 93.7752 -74.4611 75.6627 93.0043 -73.6903 75.6627 93.7752 -72.9194 75.6627</points>
+              <texCoords>0.497316 0.499996 0.0 1.0 0.0 0.0 1.0 0.0 0.502687 0.499999 1.0 1.0 1.0 0.0 0.750674 0.0 1.0 1.0 0.750674 1.0 0.750674 0.0 0.5 0.0 0.750674 1.0 0.5 1.0 0.5 0.0 0.250674 0.0 0.5 1.0 0.250674 1.0 0.250674 0.0 0.0 0.0 0.250674 1.0 0.0 1.0 0.497316 0.499996 0.0 1.0 0.0 0.0 1.0 0.0 0.502687 0.499999 1.0 1.0</texCoords>
+              <faces>8 8 6 6 7 7 8 8 7 7 9 9 12 12 10 10 11 11 12 12 11 11 13 13 16 16 14 14 15 15 16 16 15 15 17 17 20 20 18 18 19 19 20 20 19 19 21 21</faces>
+              <faceSmoothingGroups>1 1 1 1 1 1 1 1</faceSmoothingGroups>
+            </TriangleMesh>
+          </mesh>
+        </MeshView>
+        <MeshView id="Background-3" cullFace="BACK" drawMode="FILL">
+          <material>
+            <PhongMaterial specularPower="25.6">
+              <diffuseColor>
+                <Color red="1.0" green="1.0" blue="1.0" opacity="1.0"/>
+              </diffuseColor>
+              <diffuseMap>
+                <Image url="@./Background.JPG"/>
+              </diffuseMap>
+              <specularColor>
+                <Color red="0.2" green="0.2" blue="0.2" opacity="1.0"/>
+              </specularColor>
+            </PhongMaterial>
+          </material>
+          <mesh>
+            <TriangleMesh>
+              <points>92.996 -73.6903 75.4547 92.2251 -72.9194 75.4547 92.2251 -74.4611 75.4547 93.7752 -74.4611 75.4547 93.0043 -73.6903 75.4547 93.7752 -72.9194 75.4547 92.2251 -72.9194 75.4547 92.2251 -74.4611 75.4547 92.2251 -72.9194 75.6627 92.2251 -74.4611 75.6627 92.2251 -74.4611 75.4547 93.7752 -74.4611 75.4547 92.2251 -74.4611 75.6627 93.7752 -74.4611 75.6627 93.7752 -74.4611 75.4547 93.7752 -72.9194 75.4547 93.7752 -74.4611 75.6627 93.7752 -72.9194 75.6627 93.7752 -72.9194 75.4547 92.2251 -72.9194 75.4547 93.7752 -72.9194 75.6627 92.2251 -72.9194 75.6627 92.996 -73.6903 75.6627 92.2251 -72.9194 75.6627 92.2251 -74.4611 75.6627 93.7752 -74.4611 75.6627 93.0043 -73.6903 75.6627 93.7752 -72.9194 75.6627</points>
+              <texCoords>0.497316 0.499996 0.0 1.0 0.0 0.0 1.0 0.0 0.502687 0.499999 1.0 1.0 1.0 0.0 0.750674 0.0 1.0 1.0 0.750674 1.0 0.750674 0.0 0.5 0.0 0.750674 1.0 0.5 1.0 0.5 0.0 0.250674 0.0 0.5 1.0 0.250674 1.0 0.250674 0.0 0.0 0.0 0.250674 1.0 0.0 1.0 0.497316 0.499996 0.0 1.0 0.0 0.0 1.0 0.0 0.502687 0.499999 1.0 1.0</texCoords>
+              <faces>0 0 0 0 0 0</faces>
+              <faceSmoothingGroups>0</faceSmoothingGroups>
+            </TriangleMesh>
+          </mesh>
+        </MeshView>
+        <MeshView id="Background-4" cullFace="BACK" drawMode="FILL">
+          <material>
+            <PhongMaterial specularPower="25.6">
+              <diffuseColor>
+                <Color red="1.0" green="1.0" blue="1.0" opacity="1.0"/>
+              </diffuseColor>
+              <diffuseMap>
+                <Image url="@./Background.JPG"/>
+              </diffuseMap>
+              <specularColor>
+                <Color red="0.2" green="0.2" blue="0.2" opacity="1.0"/>
+              </specularColor>
+            </PhongMaterial>
+          </material>
+          <mesh>
+            <TriangleMesh>
+              <points>92.996 -73.6903 75.4547 92.2251 -72.9194 75.4547 92.2251 -74.4611 75.4547 93.7752 -74.4611 75.4547 93.0043 -73.6903 75.4547 93.7752 -72.9194 75.4547 92.2251 -72.9194 75.4547 92.2251 -74.4611 75.4547 92.2251 -72.9194 75.6627 92.2251 -74.4611 75.6627 92.2251 -74.4611 75.4547 93.7752 -74.4611 75.4547 92.2251 -74.4611 75.6627 93.7752 -74.4611 75.6627 93.7752 -74.4611 75.4547 93.7752 -72.9194 75.4547 93.7752 -74.4611 75.6627 93.7752 -72.9194 75.6627 93.7752 -72.9194 75.4547 92.2251 -72.9194 75.4547 93.7752 -72.9194 75.6627 92.2251 -72.9194 75.6627 92.996 -73.6903 75.6627 92.2251 -72.9194 75.6627 92.2251 -74.4611 75.6627 93.7752 -74.4611 75.6627 93.0043 -73.6903 75.6627 93.7752 -72.9194 75.6627</points>
+              <texCoords>0.497316 0.499996 0.0 1.0 0.0 0.0 1.0 0.0 0.502687 0.499999 1.0 1.0 1.0 0.0 0.750674 0.0 1.0 1.0 0.750674 1.0 0.750674 0.0 0.5 0.0 0.750674 1.0 0.5 1.0 0.5 0.0 0.250674 0.0 0.5 1.0 0.250674 1.0 0.250674 0.0 0.0 0.0 0.250674 1.0 0.0 1.0 0.497316 0.499996 0.0 1.0 0.0 0.0 1.0 0.0 0.502687 0.499999 1.0 1.0</texCoords>
+              <faces>23 23 24 24 22 22 25 25 26 26 22 22 25 25 27 27 26 26 23 23 22 22 26 26 22 22 24 24 25 25 26 26 27 27 23 23</faces>
+              <faceSmoothingGroups>1 1 1 1 1 1</faceSmoothingGroups>
+            </TriangleMesh>
+          </mesh>
+        </MeshView>
+      </children>
+    </Group>
+  </children>
+</Group>

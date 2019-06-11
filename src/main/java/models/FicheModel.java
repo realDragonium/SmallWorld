@@ -15,11 +15,9 @@ public class FicheModel implements FicheObservable{
 	public enum ficheType {RAS, SPECIAL, SPECIALPOWER};
 	ficheType type;
 	Translate position;
-	Xform fiche3dModel;
 	List<FicheObserver> observers = new ArrayList<FicheObserver>();
 	
-	public FicheModel(Xform xform) {
-		fiche3dModel = xform;
+	public FicheModel() {
 	}
 	
 	public int whatsMyAttackValue() {
@@ -37,10 +35,6 @@ public class FicheModel implements FicheObservable{
 	public void setPosition(Translate pos) {
 		position = pos;
 		notifyAllObservers();
-	}
-	
-	public Xform getXform() {
-		return fiche3dModel;
 	}
 
 	@Override

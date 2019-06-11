@@ -54,11 +54,11 @@ public class DepthView implements DepthObserver, GameObservable{
 
     private void generateWorld(){
         new MapView(this);
+        notifyObserver();
     }
 
     private void addGroup(Group group) {
         World.getChildren().add(group);
-        notifyObserver();
     }
 
     public void makeSubScene(){

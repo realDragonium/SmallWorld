@@ -11,7 +11,7 @@ public class Init extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        new views.ApplicatieView(primaryStage);
+        new views.Applicatie(primaryStage);
 
     }
 }

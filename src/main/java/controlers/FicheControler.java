@@ -3,15 +3,15 @@ package controlers;
 import javafx.scene.transform.Translate;
 import models.FicheModel;
 import moleculesampleapp.Xform;
-import views.FicheView;
+import observers.FicheObserver;
+import views.RaceFicheView;
 
 public class FicheControler {
 
-	FicheModel model;
+	FicheModel model = new FicheModel();
 	AnimationsControler animControler;
 	
-	public FicheControler(Xform xform) {
-		model = new FicheModel(xform);
+	public FicheControler() {
 	}
 	
 	public void setAnimationControler(AnimationsControler animControler) {
@@ -27,15 +27,15 @@ public class FicheControler {
 		return model.whatsMyType();
 	}
 	
-	public void setAnimation(String animation){
-		animControler.animateObject(animControler.getAnimation(animation), this.model.getXform());
+	public void setAnimation(String animation, Xform xform){
+		animControler.animateObject(animControler.getAnimation(animation), xform);
 	}
 	
 	public void setPosition(Translate pos) {
 		model.setPosition(pos);
 	}
 
-	public void registerObserver(FicheView ficheView) {
+	public void registerObserver(FicheObserver ficheView) {
 		model.register(ficheView);
 	}
 }

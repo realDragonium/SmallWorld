@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import controlers.FicheControler;
+import controlers.RaceFicheControler;
 import observable.AreaObservable;
 import observers.AreaObserver;
 import javafx.scene.shape.Shape3D;
@@ -34,12 +35,12 @@ public class AreaModel implements AreaObservable{
 		return centerPoint;
 	}
 
-	public void addFiche(FicheControler ficheControler) {
-		fiches.add(ficheControler);
+	public void addFiche(FicheControler controler) {
+		fiches.add(controler);
 		if(true) {
 			raceFichesAmount++;
 		}
-		if(ficheControler.getMyType() == ficheType.RAS) {
+		if(controler.getMyType() == ficheType.RAS) {
 			raceFichesAmount++;
 		}
 		notifyAllObservers();

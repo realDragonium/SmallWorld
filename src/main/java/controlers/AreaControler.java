@@ -17,10 +17,6 @@ public class AreaControler {
 		return model.getCenterPoint();
 	}
 
-	public void playFichePlacingAnimation(FicheControler fiche) {
-		fiche.setAnimation("Coin Falling");
-	}
-
 	public void setAnimationsControler(AnimationsControler animControler) {
 		this.animControler = animControler;
 	}
@@ -37,7 +33,6 @@ public class AreaControler {
 		model.addFiche(controler);
 		System.out.println("Aantal fiches: " + model.getFichesOnArea().size());
 		setFichePosition(controler);
-		playFichePlacingAnimation(controler);
 	}
 
 	public void configureTerrainData(Shape3D mesh) {
@@ -53,7 +48,7 @@ public class AreaControler {
 	}
 
 //	public RaceControler getAreaOwner() {
-//		for(FicheControler fiche : model.getFichesOnArea()) {
+//		for(RaceFicheControler fiche : model.getFichesOnArea()) {
 //			if(fiche.getMyType() == ficheType.RAS) {
 //				return fiche.getMyRace();
 //			}
