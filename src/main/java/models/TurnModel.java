@@ -1,9 +1,12 @@
 package main.java.models;
 
+import main.java.observers.TurnObservable;
+
 import java.util.Collection;
 
-public class TurnModel {
+public class TurnModel implements TurnObservable {
 
+    private int whichTurn;
     private String currentPlayer;
     private Collection playerList;
     private boolean viewActive;
@@ -20,5 +23,22 @@ public class TurnModel {
     public void changeActive(){
         return;
     }
+
+    public void changeStateTurn() {
+    }
+
+
+    @Override
+    public boolean playerOneAanDeBeurt() {
+        return false;
+    }
+
+    @Override
+    public boolean endTurn() {
+        return false;
+    }
+
+
+
 
 }

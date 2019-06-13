@@ -19,7 +19,7 @@ public class AreaControler {
 	
 	public int getAreaDefenceValue() {
 		int defenceValue = 0;
-		for(FicheControler fiche : model.getFichesOnArea()) {
+		for(controlers.FicheControler fiche : model.getFichesOnArea()) {
 			defenceValue += fiche.getDefenceValue();
 		}
 		return defenceValue;
