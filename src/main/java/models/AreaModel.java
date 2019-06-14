@@ -1,62 +1,77 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import controlers.FicheControler;
-import controlers.RaceFicheControler;
+import controlers.RaceFicheController;
 import observable.AreaObservable;
 import observers.AreaObserver;
-import javafx.scene.shape.Shape3D;
-import javafx.scene.transform.Translate;
-import models.FicheModel.ficheType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+import java.util.stream.IntStream;
 
 public class AreaModel implements AreaObservable{
-	enum Terrain { forest, swamp, sea, mountain, hill, field };
-	Terrain terrain;
-	enum SpecialType {CAVE, MAGIC, MINE, NONE}
-	SpecialType specialType;
-	Translate centerPoint;
-	List<AreaObserver> observers = new ArrayList<AreaObserver>();
-	boolean hovering;
-	boolean selected;
-	int raceFichesAmount = 0;
-	private List<FicheControler> fiches = new ArrayList<>();
 
-	public List<FicheControler> getFichesOnArea() {
-		return fiches;
+	private Stack<RaceFicheController> raceFiches = new Stack<>();
+	private List<AreaObserver> observers = new ArrayList<>();
+	private boolean active = false;
+	private String areaId;
+	
+	public AreaModel(String areaId) {
+		this.areaId = areaId;
+		//IntStream.range(0, (int) (Math.random()*3)).forEach(i -> raceFiches.push(new RaceFicheController("Lost village")));
 	}
-
-	public void setCenterPoint(Translate point) {
-		centerPoint = point;
+	
+	public void printAantal() {
+		System.out.println("Aanwezig aantal fiches: " + raceFiches.size());
 	}
-
-	public Translate getCenterPoint(){
-		return centerPoint;
+	
+	public void setAsActive() {
+		active = true;
+		notifyAllObservers();
 	}
-
-	public void addFiche(FicheControler controler) {
-		fiches.add(controler);
-		if(true) {
-			raceFichesAmount++;
-		}
-		if(controler.getMyType() == ficheType.RAS) {
-			raceFichesAmount++;
-		}
+	
+	public void setAsNonActive() {
+		active = false;
 		notifyAllObservers();
 	}
 
-	public void configureData(Shape3D mesh) {
-		String type = mesh.getId().split("_")[1];
-		terrain = Terrain.valueOf(type);
-		specialType = SpecialType.NONE;
+//	public void addFiches(Stack<RaceFiche> fiches) {
+//		while(fiches.size() > 0){
+//			raceFiches.push(fiches.pop());
+//		}
+//	}
+	
+//	public Stack<RaceFiche> deleteFiche(int count) {
+//		Stack<RaceFiche> leaveFiches = new Stack<>();
+//		IntStream.range(0, count).forEach(i -> leaveFiches.push(raceFiches.pop()));
+//		return leaveFiches;
+//	}
+
+	public boolean isEmpty(){
+		return raceFiches.isEmpty();
 	}
 
+	public boolean attackForceBigger(int count){
+		return count > raceFiches.size();
+	}
+
+	public int numbersNeeded(){
+		return raceFiches.size() + 1;
+	}
+
+	public Object getFiches() {
+		return null;
+	}
 
 	@Override
-	public void register(AreaObserver ao) {
-		observers.add(ao);
+	public void register(AreaObserver mvo) {
+		observers.add(mvo);
+	}
 
+	@Override
+	public void unregister(AreaObserver mvo) {
+		observers.remove(mvo);
+		
 	}
 
 	@Override
@@ -66,25 +81,12 @@ public class AreaModel implements AreaObservable{
 		}
 	}
 
-	public void changeStateHovering() {
-		hovering = !hovering;
-		notifyAllObservers();
-	}
-
 	@Override
-	public boolean isHovering() {
-		return hovering;
+	public boolean isActive() {
+		return active;
 	}
 
-	@Override
-	public boolean isSelected() {
-		return selected;
+	public String getId() {
+		return areaId;
 	}
-
-	@Override
-	public int getRaceFichesAmount() {
-		return raceFichesAmount;
-	}
-
-
 }

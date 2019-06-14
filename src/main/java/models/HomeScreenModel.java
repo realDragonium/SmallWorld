@@ -2,28 +2,27 @@ package models;
 
 import java.util.ArrayList;
 import java.util.List;
+import observable.HomeScreenObservable;
+import observers.HomeScreenObserver;
 
-import observable.ModelViewObservable;
-import observers.ModelViewObserver;
-
-public class HomeScreenModel implements ModelViewObservable {
-	private List<ModelViewObserver> observers = new ArrayList<>();
+public class HomeScreenModel implements HomeScreenObservable {
+	private List<HomeScreenObserver> observers = new ArrayList<>();
 	
 	@Override
 	public void notifyAllObservers() {
-		for(ModelViewObserver mvo :observers) {
+		for(HomeScreenObserver mvo :observers) {
 			mvo.update(this);
 		}
 	}
 
 	@Override
-	public void register(ModelViewObserver mvo) {
+	public void register(HomeScreenObserver mvo) {
 		observers.add(mvo);
 		
 	}
 
 	@Override
-	public void unregister(ModelViewObserver mvo) {
+	public void unregister(HomeScreenObserver mvo) {
 		observers.remove(mvo);
 	}
 

@@ -1,49 +1,46 @@
 package views;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
+import controlers.GameScreenController;
 import controlers.HomeScreenController;
-import observable.ModelViewObservable;
-import observable.SceneObservable;
-import observers.ModelViewObserver;
-import observers.SceneObserver;
+import observers.HomeScreenObserver;
 import managers.SceneManager;
+import observable.HomeScreenObservable;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-public class HomeScreenView implements ModelViewObserver{
-	private List<SceneObserver> sceneObserver = new ArrayList<>();
+public class HomeScreenView implements HomeScreenObserver{
 	SceneManager sceneManager;
 	
+	Parent root;
+	Pane pane;
 	Scene scene;
     HomeScreenController hsCon;
 
-    public HomeScreenView(SceneManager manager){
-    	this.sceneManager = manager;
-        hsCon = new HomeScreenController();
+    public HomeScreenView(HomeScreenController hsController){
+        hsCon = hsController;
         hsCon.register(this);
         loadScene();
     }
     
     private void loadScene(){
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/HomeScreen/Homescreen.fxml"));
+			root = FXMLLoader.load(getClass().getResource("/HomeScreen/Homescreen.fxml"));
 			for(Node node : ((AnchorPane) root).getChildren()){
 				if(node.getId() != null) {
 					if(node.getId().equals("select")) {
+						((HBox) node).setOnMouseClicked(e -> {
+							new GameScreenController();
+						});
 						((HBox) node).setOnMouseEntered(e -> {
 							enterHoverTitle(node);
 						});
@@ -58,7 +55,6 @@ public class HomeScreenView implements ModelViewObserver{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        sceneManager.setNewScene(scene);
     }
 
     private void enterHoverTitle(Node node) {
@@ -114,9 +110,14 @@ public class HomeScreenView implements ModelViewObserver{
     }
 
 	@Override
-	public void update(ModelViewObservable mvo) {
+	public void update(HomeScreenObservable mvo) {
 		System.out.println("mvo test message");
 	}
+
+	public void setPane(Pane pane) {
+    	this.pane = pane;
+    	pane.getChildren().addAll(root);
+    }
     
 
 

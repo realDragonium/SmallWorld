@@ -1,6 +1,10 @@
 package controlers;
 
+import managers.SceneManager;
+
 public class MapController {
-	private controlers.GameController gameCon = controlers.GameController.getInstance();
-	private controlers.DepthController depthCon;
+	
+	public MapController() {
+		SceneManager.createMapView(this);
+	}
 }
