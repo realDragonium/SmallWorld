@@ -12,6 +12,7 @@ import controlers.GameScreenController;
 import controlers.HomeScreenController;
 import controlers.LoginController;
 import controlers.MapController;
+import controlers.PlayerController;
 import controlers.PlayerListController;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -26,15 +27,21 @@ import views.LoginView;
 import views.Map2DView;
 import views.MapView;
 import views.PlayerListView;
+import views.PuntenView;
 
 public final class SceneManager {
 	
 	static GameScreenView gameScreen;
 	
-	enum pane{LOGIN(1600, 800), HOMESCREEN(1600, 800), TITLESCREEN(1600, 800), GAMESCREEN(1600, 800), MAP(1200, 600, 200, 100), PLAYERLIST(200, 600, 0, 100), DICE(200, 100, 1400, 0);
+	enum pane{LOGIN(1920, 1080), HOMESCREEN(1920, 1080), 
+		TITLESCREEN(1920, 1080), GAMESCREEN(1920, 1080), 
+		MAP(800, 800, 600, 200), PLAYERLIST(200, 600, 0, 100), 
+		DICE(200, 100, 1700, 930), PUNTEN(120, 120, 1000, 930);
+		
 		Pane myPane = new Pane();
 		pane(int width, int height){
 			myPane.setMinSize(width, height);
+			myPane.setMaxSize(width, height);
 		}
 		
 		pane(int width, int height, int xLocation, int yLocation){
@@ -58,6 +65,10 @@ public final class SceneManager {
 		login.setPane(loginPane.myPane);
 		panes.add(loginPane);
 		changeToScene(loginPane);
+	}
+	
+	public static void createPuntenView(PlayerController controller) {
+		
 	}
 	
 	public static void createDiceView(DiceController diceController) {
@@ -143,5 +154,12 @@ public final class SceneManager {
 		panes.add(mapPane);
 		gameScreen.addPane(mapPane.myPane);
 	}
-	
+
+	public static void createPlayerViews(PlayerController playerController, String playerId) {
+		PuntenView punten = new PuntenView(playerController, playerId);
+		pane puntenPane = pane.PUNTEN;
+		punten.setPane(puntenPane.myPane);
+		panes.add(puntenPane);
+		gameScreen.addPane(puntenPane.myPane);
+	}
 }

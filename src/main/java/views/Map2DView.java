@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import controlers.AreaController;
 import controlers.Map2DController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -29,8 +28,6 @@ public class Map2DView{
 
 	private TextField text;
 	private Group graphic;
-	private Shape activeShape;
-	private Stage primaryStage;
 	private Pane root;
 	private Group components = new Group();
 	
@@ -94,12 +91,6 @@ public class Map2DView{
         	decideColor(shape);
         	mapCon.createNewArea(area);
         }
-	}
-
-	private void removeActiveShape() {
-		Shape oldShape = activeShape;
-		activeShape = null;
-		decideColor(oldShape);
 	}
 	
 	private void decideColor(Shape shape) {

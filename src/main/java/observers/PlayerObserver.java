@@ -1,5 +1,7 @@
 package observers;
 
-public class PlayerObserver {
+import observable.PlayerObservable;
 
+public interface PlayerObserver {
+	void Update(PlayerObservable po);
 }

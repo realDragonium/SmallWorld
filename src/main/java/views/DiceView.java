@@ -12,7 +12,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import models.DiceModel;
 import observable.DiceObservable;
 import observers.DiceObserver;
 
@@ -65,15 +64,10 @@ public class DiceView implements DiceObserver {
         list.add(new Image("/Dice/DiceFour.jpg"));
         list.add(new Image("/Dice/DiceFive.jpg"));
         list.add(new Image("/Dice/DiceSix.jpg"));
-
-
         dice.setOnAction(e -> playAnimation());
-
-
         root = new GridPane();
         root.add(dice, 0, 0);
         root.add(showImageView, 0, 1);
-
     }
 
     public void playAnimation() {
@@ -88,18 +82,13 @@ public class DiceView implements DiceObserver {
 //        }
         timeline.play();
         timeline.setOnFinished(e -> diceController.ClickedDice());
-
-
     }
-
 
     @Override
     public void update(DiceObservable ob) {
         System.out.println("De waarde is" + (ob.getWaarde()));
 
         showImageView.setImage(list.get(ob.getWaarde() -1));
-
-
     }
 
 	public void setPane(Pane pane) {
