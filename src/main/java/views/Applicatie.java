@@ -1,11 +1,9 @@
 package views;
 
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
+import controlers.GameScreenController;
+import controlers.LoginController;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.SubScene;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import managers.SceneManager;
 
@@ -16,9 +14,9 @@ public class Applicatie {
     private double windowAnchorY= 50;
 	private Stage primaryStage;
 	private Group root = new Group();
-	SceneManager manager = new SceneManager(this);
 	
 	public Applicatie(Stage primaryStage) {
+		SceneManager.registerApp(this);
 		this.primaryStage = primaryStage;
 		loadPrimaryStage();
 	}
@@ -29,26 +27,13 @@ public class Applicatie {
             primaryStage.setTitle("Small World");
             primaryStage.setX(windowAnchorX);
             primaryStage.setY(windowAnchorY);
+            primaryStage.setFullScreen(true);
             primaryStage.show();
-            manager.createLoginScreen();
-
+            
+            new LoginController();
     }
 
 	public void changeScene(Scene scene) {
-		
 		primaryStage.setScene(scene);
-		this.root = root;
-	}
-	
-	public void addToScene(SubScene scene) {
-		GridPane pane = ((GridPane) root.getChildren().get(0));
-		 GridPane.setConstraints(scene, 5, 5, 5, 5,HPos.CENTER, VPos.CENTER);
-		pane.getChildren().addAll(scene);
-		
-		
-	}
-
-	public void removeScene(SubScene scene) {
-		root.getChildren().remove(scene);
 	}
 }

@@ -1,5 +1,6 @@
 package controlers;
 
+import managers.SceneManager;
 import models.LoginModel;
 import observers.LoginObserver;
 
@@ -8,7 +9,7 @@ public class LoginController {
     private LoginModel hsModel = new LoginModel();
 
     public LoginController(){
-        
+        SceneManager.createLoginView(this);
     }
     
     public void buttonLoginClicked(String username, String password) {
@@ -26,4 +27,8 @@ public class LoginController {
     public void register(LoginObserver lo) {
     	hsModel.register(lo);
     }
+
+	public void goToHomeScreen() {
+		new HomeScreenController();
+	}
 }

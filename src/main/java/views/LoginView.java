@@ -3,9 +3,7 @@ package views;
 import controlers.LoginController;
 import observable.LoginObservable;
 import observers.LoginObserver;
-import managers.SceneManager;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,29 +12,30 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.Pane;
 
 public class LoginView implements LoginObserver{
-	SceneManager sceneManager;
 	
 	Scene scene;
-	LoginController hsCon;
+	LoginController loginController;
+	Pane pane;
+	Parent root;
 
-    public LoginView(SceneManager manager){
-    	this.sceneManager = manager;
-        hsCon = new LoginController();
-        hsCon.register(this);
+    public LoginView(LoginController loginController){
+    	this.loginController = loginController;
+        loginController.register(this);
         loadScene();
+    }
+    
+    public void setPane(Pane pane) {
+    	this.pane = pane;
+    	pane.getChildren().addAll(root);
     }
     
     private void loadScene(){
     	
     	 try {
-             Parent root = FXMLLoader.load(getClass().getResource("/LoginScreen/Loginscherm.fxml"));
-             for(Node node : ((AnchorPane) root).getChildren()){
- 				if(node.getId() != null) {
- 					
- 				}
-             }
+             root = FXMLLoader.load(getClass().getResource("/LoginScreen/Loginscherm.fxml"));
              Button button = new Button();
              button.setBackground(Background.EMPTY);
              button.setMinHeight(85);
@@ -56,19 +55,19 @@ public class LoginView implements LoginObserver{
 	                	 }
                 	 }
                  }
-            	 hsCon.buttonLoginClicked(username, password);            	 
+            	 loginController.buttonLoginClicked(username, password);            	 
              });
              ((AnchorPane) root).getChildren().add(button);            
              scene = new Scene(root);
          } catch (Exception e) {
              e.printStackTrace();
          }
-        
-        sceneManager.setNewScene(scene);
     }
+    
+    
 
     private void goToHomeScreen() {
-    	sceneManager.createHomeScreen();
+    	loginController.goToHomeScreen();
     }
 
 	@Override
