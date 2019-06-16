@@ -89,6 +89,7 @@ public class FirebaseService {
      * Controlleert of opgegeven gevens kloppen.
      * @param username
      * @param password
+     * @return
      */
     public boolean login(@NotNull String username, @NotNull String password) {
         DocumentReference docRef = firestore.collection("Accounts").document(username);
@@ -97,6 +98,13 @@ public class FirebaseService {
         return false;
     }
 
+
+    /**
+     * Registeerd gebruiker, returned false als gebruikers naam bezet is.
+     * @param username
+     * @param password
+     * @return
+     */
     public boolean register(String username, String password) {
         DocumentReference docRef = firestore.collection("Accounts").document(username);
         DocumentSnapshot document = getDocSnapshot(docRef);
@@ -107,6 +115,11 @@ public class FirebaseService {
         return true;
     }
 
+    /**
+     * Gebruikt voor cleanup, de try/catch van future.get() gecentraliseerd.
+     * @param docRef
+     * @return
+     */
     private DocumentSnapshot getDocSnapshot(DocumentReference docRef) {
         ApiFuture<DocumentSnapshot> future = docRef.get();
         try {
