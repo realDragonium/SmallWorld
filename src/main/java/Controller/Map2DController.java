@@ -22,22 +22,35 @@ public class Map2DController {
 	}
 
 	List<AreaController> getActiveAreas(){
-		List<AreaController> areaCons = new ArrayList<>();
-		for(String id: model.ActiveAreas){
-			areaCons.add(areas.get(id));
-		}
-		return areaCons;
+		return model.ActiveAreas;
 	}
 
-	void selectActive(List<AreaController> areaCons){
-		List<String> oldList = model.ActiveAreas;
-		model.ActiveAreas = new ArrayList<>();
-		if(oldList.size() > 0) {
-			if (areas.get(oldList.get(0)).getId().equals(areaCons.get(0).getId())){
-				return;
-			}
-			else areas.get(oldList.get(0)).changeActive();
+	void selectSingleArea(AreaController areaCons){
+		deleteAllActives();
+		addActive(areaCons);
+	}
+
+	void selectMultipleAreas(List<AreaController> areaCons){
+		deleteAllActives();
+		for(AreaController areaCon: areaCons){
+			addActive(areaCon);
 		}
-		areaCons.forEach(i -> model.ActiveAreas.add(i.getId()));
+	}
+
+	void deleteAllActives(){
+		List<AreaController> oldActives = model.ActiveAreas;
+		for(AreaController areaCon: oldActives){
+			deleteActive(areaCon);
+		}
+	}
+
+	void deleteActive(AreaController areaCon){
+		model.ActiveAreas.remove(areaCon);
+		areaCon.changeActive();
+	}
+
+	void addActive(AreaController areaCon){
+		model.ActiveAreas.add(areaCon);
+		areaCon.changeActive();
 	}
 }
