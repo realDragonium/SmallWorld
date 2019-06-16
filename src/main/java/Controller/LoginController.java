@@ -19,8 +19,6 @@ public class LoginController {
     }
     
     public void validateLoginInfo(String username, String password) {
-        System.out.println("user: " + username);
-        System.out.println("pass: " + password);
     	if(fb.login(username, password)) {
     		hsModel.loginAccepted(true);
     	}

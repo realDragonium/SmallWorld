@@ -20,12 +20,12 @@
             <Image url="@SmallWorldLogo.png" />
          </image>
       </ImageView>
-      <TextField fx:id="Username" layoutX="781.0" layoutY="429.0" prefHeight="61.0" prefWidth="353.0" promptText="Username">
+      <TextField fx:id="Username" layoutX="781.0" layoutY="429.0" prefHeight="61.0" prefWidth="353.0" promptText="Username" text="admin">
       	<font>
       		<Font size="25.0" />
       	</font>
       </TextField>
-      <PasswordField fx:id="Password" layoutX="781.0" layoutY="579.0" prefHeight="61.0" prefWidth="353.0" promptText="Password">
+      <PasswordField fx:id="Password" layoutX="781.0" layoutY="579.0" prefHeight="61.0" prefWidth="353.0" promptText="Password" text="admin">
       	<font>
       		<Font size="25.0" />
       	</font>
