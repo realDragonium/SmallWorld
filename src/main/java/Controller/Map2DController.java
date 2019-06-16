@@ -27,7 +27,13 @@ public class Map2DController {
 
 	void selectSingleArea(AreaController areaCons){
 		deleteAllActives();
-		addActive(areaCons);
+		if(model.ActiveAreas.contains(areaCons)){
+			deleteActive(areaCons);
+		}
+		else{
+			addActive(areaCons);
+		}
+
 	}
 
 	void selectMultipleAreas(List<AreaController> areaCons){
@@ -38,9 +44,8 @@ public class Map2DController {
 	}
 
 	void deleteAllActives(){
-		List<AreaController> oldActives = model.ActiveAreas;
-		for(AreaController areaCon: oldActives){
-			deleteActive(areaCon);
+		for(int i = 0; i < model.ActiveAreas.size(); i++){
+			deleteActive(model.ActiveAreas.get(i));
 		}
 	}
 

@@ -104,6 +104,11 @@ public class SceneManager {
         FXMLLOADER("/PlayerView.fxml");
     }
 
+    public void loadShop(ShopController shopCon){
+        creators.put(ShopView.class, (Callable<ShopView>) () -> new ShopView(groepen.get("shopGroup"), shopCon));
+        FXMLLOADER("/ShopView.fxml");
+    }
+
     public void loadRound(RoundController roundCon) {
         creators.put(RoundView.class, (Callable<RoundView>) () -> new RoundView(groepen.get("roundGroup"), roundCon));
         FXMLLOADER("/RoundView.fxml");
