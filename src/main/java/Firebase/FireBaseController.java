@@ -38,7 +38,7 @@ public class FireBaseController {
 
         // insert/ update
 //        app.update(db);
-//		// get
+//		// getColRef
 //        app.getQuoteFromFirestore(db);
 //		// delete
 //		app.deleteFromFirestore(db);

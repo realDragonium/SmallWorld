@@ -14,14 +14,14 @@ public class LoginController {
         SceneManager.getInstance().createLoginView(this);
     }
     
-    public void buttonLoginClicked(String username, String password) {
-    	validateLoginInfo(username, password);
-    }
-    
     public void validateLoginInfo(String username, String password) {
     	if(fb.login(username, password)) {
     		hsModel.loginAccepted(true);
     	}
+    }
+
+    public void register(String username, String password){
+
     }
     
     public void register(LoginObserver lo) {
