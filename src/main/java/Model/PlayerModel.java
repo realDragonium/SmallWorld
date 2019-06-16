@@ -11,7 +11,11 @@ public class PlayerModel implements PlayerObservable {
 
     public PlayerModel(String playerId){
         playerID = playerId;
-        punten = 0;
+        punten = 5;
+    }
+
+    public void removePoints(int amount){
+        punten -= amount;
     }
 
     public String getId(){

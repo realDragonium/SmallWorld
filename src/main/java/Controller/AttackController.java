@@ -14,16 +14,18 @@ public class AttackController {
     }
 
     void attackArea(){
+        System.out.println(gameCon.getPlayer().getId() + " is attacking");
         final int fichesCountNeeded = targetArea.numbersNeeded();
-        final PlayerController player = gameCon.getActivePlayerCon();
-        if(player.getActiveRace().hasEnoughFiches(fichesCountNeeded)) {
-//            if (targetArea.getPlayer() != null)
-            targetArea.getPlayer().getActiveRace().pushFiches(targetArea.removeFiches());
+        final PlayerController player = gameCon.getPlayer();
+        if(player.getActiveCombination().getRace().hasEnoughFiches(fichesCountNeeded)) {
+           if (targetArea.getPlayer() != null) {
+               targetArea.getPlayer().getActiveCombination().getRace().pushFiches(targetArea.removeFiches());
+           }
 //            else {
 //                targetArea.removeFiches();
 //            }
-            targetArea.attackArea(gameCon.getActivePlayerCon().getActiveRace().getFiches(fichesCountNeeded));
-            targetArea.setPlayerOwner(gameCon.getActivePlayerCon());
+            targetArea.attackArea(gameCon.getPlayer().getActiveCombination().getRace().getFiches(fichesCountNeeded));
+            targetArea.setPlayerOwner(gameCon.getPlayer());
         } else System.out.println("Niet genoeg fiches in je bezit!");
     }
 }

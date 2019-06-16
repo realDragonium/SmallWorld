@@ -9,6 +9,7 @@
       <Group fx:id="mapGroup" />
       <Group fx:id="buttonGroup" />
       <Group fx:id="playerGroup" />
+      <Group fx:id="shopGroup" />
       <Group fx:id="roundGroup" />
       <Group fx:id="turnGroup" />
    </children>
