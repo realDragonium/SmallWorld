@@ -6,7 +6,6 @@ import Model.AreaModel;
 import Objects.RaceFiche;
 import Observer.AreaObserver;
 import javafx.scene.Group;
-import javafx.scene.Node;
 
 import java.util.Collections;
 import java.util.Stack;
@@ -50,8 +49,5 @@ public class AreaController {
 
 	public void register(AreaObserver ao){model.register(ao);}
 
-	public void selectActive(){
-		map2DCon.selectActive(Collections.singletonList(this));
-		changeActive();
-	}
+	public void selectActive(){	map2DCon.selectSingleArea(this);}
 }

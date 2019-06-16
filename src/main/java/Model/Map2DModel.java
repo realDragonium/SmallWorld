@@ -1,10 +1,12 @@
 package Model;
 
+import Controller.AreaController;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Map2DModel {
 
-    public List<String> ActiveAreas = new ArrayList<>();
+    public List<AreaController> ActiveAreas = new ArrayList<>();
 
 }
