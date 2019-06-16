@@ -25,16 +25,20 @@ public class PlayerController {
             System.out.println(getId() + " voegt combinatie toe");
             model.removePoints(costs);
             combinations.add(combo);
+            combo.setPlayer(this);
         }
     }
 
-    public CombinationController getActiveCombination(){
-        return combinations.get(0);
+    public void showActiveCombiFichesLeft(){
+        if(combinations.size() > 0) combinations.get(0).getRace().fichesOver();
+        else System.out.println("Je hebt geen combinatie!");
     }
 
-//    RaceController getActiveRace(){
-//        return raceCons.get(0);
-//    }
+
+    public CombinationController getActiveCombination(){
+        if(combinations.size() > 0) return combinations.get(0);
+        return null;
+    }
 
     String getId(){
         return model.getId();

@@ -29,7 +29,7 @@ public class KnoppenController {
     }
 
     public void fichesOver() {
-        gameCon.getPlayer().getActiveCombination().getRace().fichesOver();
+        gameCon.getCurrentPlayer().showActiveCombiFichesLeft();
     }
 
     public void nextTurn() {

@@ -6,7 +6,7 @@
 
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.Button?>
-<Pane fx:id="pane" layoutX="900" layoutY="300" prefHeight="600.0" prefWidth="116.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ShopView">
+<Pane fx:id="pane" layoutX="1000" layoutY="300" prefHeight="600.0" prefWidth="116.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ShopView">
    <children>
       <Text>Items:</Text>
       <Pane fx:id="item1" layoutX="0" prefHeight="100.0" prefWidth="300.0">

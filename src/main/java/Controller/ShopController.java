@@ -17,9 +17,9 @@ public class ShopController {
     }
 
     public void buyingItem(int item){
-        System.out.println(gameCon.getPlayer().getId() + " is buying");
+        System.out.println(gameCon.getCurrentPlayer().getId() + " is buying");
         if(shopItems.get(item) != null){
-            gameCon.getPlayer().buyFromShop(shopItems.get(item), item);
+            gameCon.getCurrentPlayer().buyFromShop(shopItems.get(item), item);
         }
 
     }
@@ -29,6 +29,9 @@ public class ShopController {
     }
 
     private CombinationController createRattenRace(){
-        return new CombinationController(new RaceController(new RattenKracht()), new PowerController());
+        CombinationController ratten =  new CombinationController(new RaceController(new RattenKracht()), new PowerController());
+        ratten.getRace().setCombiCon(ratten);
+        ratten.getPower().setCombiCon(ratten);
+        return ratten;
     }
 }

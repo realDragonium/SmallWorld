@@ -8,6 +8,7 @@ import java.util.Stack;
 
 public class RaceController {
 
+	private CombinationController combiCon;
 	private Kracht kracht;
 	private RaceModel model;
 	private int fichesAantal = 15;
@@ -16,6 +17,10 @@ public class RaceController {
 		this.kracht = kracht;
 		model = new RaceModel(fichesAantal);
 		//playerCon.setFiches(fichesAantal);
+	}
+
+	public void setCombiCon(CombinationController combiCon){
+		this.combiCon = combiCon;
 	}
 
 	public Stack<RaceFiche> getFiches(int count){
@@ -33,7 +38,7 @@ public class RaceController {
 	}
 
 	public void fichesOver(){
-		//System.out.println(playerCon.getId() + " heeft " + model.getFichesCount() + " fiches.");
+		System.out.println(combiCon.getPlayer().getId() + " heeft " + model.getFichesCount() + " fiches.");
 	}
 
 	public void doKractAction(){

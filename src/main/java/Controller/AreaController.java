@@ -34,11 +34,11 @@ public class AreaController {
 	}
 
 	void setPlayerOwner(PlayerController player){
-		model.playerId = player.getId();
+		model.player = player;
 	}
 
-	PlayerController getPlayer(){
-		return gameCon.getPlayer(model.playerId);
+	PlayerController getOwnerPlayer(){
+		return model.player;
 	}
 
 	Stack<RaceFiche> removeFiches(){

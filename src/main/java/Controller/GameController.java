@@ -65,6 +65,10 @@ public class GameController {
         return players.get(id);
     }
 
+    public PlayerController getCurrentPlayer(){
+        return players.get(turnCon.getCurrentPlayer());
+    }
+
     private void createAttCon(){
         attCon = new AttackController(this);
     }
