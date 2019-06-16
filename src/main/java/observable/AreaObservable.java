@@ -1,10 +1,10 @@
-package observable;
+package Observable;
 
-import observers.AreaObserver;
+import Observer.AreaObserver;
 
 public interface AreaObservable {
-	void register(AreaObserver mvo);
-    void unregister(AreaObserver mvo);
-    void notifyAllObservers();
-    boolean isActive();
+    void register(AreaObserver ao);
+    void notifyObserver();
+    boolean getActive();
+    int getNumberOfFiches();
 }

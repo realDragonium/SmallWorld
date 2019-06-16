@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.Group?>
+
+<?import javafx.scene.layout.Pane?>
+<Pane fx:id="pane" layoutX="125" layoutY="110" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.KnoppenView">
+   <children>
+      <Button fx:id="infoButton" layoutY="7.0" mnemonicParsing="false" onAction="#showInfo"  text="Info" />
+      <Button fx:id="attackButton" layoutY="47.0" mnemonicParsing="false" onAction="#attackCountry" text="Attack" />
+      <Button fx:id="availableButton" layoutY="87.0" mnemonicParsing="false" onAction="#fichesOver" text="Available" />
+      <Button fx:id="nextTurnButton" layoutY="127.0" mnemonicParsing="false" onAction="#nextTurn" text="Next Turn" />
+      <Button fx:id="nextRoundButton" layoutY="167.0" mnemonicParsing="false" onAction="#nextRound" text="Next Round" />
+      <Button fx:id="nextFaseButton" layoutY="207.0" mnemonicParsing="false" onAction="#nextFase" text="next Fase" />
+   </children>
+</Pane>
