@@ -11,23 +11,18 @@ import java.io.IOException;
 public class Map2DView{
 
 	private Map2DController mapCon;
+	private Pane graphic;
+	private Group root = new Group();
 
-	private Group graphic;
-	private Pane pane;
-
-	public Map2DView( Map2DController mapCon) {
+	public Map2DView(Map2DController mapCon, Group group) {
 		this.mapCon = mapCon;
+		group.getChildren().add(root);
 		makeStage();
 	}
 	
 	private void makeStage() {
 		mapLoader();
 		makeAreas();
-
-	}
-	public void setPane(Pane pane) {
-		this.pane = pane;
-		pane.getChildren().addAll(graphic);
 	}
 	
 	private void mapLoader() {
@@ -38,6 +33,7 @@ public class Map2DView{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+        root.getChildren().add(graphic);
 	}
 	
 	private void makeAreas() {

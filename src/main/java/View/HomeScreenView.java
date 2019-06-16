@@ -5,6 +5,7 @@ import java.io.IOException;
 import Controller.GameController;
 import Controller.HomeScreenController;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import observers.HomeScreenObserver;
 import Managers.SceneManager;
 import observable.HomeScreenObservable;
@@ -21,44 +22,54 @@ import javafx.util.Duration;
 
 public class HomeScreenView implements HomeScreenObserver{
 
-	private Parent root;
+//	private Parent root;
 	private Pane pane;
+	private Group group;
 	private Scene scene;
 	private HomeScreenController hsCon;
 
-//	@FXML
-//	public Pane root;
+	@FXML
+	public Pane root;
 
-    public HomeScreenView(HomeScreenController hsController){
+    public HomeScreenView(HomeScreenController hsController, Group group){
+    	this.group = group;
         hsCon = hsController;
         hsCon.register(this);
-        loadScene();
     }
+
+	public void initialize() {
+    	group.getChildren().add(root);
+	}
     
     private void loadScene(){
-		try {
-			root = FXMLLoader.load(getClass().getResource("/HomeScreen/Homescreen.fxml"));
-			for(Node node : ((AnchorPane) root).getChildren()){
-				if(node.getId() != null) {
-					if(node.getId().equals("select")) {
-						((HBox) node).setOnMouseClicked(e -> {
-							new GameController();
-						});
-						((HBox) node).setOnMouseEntered(e -> {
-							enterHoverTitle(node);
-						});
-						((HBox) node).setOnMouseExited(e -> {
-							exitHoverTitle(node);
-						});
-					}
-				}
-			}
-			
-			scene = new Scene(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+////			root = FXMLLoader.load(getClass().getResource("/HomeScreen/Homescreen.fxml"));
+//			for(Node node : ((AnchorPane) root).getChildren()){
+//				if(node.getId() != null) {
+//					if(node.getId().equals("select")) {
+//						((HBox) node).setOnMouseClicked(e -> {
+//							new GameController();
+//						});
+//						((HBox) node).setOnMouseEntered(e -> {
+//							enterHoverTitle(node);
+//						});
+//						((HBox) node).setOnMouseExited(e -> {
+//							exitHoverTitle(node);
+//						});
+//					}
+//				}
+//			}
+//
+//			scene = new Scene(root);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
     }
+
+    @FXML
+    private void createGame(){
+    	new GameController();
+	}
 
     private void enterHoverTitle(Node node) {
     	for(Node node2 : ((HBox) node).getChildren()) {

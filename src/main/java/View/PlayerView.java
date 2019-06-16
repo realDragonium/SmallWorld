@@ -34,7 +34,7 @@ public class PlayerView implements PlayerObserver {
         playerId.setText(id);
         playerCon.register(this);
         playerCon.makeNewRace();
-        pane.setLayoutY( 110 + (150*Integer.parseInt(id.split("yer")[1])));
+        pane.setLayoutY((150*Integer.parseInt(id.split("yer")[1])));
     }
 
     @Override
