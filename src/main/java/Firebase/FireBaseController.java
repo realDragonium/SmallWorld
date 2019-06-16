@@ -1,4 +1,4 @@
-package Controller;
+package Firebase;
 
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -32,7 +32,7 @@ public class FireBaseController {
 
         FireBaseController app = new FireBaseController();
 
-        app.voegAccountToe(db, "dev", "admin");
+//        app.voegAccountToe(db, "dev", "admin");
         app.update(db);
         System.out.println(app.controlleerPassWord(db, "dev", "admin"));
 
@@ -71,19 +71,19 @@ public class FireBaseController {
         // insert & update
         // Als een document nog niet bestaat wordt het aangemaakt.
         // Als een document al bestaat wordt het aagepast.
-        HashMap<String, String> quote = getSomethingToInsert();
+        HashMap<String, String> password = getSomethingToInsert();
 
-        ApiFuture<WriteResult> future = db.collection("sampleData")
-                .document("my_new_document")
-                .set(quote);
+        ApiFuture<WriteResult> future = db.collection("Accounts")
+                .document("dev")
+                .set(password);
 
         System.out.println("Successfully updated at: "
                 + future.get().getUpdateTime());
     }
 
     private HashMap<String, String> getSomethingToInsert() throws IOException {
-        HashMap<String, String> quoteHashMap = new HashMap<String, String>();
-        quoteHashMap.put("Gandhi", "Hallo niemand");
+        HashMap<String, String> quoteHashMap = new HashMap<>();
+        quoteHashMap.put("password", "Hallo niemand");
 
         return quoteHashMap;
     }

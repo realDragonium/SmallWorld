@@ -9,7 +9,6 @@ import java.util.concurrent.Callable;
 
 import Controller.*;
 import View.*;
-import Enum.EnumPane;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -21,7 +20,6 @@ public class SceneManager {
     private Map<Class, Callable<?>> creators = new HashMap<>();
     private Map<String, Group> groepen = new HashMap<>();
     private static SceneManager sceneManager;
-    private List<EnumPane> panes = new ArrayList<>();
     private Applicatie app;
     private Group gameView;
 

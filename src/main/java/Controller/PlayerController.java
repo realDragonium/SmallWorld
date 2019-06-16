@@ -26,7 +26,7 @@ public class PlayerController {
         setFiches(combo.getRace().fichesCount());
     }
 
-    
+
 
     public void showActiveCombiFichesLeft() {
         for (CombinationController combiCon : combinations) {

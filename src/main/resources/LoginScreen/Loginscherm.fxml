@@ -40,7 +40,7 @@
             <Font size="25.0" />
          </font>
       </Text>
-      <ImageView id="button" fitHeight="90.0" fitWidth="282.0" layoutX="813.0" layoutY="678.0" onMouseClicked="#goToHomeScreen">
+      <ImageView id="button" fitHeight="90.0" fitWidth="282.0" layoutX="813.0" layoutY="678.0" onMouseClicked="#login">
          <image>
             <Image url="@login%20button.png" />
          </image>

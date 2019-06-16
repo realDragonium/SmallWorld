@@ -1,6 +1,7 @@
 package View;
 
 import Controller.LoginController;
+import com.google.cloud.firestore.Firestore;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import observable.LoginObservable;
@@ -17,7 +18,6 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 
 public class LoginView implements LoginObserver{
-
 	@FXML
 	public Pane root;
 	@FXML
@@ -36,6 +36,11 @@ public class LoginView implements LoginObserver{
 	public void initialize() {
 		group.getChildren().add(root);
 		loginController.register(this);
+	}
+
+	@FXML
+	private void login(){
+		loginController.validateLoginInfo(Username.getText(), Password.getText());
 	}
 
 	@FXML

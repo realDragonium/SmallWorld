@@ -1,11 +1,13 @@
 package Controller;
 
+import Firebase.FirebaseService;
+import Applicatie.Applicatie;
 import Managers.SceneManager;
 import models.LoginModel;
 import observers.LoginObserver;
 
 public class LoginController {
-	
+	private FirebaseService fb = Applicatie.getFirebaseService();
     private LoginModel hsModel = new LoginModel();
 
     public LoginController(){
@@ -17,9 +19,9 @@ public class LoginController {
     }
     
     public void validateLoginInfo(String username, String password) {
-    	//checkInfoFirebase();
-    	//checkInfoView();
-    	if(true) {
+        System.out.println("user: " + username);
+        System.out.println("pass: " + password);
+    	if(fb.login(username, password)) {
     		hsModel.loginAccepted(true);
     	}
     }
