@@ -13,6 +13,7 @@ import com.google.firebase.cloud.FirestoreClient;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 public class FireBaseController {
@@ -31,10 +32,14 @@ public class FireBaseController {
 
         FireBaseController app = new FireBaseController();
 
-        // insert/ update
+        app.voegAccountToe(db, "dev", "admin");
         app.update(db);
+        System.out.println(app.controlleerPassWord(db, "dev", "admin"));
+
+        // insert/ update
+//        app.update(db);
 //		// get
-        app.getQuoteFromFirestore(db);
+//        app.getQuoteFromFirestore(db);
 //		// delete
 //		app.deleteFromFirestore(db);
     }
@@ -48,7 +53,7 @@ public class FireBaseController {
     }
 
 
-    public void getQuoteFromFirestore(Firestore db) throws InterruptedException, ExecutionException {
+    private void getQuoteFromFirestore(Firestore db) throws InterruptedException, ExecutionException {
 
         DocumentReference docRef = db.collection("sampleData").document("my_new_document");
         ApiFuture<DocumentSnapshot> future = docRef.get();
@@ -76,10 +81,32 @@ public class FireBaseController {
                 + future.get().getUpdateTime());
     }
 
-    public HashMap<String, String> getSomethingToInsert() throws IOException {
+    private HashMap<String, String> getSomethingToInsert() throws IOException {
         HashMap<String, String> quoteHashMap = new HashMap<String, String>();
         quoteHashMap.put("Gandhi", "Hallo niemand");
 
         return quoteHashMap;
+    }
+
+    public boolean controlleerPassWord(Firestore db, String username, String password) throws IOException, InterruptedException, ExecutionException {
+        DocumentReference docRef = db.collection("Accounts").document("admin");
+        ApiFuture<DocumentSnapshot> future = docRef.get();
+        DocumentSnapshot document = future.get();
+
+        if (document.exists()) {
+            String pass = (String) document.get("password");
+            return password.equals(pass);
+        } else {
+            System.out.println("No such document :(");
+        }
+        return false;
+    }
+
+    public void voegAccountToe(Firestore db, String username, String password) throws IOException, InterruptedException, ExecutionException {
+        Map<String, String> pass = new HashMap<>();
+        pass.put("password", password);
+        ApiFuture<WriteResult> future = db.collection("Accounts").document(username).set(pass);
+
+        System.out.println("Update time : " + future.get().getUpdateTime());
     }
 }
