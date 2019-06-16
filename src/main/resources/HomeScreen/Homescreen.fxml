@@ -22,7 +22,7 @@
             <Image url="@SmallWorldLogo.png" />
          </image>
       </ImageView>
-      <HBox fx:id="" id="select" layoutX="690.0" layoutY="385.0" onMouseClicked="#createGame">
+      <HBox id="select" fx:id="" layoutX="690.0" layoutY="385.0" onMouseClicked="#createGame" onMouseEntered="#enterHoverTitle" onMouseExited="#exitHoverTitle">
       	  <ImageView id="Power" fitHeight="137.0" fitWidth="158.0" layoutX="50.0" layoutY="385.0">
 	         <image>
 	            <Image url="@Blank_Power.png" />
@@ -40,7 +40,7 @@
 	      </ImageView>
 	      
 	  </HBox>
-	  <HBox id="select" layoutX="690.0" layoutY="609.0">
+	  <HBox id="select" layoutX="690.0" layoutY="609.0" onMouseEntered="#enterHoverTitle" onMouseExited="#exitHoverTitle">
 	      <ImageView id="Power" fitHeight="137.0" fitWidth="158.0" layoutX="795.0" layoutY="609.0">
 	         <image>
 	            <Image url="@Blank_Power.png" />
@@ -57,7 +57,7 @@
 	         </image>
 	      </ImageView>
 	  </HBox>
-	  <HBox id="select" layoutX="690.0" layoutY="835.0">
+	  <HBox id="select" layoutX="690.0" layoutY="835.0" onMouseEntered="#enterHoverTitle" onMouseExited="#exitHoverTitle">
 	      <ImageView id="Power" fitHeight="137.0" fitWidth="158.0" layoutX="789.0" layoutY="835.0">
 	         <image>
 	            <Image url="@Blank_Power.png" />

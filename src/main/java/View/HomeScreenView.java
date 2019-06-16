@@ -6,6 +6,7 @@ import Controller.GameController;
 import Controller.HomeScreenController;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.input.MouseEvent;
 import observers.HomeScreenObserver;
 import Managers.SceneManager;
 import observable.HomeScreenObservable;
@@ -40,39 +41,15 @@ public class HomeScreenView implements HomeScreenObserver{
 	public void initialize() {
     	group.getChildren().add(root);
 	}
-    
-    private void loadScene(){
-//		try {
-////			root = FXMLLoader.load(getClass().getResource("/HomeScreen/Homescreen.fxml"));
-//			for(Node node : ((AnchorPane) root).getChildren()){
-//				if(node.getId() != null) {
-//					if(node.getId().equals("select")) {
-//						((HBox) node).setOnMouseClicked(e -> {
-//							new GameController();
-//						});
-//						((HBox) node).setOnMouseEntered(e -> {
-//							enterHoverTitle(node);
-//						});
-//						((HBox) node).setOnMouseExited(e -> {
-//							exitHoverTitle(node);
-//						});
-//					}
-//				}
-//			}
-//
-//			scene = new Scene(root);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-    }
 
     @FXML
     private void createGame(){
     	new GameController();
 	}
 
-    private void enterHoverTitle(Node node) {
-    	for(Node node2 : ((HBox) node).getChildren()) {
+	@FXML
+    private void enterHoverTitle(MouseEvent e) {
+    	for(Node node2 : ((HBox) e.getSource()).getChildren()) {
 	    	if(node2.getId().equals("Power")) {
 		    	TranslateTransition translateTransition = new TranslateTransition(); 
 				translateTransition.setDuration(Duration.millis(500));
@@ -94,17 +71,17 @@ public class HomeScreenView implements HomeScreenObserver{
 	    }
     }
 	
-    
-	private void exitHoverTitle(Node node) {
-		for(Node node2 : ((HBox) node).getChildren()) {
+    @FXML
+	private void exitHoverTitle(MouseEvent e) {
+		for(Node node2 : ((HBox)  e.getSource()).getChildren()) {
 	    	if(node2.getId().equals("Power")) {
 		
 				TranslateTransition translateTransition = new TranslateTransition(); 
 				translateTransition.setDuration(Duration.millis(200));
-				translateTransition.setByX(-((ImageView)((HBox) node).getChildren().get(0)).getTranslateX()); 
+				translateTransition.setByX(-((ImageView)((HBox)  e.getSource()).getChildren().get(0)).getTranslateX());
 				translateTransition.setCycleCount(1); 
 				translateTransition.setAutoReverse(false); 
-				translateTransition.setNode(((ImageView)((HBox) node).getChildren().get(0)));
+				translateTransition.setNode(((ImageView)((HBox)  e.getSource()).getChildren().get(0)));
 				translateTransition.play();
 	    	}
 	    	if(node2.getId().equals("Ras")) {
