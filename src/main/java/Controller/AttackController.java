@@ -14,9 +14,10 @@ public class AttackController {
     }
 
     void attackArea(){
-        System.out.println(gameCon.getPlayer().getId() + " is attacking");
+
         final int fichesCountNeeded = targetArea.numbersNeeded();
         final PlayerController player = gameCon.getPlayer();
+        System.out.println(gameCon.getPlayer().getId() + " is attacking");
         if(player.getActiveCombination().getRace().hasEnoughFiches(fichesCountNeeded)) {
            if (targetArea.getPlayer() != null) {
                targetArea.getPlayer().getActiveCombination().getRace().pushFiches(targetArea.removeFiches());
