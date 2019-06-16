@@ -21,7 +21,9 @@ public class LoginController {
     }
 
     public void register(String username, String password){
-
+        if(fb.register(username, password)) {
+            hsModel.loginAccepted(true);
+        }
     }
     
     public void register(LoginObserver lo) {

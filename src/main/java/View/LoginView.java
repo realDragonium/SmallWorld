@@ -1,29 +1,23 @@
 package View;
 
 import Controller.LoginController;
-import com.google.cloud.firestore.Firestore;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import observable.LoginObservable;
 import observers.LoginObserver;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.Pane;
 
 public class LoginView implements LoginObserver{
 	@FXML
-	public Pane root;
+	private Pane root;
 	@FXML
-	public TextField Username;
+	private TextField Username;
 	@FXML
-	public TextField Password;
+	private TextField Password;
+	@FXML
+	private Button registeerButton;
 
 	private Group group;
 	private LoginController loginController;
@@ -47,6 +41,11 @@ public class LoginView implements LoginObserver{
     private void goToHomeScreen() {
     	loginController.goToHomeScreen();
     }
+
+    @FXML
+	private void registeren(){
+    	loginController.register(Username.getText(), Password.getText());
+	}
 
 	@Override
 	public void update(LoginObservable lo) {
