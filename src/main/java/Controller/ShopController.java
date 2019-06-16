@@ -4,6 +4,7 @@ import Objects.RattenKracht;
 import Managers.SceneManager;
 
 import java.util.Stack;
+import java.util.stream.IntStream;
 
 public class ShopController {
 
@@ -12,16 +13,15 @@ public class ShopController {
 
     public ShopController(GameController gameCon){
         this.gameCon = gameCon;
-        createShopItems();
+        IntStream.range(0, 6).forEach(e-> createShopItems());
         SceneManager.getInstance().loadShop(this);
     }
 
     public void buyingItem(int item){
         System.out.println(gameCon.getCurrentPlayer().getId() + " is buying");
-        if(shopItems.get(item) != null){
-            gameCon.getCurrentPlayer().buyFromShop(shopItems.get(item), item);
-        }
-
+        gameCon.getCurrentPlayer().buyFromShop(shopItems.get(item), item);
+        shopItems.remove(item);
+        createShopItems();
     }
 
     private void createShopItems(){

@@ -16,7 +16,10 @@ public class RaceController {
 	public RaceController(Kracht kracht) {
 		this.kracht = kracht;
 		model = new RaceModel(fichesAantal);
-		//playerCon.setFiches(fichesAantal);
+	}
+
+	public int fichesCount(){
+		return model.getFichesCount();
 	}
 
 	public void setCombiCon(CombinationController combiCon){
@@ -24,12 +27,12 @@ public class RaceController {
 	}
 
 	public Stack<RaceFiche> getFiches(int count){
-		//playerCon.lowerFiches(count);
+		combiCon.getPlayer().lowerFiches(count);
 		return model.getFiches(count);
 	}
 
 	public void pushFiches(Stack<RaceFiche> fiches){
-		//playerCon.higherFiches(fiches.size());
+		combiCon.getPlayer().higherFiches(fiches.size());
 		model.pushFiches(fiches);
 	}
 
