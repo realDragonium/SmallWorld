@@ -8,6 +8,7 @@
         <Group id="buttonGroup" />
         <Group id="playerGroup" />
         <Group id="roundGroup" />
+        <Group id="shopGroup" />
         <Group id="turnGroup" />
         <Group id="mapGroup" />
     </children>

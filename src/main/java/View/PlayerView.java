@@ -33,7 +33,6 @@ public class PlayerView implements PlayerObserver {
         group.getChildren().add(pane);
         playerId.setText(id);
         playerCon.register(this);
-        playerCon.makeNewRace();
         pane.setLayoutY((150*Integer.parseInt(id.split("yer")[1])));
     }
 

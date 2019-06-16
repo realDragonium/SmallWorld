@@ -2,6 +2,7 @@ package Controller;
 
 import Managers.SceneManager;
 import Model.GameModel;
+import Objects.RattenKracht;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,10 +10,12 @@ import java.util.Map;
 public class GameController {
     private GameModel model;
     private Map<String, PlayerController> players = new HashMap<>();
+    private PlayerController currentPlayer;
     private RoundController roundCon;
     private TurnController turnCon;
     private Map2DController mapCon;
     private AttackController attCon;
+    private ShopController shopCon;
 
     public GameController() {
         model = new GameModel(8, 8);
@@ -21,9 +24,18 @@ public class GameController {
         createGameParts();
     }
 
+    public PlayerController getPlayer(){
+        return currentPlayer;
+    }
+
+    public void changePlayerTurn(String player){
+        currentPlayer = players.get(player);
+    }
+
     public void createGameParts() {
 
         createPlayer();
+        createShop();
         createTurnsAndRounds();
         new KnoppenController(this);
         createAttCon();
@@ -38,10 +50,16 @@ public class GameController {
         players.put("player4", new PlayerController("player4", this));
     }
 
+    private void createShop(){
+        shopCon = new ShopController(this);
+    }
+
     private void createTurnsAndRounds(){
         roundCon = new RoundController(this);
         turnCon = new TurnController(this);
     }
+
+
 
     PlayerController getPlayer(String id){
         return players.get(id);
@@ -55,12 +73,10 @@ public class GameController {
         return roundCon;
     }
 
+    ShopController getShopCon(){return shopCon;}
+
     TurnController getTurnCon(){
         return turnCon;
-    }
-
-    PlayerController getActivePlayerCon(){
-        return players.get(turnCon.getCurrentPlayer());
     }
 
     Map2DController getMapCon(){

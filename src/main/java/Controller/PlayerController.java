@@ -10,7 +10,8 @@ import java.util.List;
 public class PlayerController {
     private GameController gameCon;
     private PlayerModel model;
-    private List<RaceController> raceCons = new ArrayList<>();
+    private int maxRaces = 2;
+    private List<CombinationController> combinations = new ArrayList<>();
 
 
     public PlayerController(String playerID, GameController gameCon){
@@ -19,13 +20,21 @@ public class PlayerController {
         SceneManager.getInstance().loadPlayer(playerID, this);
     }
 
-    public void makeNewRace(){
-        raceCons.add(new RaceController(this));
+    public void buyFromShop(CombinationController combo, int costs){
+        if(combinations.size() < maxRaces){
+            System.out.println(getId() + " voegt combinatie toe");
+            model.removePoints(costs);
+            combinations.add(combo);
+        }
     }
 
-    RaceController getActiveRace(){
-        return raceCons.get(0);
+    public CombinationController getActiveCombination(){
+        return combinations.get(0);
     }
+
+//    RaceController getActiveRace(){
+//        return raceCons.get(0);
+//    }
 
     String getId(){
         return model.getId();

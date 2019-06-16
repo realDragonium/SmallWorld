@@ -28,6 +28,7 @@ public class TurnController {
         }
         if(gameCon.isGameOver()) return;
         model.currentTurn++;
+        gameCon.changePlayerTurn("player"+model.currentTurn);
         model.notifyObservers();
     }
 
