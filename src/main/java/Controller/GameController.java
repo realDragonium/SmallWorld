@@ -22,11 +22,12 @@ public class GameController {
     }
 
     public void createGameParts() {
-        mapCon = new Map2DController(this);
+
         createPlayer();
         createTurnsAndRounds();
         new KnoppenController(this);
         createAttCon();
+        mapCon = new Map2DController(this);
     }
 
     private void createPlayer(){

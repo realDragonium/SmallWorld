@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.Pane?>
 
 
-<Pane fx:id="pane" prefHeight="141.0" prefWidth="116.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PlayerView">
+<Pane fx:id="pane" layoutX="900" prefHeight="141.0" prefWidth="116.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PlayerView">
    <children>
       <TextField fx:id="playerId" layoutX="14.0" layoutY="14.0" prefHeight="31.0" prefWidth="85.0" />
       <TextField fx:id="fiches" layoutX="14.0" layoutY="52.0" prefHeight="31.0" prefWidth="85.0" text="fiches: " />

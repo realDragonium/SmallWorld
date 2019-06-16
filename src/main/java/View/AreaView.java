@@ -31,8 +31,9 @@ public class AreaView implements AreaObserver {
     }
     private void CalculatePosText(){
         Bounds boundsInScene = shape.localToScene(shape.getBoundsInLocal());
+
         if(text.getX() > 0) return;
-        text.setX((boundsInScene.getMaxX() - boundsInScene.getMinX()) /2 + boundsInScene.getMinX());
+        text.setX((boundsInScene.getMaxX() - boundsInScene.getMinX()) /2 + boundsInScene.getMinX() - 200);
         text.setY((boundsInScene.getMaxY() - boundsInScene.getMinY()) /2 + boundsInScene.getMinY());
     }
 

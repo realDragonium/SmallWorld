@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Group?>
-<?import javafx.scene.layout.AnchorPane?>
-
-
 <?import javafx.scene.layout.Pane?>
-<Pane prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" >
+
+<Pane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.172-ea" >
     <children>
-        <Group id="mapGroup" />
         <Group id="buttonGroup" />
         <Group id="playerGroup" />
         <Group id="roundGroup" />
         <Group id="turnGroup" />
+        <Group id="mapGroup" />
     </children>
 </Pane>
