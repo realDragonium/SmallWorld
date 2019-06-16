@@ -1,5 +1,6 @@
 package Applicatie;
 
+import Controller.FirebaseController;
 import Controller.LoginController;
 import Managers.SceneManager;
 import javafx.scene.Group;
@@ -28,6 +29,8 @@ public class Applicatie {
         primaryStage.setY(windowAnchorY);
         primaryStage.setFullScreen(true);
         primaryStage.show();
+
+        new FirebaseController();
 
         new LoginController();
     }
