@@ -32,7 +32,7 @@ public class AreaController {
 	}
 
 	void attackArea(Stack<RaceFiche> fiches){
-		model.attackArea(fiches);
+		model.setFiches(fiches);
 		fb.mapUpdateFiches(model.getId(), fiches.size());
 	}
 
@@ -56,9 +56,7 @@ public class AreaController {
 	public void selectActive(){	map2DCon.selectSingleArea(this);}
 
     public void returnAllButOne(RaceController raceController) {
-		RaceFiche tempFiche = model.getAllFiches().pop();
-		raceController.pushFiches(model.getAllFiches());
-		model.getAllFiches().empty();
-		model.getAllFiches().add(tempFiche);
+
+		raceController.pushFiches(model.getAllButOne());
     }
 }

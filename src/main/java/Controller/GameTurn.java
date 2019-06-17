@@ -54,6 +54,7 @@ public class GameTurn {
     public void startEndingPhase(){
         currentPhase = Phase.ENDING;
         SceneManager.getInstance().switchToEndingPhase();
+        currentPlayer.addRoundPoints();
         phaseTimer = new TimerController(this);
     }
 }

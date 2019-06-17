@@ -42,7 +42,7 @@ public class GameController {
         createShop();
 
         createTurnsAndRounds();
-        //new KnoppenController(this);
+        new KnoppenController(this);
         createAttCon();
 
         mapCon = new Map2DController(this);
@@ -99,6 +99,8 @@ public class GameController {
     AttackController getAttCon(){
         return attCon;
     }
+
+    GameTurn getGameTurn() { return gameTurn;}
 
     void endGame(){
         System.out.println("Game Ended!");

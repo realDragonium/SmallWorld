@@ -34,9 +34,7 @@ public class RaceModel {
 	}
 
 	public void pushFiches(Stack<RaceFiche> fiches){
-		while(fiches.size() > 0){
-			availableFiches.push(fiches.pop());
-		}
+		availableFiches.addAll(fiches);
 	}
 	public List<AreaController> getAreas(){
 		return areas;
@@ -50,6 +48,21 @@ public class RaceModel {
 	public int getFichesCount(){
 		return availableFiches.size();
 	}
-	
-	
+
+
+	public void addArea(AreaController area) {
+		areas.add(area);
+	}
+
+	public Stack<RaceFiche> removeFiches(int count) {
+		Stack<RaceFiche> tempFiches = new Stack<>();
+		for(int i = 0; i < count; i++){
+			tempFiches.add(availableFiches.pop());
+		}
+		return tempFiches;
+	}
+
+	public void removeArea(AreaController area) {
+		areas.remove(area);
+	}
 }

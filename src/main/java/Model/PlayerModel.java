@@ -14,6 +14,10 @@ public class PlayerModel implements PlayerObservable {
         punten = 5;
     }
 
+    public void setFicheAmount(int amount){
+        fiches = amount;
+    }
+
     public void removePoints(int amount){
         punten -= amount;
     }
@@ -30,7 +34,6 @@ public class PlayerModel implements PlayerObservable {
     @Override
     public void notifyObserver() {
         observer.update(this);
-
     }
 
     @Override
@@ -41,5 +44,10 @@ public class PlayerModel implements PlayerObservable {
     @Override
     public int getPunten() {
         return punten;
+    }
+
+    public void addPunten(int amount) {
+        punten += amount;
+        notifyObserver();
     }
 }

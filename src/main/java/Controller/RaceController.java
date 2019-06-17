@@ -29,13 +29,14 @@ public class RaceController {
 	}
 
 	public Stack<RaceFiche> getFiches(int count){
-		combiCon.getPlayer().lowerFiches(count);
-		return model.getFiches(count);
+		Stack<RaceFiche> tempFiches = model.removeFiches(count);
+		updatePlayerFicheAmount();
+		return tempFiches;
 	}
 
 	public void pushFiches(Stack<RaceFiche> fiches){
-		combiCon.getPlayer().higherFiches(fiches.size());
 		model.pushFiches(fiches);
+		updatePlayerFicheAmount();
 	}
 
 	public boolean hasEnoughFiches(int count){
@@ -54,5 +55,22 @@ public class RaceController {
 		for(AreaController area : model.getAreas()){
 			area.returnAllButOne(this);
 		}
+		updatePlayerFicheAmount();
     }
+
+    public void addArea(AreaController area){
+		model.addArea(area);
+	}
+
+	public void updatePlayerFicheAmount(){
+		combiCon.getPlayer().setFiches(model.getFichesCount());
+	}
+
+	public void removeArea(AreaController area) {
+		model.removeArea(area);
+	}
+
+	public int getAreasAmount() {
+		return model.getAreas().size();
+	}
 }

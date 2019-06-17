@@ -50,6 +50,6 @@ public class AreaView implements AreaObserver {
     public void update(AreaObservable ao) {
         shape.setFill((ao.getActive()) ? color.getColor().darker() : color.getColor());
         int numbers = ao.getNumberOfFiches();
-        if(numbers > 0) text.setText(String.valueOf(numbers));
+        text.setText(String.valueOf(numbers));
     }
 }
