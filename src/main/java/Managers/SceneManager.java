@@ -92,6 +92,19 @@ public class SceneManager {
         }
     }
 
+
+    public void createLobbyView(LobbyController con){
+        Group localGroup = new Group();
+        creators.put(LobbyView.class, (Callable<LobbyView>) () -> new LobbyView(localGroup, con));
+        FXMLLOADER("/LobbyScreen/LobbyScreen.fxml");
+
+
+        changeToScene(localGroup);
+
+    }
+
+
+
     public void loadButtons(KnoppenController knopCon) {
         creators.put(KnoppenView.class, (Callable<KnoppenView>) () -> new KnoppenView(groepen.get("buttonGroup"), knopCon));
         FXMLLOADER("/Buttons.fxml");

@@ -1,5 +1,6 @@
 package Applicatie;
 
+import Controller.LobbyController;
 import Controller.LoginController;
 import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
@@ -36,8 +37,11 @@ public class Applicatie {
         primaryStage.setFullScreen(true);
         primaryStage.show();
 
-        new LoginController();
+       // new LoginController();
+        new LobbyController();
     }
+
+
 
     public void changeScene(Scene scene) {
         primaryStage.setScene(scene);
