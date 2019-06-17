@@ -9,6 +9,7 @@ import View.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import Applicatie.Applicatie;
@@ -31,13 +32,39 @@ public class SceneManager {
         return sceneManager;
     }
 
-    public void changeToScene(Group group) {
+    public void changeToScene(Parent group) {
         Scene scene = new Scene(group);
         this.app.changeScene(scene);
     }
 
     public void registerApp(Applicatie newApp) {
         this.app = newApp;
+    }
+
+    public void switchToPreperationPhase(){
+        Pane pane = new Pane();
+        pane.getChildren().add(groepen.get("mapGroup"));
+        pane.getChildren().add(groepen.get("shopGroup"));
+        pane.getChildren().add(groepen.get("playerGroup"));
+        pane.getChildren().add(groepen.get("timerGroup"));
+        changeToScene(pane);
+    }
+
+    public void switchToAttackPhase(){
+        Pane pane = new Pane();
+        pane.getChildren().add(groepen.get("mapGroup"));
+        pane.getChildren().add(groepen.get("playerGroup"));
+        pane.getChildren().add(groepen.get("timerGroup"));
+        pane.getChildren().add(groepen.get("buttonGroup"));
+        changeToScene(pane);
+    }
+
+    public void switchToEndingPhase(){
+        Pane pane = new Pane();
+        pane.getChildren().add(groepen.get("mapGroup"));
+        pane.getChildren().add(groepen.get("playerGroup"));
+        pane.getChildren().add(groepen.get("timerGroup"));
+        changeToScene(pane);
     }
 
     public void createLoginView(LoginController loginController) {
@@ -84,10 +111,11 @@ public class SceneManager {
         new AreaView(area, areaController);
     }
 
-    public void createMap(Map2DController mapController) {
-        Group localGroup = new Group();
-        new Map2DView(mapController, localGroup);
-        this.gameView.getChildren().add(localGroup);
+    public void createMap(Map2DController mapCon) {
+        this.creators.put(Map2DView.class, () -> {
+            return new Map2DView( mapCon, (Group)this.groepen.get("mapGroup"));
+        });
+        this.FXMLLOADER("/UglyMap.fxml");
     }
 
     public void makeMap() {
@@ -129,6 +157,13 @@ public class SceneManager {
             return new ShopView((Group)this.groepen.get("shopGroup"), shopCon);
         });
         this.FXMLLOADER("/ShopView.fxml");
+    }
+
+    public void loadTimer(TimerController timerCon) {
+        this.creators.put(TimerView.class, () -> {
+            return new TimerView((Group)this.groepen.get("timerGroup"), timerCon);
+        });
+        this.FXMLLOADER("/timerView.fxml");
     }
 
     public void loadRound(RoundController roundCon) {
