@@ -16,6 +16,8 @@ public class GameController {
     private Map2DController mapCon;
     private AttackController attCon;
     private ShopController shopCon;
+    private GameTurn gameTurn;
+
 
     public GameController() {
         model = new GameModel(8, 8);
@@ -29,16 +31,20 @@ public class GameController {
     }
 
     public void changePlayerTurn(String player){
+
         currentPlayer = players.get(player);
+        createGameTurn();
     }
 
     public void createGameParts() {
 
         createPlayer();
         createShop();
+
         createTurnsAndRounds();
-        new KnoppenController(this);
+        //new KnoppenController(this);
         createAttCon();
+        createGameTurn();
         mapCon = new Map2DController(this);
     }
 
@@ -59,10 +65,18 @@ public class GameController {
         turnCon = new TurnController(this);
     }
 
+    private void createGameTurn(){
+        gameTurn = new GameTurn(this, currentPlayer);
+    }
+
 
 
     PlayerController getPlayer(String id){
         return players.get(id);
+    }
+
+    public PlayerController getCurrentPlayer(){
+        return players.get(turnCon.getCurrentPlayer());
     }
 
     private void createAttCon(){
@@ -94,5 +108,14 @@ public class GameController {
 
     boolean isGameOver(){
         return model.gameEnded;
+    }
+
+
+    private void startGame(){
+
+    }
+
+    public void nextTurn() {
+        turnCon.nextTurn();
     }
 }

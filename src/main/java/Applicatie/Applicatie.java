@@ -2,6 +2,7 @@ package Applicatie;
 
 import Controller.FirebaseController;
 import Controller.LoginController;
+import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -14,11 +15,17 @@ public class Applicatie {
     private double windowAnchorY= 50;
     private Stage primaryStage;
     private Group root = new Group();
+    private static FirebaseServiceOwn fb;
 
     public Applicatie(Stage primaryStage) {
         SceneManager.getInstance().registerApp(this);
         this.primaryStage = primaryStage;
         loadPrimaryStage();
+    }
+
+    public static FirebaseServiceOwn getFirebaseService(){
+        if(fb == null) fb = new FirebaseServiceOwn();
+        return fb;
     }
 
     private void loadPrimaryStage() {

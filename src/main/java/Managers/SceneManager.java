@@ -1,15 +1,11 @@
 package Managers;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.Callable;
 
 import Controller.*;
 import View.*;
-import Enum.EnumPane;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -18,56 +14,70 @@ import javafx.scene.layout.Pane;
 import Applicatie.Applicatie;
 
 public class SceneManager {
-    private Map<Class, Callable<?>> creators = new HashMap<>();
-    private Map<String, Group> groepen = new HashMap<>();
+    private Map<Class, Callable<?>> creators = new HashMap();
+    private Map<String, Group> groepen = new HashMap();
     private static SceneManager sceneManager;
-    private List<EnumPane> panes = new ArrayList<>();
     private Applicatie app;
     private Group gameView;
 
-    public static SceneManager getInstance(){
-        if(sceneManager == null) sceneManager = new SceneManager();
+    public SceneManager() {
+    }
+
+    public static SceneManager getInstance() {
+        if (sceneManager == null) {
+            sceneManager = new SceneManager();
+        }
+
         return sceneManager;
     }
 
     public void changeToScene(Group group) {
         Scene scene = new Scene(group);
-        app.changeScene(scene);
+        this.app.changeScene(scene);
     }
 
     public void registerApp(Applicatie newApp) {
-        app = newApp;
+        this.app = newApp;
     }
 
-    public void createLoginView(LoginController loginController){
+    public void createLoginView(LoginController loginController) {
         Group localGroup = new Group();
-        creators.put(LoginView.class, (Callable<LoginView>) () -> new LoginView(loginController, localGroup));
-        FXMLLOADER("/LoginScreen/Loginscherm.fxml");
-        changeToScene(localGroup);
+        this.creators.put(LoginView.class, () -> {
+            return new LoginView(loginController, localGroup);
+        });
+        this.FXMLLOADER("/LoginScreen/Loginscherm.fxml");
+        this.changeToScene(localGroup);
     }
 
     public void createHomeScreenView(HomeScreenController hsController) {
         Group localGroup = new Group();
-        creators.put(HomeScreenView.class, (Callable<HomeScreenView>) () -> new HomeScreenView(hsController, localGroup));
-        FXMLLOADER("/HomeScreen/Homescreen.fxml");
-        changeToScene(localGroup);
+        this.creators.put(HomeScreenView.class, () -> {
+            return new HomeScreenView(hsController, localGroup);
+        });
+        this.FXMLLOADER("/HomeScreen/Homescreen.fxml");
+        this.changeToScene(localGroup);
     }
 
     public void createGameView(GameController gameCon) {
-
-        gameView = new Group();
+        this.gameView = new Group();
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/GameMain.fxml"));
+        fxmlLoader.setLocation(this.getClass().getResource("/GameMain.fxml"));
+
         try {
-            Pane pane = fxmlLoader.load();
-            for (Node groep : pane.getChildren()) {
-                groepen.put(groep.getId(), (Group) groep);
+            Pane pane = (Pane)fxmlLoader.load();
+            Iterator var4 = pane.getChildren().iterator();
+
+            while(var4.hasNext()) {
+                Node groep = (Node)var4.next();
+                this.groepen.put(groep.getId(), (Group)groep);
             }
-            gameView.getChildren().add(pane);
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            this.gameView.getChildren().add(pane);
+        } catch (IOException var6) {
+            var6.printStackTrace();
         }
-        changeToScene(gameView);
+
+        this.changeToScene(this.gameView);
     }
 
     public void createAreaView(AreaController areaController, Group area) {
@@ -77,73 +87,83 @@ public class SceneManager {
     public void createMap(Map2DController mapController) {
         Group localGroup = new Group();
         new Map2DView(mapController, localGroup);
-        gameView.getChildren().add(localGroup);
+        this.gameView.getChildren().add(localGroup);
     }
 
     public void makeMap() {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/GameMain.fxml"));
+        fxmlLoader.setLocation(this.getClass().getResource("/GameMain.fxml"));
+
         try {
-            Pane pane = fxmlLoader.load();
-            for (Node groep : pane.getChildren()) {
-                groepen.put(groep.getId(), (Group) groep);
+            Pane pane = (Pane)fxmlLoader.load();
+            Iterator var3 = pane.getChildren().iterator();
+
+            while(var3.hasNext()) {
+                Node groep = (Node)var3.next();
+                this.groepen.put(groep.getId(), (Group)groep);
             }
-            gameView.getChildren().add(pane);
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            this.gameView.getChildren().add(pane);
+        } catch (IOException var5) {
+            var5.printStackTrace();
         }
+
     }
 
     public void loadButtons(KnoppenController knopCon) {
-        creators.put(KnoppenView.class, (Callable<KnoppenView>) () -> new KnoppenView(groepen.get("buttonGroup"), knopCon));
-        FXMLLOADER("/Buttons.fxml");
+        this.creators.put(KnoppenView.class, () -> {
+            return new KnoppenView((Group)this.groepen.get("buttonGroup"), knopCon);
+        });
+        this.FXMLLOADER("/Buttons.fxml");
     }
 
     public void loadPlayer(String playerID, PlayerController playerCon) {
-        creators.put(PlayerView.class, (Callable<PlayerView>) () -> new PlayerView(playerID, groepen.get("playerGroup"), playerCon));
-        FXMLLOADER("/PlayerView.fxml");
+        this.creators.put(PlayerView.class, () -> {
+            return new PlayerView(playerID, (Group)this.groepen.get("playerGroup"), playerCon);
+        });
+        this.FXMLLOADER("/PlayerView.fxml");
     }
 
-    public void loadShop(ShopController shopCon){
-        creators.put(ShopView.class, (Callable<ShopView>) () -> new ShopView(groepen.get("shopGroup"), shopCon));
-        FXMLLOADER("/ShopView.fxml");
+    public void loadShop(ShopController shopCon) {
+        this.creators.put(ShopView.class, () -> {
+            return new ShopView((Group)this.groepen.get("shopGroup"), shopCon);
+        });
+        this.FXMLLOADER("/ShopView.fxml");
     }
 
     public void loadRound(RoundController roundCon) {
-        creators.put(RoundView.class, (Callable<RoundView>) () -> new RoundView(groepen.get("roundGroup"), roundCon));
-        FXMLLOADER("/RoundView.fxml");
+        this.creators.put(RoundView.class, () -> {
+            return new RoundView((Group)this.groepen.get("roundGroup"), roundCon);
+        });
+        this.FXMLLOADER("/RoundView.fxml");
     }
 
     public void loadTurn(TurnController turnCon) {
-        creators.put(TurnView.class, (Callable<TurnView>) () -> new TurnView(groepen.get("turnGroup"), turnCon));
-        FXMLLOADER("/TurnView.fxml");
+        this.creators.put(TurnView.class, () -> {
+            return new TurnView((Group)this.groepen.get("turnGroup"), turnCon);
+        });
+        this.FXMLLOADER("/TurnView.fxml");
     }
 
     private void FXMLLOADER(String path) {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource(path));
-        fxmlLoader.setControllerFactory(param -> {
-            Callable<?> callable = creators.get(param);
-            if (callable == null) {
-                try {
-                    // default handling: use no-arg constructor
-                    return param.newInstance();
-                } catch (InstantiationException | IllegalAccessException ex) {
-                    throw new IllegalStateException(ex);
-                }
-            } else {
-                try {
-                    return callable.call();
-                } catch (Exception ex) {
-                    throw new IllegalStateException(ex);
-                }
+        fxmlLoader.setLocation(this.getClass().getResource(path));
+        fxmlLoader.setControllerFactory((param) -> {
+            Callable callable = (Callable)this.creators.get(param);
+
+            try {
+                return callable.call();
+            } catch (Exception var4) {
+                var4.printStackTrace();
+                return null;
             }
         });
+
         try {
             fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException var4) {
+            var4.printStackTrace();
         }
-    }
 
+    }
 }

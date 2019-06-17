@@ -3,7 +3,6 @@ package Controller;
 import Managers.SceneManager;
 import Model.Map2DModel;
 import javafx.scene.Group;
-import javafx.scene.Node;
 
 import java.util.*;
 

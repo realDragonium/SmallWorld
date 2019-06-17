@@ -1,27 +1,30 @@
 package Controller;
 
+import Firebase.FirebaseServiceOwn;
+import Applicatie.Applicatie;
 import Managers.SceneManager;
 import models.LoginModel;
 import observers.LoginObserver;
+import Controller.HomeScreenController;
 
 public class LoginController {
-	
+	private FirebaseServiceOwn fb = Applicatie.getFirebaseService();
     private LoginModel hsModel = new LoginModel();
 
     public LoginController(){
         SceneManager.getInstance().createLoginView(this);
     }
     
-    public void buttonLoginClicked(String username, String password) {
-    	validateLoginInfo(username, password);
-    }
-    
     public void validateLoginInfo(String username, String password) {
-    	//checkInfoFirebase();
-    	//checkInfoView();
-    	if(true) {
+    	if(fb.login(username, password)) {
     		hsModel.loginAccepted(true);
     	}
+    }
+
+    public void register(String username, String password){
+        if(fb.register(username, password)) {
+            hsModel.loginAccepted(true);
+        }
     }
     
     public void register(LoginObserver lo) {
@@ -29,6 +32,6 @@ public class LoginController {
     }
 
 	public void goToHomeScreen() {
-		new Controller.HomeScreenController();
+		new HomeScreenController();
 	}
 }

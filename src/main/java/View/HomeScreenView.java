@@ -1,31 +1,24 @@
 package View;
 
-import java.io.IOException;
-
 import Controller.GameController;
 import Controller.HomeScreenController;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
-import observers.HomeScreenObserver;
-import Managers.SceneManager;
-import observable.HomeScreenObservable;
-import javafx.animation.TranslateTransition;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import observable.HomeScreenObservable;
+import observers.HomeScreenObserver;
 
 public class HomeScreenView implements HomeScreenObserver{
 
-//	private Parent root;
 	private Pane pane;
 	private Group group;
-	private Scene scene;
 	private HomeScreenController hsCon;
 
 	@FXML
@@ -40,39 +33,15 @@ public class HomeScreenView implements HomeScreenObserver{
 	public void initialize() {
     	group.getChildren().add(root);
 	}
-    
-    private void loadScene(){
-//		try {
-////			root = FXMLLoader.load(getClass().getResource("/HomeScreen/Homescreen.fxml"));
-//			for(Node node : ((AnchorPane) root).getChildren()){
-//				if(node.getId() != null) {
-//					if(node.getId().equals("select")) {
-//						((HBox) node).setOnMouseClicked(e -> {
-//							new GameController();
-//						});
-//						((HBox) node).setOnMouseEntered(e -> {
-//							enterHoverTitle(node);
-//						});
-//						((HBox) node).setOnMouseExited(e -> {
-//							exitHoverTitle(node);
-//						});
-//					}
-//				}
-//			}
-//
-//			scene = new Scene(root);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-    }
 
     @FXML
     private void createGame(){
     	new GameController();
 	}
 
-    private void enterHoverTitle(Node node) {
-    	for(Node node2 : ((HBox) node).getChildren()) {
+	@FXML
+    private void enterHoverTitle(MouseEvent e) {
+    	for(Node node2 : ((HBox) e.getSource()).getChildren()) {
 	    	if(node2.getId().equals("Power")) {
 		    	TranslateTransition translateTransition = new TranslateTransition(); 
 				translateTransition.setDuration(Duration.millis(500));
@@ -94,17 +63,17 @@ public class HomeScreenView implements HomeScreenObserver{
 	    }
     }
 	
-    
-	private void exitHoverTitle(Node node) {
-		for(Node node2 : ((HBox) node).getChildren()) {
+    @FXML
+	private void exitHoverTitle(MouseEvent e) {
+		for(Node node2 : ((HBox)  e.getSource()).getChildren()) {
 	    	if(node2.getId().equals("Power")) {
 		
 				TranslateTransition translateTransition = new TranslateTransition(); 
 				translateTransition.setDuration(Duration.millis(200));
-				translateTransition.setByX(-((ImageView)((HBox) node).getChildren().get(0)).getTranslateX()); 
+				translateTransition.setByX(-((ImageView)((HBox)  e.getSource()).getChildren().get(0)).getTranslateX());
 				translateTransition.setCycleCount(1); 
 				translateTransition.setAutoReverse(false); 
-				translateTransition.setNode(((ImageView)((HBox) node).getChildren().get(0)));
+				translateTransition.setNode(((ImageView)((HBox)  e.getSource()).getChildren().get(0)));
 				translateTransition.play();
 	    	}
 	    	if(node2.getId().equals("Ras")) {

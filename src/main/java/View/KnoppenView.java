@@ -42,5 +42,5 @@ public class KnoppenView {
         knopCon.nextTurn();
     }
     public void nextRound(){knopCon.nextRound();}
-    public void nextFase(){knopCon.nextFase();}
+    //public void nextFase(){knopCon.nextFase();}
 }

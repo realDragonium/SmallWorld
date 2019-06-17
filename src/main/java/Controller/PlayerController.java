@@ -1,62 +1,78 @@
 package Controller;
 
+import Firebase.FirebaseControllerObserver;
 import Managers.SceneManager;
 import Model.PlayerModel;
 import Observer.PlayerObserver;
+import com.google.cloud.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerController {
+public class PlayerController implements FirebaseControllerObserver {
     private GameController gameCon;
     private PlayerModel model;
-    private int maxRaces = 2;
     private List<CombinationController> combinations = new ArrayList<>();
 
-
-    public PlayerController(String playerID, GameController gameCon){
+    public PlayerController(String playerID, GameController gameCon) {
         model = new PlayerModel(playerID);
         this.gameCon = gameCon;
         SceneManager.getInstance().loadPlayer(playerID, this);
+        Applicatie.Applicatie.getFirebaseService().playerListen(playerID, this);
     }
 
-    public void buyFromShop(CombinationController combo, int costs){
-        if(combinations.size() < maxRaces){
-            System.out.println(getId() + " voegt combinatie toe");
-            model.removePoints(costs);
-            combinations.add(combo);
+    public void buyFromShop(CombinationController combo, int costs) {
+        System.out.println(getId() + " voegt combinatie toe");
+        model.removePoints(costs);
+        combinations.add(combo);
+        combo.setPlayer(this);
+        setFiches(combo.getRace().fichesCount());
+    }
+
+
+
+    public void showActiveCombiFichesLeft() {
+        for (CombinationController combiCon : combinations) {
+            combiCon.getRace().fichesOver();
         }
     }
 
-    public CombinationController getActiveCombination(){
-        return combinations.get(0);
+
+    public CombinationController getActiveCombination() {
+        if (combinations.size() > 0) return combinations.get(0);
+        return null;
     }
 
-//    RaceController getActiveRace(){
-//        return raceCons.get(0);
-//    }
-
-    String getId(){
+    String getId() {
         return model.getId();
     }
 
-    public void register(PlayerObserver po){
+    public void register(PlayerObserver po) {
         model.register(po);
     }
 
-    public void setFiches(int fiches){
+    public void setFiches(int fiches) {
         model.fiches = fiches;
         model.notifyObserver();
     }
 
-    void lowerFiches(int count){
+    void lowerFiches(int count) {
         model.fiches -= count;
         model.notifyObserver();
     }
 
-    void higherFiches(int count){
+    void higherFiches(int count) {
         model.fiches += count;
         model.notifyObserver();
     }
 
+    @Override
+    public void update(DocumentSnapshot ds) {
+        model.fiches = (int) Math.round(ds.getDouble("fiches"));
+        model.notifyObserver();
+    }
+
+    public void returnFiches() {
+        combinations.get(0).returnFiches();
+    }
 }

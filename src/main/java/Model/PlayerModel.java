@@ -9,7 +9,7 @@ public class PlayerModel implements PlayerObservable {
     public int fiches;
     private int punten;
 
-    public PlayerModel(String playerId){
+    public PlayerModel(String playerId) {
         playerID = playerId;
         punten = 5;
     }

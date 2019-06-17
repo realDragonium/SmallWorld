@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.PlayerController;
 import Objects.RaceFiche;
 import Observable.AreaObservable;
 import Observer.AreaObserver;
@@ -13,7 +14,7 @@ public class AreaModel implements AreaObservable {
     private boolean active = false;
     private AreaObserver observer;
     private String id;
-    public String playerId = "player0";
+    public PlayerController player;
 
     public AreaModel(String id) {
         this.id = id;
