@@ -32,9 +32,9 @@ public class Applicatie {
         Scene scene = new Scene(root, width,height);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Small World");
-        primaryStage.setX(windowAnchorX);
-        primaryStage.setY(windowAnchorY);
-        primaryStage.setFullScreen(true);
+//        primaryStage.setX(windowAnchorX);
+//        primaryStage.setY(windowAnchorY);
+//        primaryStage.setFullScreen(true);
         primaryStage.show();
 
         new FirebaseController();
@@ -44,6 +44,7 @@ public class Applicatie {
 
     public void changeScene(Scene scene) {
         primaryStage.setScene(scene);
+        primaryStage.setFullScreen(true);
     }
 }
 

@@ -92,6 +92,16 @@ public class FirebaseServiceOwn {
         });
     }
 
+    public void playerUpdateFiches(String player, int fichesCount){
+        DocumentReference docRef = firestore.collection("Games").document("First").collection("Spelers").document(player);
+        docRef.update("fiche", fichesCount);
+    }
+
+    public void mapUpdateFiches(String mapId, int fichesCount){
+        DocumentReference docRef = firestore.collection("Games").document("First").collection("Map").document(mapId);
+        docRef.update("fiches", fichesCount);
+    }
+
     /**
      * Overschrijft een document als het als bestaat of maakt een nieuwe aan.
      * Wees hier dus voorzichtig mee.
