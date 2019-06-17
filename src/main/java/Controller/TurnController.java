@@ -14,7 +14,7 @@ public class TurnController {
         model = new TurnModel(4);
         this.gameCon = gameCon;
         SceneManager.getInstance().loadTurn(this);
-        nextTurn();
+        gameCon.changePlayerTurn("player"+model.currentTurn);
     }
 
     public void register(TurnObserver to){

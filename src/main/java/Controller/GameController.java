@@ -44,10 +44,11 @@ public class GameController {
         createTurnsAndRounds();
         //new KnoppenController(this);
         createAttCon();
-        createGameTurn();
-        mapCon = new Map2DController(this);
-    }
 
+        mapCon = new Map2DController(this);
+
+        createGameTurn();
+    }
     private void createPlayer(){
         players.put("player0", new PlayerController("player0", this));
         players.put("player1", new PlayerController("player1", this));
