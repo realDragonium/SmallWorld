@@ -22,6 +22,26 @@ public class ShopView {
         shopCon.buyingItem(0);
     }
 
+    public void buyItem2(){
+        shopCon.buyingItem(0);
+    }
+
+    public void buyItem3(){
+        shopCon.buyingItem(0);
+    }
+
+    public void buyItem4(){
+        shopCon.buyingItem(0);
+    }
+
+    public void buyItem5(){
+        shopCon.buyingItem(0);
+    }
+
+    public void buyItem6(){
+        shopCon.buyingItem(0);
+    }
+
     public void initialize() {
         group.getChildren().add(pane);
     }
