@@ -3,10 +3,12 @@ package DiceMVC;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -16,23 +18,37 @@ import java.util.ArrayList;
 
 public class DiceView implements Observer {
 
-    ImageView showImageView = new ImageView("/images/DiceTwo.jpg");
-    Image One = new Image("/images/DiceOne.jpg");
-    Image Two = new Image("/images/DiceTwo.jpg");
-    Image Three = new Image("/images/DiceThree.jpg");
-    Image Four = new Image("/images/DiceFour.jpg");
-    Image Five = new Image("/images/DiceFive.jpg");
-    Image Six = new Image("/images/DiceSix.jpg");
+    ImageView showImageView = new ImageView("/images/DiceNul.jpg");
+    Image One = new Image("/images/DiceNul.jpg");
+    Image Two = new Image("/images/DiceNul.jpg");
+    Image Three = new Image("/images/DiceNul.jpg");
+    Image Four = new Image("/images/DiceOne.jpg");
+    Image Five = new Image("/images/DiceTwo.jpg");
+    Image Six = new Image("/images/DiceThree.jpg");
+
+
 
     Stage primaryStage = new Stage();
     Timeline timeline = new Timeline(
             new KeyFrame(Duration.millis(500), new KeyValue(showImageView.imageProperty(), One)),
-            new KeyFrame(Duration.millis(1000), new KeyValue(showImageView.imageProperty(), Two)),
+            new KeyFrame(Duration.millis(1000), new KeyValue(showImageView.imageProperty(), Four)),
             new KeyFrame(Duration.millis(1500), new KeyValue(showImageView.imageProperty(), Three)),
-            new KeyFrame(Duration.millis(2000), new KeyValue(showImageView.imageProperty(), Four)),
-            new KeyFrame(Duration.millis(2500), new KeyValue(showImageView.imageProperty(), Five)),
-            new KeyFrame(Duration.millis(3000), new KeyValue(showImageView.imageProperty(), Six))
+            new KeyFrame(Duration.millis(2000), new KeyValue(showImageView.imageProperty(), Six)),
+            new KeyFrame(Duration.millis(2500), new KeyValue(showImageView.imageProperty(), Two)),
+            new KeyFrame(Duration.millis(3000), new KeyValue(showImageView.imageProperty(), Five))
     );
+
+
+    public void onClick(){
+
+        showImageView.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                playAnimation();
+
+            }
+        });
+    }
 
 
     DiceController diceController = new DiceController();
@@ -44,26 +60,23 @@ public class DiceView implements Observer {
         diceController.registreer(this);
         this.primaryStage = primaryStage;
         createScene();
+        onClick();
+
     }
+
+
 
     public void createScene() {
 
-        Button dice = new Button("RollDice");
 
-
+        list.add(new Image("/images/DiceNul.jpg"));
+        list.add(new Image("/images/DiceNul.jpg"));
+        list.add(new Image("/images/DiceNul.jpg"));
         list.add(new Image("/images/DiceOne.jpg"));
         list.add(new Image("/images/DiceTwo.jpg"));
         list.add(new Image("/images/DiceThree.jpg"));
-        list.add(new Image("/images/DiceFour.jpg"));
-        list.add(new Image("/images/DiceFive.jpg"));
-        list.add(new Image("/images/DiceSix.jpg"));
-
-
-        dice.setOnAction(e -> playAnimation());
-
 
         GridPane gridPane = new GridPane();
-        gridPane.add(dice, 0, 0);
         gridPane.add(showImageView, 0, 1);
 
 
@@ -73,6 +86,9 @@ public class DiceView implements Observer {
         primaryStage.show();
 
     }
+
+
+
 
     public void playAnimation() {
 
@@ -93,9 +109,8 @@ public class DiceView implements Observer {
 
     @Override
     public void update(Observable ob) {
-        System.out.println("De waarde is" + ob.getWaarde());
-
         showImageView.setImage(list.get(ob.getWaarde()));
+
 
 
     }
