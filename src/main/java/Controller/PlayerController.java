@@ -1,6 +1,8 @@
 package Controller;
 
+import Applicatie.Applicatie;
 import Firebase.FirebaseControllerObserver;
+import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
 import Model.PlayerModel;
 import Observer.PlayerObserver;
@@ -11,6 +13,7 @@ import java.util.List;
 
 public class PlayerController implements FirebaseControllerObserver {
     private GameController gameCon;
+    private FirebaseServiceOwn fb = Applicatie.getFirebaseService();
     private PlayerModel model;
     private List<CombinationController> combinations = new ArrayList<>();
 
@@ -18,7 +21,7 @@ public class PlayerController implements FirebaseControllerObserver {
         model = new PlayerModel(playerID);
         this.gameCon = gameCon;
         SceneManager.getInstance().loadPlayer(playerID, this);
-        Applicatie.Applicatie.getFirebaseService().playerListen(playerID, this);
+        fb.playerListen(playerID, this);
     }
 
     public void buyFromShop(CombinationController combo, int costs) {
@@ -54,20 +57,24 @@ public class PlayerController implements FirebaseControllerObserver {
     public void setFiches(int fiches) {
         model.fiches = fiches;
         model.notifyObserver();
+        fb.playerUpdateFiches(model.getId(), fiches);
     }
 
     void lowerFiches(int count) {
         model.fiches -= count;
         model.notifyObserver();
+        fb.playerUpdateFiches(model.getId(), model.fiches);
     }
 
     void higherFiches(int count) {
         model.fiches += count;
         model.notifyObserver();
+        fb.playerUpdateFiches(model.getId(), model.fiches);
     }
 
     @Override
     public void update(DocumentSnapshot ds) {
+        if(gameCon.getCurrentPlayer()==this) return;
         model.fiches = (int) Math.round(ds.getDouble("fiches"));
         model.notifyObserver();
     }

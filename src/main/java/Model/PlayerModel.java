@@ -30,6 +30,7 @@ public class PlayerModel implements PlayerObservable {
     @Override
     public void notifyObserver() {
         observer.update(this);
+
     }
 
     @Override
