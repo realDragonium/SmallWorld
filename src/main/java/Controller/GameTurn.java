@@ -18,6 +18,7 @@ public class GameTurn {
     }
 
     public void endPhase() {
+
         switch(currentPhase){
             case PREPERATION:
                 startAttackPhase();
@@ -28,6 +29,7 @@ public class GameTurn {
                 break;
 
             case ENDING:
+                System.out.println("end of ending phase");
                 gameCon.nextTurn();
                 break;
     }

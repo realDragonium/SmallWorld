@@ -13,7 +13,7 @@ public class TimerController {
     GameTurn gameTurn;
     TimerModel model = new TimerModel();
 
-    Timer timer = new Timer();
+    Timer timer;
 
     public void startTimer() {
         TimerTask start = new TimerTask() {
@@ -24,8 +24,9 @@ public class TimerController {
                     public void run() {
                         model.addSecond();
                         if (model.timerIsDone()) {
-                            timer.cancel();
+                            System.out.println("test");
                             timerEnded();
+
                         }
                     }
                 });
@@ -55,6 +56,7 @@ public class TimerController {
 //    }
 
     public TimerController(GameTurn gameTurn){
+        System.out.println("test2");
         this.gameTurn = gameTurn;
         SceneManager.getInstance().loadTimer(this);
         startTimer();
@@ -67,6 +69,8 @@ public class TimerController {
     }
 
     public void timerEnded(){
+        timer.cancel();
         gameTurn.endPhase();
+
     }
 }

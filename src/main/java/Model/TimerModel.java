@@ -12,15 +12,18 @@ public class TimerModel implements TimerObservable, ChangeListener {
 
     int elapsedTime;
     TimerObserver observer;
-    int timeAmount = 20;
-    boolean timerDone;
+    int timeAmount = 10;
+    boolean timerDone = false;
 
     public boolean timerIsDone(){
-        return(elapsedTime >= timeAmount);
+        return timerDone;
     }
 
     public void addSecond(){
         elapsedTime++;
+        if(elapsedTime >= timeAmount){
+            timerDone = true;
+        }
         notifyAllObservers();
     }
 

@@ -22,6 +22,7 @@ public class TurnController {
     }
 
     void nextTurn(){
+        System.out.println("volgende beurt");
         if(model.currentTurn >= model.getTurnPerRound()) {
             model.currentTurn = 0;
             gameCon.getRoundCon().nextRound();

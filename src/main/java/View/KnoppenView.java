@@ -39,7 +39,7 @@ public class KnoppenView {
         knopCon.fichesOver();
     }
     public void nextTurn(){
-        knopCon.nextTurn();
+        //knopCon.nextTurn();
     }
     public void nextRound(){knopCon.nextRound();}
     //public void nextFase(){knopCon.nextFase();}

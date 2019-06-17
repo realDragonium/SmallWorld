@@ -32,9 +32,9 @@ public class KnoppenController {
         gameCon.getCurrentPlayer().showActiveCombiFichesLeft();
     }
 
-    public void nextTurn() {
-        gameCon.getTurnCon().nextTurn();
-    }
+//    public void nextTurn() {
+//        gameCon.getTurnCon().nextTurn();
+//    }
 
     public void nextRound() {
         gameCon.getRoundCon().nextRound();

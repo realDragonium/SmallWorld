@@ -47,6 +47,8 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("shopGroup"));
         pane.getChildren().add(groepen.get("playerGroup"));
         pane.getChildren().add(groepen.get("timerGroup"));
+        pane.getChildren().add(groepen.get("turnGroup"));
+        pane.getChildren().add(groepen.get("roundGroup"));
         changeToScene(pane);
     }
 
@@ -55,7 +57,8 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("mapGroup"));
         pane.getChildren().add(groepen.get("playerGroup"));
         pane.getChildren().add(groepen.get("timerGroup"));
-        pane.getChildren().add(groepen.get("buttonGroup"));
+        pane.getChildren().add(groepen.get("turnGroup"));
+        pane.getChildren().add(groepen.get("roundGroup"));
         changeToScene(pane);
     }
 
@@ -64,6 +67,8 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("mapGroup"));
         pane.getChildren().add(groepen.get("playerGroup"));
         pane.getChildren().add(groepen.get("timerGroup"));
+        pane.getChildren().add(groepen.get("turnGroup"));
+        pane.getChildren().add(groepen.get("roundGroup"));
         changeToScene(pane);
     }
 

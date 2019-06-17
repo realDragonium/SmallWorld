@@ -28,6 +28,6 @@ public class CombinationController {
     }
 
     public void returnFiches() {
-        race.returnFiches();
+            race.returnFiches();
     }
 }

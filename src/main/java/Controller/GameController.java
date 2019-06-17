@@ -46,8 +46,6 @@ public class GameController {
         createAttCon();
 
         mapCon = new Map2DController(this);
-
-        createGameTurn();
     }
     private void createPlayer(){
         players.put("player0", new PlayerController("player0", this));

@@ -14,12 +14,10 @@ public class RaceController {
 	private CombinationController combiCon;
 	private Kracht kracht;
 	private RaceModel model;
-	private int fichesAantal = 15;
-	private List<AreaController> areas = new ArrayList<>();
 
 	public RaceController(Kracht kracht) {
 		this.kracht = kracht;
-		model = new RaceModel(fichesAantal);
+		model = new RaceModel();
 	}
 
 	public int fichesCount(){
@@ -53,7 +51,7 @@ public class RaceController {
 	}
 
     public void returnFiches() {
-		for(AreaController area : areas){
+		for(AreaController area : model.getAreas()){
 			area.returnAllButOne(this);
 		}
     }
