@@ -51,6 +51,8 @@ public class SceneManager {
         changeToScene(localGroup);
     }
 
+
+
     public void createGameView(GameController gameCon) {
 
         gameView = new Group();
@@ -92,18 +94,19 @@ public class SceneManager {
         }
     }
 
-
     public void createLobbyView(LobbyController con){
         Group localGroup = new Group();
         creators.put(LobbyView.class, (Callable<LobbyView>) () -> new LobbyView(localGroup, con));
         FXMLLOADER("/LobbyScreen/LobbyScreen.fxml");
-
-
         changeToScene(localGroup);
-
     }
 
-
+    public void createInLobbyView(InLobbyController con){
+        Group localGroup = new Group();
+        creators.put(InLobbyView.class, (Callable<InLobbyView>) () -> new InLobbyView(localGroup, con));
+        FXMLLOADER("/LobbyScreen/InLobbyScreen.fxml");
+        changeToScene(localGroup);
+    }
 
     public void loadButtons(KnoppenController knopCon) {
         creators.put(KnoppenView.class, (Callable<KnoppenView>) () -> new KnoppenView(groepen.get("buttonGroup"), knopCon));

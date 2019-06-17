@@ -23,13 +23,14 @@ public class Applicatie {
         loadPrimaryStage();
     }
 
+
     public static FirebaseServiceOwn getFirebaseService(){
         if(fb == null) fb = new FirebaseServiceOwn();
         return fb;
     }
 
     private void loadPrimaryStage() {
-        Scene scene = new Scene(root, width,height);
+        Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Small World");
         primaryStage.setX(windowAnchorX);
@@ -37,14 +38,15 @@ public class Applicatie {
         primaryStage.setFullScreen(true);
         primaryStage.show();
 
-       // new LoginController();
-        new LobbyController();
+       new LoginController();
+       /// new LobbyController();
     }
 
 
 
     public void changeScene(Scene scene) {
         primaryStage.setScene(scene);
+        primaryStage.setFullScreen(true);
     }
 }
 
