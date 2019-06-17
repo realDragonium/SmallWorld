@@ -35,6 +35,7 @@ public class LoginView implements LoginObserver{
 	@FXML
 	private void login(){
 		loginController.validateLoginInfo(Username.getText(), Password.getText());
+//		loginController.goToHomeScreen(); //voor als je geen internet hebt
 	}
 
 	@FXML

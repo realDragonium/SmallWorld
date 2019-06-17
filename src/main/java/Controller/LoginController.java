@@ -1,13 +1,14 @@
 package Controller;
 
-import Firebase.FirebaseService;
+import Firebase.FirebaseServiceOwn;
 import Applicatie.Applicatie;
 import Managers.SceneManager;
 import models.LoginModel;
 import observers.LoginObserver;
+import Controller.HomeScreenController;
 
 public class LoginController {
-	private FirebaseService fb = Applicatie.getFirebaseService();
+	private FirebaseServiceOwn fb = Applicatie.getFirebaseService();
     private LoginModel hsModel = new LoginModel();
 
     public LoginController(){
@@ -31,6 +32,6 @@ public class LoginController {
     }
 
 	public void goToHomeScreen() {
-		new Controller.HomeScreenController();
+		new HomeScreenController();
 	}
 }

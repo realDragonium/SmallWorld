@@ -1,32 +1,24 @@
 package View;
 
-import java.io.IOException;
-
 import Controller.GameController;
 import Controller.HomeScreenController;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
-import javafx.scene.input.MouseEvent;
-import observers.HomeScreenObserver;
-import Managers.SceneManager;
-import observable.HomeScreenObservable;
-import javafx.animation.TranslateTransition;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import observable.HomeScreenObservable;
+import observers.HomeScreenObserver;
 
 public class HomeScreenView implements HomeScreenObserver{
 
-//	private Parent root;
 	private Pane pane;
 	private Group group;
-	private Scene scene;
 	private HomeScreenController hsCon;
 
 	@FXML
