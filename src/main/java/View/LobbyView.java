@@ -28,6 +28,7 @@ public class LobbyView implements LobbyObserver {
         this.lobbyCon = con;
     }
 
+
     public void initialize() {
         group.getChildren().add(root);
         lobbyCon.register(this);
@@ -38,19 +39,29 @@ public class LobbyView implements LobbyObserver {
     }
 
     public void join(){
-        lobbyCon.startInLobbyScreen();
+       // lobbyCon.startInLobbyScreen();
+        lobbyCon.lobbyEdit();
     }
+
+/*
+    public void join(String lobbyNaam){
+        lobbyCon.lobbyEdit(lobbyNaam);
+        // lobbyCon.startInLobbyScreen(lobbyNaam);
+    }
+   */
+
 
     public void hostGame(ActionEvent t) {
         if (gridCounter < 5) {
             Button btn = new Button("lobby" + gridCounter);
             lobbyNaam = btn.getText();              // = lobbynaam
+            //lobbyNaam = getLobbyNaam();
             pane1.setVgap(10);
             pane1.add(btn, 0, gridCounter);
             lobbyQuantity[gridCounter] = btn;
             gridCounter++;
-            //hostLobby(lobbyNaam);
-            join(lobbyNaam);
+
+            join();
 
             btn.setOnAction(d -> {
                 if (activeButton != null) {
@@ -67,9 +78,11 @@ public class LobbyView implements LobbyObserver {
         }
     }
 
-    public void join(String lobbyNaam){
-        lobbyCon.startInLobbyScreen(lobbyNaam);
-    }
+//    public String getLobbyNaam(){
+//        return lobbyCon.getLobbyNaam();
+//    }
+
+
 
     @Override
     public void update(boolean mode) {

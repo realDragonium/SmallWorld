@@ -17,6 +17,12 @@ public class LobbyModel implements LobbyObservable {
 
 	private boolean mode = true;
 
+
+
+	public void setLobbyNaam(String lobbyNaam) {
+		this.lobbyNaam = lobbyNaam;
+	}
+
 	private String lobbyNaam;
 	
 	@Override
@@ -25,6 +31,17 @@ public class LobbyModel implements LobbyObservable {
 			obs.update(mode);
 		}	
 	}
+
+	public void setLobbyName(String lobbyName){
+		this.lobbyNaam = lobbyName;
+	}
+
+	public void getLobbyNaam() {
+
+	}
+
+
+
 
 	public int getLobbyAmount() {
 		return lobbyAmount;
