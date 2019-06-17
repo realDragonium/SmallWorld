@@ -17,6 +17,8 @@ public class InLobbyModel implements InLobbyObservable {
         this.lobbyNaam = lobbyNaam;
     }
 
+
+
     @Override
     public void notifyAllObservers() {
         for(InLobbyObserver obs : observers) {

@@ -101,6 +101,19 @@ public class SceneManager {
         changeToScene(localGroup);
     }
 
+
+    public void createLobbySettingsView(LobbySettingsController con){
+        Group localGroup = new Group();
+        creators.put(LobbySettingsView.class, (Callable<LobbySettingsView>) () -> new LobbySettingsView(localGroup, con));
+        FXMLLOADER("/LobbyScreen/CreateLobbySettings.fxml");
+        changeToScene(localGroup);
+    }
+
+
+
+
+
+
     public void createInLobbyView(InLobbyController con){
         Group localGroup = new Group();
         creators.put(InLobbyView.class, (Callable<InLobbyView>) () -> new InLobbyView(localGroup, con));

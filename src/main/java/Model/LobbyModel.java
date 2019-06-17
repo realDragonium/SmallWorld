@@ -32,14 +32,12 @@ public class LobbyModel implements LobbyObservable {
 
 	public void hostLobby(String lobNaam) {
 		mode = !mode;
-		
 		lobbySize = new String[4];           // Lege array die 4 groot is.
 		lobbyAmount++;  // aantal lobbies = +1
 		
 		lobbyNaam = lobNaam;
 		System.out.println(lobbyNaam);
 		spelerToevoegen();
-
 		notifyAllObservers();
 	}
 
@@ -53,7 +51,6 @@ public class LobbyModel implements LobbyObservable {
 
 		notifyAllObservers();
 	}
-
 
 	public void joinGame() {
 		spelerToevoegen();
@@ -82,11 +79,6 @@ public class LobbyModel implements LobbyObservable {
 		return lobbyNaam;
 	}
 		
-	@Override
-	public void makeLobby(LobbyObserver ob) {
-		
-	}
-
 
 
 	@Override
