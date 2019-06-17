@@ -32,14 +32,11 @@ public class PlayerController implements FirebaseControllerObserver {
         setFiches(combo.getRace().fichesCount());
     }
 
-
-
     public void showActiveCombiFichesLeft() {
         for (CombinationController combiCon : combinations) {
             combiCon.getRace().fichesOver();
         }
     }
-
 
     public CombinationController getActiveCombination() {
         if (combinations.size() > 0) return combinations.get(0);
