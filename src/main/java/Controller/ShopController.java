@@ -1,18 +1,15 @@
 package Controller;
 
+import Model.ShopModel;
 import Objects.HumanKracht;
 import Objects.RattenKracht;
 import Managers.SceneManager;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
-import java.util.stream.IntStream;
+import Observer.ShopObserver;
 
 public class ShopController {
 
     GameController gameCon;
-    private List<CombinationController> shopItems = new ArrayList<>();
+    ShopModel model = new ShopModel();
 
     public ShopController(GameController gameCon){
         this.gameCon = gameCon;
@@ -22,14 +19,19 @@ public class ShopController {
 
     public void buyingItem(int item){
         System.out.println(gameCon.getCurrentPlayer().getId() + " is buying");
-        gameCon.getCurrentPlayer().buyFromShop(shopItems.get(item), item);
-        shopItems.remove(item);
+        if(model.getShopItems().size() > item) {
+            gameCon.getCurrentPlayer().buyFromShop(model.getShopItems().get(item), item);
+            model.removeItem(item);
+        }
+    }
 
+    public void registerObserver(ShopObserver obs){
+        model.register(obs);
     }
 
     private void createShopItems(){
-        shopItems.add(createHumanRace());
-        shopItems.add(createRattenRace());
+        model.addShopItem(createHumanRace());
+        model.addShopItem(createRattenRace());
     }
 
     private CombinationController createRattenRace(){
