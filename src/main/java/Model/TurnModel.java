@@ -34,13 +34,9 @@ public class TurnModel implements TurnObservable {
         fase = fases.remove();
     }
 
-    public void nextFase(){
-        fase = fases.remove();
+    public void nextTurn(){
+        currentTurn++;
         notifyObservers();
-    }
-
-    public TurnFase peek(){
-        return fases.peek();
     }
 
     @Override

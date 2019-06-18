@@ -1,5 +1,6 @@
 package Controller;
 
+import Objects.HumanKracht;
 import Objects.RattenKracht;
 import Managers.SceneManager;
 
@@ -25,6 +26,7 @@ public class ShopController {
     }
 
     private void createShopItems(){
+        shopItems.add(createHumanRace());
         shopItems.add(createRattenRace());
     }
 
@@ -33,5 +35,12 @@ public class ShopController {
         ratten.getRace().setCombiCon(ratten);
         ratten.getPower().setCombiCon(ratten);
         return ratten;
+    }
+
+    private CombinationController createHumanRace(){
+        CombinationController human =  new CombinationController(new RaceController(new HumanKracht()), new PowerController());
+        human.getRace().setCombiCon(human);
+        human.getPower().setCombiCon(human);
+        return human;
     }
 }

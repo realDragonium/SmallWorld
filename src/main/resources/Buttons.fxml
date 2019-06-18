@@ -9,8 +9,6 @@
       <Button fx:id="infoButton" layoutY="7.0" mnemonicParsing="false" onAction="#showInfo"  text="Info" />
       <Button fx:id="attackButton" layoutY="47.0" mnemonicParsing="false" onAction="#attackCountry" text="Attack" />
       <Button fx:id="availableButton" layoutY="87.0" mnemonicParsing="false" onAction="#fichesOver" text="Available" />
-      <Button fx:id="nextTurnButton" layoutY="127.0" mnemonicParsing="false" onAction="#nextTurn" text="Next Turn" />
-      <Button fx:id="nextRoundButton" layoutY="167.0" mnemonicParsing="false" onAction="#nextRound" text="Next Round" />
-      <Button fx:id="nextFaseButton" layoutY="207.0" mnemonicParsing="false" onAction="#nextFase" text="next Fase" />
+      <Button fx:id="nextFaseButton" layoutY="207.0" mnemonicParsing="false" onAction="#nextPhase" text="next Fase" />
    </children>
 </Pane>

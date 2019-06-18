@@ -9,6 +9,7 @@
         <Group id="playerGroup" />
         <Group id="roundGroup" />
         <Group id="shopGroup" />
+        <Group id="timerGroup" />
         <Group id="turnGroup" />
         <Group id="mapGroup" />
         <Group id="infoGroup"/>

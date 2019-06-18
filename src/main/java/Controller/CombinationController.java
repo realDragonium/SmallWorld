@@ -26,4 +26,8 @@ public class CombinationController {
     public PowerController getPower(){
         return power;
     }
+
+    public void returnFiches() {
+            race.returnFiches();
+    }
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane fx:id="pane" layoutX="1000" prefHeight="100.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.TimerView">
+   <children>
+      <TextField fx:id="timer" layoutX="14.0" layoutY="14.0" prefHeight="31.0" prefWidth="200.0" />
+   </children>
+</Pane>

@@ -36,13 +36,29 @@ public class AreaModel implements AreaObservable {
     }
 
     //Ze worden overschreven omdat getAllFiches de hele lijst al mee geeft
-    public void attackArea(Stack<RaceFiche> fiches) {
+    public void setFiches(Stack<RaceFiche> fiches) {
         raceFiches = fiches;
         notifyObserver();
     }
 
     public Stack<RaceFiche> getAllFiches() {
-        return raceFiches;
+        Stack<RaceFiche> tempFiches = raceFiches;
+        raceFiches = new Stack<>();
+        return tempFiches;
+    }
+
+    public Stack<RaceFiche> getAllButOne(){
+
+        Stack<RaceFiche> temp = new Stack<>();
+
+        if(raceFiches.size() > 0) {
+            RaceFiche tempFiche = raceFiches.pop();
+            temp  = raceFiches;
+            raceFiches = new Stack<>();
+            raceFiches.add(tempFiche);
+            notifyObserver();
+        }
+        return temp;
     }
 
     @Override

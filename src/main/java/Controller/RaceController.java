@@ -4,6 +4,9 @@ import Model.RaceModel;
 import Objects.Kracht;
 import Objects.RaceFiche;
 
+import java.awt.geom.Area;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class RaceController {
@@ -11,11 +14,10 @@ public class RaceController {
 	private CombinationController combiCon;
 	private Kracht kracht;
 	private RaceModel model;
-	private int fichesAantal = 15;
 
 	public RaceController(Kracht kracht) {
 		this.kracht = kracht;
-		model = new RaceModel(fichesAantal);
+		model = new RaceModel();
 	}
 
 	public int fichesCount(){
@@ -27,13 +29,14 @@ public class RaceController {
 	}
 
 	public Stack<RaceFiche> getFiches(int count){
-		combiCon.getPlayer().lowerFiches(count);
-		return model.getFiches(count);
+		Stack<RaceFiche> tempFiches = model.removeFiches(count);
+		updatePlayerFicheAmount();
+		return tempFiches;
 	}
 
 	public void pushFiches(Stack<RaceFiche> fiches){
-		combiCon.getPlayer().higherFiches(fiches.size());
 		model.pushFiches(fiches);
+		updatePlayerFicheAmount();
 	}
 
 	public boolean hasEnoughFiches(int count){
@@ -48,4 +51,26 @@ public class RaceController {
 		kracht.doAction();
 	}
 
+    public void returnFiches() {
+		for(AreaController area : model.getAreas()){
+			area.returnAllButOne(this);
+		}
+		updatePlayerFicheAmount();
+    }
+
+    public void addArea(AreaController area){
+		model.addArea(area);
+	}
+
+	public void updatePlayerFicheAmount(){
+		combiCon.getPlayer().setFiches(model.getFichesCount());
+	}
+
+	public void removeArea(AreaController area) {
+		model.removeArea(area);
+	}
+
+	public int getAreasAmount() {
+		return model.getAreas().size();
+	}
 }
