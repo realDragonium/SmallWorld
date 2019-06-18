@@ -4,25 +4,27 @@ import Objects.HumanKracht;
 import Objects.RattenKracht;
 import Managers.SceneManager;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 import java.util.stream.IntStream;
 
 public class ShopController {
 
     GameController gameCon;
-    private Stack<CombinationController> shopItems = new Stack<>();
+    private List<CombinationController> shopItems = new ArrayList<>();
 
     public ShopController(GameController gameCon){
         this.gameCon = gameCon;
-        IntStream.range(0, 6).forEach(e-> createShopItems());
         SceneManager.getInstance().loadShop(this);
+        createShopItems();
     }
 
     public void buyingItem(int item){
         System.out.println(gameCon.getCurrentPlayer().getId() + " is buying");
         gameCon.getCurrentPlayer().buyFromShop(shopItems.get(item), item);
         shopItems.remove(item);
-        createShopItems();
+        
     }
 
     private void createShopItems(){
@@ -31,14 +33,14 @@ public class ShopController {
     }
 
     private CombinationController createRattenRace(){
-        CombinationController ratten =  new CombinationController(new RaceController(new RattenKracht()), new PowerController());
+        CombinationController ratten =  new CombinationController(new RaceController(new RattenKracht(), "rats", 12), new PowerController());
         ratten.getRace().setCombiCon(ratten);
         ratten.getPower().setCombiCon(ratten);
         return ratten;
     }
 
     private CombinationController createHumanRace(){
-        CombinationController human =  new CombinationController(new RaceController(new HumanKracht()), new PowerController());
+        CombinationController human =  new CombinationController(new RaceController(new HumanKracht(), "humans", 8), new PowerController());
         human.getRace().setCombiCon(human);
         human.getPower().setCombiCon(human);
         return human;

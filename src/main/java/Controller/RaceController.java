@@ -15,9 +15,9 @@ public class RaceController {
 	private Kracht kracht;
 	private RaceModel model;
 
-	public RaceController(Kracht kracht) {
+	public RaceController(Kracht kracht, String id, int ficheAmount) {
 		this.kracht = kracht;
-		model = new RaceModel();
+		model = new RaceModel(id, ficheAmount);
 	}
 
 	public int fichesCount(){
@@ -72,5 +72,9 @@ public class RaceController {
 
 	public int getAreasAmount() {
 		return model.getAreas().size();
+	}
+
+	public String getId(){
+		return model.getId();
 	}
 }

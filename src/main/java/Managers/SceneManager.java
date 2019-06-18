@@ -17,6 +17,7 @@ import Applicatie.Applicatie;
 public class SceneManager {
     private Map<Class, Callable<?>> creators = new HashMap();
     private Map<String, Group> groepen = new HashMap();
+    private List<Group> shopItems = new ArrayList<>();
     private static SceneManager sceneManager;
     private Applicatie app;
     private Group gameView;
@@ -163,6 +164,9 @@ public class SceneManager {
             return new ShopView((Group)this.groepen.get("shopGroup"), shopCon);
         });
         this.FXMLLOADER("/ShopView.fxml");
+        for(Node item : ((Pane)this.groepen.get("shopGroup").getChildren().get(0)).getChildren()){
+            this.shopItems.add((Group)item);
+        }
     }
 
     public void loadTimer(TimerController timerCon) {
@@ -170,6 +174,18 @@ public class SceneManager {
             return new TimerView((Group)this.groepen.get("timerGroup"), timerCon);
         });
         this.FXMLLOADER("/timerView.fxml");
+    }
+
+    public void loadCombination(CombinationController combiCon){
+        this.creators.put(CombinationView.class, () -> {
+            for (Group item : shopItems) {
+                if (item.getChildren().size() == 1) {
+                    return new CombinationView(item, combiCon);
+                }
+            }
+            return null;
+        });
+        this.FXMLLOADER("/combinationView.fxml");
     }
 
     public void loadRound(RoundController roundCon) {

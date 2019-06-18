@@ -11,20 +11,21 @@ import java.util.stream.IntStream;
 public class RaceModel {
 
 	private int beginCountFiches;
-	
+
+	private String raceId;
 	private Stack<RaceFiche> availableFiches = new Stack<>();
-	private int fichesAantal = 15;
 	private List<AreaController> areas = new ArrayList<>();
 	
-	public RaceModel() {
-		createFiches();
+	public RaceModel(String id, int fichesAmount) {
+		createFiches(fichesAmount);
+		this.raceId = id;
 	}
 
-	public void createFiches(){
-		IntStream.range(0,fichesAantal).forEach(i -> {
+	public void createFiches(int amount){
+		IntStream.range(0,amount).forEach(i -> {
 			availableFiches.push(new RaceFiche());
 		});
-		beginCountFiches = fichesAantal;
+		beginCountFiches = amount;
 	}
 
 	public Stack<RaceFiche> getFiches(int count){
@@ -60,6 +61,10 @@ public class RaceModel {
 			tempFiches.add(availableFiches.pop());
 		}
 		return tempFiches;
+	}
+
+	public String getId(){
+		return raceId;
 	}
 
 	public void removeArea(AreaController area) {
