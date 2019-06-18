@@ -25,7 +25,6 @@ public class TimerController {
                         model.addSecond();
                         if (model.timerIsDone()) {
                             timerEnded();
-
                         }
                     }
                 });

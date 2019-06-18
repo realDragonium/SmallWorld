@@ -13,7 +13,7 @@ public class AttackController {
         targetArea = gameCon.getMapCon().getActiveAreas().get(0);
     }
 
-    void attackArea() {
+    void attackAreaLocal() {
         final int fichesCountNeeded = targetArea.numbersNeeded();
         final PlayerController player = gameCon.getCurrentPlayer();
         System.out.println(player.getId() + " is attacking");
@@ -28,5 +28,9 @@ public class AttackController {
             targetArea.attackArea(player.getActiveCombination().getRace().getFiches(fichesCountNeeded));
             targetArea.setPlayerOwner(player);
         } else System.out.println("Niet genoeg fiches in je bezit!");
+    }
+
+    void attackFromFirebase(){
+
     }
 }

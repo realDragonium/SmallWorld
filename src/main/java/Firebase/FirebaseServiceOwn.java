@@ -27,6 +27,9 @@ public class FirebaseServiceOwn {
         gameRef = colRef.document(lobbyName);
     }
 
+    public Firestore getFireStore(){
+        return firestore;
+    }
     /**
      * Geeft een update naar de meegeleverde controller
      * op het moment dat er een wijziging in het firebase document plaatsvindt.
@@ -92,10 +95,8 @@ public class FirebaseServiceOwn {
         docRef.update("fiches", count);
     }
 
-    //Areas
-    public void setAreas(String areaId, int fiches){
-        Map<String, Object> area = new HashMap<>();
-        area.put("fiches", fiches);
+    //Areas setten in firebase
+    public void setAreas(String areaId, Map<String, Object> area){
         gameRef.collection("Areas").document(areaId).set(area);
     }
 
