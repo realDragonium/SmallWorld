@@ -1,6 +1,6 @@
 package Observer;
 
-import observable.DiceObservable;
+import Observable.DiceObservable;
 
 public interface DiceObserver {
     void update(DiceObservable ob);

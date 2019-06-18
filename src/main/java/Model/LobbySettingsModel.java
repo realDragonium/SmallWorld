@@ -1,7 +1,7 @@
 package Model;
 
 import Observer.LobbySettingsObserver;
-import observable.LobbySettingsObservable;
+import Observable.LobbySettingsObservable;
 import java.util.ArrayList;
 import java.util.List;
 

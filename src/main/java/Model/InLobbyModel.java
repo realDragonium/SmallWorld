@@ -2,7 +2,7 @@ package Model;
 
 import Observer.InLobbyObserver;
 import Observer.LobbyObserver;
-import observable.InLobbyObservable;
+import Observable.InLobbyObservable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,9 @@ public class InLobbyModel implements InLobbyObservable {
         this.lobbyNaam = lobbyNaam;
     }
 
+    public String getLobbyNaam(){
+        return lobbyNaam;
+    }
 
 
     @Override

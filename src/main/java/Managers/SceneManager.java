@@ -22,6 +22,9 @@ public class SceneManager {
     private Applicatie app;
     private Group gameView;
 
+    public Applicatie getApp(){
+        return app;
+    }
 
     public static SceneManager getInstance() {
         if (sceneManager == null) {
@@ -139,13 +142,6 @@ public class SceneManager {
 
     }
 
-    public void createLobbyView(LobbyController con) {
-        Group localGroup = new Group();
-        creators.put(LobbyView.class, (Callable<LobbyView>) () -> new LobbyView(localGroup, con));
-        FXMLLOADER("/LobbyScreen/LobbyScreen.fxml");
-        changeToScene(localGroup);
-    }
-
     public void loadTimer(TimerController con) {
         creators.put(TimerView.class, (Callable<TimerView>) () -> new TimerView(groepen.get("timerGroup"), con));
         FXMLLOADER("/TimerView.fxml");
@@ -167,14 +163,6 @@ public class SceneManager {
         creators.put(VervallenView.class, (Callable<VervallenView>) () -> new VervallenView(con, groepen.get("vervalGroup")));
         FXMLLOADER("/VervallenView.fxml");
     }
-
-    public void createLobbySettingsView(LobbySettingsController con) {
-        Group localGroup = new Group();
-        creators.put(LobbySettingsView.class, (Callable<LobbySettingsView>) () -> new LobbySettingsView(localGroup, con));
-        FXMLLOADER("/LobbyScreen/CreateLobbySettings.fxml");
-        changeToScene(localGroup);
-    }
-
 
     public void createInLobbyView(InLobbyController con) {
         Group localGroup = new Group();

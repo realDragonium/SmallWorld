@@ -1,6 +1,6 @@
 package Observer;
 
-import observable.TimerObservable;
+import Observable.TimerObservable;
 
 public interface TimerObserver {
     void update(TimerObservable ao);

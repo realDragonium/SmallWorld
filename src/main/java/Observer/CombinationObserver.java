@@ -1,6 +1,6 @@
 package Observer;
 
-import observable.CombinationObservable;
+import Observable.CombinationObservable;
 
 public interface CombinationObserver {
     void update(CombinationObservable co);

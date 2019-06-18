@@ -3,7 +3,7 @@ package Controller;
 import Managers.SceneManager;
 import Model.CombinationModel;
 import Observer.CombinationObserver;
-import observable.CombinationObservable;
+import Observable.CombinationObservable;
 
 import java.util.ArrayList;
 import java.util.List;

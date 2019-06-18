@@ -1,7 +1,7 @@
 package Model;
 
 import Observer.TimerObserver;
-import observable.TimerObservable;
+import Observable.TimerObservable;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;

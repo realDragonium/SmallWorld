@@ -1,12 +1,12 @@
 package Model;
 
 import Observer.LobbyObserver;
-import observable.LobbyObservable;
+import Observable.ObservableLobby;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LobbyModel implements LobbyObservable {
+public class LobbyModel implements ObservableLobby {
 
 	private List<LobbyObserver> observers = new ArrayList<>();
 	private String lobbySize[];  // max 4 spelers
@@ -20,7 +20,6 @@ public class LobbyModel implements LobbyObservable {
 
 
 	public String getLobbyNaam() {
-		notifyAllObservers();
 		return lobbyNaam;
 	}
 

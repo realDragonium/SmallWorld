@@ -19,7 +19,7 @@ public class AreaController implements FirebaseControllerObserver {
 	private Map2DController map2DCon;
 	private AreaModel model;
 	private GameController gameCon;
-	private FirebaseServiceOwn fb = Applicatie.getFirebaseService();
+	private FirebaseServiceOwn fb = SceneManager.getInstance().getApp().getFirebaseService();
 	
 	public AreaController(Group area, Map2DController mapCon, GameController gameCon) {
 		model = new AreaModel(area.getChildren().get(0).getId());

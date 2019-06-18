@@ -2,7 +2,7 @@ package Model;
 
 
 import Observer.DiceObserver;
-import observable.DiceObservable;
+import Observable.DiceObservable;
 
 import java.util.ArrayList;
 

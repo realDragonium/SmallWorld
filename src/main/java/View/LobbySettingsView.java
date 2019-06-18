@@ -18,7 +18,7 @@ public class LobbySettingsView implements LobbySettingsObserver{
     public Group root;
     public TextField lobbyNaam;
     public ChoiceBox<String> box;
-    private String playerAmount;
+    private int playerAmount;
     private String textLobby;
     public Button hosten;
     public Button test;
@@ -34,10 +34,9 @@ public class LobbySettingsView implements LobbySettingsObserver{
 
     public void submit(){
         textLobby = lobbyNaam.getText();
-        playerAmount = box.getValue();
+        playerAmount = Integer.valueOf(box.getValue().split(" ")[0]);
        // createLobby();
-        System.out.println(textLobby + playerAmount);
-        con.lobbyView(textLobby, playerAmount);
+        con.startLobby(textLobby, playerAmount);
         // con.lobbyView(textLobby);   // gaat terug naar lobby overzicht
     }
 

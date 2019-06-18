@@ -2,30 +2,26 @@ package Controller;
 
 
 import Applicatie.Applicatie;
-import Firebase.FirebaseControllerObserver;
-import Firebase.FirebaseLobbyObserver;
 import Managers.SceneManager;
 import Model.LobbyModel;
 import Observer.LobbyObserver;
-import com.google.cloud.firestore.DocumentSnapshot;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class LobbyController {
+
 	LobbyModel lobbymodel = new LobbyModel();
-	LobbySettingsController con = new LobbySettingsController();
-	private String lobbyName;
 
 	public LobbyController(){
 		SceneManager.getInstance().createLobbyView(this);
 	}
 
-	public LobbyController(String lobbyName, String playerAmount){
-		lobbymodel.setLobbyName(lobbyName);
-		lobbymodel.setPlayerAmount(playerAmount);
-		SceneManager.getInstance().createLobbyView(this);
+	public void joinLobby(String Name){
+		Applicatie app = SceneManager.getInstance().getApp();
+		if(app.getFirebaseService().joinLobby(Name, app.getAccountCon().getAccountName())){
+			new InLobbyController(Name);
+		}
 	}
 
 	public String getLobbyNaam(){
@@ -46,7 +42,7 @@ public class LobbyController {
 
 	public List<String> getFirebaseLobbyNamen(){
 		try {
-			return Applicatie.getFirebaseService().getActiveLobbies();
+			return SceneManager.getInstance().getApp().getFirebaseService().getActiveLobbies();
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {

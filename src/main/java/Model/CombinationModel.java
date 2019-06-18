@@ -1,7 +1,7 @@
 package Model;
 
 import Observer.CombinationObserver;
-import observable.CombinationObservable;
+import Observable.CombinationObservable;
 
 import java.util.ArrayList;
 import java.util.List;

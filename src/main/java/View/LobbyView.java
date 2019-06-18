@@ -8,7 +8,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import observable.LobbyObservable;
+import Observable.ObservableLobby;
 import java.util.List;
 
 public class LobbyView implements LobbyObserver {
@@ -18,7 +18,6 @@ public class LobbyView implements LobbyObserver {
     public Button terug, hosten;
     public GridPane panel;
     private Button activeButton;
-    //private Button[] lobbyQuantity = new Button[5];
     private int gridCounter = 0;
     private GridPane grid= new GridPane();
 
@@ -53,20 +52,21 @@ public class LobbyView implements LobbyObserver {
     }
 
     public void join() {
-        lobbyCon.lobbyEdit();               // start de LobbySettingView
+        lobbyCon.joinLobby(activeButton.getText());               // start de LobbySettingView
+    }
+
+    public void host(){
+        lobbyCon.lobbyEdit();
     }
 
     public void addLobbyFirebase(String lobbyNaam) {
-        System.out.println(lobbyNaam);
-        Button btn = new Button(lobbyNaam);
         panel.add(new Button(lobbyNaam), 0, gridCounter);
-        System.out.println("test" + lobbyNaam);
     }
 
     public void hostGame(ActionEvent t) {
         if (gridCounter < 5) {
             gridCounter++;
-            join();
+            host();
         } else {
             ((Node) t.getSource()).setOpacity(0);
             root.getChildren().remove(t.getSource());
@@ -79,7 +79,7 @@ public class LobbyView implements LobbyObserver {
     }
 
     @Override
-    public void update(LobbyObservable lo) {
+    public void update(ObservableLobby lo) {
         List<String> lobbynamen =  lo.getLobbyName();
         System.out.println(lobbynamen.size());
         for(String test:lobbynamen){

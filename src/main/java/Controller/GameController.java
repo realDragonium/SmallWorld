@@ -26,7 +26,7 @@ public class GameController {
 
     public GameController(String lobbyName, String playerID) {
         myPlayerId = playerID;
-        Applicatie.getFirebaseService().setGame(lobbyName);
+        SceneManager.getInstance().getApp().getFirebaseService().setGame(lobbyName);
         model = new GameModel(8, 8);
         SceneManager.getInstance().createGameView(this);
         SceneManager.getInstance().makeMap();
