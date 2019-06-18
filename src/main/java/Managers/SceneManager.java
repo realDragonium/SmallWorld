@@ -92,6 +92,8 @@ public class SceneManager {
         }
     }
 
+
+
     public void loadButtons(KnoppenController knopCon) {
         creators.put(KnoppenView.class, (Callable<KnoppenView>) () -> new KnoppenView(groepen.get("buttonGroup"), knopCon));
         FXMLLOADER("/Buttons.fxml");
@@ -101,6 +103,11 @@ public class SceneManager {
         creators.put(PlayerView.class, (Callable<PlayerView>) () -> new PlayerView(playerID, groepen.get("playerGroup"), playerCon));
         FXMLLOADER("/PlayerView.fxml");
     }
+    public void loadInfoscreen( InfoController InfoCon) {
+        creators.put(InfoView.class, (Callable<InfoView>) () -> new InfoView(groepen.get("infoGroup"),InfoCon));
+        FXMLLOADER("/PlayerView.fxml");
+    }
+
 
     public void loadShop(ShopController shopCon){
         creators.put(ShopView.class, (Callable<ShopView>) () -> new ShopView(groepen.get("shopGroup"), shopCon));
