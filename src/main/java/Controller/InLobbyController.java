@@ -18,9 +18,14 @@ public class InLobbyController {
     }
 
 
+
+
+
     public void setLobbyNaam(String lobbyNaam){
         mod.setLobbyNaam(lobbyNaam);
     }
+
+
 
     public void start(){            // start button
         new GameController();  // starten van het spel

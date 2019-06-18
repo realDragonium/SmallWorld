@@ -18,11 +18,12 @@
             <Image url="@guiLobbyScreen.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="terug" layoutX="271.0" layoutY="308.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Back" />
+      <Button fx:id="terug" layoutX="271.0" layoutY="308.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="100.0" text="Back" />
       <Button fx:id="hosten" layoutX="425.0" layoutY="308.0" mnemonicParsing="false" onAction="#submit" prefHeight="25.0" prefWidth="100.0" text="Submit &amp; host" />
-      <ChoiceBox layoutX="414.0" layoutY="222.0" prefHeight="21.0" prefWidth="55.0" />
+      <ChoiceBox fx:id="box" layoutX="414.0" layoutY="222.0" prefHeight="25.0" prefWidth="179.0" />
       <Button layoutX="271.0" layoutY="221.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="131.0" text="Select player amount" />
       <Button layoutX="272.0" layoutY="255.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Enter lobby name" />
-      <TextField fx:id="lobbyName" layoutX="414.0" layoutY="255.0" onAction="#lobbyName" prefHeight="25.0" prefWidth="179.0" />
+      <TextField fx:id="lobbyNaam" layoutX="414.0" layoutY="255.0" onAction="#lobbyName" prefHeight="25.0" prefWidth="179.0" />
+      <Button fx:id="test" layoutX="349.0" layoutY="149.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="buttonTekst" />
    </children>
 </Group>
