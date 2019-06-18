@@ -77,6 +77,5 @@ public class RaceModel {
 			area.destroyAllButOne();
 		}
 		availableFiches = new Stack<>();
-		notifyAll();
     }
 }
