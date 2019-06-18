@@ -18,14 +18,14 @@ public class LobbySettingsView implements LobbySettingsObserver{
     public Group root;
     public TextField lobbyNaam;
     public ChoiceBox<String> box;
-    private String playerAmount;
+    private int playerAmount;
     private String textLobby;
     public Button hosten;
     public Button test;
 
-    public GridPane lobbyLijst;
-    private Button[] lobbyQuantity = new Button[5];
-    private int gridCounter = 0;
+    //public GridPane lobbyLijst;
+    //private Button[] lobbyQuantity = new Button[5];
+   // private int gridCounter = 0;
 
     public LobbySettingsView(Group group, LobbySettingsController con) {
         this.group = group;
@@ -34,25 +34,11 @@ public class LobbySettingsView implements LobbySettingsObserver{
 
     public void submit(){
         textLobby = lobbyNaam.getText();
-
-        playerAmount = box.getValue();
-
+        playerAmount = Integer.valueOf(box.getValue().split(" ")[0]);
        // createLobby();
-        System.out.println(textLobby + playerAmount);
-        con.lobbyView(textLobby, playerAmount);
+        con.startLobby(textLobby, playerAmount);
         // con.lobbyView(textLobby);   // gaat terug naar lobby overzicht
     }
-
-
-    public void createLobby() {
-
-
-
-
-        }
-
-
-
 
     public void back(){
         con.lobbyView();
@@ -67,7 +53,6 @@ public class LobbySettingsView implements LobbySettingsObserver{
         group.getChildren().add(root);
         con.register(this);
         playerAmountBox();
-
     }
 
     public void lobbyName(){}

@@ -1,26 +1,31 @@
 package Controller;
 
 
+import Applicatie.Applicatie;
 import Managers.SceneManager;
 import Model.LobbyModel;
 import Observer.LobbyObserver;
 
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 public class LobbyController {
+
 	LobbyModel lobbymodel = new LobbyModel();
-	LobbySettingsController con = new LobbySettingsController();
-
-
-	private String lobbyName;
 
 	public LobbyController(){
 		SceneManager.getInstance().createLobbyView(this);
 	}
 
+	public void joinLobby(String Name){
+		Applicatie app = SceneManager.getInstance().getApp();
+		if(app.getFirebaseService().joinLobby(Name, app.getAccountCon().getAccountName())){
+			new InLobbyController(Name);
+		}
+	}
 
-	public LobbyController(String lobbyName, String playerAmount){
-		lobbymodel.setLobbyName(lobbyName);
-		lobbymodel.setPlayerAmount(playerAmount);
-		SceneManager.getInstance().createLobbyView(this);
+	public String getLobbyNaam(){
+		return lobbymodel.getLobbyNaam();
 	}
 
 	public void register(LobbyObserver ob) {
@@ -35,7 +40,19 @@ public class LobbyController {
 		new LobbySettingsController();
 	}
 
-	public void exitLobby(int decreaseLobbySize) {   
+	public List<String> getFirebaseLobbyNamen(){
+		try {
+			return SceneManager.getInstance().getApp().getFirebaseService().getActiveLobbies();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+	public void exitLobby(int decreaseLobbySize) {
 		lobbymodel.exitLobby(decreaseLobbySize);
 	}
 

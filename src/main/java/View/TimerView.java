@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import observable.TimerObservable;
+import Observable.TimerObservable;
 
 public class TimerView implements TimerObserver {
 

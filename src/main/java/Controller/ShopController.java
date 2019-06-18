@@ -1,20 +1,29 @@
 package Controller;
 
 import Model.ShopModel;
-import Objects.HumanKracht;
-import Objects.RattenKracht;
+import Objects.*;
 import Managers.SceneManager;
 import Observer.ShopObserver;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class ShopController {
 
     GameController gameCon;
     ShopModel model = new ShopModel();
+    private List<RaceController> races = new ArrayList<>();
+    private List<Power> powers = new ArrayList<>();
 
-    public ShopController(GameController gameCon){
+     ShopController(GameController gameCon){
         this.gameCon = gameCon;
         SceneManager.getInstance().loadShop(this);
+
         createShopItems();
+        for(int i = 0; i < 6; i++){
+            makeNewCombination();
+        }
     }
 
     public void buyingItem(int item){
@@ -30,21 +39,41 @@ public class ShopController {
     }
 
     private void createShopItems(){
-        model.addShopItem(createHumanRace());
-        model.addShopItem(createRattenRace());
+        races.add(new RaceController(new RattenKracht(), "rats", 12));
+        races.add(new RaceController(new WizzardsKracht(), "wizzards", 12));
+        races.add(new RaceController(new DwarvesKracht(), "dwarves", 12));
+        races.add(new RaceController(new TritansKracht(), "tritans", 12));
+        races.add(new RaceController(new HumanKracht(), "humans", 12));
+
+        powers.add(new AlchemistPower());
+        powers.add(new WelthPower());
+        powers.add(new AlchemistPower());
+        powers.add(new WelthPower());
+        powers.add(new AlchemistPower());
     }
 
-    private CombinationController createRattenRace(){
-        CombinationController ratten =  new CombinationController(new RaceController(new RattenKracht(), "rats", 12), new PowerController());
-        ratten.getRace().setCombiCon(ratten);
-        ratten.getPower().setCombiCon(ratten);
-        return ratten;
+    private void makeNewCombination(){
+        RaceController race = getRandomRace();
+        Power power = getRandomPower();
+        if(race != null && power != null) {
+            CombinationController combination = new CombinationController(race, power);
+            race.setCombiCon(combination);
+            model.addShopItem(combination);
+        }
     }
 
-    private CombinationController createHumanRace(){
-        CombinationController human =  new CombinationController(new RaceController(new HumanKracht(), "humans", 8), new PowerController());
-        human.getRace().setCombiCon(human);
-        human.getPower().setCombiCon(human);
-        return human;
+    private RaceController getRandomRace(){
+        if(races.size() != 0) {
+            return races.remove(new Random().nextInt(races.size()));
+        }
+        return null;
     }
+
+    private Power getRandomPower(){
+        if(powers.size() != 0) {
+            return powers.remove(new Random().nextInt(powers.size()));
+        }
+        return null;
+    }
+
 }

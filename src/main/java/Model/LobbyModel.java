@@ -1,108 +1,138 @@
 package Model;
 
 import Observer.LobbyObserver;
-import observable.LobbyObservable;
+import Observable.ObservableLobby;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LobbyModel implements LobbyObservable {
+public class LobbyModel implements ObservableLobby {
 
-    private List<LobbyObserver> observers = new ArrayList<>();
-    private String lobbySize[];  // max 4 spelers
-    private int lobbySizeCounter = 0;
-    private int lobbyAmount = 0;
-
-    private String[] spelers = {"Speler 1", "Speler 2", "Speler 3", "Speler 4"};
-
-    private boolean mode = true;
-
-
-    public void setLobbyNaam(String lobbyNaam) {
-        this.lobbyNaam = lobbyNaam;
-    }
-
-    private String lobbyNaam;
-
-    @Override
-    public void notifyAllObservers() {
-        for (LobbyObserver obs : observers) {
-            obs.update();
-        }
-    }
-
-    public void setLobbyName(String lobbyName) {
-        this.lobbyNaam = lobbyName;
-    }
-
-    public void getLobbyNaam() {
-
-    }
+	private List<LobbyObserver> observers = new ArrayList<>();
+	private String lobbySize[];  // max 4 spelers
+	private int lobbySizeCounter = 0;
+	private int lobbyAmount = 0;
+	private String playerAmount;
+	private String[] spelers = {"Speler 1", "Speler 2", "Speler 3", "Speler 4"};
+	private String lobbyNaam;
+	private List<String> lobbynamen = new ArrayList<>();
 
 
-    public int getLobbyAmount() {
-        return lobbyAmount;
-    }
 
-    public void hostLobby(String lobNaam) {
-        mode = !mode;
-        lobbySize = new String[4];           // Lege array die 4 groot is.
-        lobbyAmount++;  // aantal lobbies = +1
+	public String getLobbyNaam() {
+		return lobbyNaam;
+	}
 
-        lobbyNaam = lobNaam;
-        System.out.println(lobbyNaam);
-        spelerToevoegen();
-        notifyAllObservers();
-    }
-
-    public void exitLobby(int decreaseLobbySize) {
-
-        lobbyAmount = decreaseLobbySize;
-        lobbyAmount--;
-        lobbySizeCounter--;
-        System.out.println("Lobby is verwijderd   ");
-
-        notifyAllObservers();
-    }
-
-    public void joinGame() {
-        spelerToevoegen();
-    }
-
-    public void spelerToevoegen() {
-        try {
-            if (lobbySizeCounter < 4) {
-                lobbySize[lobbySizeCounter] = spelers[lobbySizeCounter];
-                System.out.println(lobbySize[lobbySizeCounter]);
-                lobbySizeCounter++;
-            }
-
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Lobby zit vol");
-        }
-    }
+	public void setPlayerAmount(){
+		this.playerAmount = playerAmount;
+	}
 
 
-    public int getLobbySizeCounter() {
-        return lobbySizeCounter;
-    }
 
-    public String lobbyNaamOpvragen() {
-        return lobbyNaam;
-    }
+	// zet de lobby naam
+	public void setLobbyName(String lobbyName){
+		this.lobbyNaam = lobbyName;
+	}
 
 
-    @Override
-    public void register(LobbyObserver ob) {
-        observers.add(ob);
+	// zet de aantal spelers
+	public void setPlayerAmount(String playerAmount) {
+		this.playerAmount = playerAmount;
+	}
 
-    }
 
-    @Override
-    public void unregister(LobbyObserver mvo) {
-        
-    }
+	public int getLobbyAmount() {
+		notifyAllObservers();
+		return lobbyAmount;
+	}
 
-    public void setPlayerAmount(String playerAmount) {
-    }
+	public void hostLobby(String lobNaam) {
+		lobbySize = new String[4];           // Lege array die 4 groot is.
+		lobbyAmount++;  // aantal lobbies = +1
+
+		lobbyNaam = lobNaam;
+		System.out.println(lobbyNaam);
+		spelerToevoegen();
+		notifyAllObservers();
+	}
+
+	public void exitLobby(int decreaseLobbySize) {
+		lobbyAmount = decreaseLobbySize;
+		lobbyAmount--;
+		lobbySizeCounter--;
+		System.out.println("Lobby is verwijderd   ");
+		notifyAllObservers();
+	}
+
+	public void joinGame() {
+		spelerToevoegen();
+	}
+
+
+
+
+
+	public void newLobbyList(List<String> namen){
+		lobbynamen = namen;
+//		System.out.println(namen.size());
+		notifyAllObservers();
+	}
+
+
+
+
+
+
+
+
+	public void spelerToevoegen() {
+		try {
+			if(lobbySizeCounter < 4) {
+				lobbySize[lobbySizeCounter] = spelers[lobbySizeCounter];
+				System.out.println(lobbySize[lobbySizeCounter]);
+				lobbySizeCounter++;
+			}
+		} catch(ArrayIndexOutOfBoundsException e){
+			System.out.println("Lobby zit vol");
+			}
+	}
+
+
+	public int getLobbySizeCounter() {
+		return lobbySizeCounter;
+	}
+
+
+
+	@Override
+	public void notifyAllObservers() {
+		for(LobbyObserver obs : observers) {
+			obs.update(this);
+		}
+	}
+
+	@Override
+	public List<String> getLobbyName() {
+		return lobbynamen;
+	}
+
+	@Override
+	public void register(LobbyObserver ob) {
+		observers.add(ob);
+	}
+
+	@Override
+	public void unregister(LobbyObserver ob) {
+		observers.remove(ob);
+	}
+
+
+
+
+
+
+
+
+
+
 }

@@ -1,17 +1,13 @@
 package Model;
 
 import Observer.LobbySettingsObserver;
-import javafx.scene.control.TextField;
-import observable.LobbySettingsObservable;
-
+import Observable.LobbySettingsObservable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LobbySettingsModel implements LobbySettingsObservable {
-
     private List<LobbySettingsObserver> observers = new ArrayList<>();
     private String lobbyNaam;
-
 
     @Override
     public void notifyAllObservers() {
@@ -27,9 +23,7 @@ public class LobbySettingsModel implements LobbySettingsObservable {
 
     @Override
     public void unregister(LobbySettingsObserver mvo) {
-
     }
-
 
     public String getNameLobby(){
         return lobbyNaam;

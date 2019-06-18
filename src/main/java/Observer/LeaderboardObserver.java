@@ -1,6 +1,6 @@
 package Observer;
 
-import observable.LeaderboardObservable;
+import Observable.LeaderboardObservable;
 
 public interface LeaderboardObserver {
     public void update(LeaderboardObservable ob);
