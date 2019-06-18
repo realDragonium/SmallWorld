@@ -7,11 +7,12 @@ public class GameTurn {
     GameController gameCon;
     TimerController phaseTimer;
 
-    enum Phase{PREPERATION, ATTACK, ENDING}
+    enum Phase {PREPERATION, ATTACK, ENDING}
+
     Phase currentPhase;
     PlayerController currentPlayer;
 
-    public GameTurn(GameController gameCon, PlayerController player){
+    public GameTurn(GameController gameCon, PlayerController player) {
         this.gameCon = gameCon;
         this.currentPlayer = player;
         startPreperationPhase();
@@ -19,7 +20,7 @@ public class GameTurn {
 
     public void endPhase() {
 
-        switch(currentPhase){
+        switch (currentPhase) {
             case PREPERATION:
                 startAttackPhase();
                 break;
@@ -32,26 +33,26 @@ public class GameTurn {
                 System.out.println("end of ending phase");
                 gameCon.nextTurn();
                 break;
+        }
     }
-}
 
-    public void startPreperationPhase(){
+    public void startPreperationPhase() {
         currentPhase = Phase.PREPERATION;
         SceneManager.getInstance().switchToPreperationPhase();
-        if(currentPlayer.getActiveCombination() != null){
+        if (currentPlayer.getActiveCombination() != null) {
             currentPlayer.returnFiches();
         }
         phaseTimer = new TimerController(this);
 
     }
 
-    public void startAttackPhase(){
+    public void startAttackPhase() {
         currentPhase = Phase.ATTACK;
         SceneManager.getInstance().switchToAttackPhase();
         phaseTimer = new TimerController(this);
     }
 
-    public void startEndingPhase(){
+    public void startEndingPhase() {
         currentPhase = Phase.ENDING;
         SceneManager.getInstance().switchToEndingPhase();
         currentPlayer.addRoundPoints();

@@ -118,9 +118,8 @@ public class SceneManager {
     }
 
     public void createMap(Map2DController mapController) {
-        Group localGroup = new Group();
-        new Map2DView(mapController, localGroup);
-        gameView.getChildren().add(localGroup);
+        creators.put(Map2DView.class, (Callable<Map2DView>) () -> new Map2DView(mapController, groepen.get("mapGroup")));
+        FXMLLOADER("/UglyMap.fxml");
     }
 
     public void makeMap() {
@@ -151,7 +150,7 @@ public class SceneManager {
     }
 
     public void loadCombination(CombinationController con) {
-        creators.put(CombinationView.class, (Callable<CombinationView>) () -> {
+        creators.put(CombinationView.class, () -> {
             for (Group item : shopItems) {
                 if (item.getChildren().size() == 1) {
                     return new CombinationView(item, con);
@@ -159,14 +158,12 @@ public class SceneManager {
             }
             return null;
         });
-
         FXMLLOADER("/CombinationView.fxml");
-
     }
 
     public void loadVerval(VervallenController con) {
         creators.put(VervallenView.class, (Callable<VervallenView>) () -> new VervallenView(con, groepen.get("vervalGroup")));
-        FXMLLOADER("/CombinationView.fxml");
+        FXMLLOADER("/VervallenView.fxml");
     }
 
     public void createLobbySettingsView(LobbySettingsController con) {

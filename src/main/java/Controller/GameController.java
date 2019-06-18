@@ -33,13 +33,11 @@ public class GameController {
     }
 
     public void changePlayerTurn(String player){
-
         currentPlayer = players.get(player);
         createGameTurn();
     }
 
     public void createGameParts() {
-
         createPlayer();
         createShop();
         createVerval();
@@ -47,8 +45,8 @@ public class GameController {
         createTurnsAndRounds();
         new DiceController();
         new KnoppenController(this);
-        createAttCon();
 
+        createAttCon();
         mapCon = new Map2DController(this);
     }
 
