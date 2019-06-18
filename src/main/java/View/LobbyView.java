@@ -12,7 +12,6 @@ import javafx.scene.layout.GridPane;
 
 public class LobbyView implements LobbyObserver {
     LobbyController lobbyCon;
-
     private Group group;
     public Group root;
     public Button terug, hosten;
@@ -28,7 +27,6 @@ public class LobbyView implements LobbyObserver {
         this.lobbyCon = con;
     }
 
-
     public void initialize() {
         group.getChildren().add(root);
         lobbyCon.register(this);
@@ -38,30 +36,21 @@ public class LobbyView implements LobbyObserver {
         new HomeScreenController();
     }
 
-    public void join(){
-       // lobbyCon.startInLobbyScreen();
-        lobbyCon.lobbyEdit();
+    public void join() {
+
+        lobbyCon.lobbyEdit();               // start de LobbySettingView
     }
 
-/*
-    public void join(String lobbyNaam){
-        lobbyCon.lobbyEdit(lobbyNaam);
-        // lobbyCon.startInLobbyScreen(lobbyNaam);
-    }
-   */
-
-
-    public void hostGame(ActionEvent t) {
+    public void addLobbyFirebase(ActionEvent t) {
         if (gridCounter < 5) {
             Button btn = new Button("lobby" + gridCounter);
-            lobbyNaam = btn.getText();              // = lobbynaam
-            //lobbyNaam = getLobbyNaam();
+            btn.setId("lobby" + gridCounter);
+
+
             pane1.setVgap(10);
             pane1.add(btn, 0, gridCounter);
             lobbyQuantity[gridCounter] = btn;
             gridCounter++;
-
-            join();
 
             btn.setOnAction(d -> {
                 if (activeButton != null) {
@@ -71,22 +60,23 @@ public class LobbyView implements LobbyObserver {
                 System.out.println("TESTTEST");
                 activeButton = btn;
             });
+
+
+        }
+    }
+
+    public void hostGame(ActionEvent t) {
+        if (gridCounter < 6) {
+            gridCounter++;
+            join();
         } else {
-            ((Node)t.getSource()).setOpacity(0);
+            ((Node) t.getSource()).setOpacity(0);
             root.getChildren().remove(t.getSource());
             System.out.println("Max aantal lobbies");
         }
     }
 
-//    public String getLobbyNaam(){
-//        return lobbyCon.getLobbyNaam();
-//    }
-
-
-
     @Override
-    public void update(boolean mode) {
-
+    public void update() {
     }
-
 }

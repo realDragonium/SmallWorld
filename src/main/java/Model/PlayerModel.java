@@ -20,6 +20,7 @@ public class PlayerModel implements PlayerObservable {
 
     public void removePoints(int amount){
         punten -= amount;
+        notifyObserver();
     }
 
     public String getId(){

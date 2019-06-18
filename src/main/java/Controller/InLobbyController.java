@@ -28,7 +28,7 @@ public class InLobbyController {
 
 
     public void start(){            // start button
-        new GameController();  // starten van het spel
+        new GameController("First", "player1");  // starten van het spel
     }
 
     public void exitLobby(){

@@ -1,5 +1,6 @@
 package Firebase;
 
+import Objects.RaceFiche;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.database.annotations.NotNull;
@@ -7,21 +8,28 @@ import com.google.firebase.database.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 import java.util.concurrent.ExecutionException;
 
 public class FirebaseServiceOwn {
 
     private Firestore firestore;
-    private static final String GAMES_PATH = "games";
     private CollectionReference colRef;
-
+    private DocumentReference gameRef;
 
     public FirebaseServiceOwn() {
         Database db = new Database();
         this.firestore = db.getFirestoreDatabase();
-        this.colRef = this.firestore.collection(GAMES_PATH);
+        this.colRef = this.firestore.collection("Games");
     }
 
+    public void setGame(String lobbyName){
+        gameRef = colRef.document(lobbyName);
+    }
+
+    public Firestore getFireStore(){
+        return firestore;
+    }
     /**
      * Geeft een update naar de meegeleverde controller
      * op het moment dat er een wijziging in het firebase document plaatsvindt.
@@ -32,7 +40,6 @@ public class FirebaseServiceOwn {
     public void listen(String documentId, final FirebaseControllerObserver controller) {
         DocumentReference docRef = this.colRef.document(documentId);
         docRef.addSnapshotListener((snapshot, e) -> {
-            System.out.println("test2");
             if (e != null) {
                 System.err.println("Listen failed: " + e);
                 return;
@@ -48,58 +55,49 @@ public class FirebaseServiceOwn {
     }
 
     public void playerListen(String player, final FirebaseControllerObserver controller) {
-        DocumentReference docRef = firestore.collection("Games").document("First").collection("Spelers").document(player); //.getCollections().forEach()
-
+        DocumentReference docRef = gameRef.collection("Spelers").document(player);
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirestoreException error) {
                 if (error != null) {
                     System.err.println("Listen failed: " + error);
                     return;
                 }
-                if (snapshot != null && snapshot.exists()) {
-
-                    System.out.println("Current data2: " + snapshot.getData());
-                    controller.update(snapshot);
-
-                } else {
-                    System.out.print("Current data: null");
-                }
+                if (snapshot != null && snapshot.exists()) controller.update(snapshot);
+                else System.out.print("Current data: null");
             }
         });
     }
 
-    public void testen() {
-        DocumentReference docRef = firestore.collection("Games").document("First").collection("Spelers").document("player0");
-
-        // De listener
+    //AreaRegister
+    public void AreaListener(String areaId, final FirebaseControllerObserver controller){
+        DocumentReference docRef = gameRef.collection("Areas").document(areaId);
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirestoreException error) {
                 if (error != null) {
                     System.err.println("Listen failed: " + error);
                     return;
                 }
-
-                if (snapshot != null && snapshot.exists()) {
-                    System.out.println("Other data: " + snapshot.getDouble("fiches"));
-                    System.out.println("Current data: " + snapshot.getData());
-                } else {
-                    System.out.print("Current data: null");
-                }
-
+                if (snapshot != null && snapshot.exists()) controller.update(snapshot);
+                else System.out.print("Current data: null");
             }
         });
     }
 
+    //player Updates
     public void playerUpdateFiches(String player, int fichesCount){
-        DocumentReference docRef = firestore.collection("Games").document("First").collection("Spelers").document(player);
+        DocumentReference docRef = gameRef.collection("Spelers").document(player);
         docRef.update("fiche", fichesCount);
     }
 
-    public void mapUpdateFiches(String mapId, int fichesCount){
-        DocumentReference docRef = firestore.collection("Games").document("First").collection("Map").document(mapId);
-        docRef.update("fiches", fichesCount);
+    //areaUpdates
+    public void areaUpdateFiches(String areaId, int count){
+        DocumentReference docRef = gameRef.collection("Areas").document(areaId);
+        docRef.update("fiches", count);
+    }
+
+    //Areas setten in firebase
+    public void setAreas(String areaId, Map<String, Object> area){
+        gameRef.collection("Areas").document(areaId).set(area);
     }
 
     /**

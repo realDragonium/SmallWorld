@@ -26,7 +26,6 @@ public class TimerView implements TimerObserver {
     }
 
     public void initialize(){
-        System.out.println(pane);
         group.getChildren().add(pane);
     }
 

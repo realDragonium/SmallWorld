@@ -27,7 +27,7 @@ public class CombinationController {
         this.race = race;
         this.power = power;
         model = new CombinationModel(race.getId(), power.getId());
-        //SceneManager.getInstance().loadCombination(this);
+        SceneManager.getInstance().loadCombination(this);
     }
 
     public void setPlayer(PlayerController player){
