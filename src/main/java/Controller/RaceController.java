@@ -58,6 +58,10 @@ public class RaceController {
 		updatePlayerFicheAmount();
     }
 
+    public void destroyAllFichesButOne(){
+		model.removeAllFichesButOne();
+	}
+
     public void addArea(AreaController area){
 		model.addArea(area);
 	}

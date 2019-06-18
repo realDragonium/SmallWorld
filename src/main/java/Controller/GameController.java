@@ -14,6 +14,8 @@ public class GameController {
     private RoundController roundCon;
     private TurnController turnCon;
     private Map2DController mapCon;
+    private VervallenController vervCon;
+    private AreaController areaCon;
     private AttackController attCon;
     private ShopController shopCon;
     private GameTurn gameTurn;
@@ -40,6 +42,7 @@ public class GameController {
 
         createPlayer();
         createShop();
+        createVerval();
 
         createTurnsAndRounds();
         new KnoppenController(this);
@@ -47,6 +50,11 @@ public class GameController {
 
         mapCon = new Map2DController(this);
     }
+
+    private void createVerval() {
+        vervCon = new VervallenController(this);
+    }
+
     private void createPlayer(){
         players.put("player0", new PlayerController("player0", this));
         players.put("player1", new PlayerController("player1", this));
@@ -95,6 +103,10 @@ public class GameController {
     Map2DController getMapCon(){
         return mapCon;
     }
+
+    AreaController getAreaCon(){return areaCon;}
+
+    VervallenController getVervCon(){return vervCon;}
 
     AttackController getAttCon(){
         return attCon;

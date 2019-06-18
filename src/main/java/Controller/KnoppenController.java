@@ -33,4 +33,6 @@ public class KnoppenController {
     }
 
     public void nextPhase(){gameCon.getGameTurn().endPhase();}
+
+    public void inVerval() {gameCon.getVervCon().inVerval();}
 }

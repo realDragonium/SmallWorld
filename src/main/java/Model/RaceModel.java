@@ -3,6 +3,7 @@ package Model;
 import Controller.AreaController;
 import Objects.RaceFiche;
 
+import java.awt.geom.Area;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -70,4 +71,12 @@ public class RaceModel {
 	public void removeArea(AreaController area) {
 		areas.remove(area);
 	}
+
+    public void removeAllFichesButOne() {
+		for(AreaController area : areas){
+			area.destroyAllButOne();
+		}
+		availableFiches = new Stack<>();
+		notifyAll();
+    }
 }

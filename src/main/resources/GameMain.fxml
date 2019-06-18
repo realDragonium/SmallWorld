@@ -12,5 +12,6 @@
         <Group id="timerGroup" />
         <Group id="turnGroup" />
         <Group id="mapGroup" />
+        <Group id="vervalGroup" />
     </children>
 </Pane>

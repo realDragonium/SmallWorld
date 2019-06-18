@@ -51,4 +51,12 @@ public class CombinationController {
     public void returnFiches() {
             race.returnFiches();
     }
+
+    public void setToNonActive() {
+        model.setToNonActive();
+    }
+
+    public void destroyAllFichesButOne() {
+        race.destroyAllFichesButOne();
+    }
 }

@@ -55,8 +55,21 @@ public class AreaController {
 
 	public void selectActive(){	map2DCon.selectSingleArea(this);}
 
+	public void inVerval() {
+		destroyAllButOne();
+	}
+
+	public void destroyAllButOne(){model.getAllButOne();}
+
     public void returnAllButOne(RaceController raceController) {
 
 		raceController.pushFiches(model.getAllButOne());
     }
+
+
+
+
+
+
+
 }

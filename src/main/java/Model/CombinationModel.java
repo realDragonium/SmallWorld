@@ -49,4 +49,8 @@ public class CombinationModel implements CombinationObservable {
     public String getPowerId() {
         return powerId;
     }
+
+    public void setToNonActive() {
+        active = false;
+    }
 }

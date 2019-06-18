@@ -50,6 +50,7 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("timerGroup"));
         pane.getChildren().add(groepen.get("turnGroup"));
         pane.getChildren().add(groepen.get("roundGroup"));
+        pane.getChildren().add(groepen.get("vervalGroup"));
         changeToScene(pane);
     }
 
@@ -167,6 +168,13 @@ public class SceneManager {
         for(Node item : ((Pane)this.groepen.get("shopGroup").getChildren().get(0)).getChildren()){
             this.shopItems.add((Group)item);
         }
+    }
+
+    public void loadVerval(VervallenController vervCon) {
+        this.creators.put(VervallenView.class, () -> {
+            return new VervallenView(vervCon, (Group)this.groepen.get("vervalGroup"));
+        });
+        this.FXMLLOADER("/VervallenView.fxml");
     }
 
     public void loadTimer(TimerController timerCon) {

@@ -36,4 +36,6 @@ public class TurnController {
         return "player" + model.currentTurn;
     }
 
+    public void skipTurnPlayerVerval() {
+    }
 }
