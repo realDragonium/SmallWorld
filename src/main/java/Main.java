@@ -1,4 +1,6 @@
 import Applicatie.Applicatie;
+import Controller.LobbyController;
+import View.LobbyView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

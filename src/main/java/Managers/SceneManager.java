@@ -89,6 +89,8 @@ public class SceneManager {
         changeToScene(localGroup);
     }
 
+
+
     public void createGameView(GameController gameCon) {
         this.gameView = new Group();
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -140,6 +142,33 @@ public class SceneManager {
             var5.printStackTrace();
         }
 
+    }
+
+    public void createLobbyView(LobbyController con){
+        Group localGroup = new Group();
+        creators.put(LobbyView.class, (Callable<LobbyView>) () -> new LobbyView(localGroup, con));
+        FXMLLOADER("/LobbyScreen/LobbyScreen.fxml");
+        changeToScene(localGroup);
+    }
+
+
+    public void createLobbySettingsView(LobbySettingsController con){
+        Group localGroup = new Group();
+        creators.put(LobbySettingsView.class, (Callable<LobbySettingsView>) () -> new LobbySettingsView(localGroup, con));
+        FXMLLOADER("/LobbyScreen/CreateLobbySettings.fxml");
+        changeToScene(localGroup);
+    }
+
+
+
+
+
+
+    public void createInLobbyView(InLobbyController con){
+        Group localGroup = new Group();
+        creators.put(InLobbyView.class, (Callable<InLobbyView>) () -> new InLobbyView(localGroup, con));
+        FXMLLOADER("/LobbyScreen/InLobbyScreen.fxml");
+        changeToScene(localGroup);
     }
 
     public void loadButtons(KnoppenController knopCon) {
