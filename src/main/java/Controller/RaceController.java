@@ -7,6 +7,7 @@ import Objects.RaceFiche;
 import java.awt.geom.Area;
 import java.util.ArrayList;
 import java.util.List;
+import Enum.TurnFase;
 import java.util.Stack;
 
 public class RaceController {
@@ -81,5 +82,9 @@ public class RaceController {
 
 	public String getId(){
 		return model.getId();
+	}
+
+	public boolean checkPhaseActoin(TurnFase curPhase) {
+		return kracht.checkPhaseAction(curPhase);
 	}
 }

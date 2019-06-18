@@ -2,16 +2,17 @@ package Controller;
 
 import Managers.SceneManager;
 import Model.CombinationModel;
+import Objects.Power;
 import Observer.CombinationObserver;
 import observable.CombinationObservable;
-
+import Enum.TurnFase;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CombinationController {
 
     private RaceController race;
-    private PowerController power;
+    private Power power;
     private PlayerController player;
     private CombinationModel model;
 
@@ -23,7 +24,7 @@ public class CombinationController {
         return model.isActive();
     }
 
-    public CombinationController(RaceController race, PowerController power){
+    public CombinationController(RaceController race, Power power){
         this.race = race;
         this.power = power;
         model = new CombinationModel(race.getId(), power.getId());
@@ -38,13 +39,20 @@ public class CombinationController {
         return this.player;
     }
 
-
+    public void checkForSpecialActions(TurnFase curPhase){
+        if(race.checkPhaseActoin(curPhase)){
+            race.doKractAction();
+        }
+        if(power.checkPhaseAction(curPhase)){
+            power.doAction();
+        }
+    }
 
     public RaceController getRace(){
         return race;
     }
 
-    public PowerController getPower(){
+    public Power getPower(){
         return power;
     }
 
