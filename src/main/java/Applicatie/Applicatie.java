@@ -1,6 +1,5 @@
 package Applicatie;
 
-import Controller.LobbyController;
 import Controller.LoginController;
 import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
@@ -41,8 +40,6 @@ public class Applicatie {
        new LoginController();
        /// new LobbyController();
     }
-
-
 
     public void changeScene(Scene scene) {
         primaryStage.setScene(scene);

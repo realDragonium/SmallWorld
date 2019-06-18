@@ -1,6 +1,6 @@
 package Controller;
 
-
+import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
 import Model.AreaModel;
 import Objects.RaceFiche;
@@ -15,7 +15,8 @@ public class AreaController {
 	private Map2DController map2DCon;
 	private AreaModel model;
 	private GameController gameCon;
-	
+	private FirebaseServiceOwn fb = Applicatie.Applicatie.getFirebaseService();
+
 	public AreaController(Group area, Map2DController mapCon, GameController gameCon) {
 		model = new AreaModel(area.getChildren().get(0).getId());
 		map2DCon = mapCon;
@@ -31,6 +32,7 @@ public class AreaController {
 
 	void attackArea(Stack<RaceFiche> fiches){
 		model.attackArea(fiches);
+		fb.mapUpdateFiches(model.getId(), fiches.size());
 	}
 
 	void setPlayerOwner(PlayerController player){
@@ -42,6 +44,7 @@ public class AreaController {
 	}
 
 	Stack<RaceFiche> removeFiches(){
+		fb.mapUpdateFiches(model.getId(), 0);
 		return model.getAllFiches();
 	}
 

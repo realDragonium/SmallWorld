@@ -58,8 +58,6 @@ public class SceneManager {
         changeToScene(localGroup);
     }
 
-
-
     public void createGameView(GameController gameCon) {
 
         gameView = new Group();
@@ -183,8 +181,5 @@ public class SceneManager {
             e.printStackTrace();
         }
     }
-
-
-
 
 }

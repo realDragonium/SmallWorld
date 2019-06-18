@@ -11,6 +11,6 @@
         <Group id="shopGroup" />
         <Group id="turnGroup" />
         <Group id="mapGroup" />
-        <Group id="diceGroup" />
+        <Group id="diceGroup"/>
     </children>
 </Pane>
