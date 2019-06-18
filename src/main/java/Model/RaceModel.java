@@ -11,8 +11,6 @@ import java.util.stream.IntStream;
 
 public class RaceModel {
 
-	private int beginCountFiches;
-
 	private String raceId;
 	private Stack<RaceFiche> availableFiches = new Stack<>();
 	private List<AreaController> areas = new ArrayList<>();
@@ -22,11 +20,10 @@ public class RaceModel {
 		this.raceId = id;
 	}
 
-	public void createFiches(int amount){
+	private void createFiches(int amount){
 		IntStream.range(0,amount).forEach(i -> {
 			availableFiches.push(new RaceFiche());
 		});
-		beginCountFiches = amount;
 	}
 
 	public Stack<RaceFiche> getFiches(int count){
@@ -77,6 +74,5 @@ public class RaceModel {
 			area.destroyAllButOne();
 		}
 		availableFiches = new Stack<>();
-		notifyAll();
     }
 }

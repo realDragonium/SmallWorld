@@ -7,6 +7,7 @@ import Objects.RaceFiche;
 import java.awt.geom.Area;
 import java.util.ArrayList;
 import java.util.List;
+import Enum.TurnFase;
 import java.util.Stack;
 
 public class RaceController {
@@ -15,70 +16,75 @@ public class RaceController {
 	private Kracht kracht;
 	private RaceModel model;
 
-	public RaceController(Kracht kracht, String id, int ficheAmount) {
+	RaceController(Kracht kracht, String id, int ficheAmount) {
 		this.kracht = kracht;
 		model = new RaceModel(id, ficheAmount);
 	}
 
-	public int fichesCount(){
+	int fichesCount(){
 		return model.getFichesCount();
 	}
 
-	public void setCombiCon(CombinationController combiCon){
+	void setCombiCon(CombinationController combiCon){
 		this.combiCon = combiCon;
 	}
 
-	public Stack<RaceFiche> getFiches(int count){
+	Stack<RaceFiche> getFiches(int count){
 		Stack<RaceFiche> tempFiches = model.removeFiches(count);
 		updatePlayerFicheAmount();
 		return tempFiches;
 	}
 
-	public void pushFiches(Stack<RaceFiche> fiches){
+	void pushFiches(Stack<RaceFiche> fiches){
 		model.pushFiches(fiches);
 		updatePlayerFicheAmount();
 	}
 
-	public boolean hasEnoughFiches(int count){
+	boolean hasEnoughFiches(int count){
 		return count <= model.getFichesCount();
 	}
 
-	public void fichesOver(){
+	void fichesOver(){
 		System.out.println(combiCon.getPlayer().getId() + " heeft " + model.getFichesCount() + " fiches.");
 	}
 
-	public void doKractAction(){
+	void doKractAction(){
 		kracht.doAction();
 	}
 
-    public void returnFiches() {
+    void returnFiches() {
 		for(AreaController area : model.getAreas()){
 			area.returnAllButOne(this);
 		}
 		updatePlayerFicheAmount();
     }
 
-    public void destroyAllFichesButOne(){
+     void destroyAllFichesButOne(){
 		model.removeAllFichesButOne();
+		updatePlayerFicheAmount();
 	}
 
-    public void addArea(AreaController area){
+    void addArea(AreaController area){
 		model.addArea(area);
 	}
 
-	public void updatePlayerFicheAmount(){
+	private void updatePlayerFicheAmount(){
 		combiCon.getPlayer().setFiches(model.getFichesCount());
 	}
 
-	public void removeArea(AreaController area) {
+	void removeArea(AreaController area) {
 		model.removeArea(area);
 	}
 
-	public int getAreasAmount() {
+	int getAreasAmount() {
 		return model.getAreas().size();
 	}
 
 	public String getId(){
 		return model.getId();
+	}
+
+	boolean checkPhaseActoin(TurnFase curPhase) {
+		return kracht.checkPhaseAction(curPhase);
 	}
 }
