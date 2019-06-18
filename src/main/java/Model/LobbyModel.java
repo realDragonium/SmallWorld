@@ -1,7 +1,6 @@
 package Model;
 
 import Observer.LobbyObserver;
-import observable.LobbyObservable;
 
 import java.util.ArrayList;
 import java.util.List;
