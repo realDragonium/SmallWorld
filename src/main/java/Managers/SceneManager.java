@@ -62,6 +62,7 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("buttonGroup"));
         pane.getChildren().add(groepen.get("turnGroup"));
         pane.getChildren().add(groepen.get("roundGroup"));
+        pane.getChildren().add(groepen.get("diceGroup"));
         changeToScene(pane);
     }
 
