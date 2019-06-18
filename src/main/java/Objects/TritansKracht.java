@@ -2,9 +2,9 @@ package Objects;
 
 import Enum.TurnFase;
 
-public class HumanKracht implements Kracht{
+public class TritansKracht implements Kracht{
 
-    private TurnFase phase = TurnFase.redeploying;
+    private TurnFase phase = TurnFase.conquering;
 
     @Override
     public Kracht getKracht() {
@@ -13,7 +13,7 @@ public class HumanKracht implements Kracht{
 
     @Override
     public void doAction() {
-        System.out.println("op fields heb je een extra punt");
+        System.out.println("Op landen naast water heb je 1 extra aanvals punt");
     }
 
     @Override

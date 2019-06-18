@@ -1,6 +1,6 @@
 package Model;
 
-import observable.LeaderboardObservable;
+import Observable.LeaderboardObservable;
 import Observer.LeaderboardObserver;
 
 import java.util.ArrayList;

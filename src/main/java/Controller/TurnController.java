@@ -10,7 +10,7 @@ public class TurnController {
     private GameController gameCon;
 
 
-    public TurnController(GameController gameCon){
+    TurnController(GameController gameCon){
         model = new TurnModel(4);
         this.gameCon = gameCon;
         SceneManager.getInstance().loadTurn(this);
@@ -31,10 +31,7 @@ public class TurnController {
         gameCon.changePlayerTurn("player"+model.currentTurn);
     }
 
-    public String getCurrentPlayer() {
+    String getCurrentPlayer() {
         return "player" + model.currentTurn;
-    }
-
-    public void skipTurnPlayerVerval() {
     }
 }

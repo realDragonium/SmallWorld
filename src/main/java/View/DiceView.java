@@ -13,7 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import observable.DiceObservable;
+import Observable.DiceObservable;
 
 import java.util.ArrayList;
 

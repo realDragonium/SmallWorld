@@ -2,7 +2,7 @@ package Objects;
 
 import Enum.TurnFase;
 
-public class HumanKracht implements Kracht{
+public class WizzardsKracht implements Kracht{
 
     private TurnFase phase = TurnFase.redeploying;
 
@@ -13,7 +13,7 @@ public class HumanKracht implements Kracht{
 
     @Override
     public void doAction() {
-        System.out.println("op fields heb je een extra punt");
+        System.out.println("op bepaalde gebieden plus 1");
     }
 
     @Override

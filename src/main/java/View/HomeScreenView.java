@@ -1,6 +1,5 @@
 package View;
 
-import Controller.GameController;
 import Controller.HomeScreenController;
 import Controller.LobbyController;
 import javafx.animation.TranslateTransition;
@@ -12,8 +11,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-import observable.HomeScreenObservable;
-import observers.HomeScreenObserver;
+import Observable.HomeScreenObservable;
+import Observer.HomeScreenObserver;
 
 public class HomeScreenView implements HomeScreenObserver{
 
@@ -36,53 +35,53 @@ public class HomeScreenView implements HomeScreenObserver{
 
     @FXML
     private void createGame(){
-    	new GameController("First", "player1");
-//		new LobbyController();
+    	//new GameController("First", "player1");
+		new LobbyController();
 	}
 
 	@FXML
     private void enterHoverTitle(MouseEvent e) {
     	for(Node node2 : ((HBox) e.getSource()).getChildren()) {
 	    	if(node2.getId().equals("Power")) {
-		    	TranslateTransition translateTransition = new TranslateTransition(); 
+		    	TranslateTransition translateTransition = new TranslateTransition();
 				translateTransition.setDuration(Duration.millis(500));
-				translateTransition.setByX(-50 - ((ImageView)node2).getTranslateX()); 
-				translateTransition.setCycleCount(1); 
-				translateTransition.setAutoReverse(false); 
+				translateTransition.setByX(-50 - ((ImageView)node2).getTranslateX());
+				translateTransition.setCycleCount(1);
+				translateTransition.setAutoReverse(false);
 				translateTransition.setNode((ImageView)node2);
 				translateTransition.play();
 	    	}
 			if(node2.getId().equals("Ras")) {
-				TranslateTransition translateTransition2 = new TranslateTransition(); 
+				TranslateTransition translateTransition2 = new TranslateTransition();
 				translateTransition2.setDuration(Duration.millis(500));
-				translateTransition2.setByX(10 - ((ImageView) node2).getTranslateX()); 
-				translateTransition2.setCycleCount(1); 
-				translateTransition2.setAutoReverse(false); 
+				translateTransition2.setByX(10 - ((ImageView) node2).getTranslateX());
+				translateTransition2.setCycleCount(1);
+				translateTransition2.setAutoReverse(false);
 				translateTransition2.setNode(node2);
 				translateTransition2.play();
 			}
 	    }
     }
-	
+
     @FXML
 	private void exitHoverTitle(MouseEvent e) {
 		for(Node node2 : ((HBox)  e.getSource()).getChildren()) {
 	    	if(node2.getId().equals("Power")) {
-		
-				TranslateTransition translateTransition = new TranslateTransition(); 
+
+				TranslateTransition translateTransition = new TranslateTransition();
 				translateTransition.setDuration(Duration.millis(200));
 				translateTransition.setByX(-((ImageView)((HBox)  e.getSource()).getChildren().get(0)).getTranslateX());
-				translateTransition.setCycleCount(1); 
-				translateTransition.setAutoReverse(false); 
+				translateTransition.setCycleCount(1);
+				translateTransition.setAutoReverse(false);
 				translateTransition.setNode(((ImageView)((HBox)  e.getSource()).getChildren().get(0)));
 				translateTransition.play();
 	    	}
 	    	if(node2.getId().equals("Ras")) {
-				TranslateTransition translateTransition2 = new TranslateTransition(); 
+				TranslateTransition translateTransition2 = new TranslateTransition();
 				translateTransition2.setDuration(Duration.millis(200));
-				translateTransition2.setByX(-((ImageView)node2).getTranslateX()); 
-				translateTransition2.setCycleCount(1); 
-				translateTransition2.setAutoReverse(false); 
+				translateTransition2.setByX(-((ImageView)node2).getTranslateX());
+				translateTransition2.setCycleCount(1);
+				translateTransition2.setAutoReverse(false);
 				translateTransition2.setNode((ImageView)node2);
 				translateTransition2.play();
 	    	}
@@ -98,10 +97,10 @@ public class HomeScreenView implements HomeScreenObserver{
     	this.pane = pane;
     	pane.getChildren().addAll(root);
     }
-    
 
 
-    
-    
-	
+
+
+
+
 }

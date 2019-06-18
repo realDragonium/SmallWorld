@@ -5,7 +5,7 @@ import Controller.HomeScreenController;
 import Controller.LeaderboardController;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
-import observable.LeaderboardObservable;
+import Observable.LeaderboardObservable;
 import Observer.LeaderboardObserver;
 import javafx.fxml.FXML;
 

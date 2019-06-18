@@ -1,4 +1,4 @@
-package observable;
+package Observable;
 
 import Observer.ShopObserver;
 

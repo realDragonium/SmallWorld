@@ -13,7 +13,7 @@ import java.util.List;
 
 public class PlayerController implements FirebaseControllerObserver {
     private GameController gameCon;
-    private FirebaseServiceOwn fb = Applicatie.getFirebaseService();
+    private FirebaseServiceOwn fb = SceneManager.getInstance().getApp().getFirebaseService();
     private PlayerModel model;
     private List<CombinationController> combinations = new ArrayList<>();
 
@@ -21,7 +21,7 @@ public class PlayerController implements FirebaseControllerObserver {
         model = new PlayerModel(playerID);
         this.gameCon = gameCon;
         SceneManager.getInstance().loadPlayer(playerID, this);
-        Applicatie.getFirebaseService().playerListen(playerID, this);
+        SceneManager.getInstance().getApp().getFirebaseService().playerListen(playerID, this);
         fb.playerListen(playerID, this);
     }
 

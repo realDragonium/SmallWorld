@@ -2,7 +2,7 @@ package Model;
 
 import Controller.CombinationController;
 import Observer.ShopObserver;
-import observable.ShopObservable;
+import Observable.ShopObservable;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

@@ -1,9 +1,9 @@
-package models;
+package Model;
 
 import java.util.ArrayList;
 import java.util.List;
-import observable.HomeScreenObservable;
-import observers.HomeScreenObserver;
+import Observable.HomeScreenObservable;
+import Observer.HomeScreenObserver;
 
 public class HomeScreenModel implements HomeScreenObservable {
 	private List<HomeScreenObserver> observers = new ArrayList<>();
