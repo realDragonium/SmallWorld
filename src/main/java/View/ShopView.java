@@ -2,7 +2,6 @@ package View;
 
 import Controller.ShopController;
 import Observer.ShopObserver;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
