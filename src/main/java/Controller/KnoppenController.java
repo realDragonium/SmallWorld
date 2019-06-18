@@ -23,6 +23,7 @@ public class KnoppenController {
     }
 
     public void attackCountry() {
+
         AttackController attCon = gameCon.getAttCon();
         attCon.getTargetArea();
         attCon.attackArea();

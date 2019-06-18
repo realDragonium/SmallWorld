@@ -72,7 +72,7 @@ public class PlayerController implements FirebaseControllerObserver {
     @Override
     public void update(DocumentSnapshot ds) {
         if(gameCon.getCurrentPlayer()==this) return;
-        //model.fiches = (int) Math.round(ds.getDouble("fiches"));
+        model.fiches = (int) Math.round(ds.getDouble("fiches"));
         model.notifyObserver();
     }
 

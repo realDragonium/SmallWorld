@@ -1,7 +1,6 @@
 package View;
 
 import Controller.AreaController;
-import Controller.Map2DController;
 import Enum.AreaColor;
 import Observable.AreaObservable;
 import Observer.AreaObserver;

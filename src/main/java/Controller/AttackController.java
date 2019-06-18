@@ -18,7 +18,7 @@ public class AttackController {
         final PlayerController player = gameCon.getCurrentPlayer();
         System.out.println(player.getId() + " is attacking");
         if (player.getActiveCombination().getRace().hasEnoughFiches(fichesCountNeeded)) {
-            if (targetArea.getOwnerPlayer() != null) {
+            if (targetArea.getOwnerPlayer() != null){
                 System.out.println("OMG er staat iemand op... dan maar met meer aanvallen!");
                 targetArea.getOwnerPlayer().getActiveCombination().getRace().pushFiches(targetArea.removeFiches());
                 targetArea.getOwnerPlayer().getActiveCombination().getRace().removeArea(targetArea);

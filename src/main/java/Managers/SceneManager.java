@@ -21,8 +21,6 @@ public class SceneManager {
     private Applicatie app;
     private Group gameView;
 
-    public SceneManager() {
-    }
 
     public static SceneManager getInstance() {
         if (sceneManager == null) {
@@ -75,20 +73,20 @@ public class SceneManager {
 
     public void createLoginView(LoginController loginController) {
         Group localGroup = new Group();
-        this.creators.put(LoginView.class, () -> {
+        creators.put(LoginView.class, () -> {
             return new LoginView(loginController, localGroup);
         });
-        this.FXMLLOADER("/LoginScreen/Loginscherm.fxml");
-        this.changeToScene(localGroup);
+        FXMLLOADER("/LoginScreen/Loginscherm.fxml");
+        changeToScene(localGroup);
     }
 
     public void createHomeScreenView(HomeScreenController hsController) {
         Group localGroup = new Group();
-        this.creators.put(HomeScreenView.class, () -> {
+        creators.put(HomeScreenView.class, () -> {
             return new HomeScreenView(hsController, localGroup);
         });
-        this.FXMLLOADER("/HomeScreen/Homescreen.fxml");
-        this.changeToScene(localGroup);
+        FXMLLOADER("/HomeScreen/Homescreen.fxml");
+        changeToScene(localGroup);
     }
 
     public void createGameView(GameController gameCon) {
