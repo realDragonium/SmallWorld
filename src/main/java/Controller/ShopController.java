@@ -24,7 +24,7 @@ public class ShopController {
         System.out.println(gameCon.getCurrentPlayer().getId() + " is buying");
         gameCon.getCurrentPlayer().buyFromShop(shopItems.get(item), item);
         shopItems.remove(item);
-        
+
     }
 
     private void createShopItems(){

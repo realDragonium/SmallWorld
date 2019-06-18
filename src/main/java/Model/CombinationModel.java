@@ -11,10 +11,15 @@ public class CombinationModel implements CombinationObservable {
     List<CombinationObserver> observers = new ArrayList<>();
     String raceId;
     String powerId;
+    boolean active = true;
 
     public CombinationModel(String raceId, String powerId){
         this.raceId = raceId;
         this.powerId = powerId;
+    }
+
+    public boolean isActive(){
+        return active;
     }
 
     @Override

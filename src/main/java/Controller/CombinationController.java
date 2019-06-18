@@ -19,6 +19,9 @@ public class CombinationController {
         model.register(obs);
     }
 
+    public boolean isActive(){
+        return model.isActive();
+    }
 
     public CombinationController(RaceController race, PowerController power){
         this.race = race;
