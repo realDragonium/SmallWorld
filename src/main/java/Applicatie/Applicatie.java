@@ -1,5 +1,6 @@
 package Applicatie;
 
+import Controller.LobbyController;
 import Controller.LoginController;
 import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
@@ -22,24 +23,26 @@ public class Applicatie {
         loadPrimaryStage();
     }
 
-
     public static FirebaseServiceOwn getFirebaseService(){
         if(fb == null) fb = new FirebaseServiceOwn();
         return fb;
     }
 
     private void loadPrimaryStage() {
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, width,height);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Small World");
-        primaryStage.setX(windowAnchorX);
-        primaryStage.setY(windowAnchorY);
-        primaryStage.setFullScreen(true);
+//        primaryStage.setX(windowAnchorX);
+//        primaryStage.setY(windowAnchorY);
+//        primaryStage.setFullScreen(true);
         primaryStage.show();
 
-       new LoginController();
+       //new LoginController();
+        new LobbyController();
        /// new LobbyController();
     }
+
+
 
     public void changeScene(Scene scene) {
         primaryStage.setScene(scene);

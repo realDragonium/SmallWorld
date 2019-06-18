@@ -24,9 +24,7 @@ public class TimerController {
                     public void run() {
                         model.addSecond();
                         if (model.timerIsDone()) {
-                            System.out.println("test");
                             timerEnded();
-
                         }
                     }
                 });
@@ -56,7 +54,6 @@ public class TimerController {
 //    }
 
     public TimerController(GameTurn gameTurn){
-        System.out.println("test2");
         this.gameTurn = gameTurn;
         SceneManager.getInstance().loadTimer(this);
         startTimer();

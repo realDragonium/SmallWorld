@@ -22,8 +22,6 @@ public class SceneManager {
     private Applicatie app;
     private Group gameView;
 
-    public SceneManager() {
-    }
 
     public static SceneManager getInstance() {
         if (sceneManager == null) {
@@ -65,7 +63,7 @@ public class SceneManager {
         changeToScene(pane);
     }
 
-    public void switchToEndingPhase() {
+    public void switchToEndingPhase(){
         Pane pane = new Pane();
         pane.getChildren().add(groepen.get("mapGroup"));
         pane.getChildren().add(groepen.get("playerGroup"));
@@ -84,7 +82,9 @@ public class SceneManager {
 
     public void createLoginView(LoginController loginController) {
         Group localGroup = new Group();
-        creators.put(LoginView.class, (Callable<LoginView>) () -> new LoginView(loginController, localGroup));
+        creators.put(LoginView.class, () -> {
+            return new LoginView(loginController, localGroup);
+        });
         FXMLLOADER("/LoginScreen/Loginscherm.fxml");
         changeToScene(localGroup);
     }
@@ -95,6 +95,8 @@ public class SceneManager {
         FXMLLOADER("/HomeScreen/Homescreen.fxml");
         changeToScene(localGroup);
     }
+
+
 
     public void createGameView(GameController gameCon) {
 
@@ -178,6 +180,21 @@ public class SceneManager {
         Group localGroup = new Group();
         creators.put(InLobbyView.class, (Callable<InLobbyView>) () -> new InLobbyView(localGroup, con));
         FXMLLOADER("/LobbyScreen/InLobbyScreen.fxml");
+        changeToScene(localGroup);
+    }
+
+    public void createLobbyView(LobbyController con){
+        Group localGroup = new Group();
+        creators.put(LobbyView.class, (Callable<LobbyView>) () -> new LobbyView(localGroup, con));
+        FXMLLOADER("/LobbyScreen/LobbyScreen.fxml");
+        changeToScene(localGroup);
+    }
+
+
+    public void createLobbySettingsView(LobbySettingsController con){
+        Group localGroup = new Group();
+        creators.put(LobbySettingsView.class, (Callable<LobbySettingsView>) () -> new LobbySettingsView(localGroup, con));
+        FXMLLOADER("/LobbyScreen/CreateLobbySettings.fxml");
         changeToScene(localGroup);
     }
 

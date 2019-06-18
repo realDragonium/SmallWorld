@@ -1,16 +1,35 @@
 package Controller;
 
 
+import Applicatie.Applicatie;
+import Firebase.FirebaseControllerObserver;
+import Firebase.FirebaseLobbyObserver;
 import Managers.SceneManager;
 import Model.LobbyModel;
 import Observer.LobbyObserver;
+import com.google.cloud.firestore.DocumentSnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class LobbyController {
 	LobbyModel lobbymodel = new LobbyModel();
-	//LobbySettingsController con = new LobbySettingsController();
+	LobbySettingsController con = new LobbySettingsController();
+	private String lobbyName;
 
 	public LobbyController(){
 		SceneManager.getInstance().createLobbyView(this);
+	}
+
+	public LobbyController(String lobbyName, String playerAmount){
+		lobbymodel.setLobbyName(lobbyName);
+		lobbymodel.setPlayerAmount(playerAmount);
+		SceneManager.getInstance().createLobbyView(this);
+	}
+
+	public String getLobbyNaam(){
+		return lobbymodel.getLobbyNaam();
 	}
 
 	public void register(LobbyObserver ob) {
@@ -21,39 +40,37 @@ public class LobbyController {
 		lobbymodel.hostLobby(lobbyName);
 	}
 
-
-
-
-//	public void startInLobbyScreen(){
-//		new InLobbyController();
-//	}
-
-//	public void startInLobbyScreen(String lobbyNaam){
-//		new InLobbyController(lobbyNaam);
-//	}
-
-//
-//
-//	public void setLobbyName(String lobbyName){
-//		con.setLobbyName(lobbyName);
-//	}
-//
-//	public void getLobbyName(String lobbyName){
-//		con.setLobbyName(lobbyName);
-//	}
-
-
-
-
-
 	public void lobbyEdit(){
 		new LobbySettingsController();
 	}
 
+	public List<String> getFirebaseLobbyNamen(){
+		try {
+			return Applicatie.getFirebaseService().getActiveLobbies();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
-//	public void lobbyEdit(String lobbyNaam){
-//		new LobbySettingsController(lobbyNaam);
-//	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	public void exitLobby(int decreaseLobbySize) {   
 		lobbymodel.exitLobby(decreaseLobbySize);
@@ -63,12 +80,6 @@ public class LobbyController {
 		lobbymodel.getLobbyAmount();
 	}
 
-
-
-
-	public void lobbyNaamOpvragen() {
-		lobbymodel.lobbyNaamOpvragen();
-	}
 
 	public void spelerToevoegen() {            // berekening om speler toe te voegen
 		lobbymodel.spelerToevoegen();
@@ -81,5 +92,7 @@ public class LobbyController {
 	public int getLobbySizeCounter() {
 		return lobbymodel.getLobbySizeCounter();
 	}
-	
+
+
+
 }

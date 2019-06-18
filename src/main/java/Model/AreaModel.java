@@ -14,11 +14,13 @@ public class AreaModel implements AreaObservable {
     private boolean active = false;
     private AreaObserver observer;
     private String id;
+    public int fichesCount;
     public PlayerController player;
 
     public AreaModel(String id) {
         this.id = id;
         IntStream.range(0, (int) (Math.random() * 3)).forEach(i -> raceFiches.push(new RaceFiche()));
+        fichesCount = raceFiches.size();
     }
 
     public String getId() {
@@ -27,6 +29,7 @@ public class AreaModel implements AreaObservable {
 
     public void changeActive() {
         active = !active;
+        fichesCount = raceFiches.size();
         notifyObserver();
     }
 
@@ -38,24 +41,25 @@ public class AreaModel implements AreaObservable {
     //Ze worden overschreven omdat getAllFiches de hele lijst al mee geeft
     public void setFiches(Stack<RaceFiche> fiches) {
         raceFiches = fiches;
+        fichesCount = raceFiches.size();
         notifyObserver();
     }
 
     public Stack<RaceFiche> getAllFiches() {
         Stack<RaceFiche> tempFiches = raceFiches;
         raceFiches = new Stack<>();
+        fichesCount = raceFiches.size();
         return tempFiches;
     }
 
     public Stack<RaceFiche> getAllButOne(){
-
         Stack<RaceFiche> temp = new Stack<>();
-
         if(raceFiches.size() > 0) {
             RaceFiche tempFiche = raceFiches.pop();
             temp  = raceFiches;
             raceFiches = new Stack<>();
             raceFiches.add(tempFiche);
+            fichesCount = raceFiches.size();
             notifyObserver();
         }
         return temp;
@@ -79,6 +83,6 @@ public class AreaModel implements AreaObservable {
 
     @Override
     public int getNumberOfFiches() {
-        return raceFiches.size();
+        return fichesCount;
     }
 }

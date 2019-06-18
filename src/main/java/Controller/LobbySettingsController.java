@@ -8,36 +8,14 @@ import View.LobbyView;
 public class LobbySettingsController {
 
     LobbySettingsModel mod = new LobbySettingsModel();
-    LobbyController con = new LobbyController();
-
-   // private String lobbyNaam;
 
     public LobbySettingsController(){
         SceneManager.getInstance().createLobbySettingsView(this);
     }
 
-
-//    public LobbySettingsController(String lobbyNaam){
-//        SceneManager.getInstance().createLobbySettingsView(this);
-//        //setLobbyNaam(lobbyNaam);
-//    }
-
-//
-//    public void setLobbyName(String lobbyNaam){
-//        con.setLobbyName(lobbyNaam);
-//    }
-
-
-
-
-
-
-
-
-
-
-
-
+    public void lobbyView(String lobbyNaam, String playerAmount){
+        new LobbyController(lobbyNaam, playerAmount);
+    }
 
     public void lobbyView(){
         new LobbyController();

@@ -33,14 +33,11 @@ public class PlayerController implements FirebaseControllerObserver {
         setFiches(combo.getRace().fichesCount());
     }
 
-
-
     public void showActiveCombiFichesLeft() {
         for (CombinationController combiCon : combinations) {
             combiCon.getRace().fichesOver();
         }
     }
-
 
     public CombinationController getActiveCombination() {
         if (combinations.size() > 0) return combinations.get(0);
@@ -89,7 +86,7 @@ public class PlayerController implements FirebaseControllerObserver {
     @Override
     public void update(DocumentSnapshot ds) {
         if(gameCon.getCurrentPlayer()==this) return;
-        //model.fiches = (int) Math.round(ds.getDouble("fiches"));
+        model.fiches = (int) Math.round(ds.getDouble("fiches"));
         model.notifyObserver();
     }
 
