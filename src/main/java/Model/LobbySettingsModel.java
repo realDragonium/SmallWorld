@@ -31,6 +31,9 @@ public class LobbySettingsModel implements LobbySettingsObservable {
     }
 
 
+    public String getNameLobby(){
+        return lobbyNaam;
+    }
 
 
 

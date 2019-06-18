@@ -13,7 +13,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		new Applicatie(primaryStage);
 
-		//new LobbyController();
+
 	}
 	
 	public static void main(String[] args) throws IOException, InterruptedException {

@@ -35,10 +35,11 @@ public class Applicatie {
         primaryStage.setTitle("Small World");
         primaryStage.setX(windowAnchorX);
         primaryStage.setY(windowAnchorY);
-        primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
         primaryStage.show();
 
-       new LoginController();
+       //new LoginController();
+        new LobbyController();
        /// new LobbyController();
     }
 
@@ -46,7 +47,7 @@ public class Applicatie {
 
     public void changeScene(Scene scene) {
         primaryStage.setScene(scene);
-        primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
     }
 }
 
