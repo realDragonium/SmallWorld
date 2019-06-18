@@ -14,8 +14,12 @@ public class GameController {
     private RoundController roundCon;
     private TurnController turnCon;
     private Map2DController mapCon;
+    private VervallenController vervCon;
+    private AreaController areaCon;
     private AttackController attCon;
     private ShopController shopCon;
+    private GameTurn gameTurn;
+
 
     public GameController() {
         model = new GameModel(8, 8);
@@ -29,18 +33,27 @@ public class GameController {
     }
 
     public void changePlayerTurn(String player){
+
         currentPlayer = players.get(player);
+        createGameTurn();
     }
 
     public void createGameParts() {
 
         createPlayer();
         createShop();
+        createVerval();
+
         createTurnsAndRounds();
         new DiceController();
         new KnoppenController(this);
         createAttCon();
+
         mapCon = new Map2DController(this);
+    }
+
+    private void createVerval() {
+        vervCon = new VervallenController(this);
     }
 
     private void createPlayer(){
@@ -58,6 +71,10 @@ public class GameController {
     private void createTurnsAndRounds(){
         roundCon = new RoundController(this);
         turnCon = new TurnController(this);
+    }
+
+    private void createGameTurn(){
+        gameTurn = new GameTurn(this, currentPlayer);
     }
 
 
@@ -88,9 +105,15 @@ public class GameController {
         return mapCon;
     }
 
+    AreaController getAreaCon(){return areaCon;}
+
+    VervallenController getVervCon(){return vervCon;}
+
     AttackController getAttCon(){
         return attCon;
     }
+
+    GameTurn getGameTurn() { return gameTurn;}
 
     void endGame(){
         System.out.println("Game Ended!");
@@ -99,5 +122,14 @@ public class GameController {
 
     boolean isGameOver(){
         return model.gameEnded;
+    }
+
+
+    private void startGame(){
+
+    }
+
+    public void nextTurn() {
+        turnCon.nextTurn();
     }
 }

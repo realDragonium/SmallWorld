@@ -4,14 +4,39 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.Group?>
 <Pane fx:id="pane" layoutX="1000" layoutY="300" prefHeight="600.0" prefWidth="116.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ShopView">
    <children>
-      <Text>Items:</Text>
-      <Button fx:id="buy1" id="0" layoutY="10.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" text="Buy1" />
-      <Button fx:id="buy2" id="1" layoutY="40.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" text="Buy2" />
-      <Button fx:id="buy3" id="2" layoutY="70.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" text="Buy3" />
-      <Button fx:id="buy4" id="3" layoutY="100.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" text="Buy4" />
-      <Button fx:id="buy5" id="4" layoutY="130.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" text="Buy5" />
-      <Button fx:id="buy6" id="5" layoutY="160.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" text="Buy6" />
+      <Group fx:id = "item1" layoutY="0.0">
+         <children>
+            <Button fx:id="buy1" id="0" layoutX="300.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" text="Buy1" />
+         </children>
+      </Group>
+      <Group fx:id = "item2" layoutY="30.0">
+         <children>
+            <Button fx:id="buy2" id="0" layoutX="300.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" text="Buy2" />
+         </children>
+      </Group>
+      <Group fx:id = "item3" layoutY="60.0">
+         <children>
+            <Button fx:id="buy3" id="0" layoutX="300.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" text="Buy3" />
+         </children>
+      </Group>
+      <Group fx:id = "item4" layoutY="90.0">
+         <children>
+            <Button fx:id="buy4" id="0" layoutX="300.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" text="Buy4" />
+         </children>
+      </Group>
+      <Group fx:id = "item5" layoutY="120.0">
+         <children>
+            <Button fx:id="buy5" id="0" layoutX="300.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" text="Buy5" />
+         </children>
+      </Group>
+
+      <Group fx:id = "item6" layoutY="150.0">
+         <children>
+            <Button fx:id="buy6" id="0" layoutX="300.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" text="Buy6" />
+         </children>
+      </Group>
    </children>
 </Pane>

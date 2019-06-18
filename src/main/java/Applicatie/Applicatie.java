@@ -43,7 +43,7 @@ public class Applicatie {
 
     public void changeScene(Scene scene) {
         primaryStage.setScene(scene);
-        primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
     }
 }
 

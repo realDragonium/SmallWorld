@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Map2DController;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -11,33 +12,24 @@ import java.io.IOException;
 public class Map2DView{
 
 	private Map2DController mapCon;
-	private Pane graphic;
-	private Group root = new Group();
+	Group group;
+
+	@FXML
+	private Pane pane;
 
 	public Map2DView(Map2DController mapCon, Group group) {
 		this.mapCon = mapCon;
-		group.getChildren().add(root);
-		makeStage();
+		this.group = group;
 	}
-	
-	private void makeStage() {
-		mapLoader();
+
+	public void initialize(){
+		group.getChildren().add(pane);
 		makeAreas();
 	}
-	
-	private void mapLoader() {
-		FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(this.getClass().getResource("/UglyMap.fxml"));
-        try {
-			graphic = fxmlLoader.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-        root.getChildren().add(graphic);
-	}
+
 	
 	private void makeAreas() {
-        for (Node area : graphic.getChildren()) {
+        for (Node area : pane.getChildren()) {
         	mapCon.createArea((Group) area);
         }
 	}

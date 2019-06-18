@@ -6,4 +6,8 @@ public class PowerController {
     public void setCombiCon(CombinationController combiCon){
         this.combiCon = combiCon;
     }
+
+    public String getId() {
+        return "power";
+    }
 }

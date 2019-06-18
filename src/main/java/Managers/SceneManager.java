@@ -1,10 +1,7 @@
 package Managers;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.Callable;
 
 import Controller.*;
@@ -12,39 +9,80 @@ import View.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import Applicatie.Applicatie;
 
 public class SceneManager {
-    private Map<Class, Callable<?>> creators = new HashMap<>();
-    private Map<String, Group> groepen = new HashMap<>();
+    private Map<Class, Callable<?>> creators = new HashMap();
+    private Map<String, Group> groepen = new HashMap();
+    private List<Group> shopItems = new ArrayList<>();
     private static SceneManager sceneManager;
     private Applicatie app;
     private Group gameView;
 
-    public static SceneManager getInstance(){
-        if(sceneManager == null) sceneManager = new SceneManager();
+    public SceneManager() {
+    }
+
+    public static SceneManager getInstance() {
+        if (sceneManager == null) {
+            sceneManager = new SceneManager();
+        }
+
         return sceneManager;
     }
 
-    public void changeToScene(Group group) {
+    public void changeToScene(Parent group) {
         Scene scene = new Scene(group);
         app.changeScene(scene);
     }
 
     public void registerApp(Applicatie newApp) {
-        app = newApp;
+        this.app = newApp;
     }
 
-    public void LeaderboardView(LeaderboardController con){
+    public void switchToPreperationPhase() {
+        Pane pane = new Pane();
+        pane.getChildren().add(groepen.get("mapGroup"));
+        pane.getChildren().add(groepen.get("shopGroup"));
+        pane.getChildren().add(groepen.get("playerGroup"));
+        pane.getChildren().add(groepen.get("timerGroup"));
+        pane.getChildren().add(groepen.get("turnGroup"));
+        pane.getChildren().add(groepen.get("roundGroup"));
+        pane.getChildren().add(groepen.get("vervalGroup"));
+        changeToScene(pane);
+    }
+
+    public void switchToAttackPhase() {
+        Pane pane = new Pane();
+        pane.getChildren().add(groepen.get("mapGroup"));
+        pane.getChildren().add(groepen.get("playerGroup"));
+        pane.getChildren().add(groepen.get("timerGroup"));
+        pane.getChildren().add(groepen.get("buttonGroup"));
+        pane.getChildren().add(groepen.get("turnGroup"));
+        pane.getChildren().add(groepen.get("roundGroup"));
+        changeToScene(pane);
+    }
+
+    public void switchToEndingPhase() {
+        Pane pane = new Pane();
+        pane.getChildren().add(groepen.get("mapGroup"));
+        pane.getChildren().add(groepen.get("playerGroup"));
+        pane.getChildren().add(groepen.get("timerGroup"));
+        pane.getChildren().add(groepen.get("turnGroup"));
+        pane.getChildren().add(groepen.get("roundGroup"));
+        changeToScene(pane);
+    }
+
+    public void LeaderboardView(LeaderboardController con) {
         Group localGroup = new Group();
         creators.put(LeaderboardView.class, (Callable<LeaderboardView>) () -> new LeaderboardView(localGroup, con));
         FXMLLOADER("/Leaderboard/Leaderboard.fxml");
         changeToScene(localGroup);
     }
 
-    public void createLoginView(LoginController loginController){
+    public void createLoginView(LoginController loginController) {
         Group localGroup = new Group();
         creators.put(LoginView.class, (Callable<LoginView>) () -> new LoginView(loginController, localGroup));
         FXMLLOADER("/LoginScreen/Loginscherm.fxml");
@@ -97,17 +135,41 @@ public class SceneManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
-    public void createLobbyView(LobbyController con){
+    public void createLobbyView(LobbyController con) {
         Group localGroup = new Group();
         creators.put(LobbyView.class, (Callable<LobbyView>) () -> new LobbyView(localGroup, con));
         FXMLLOADER("/LobbyScreen/LobbyScreen.fxml");
         changeToScene(localGroup);
     }
 
+    public void loadTimer(TimerController con) {
+        creators.put(TimerView.class, (Callable<TimerView>) () -> new TimerView(groepen.get("timerGroup"), con));
+        FXMLLOADER("/TimerView.fxml");
+    }
 
-    public void createLobbySettingsView(LobbySettingsController con){
+    public void loadCombination(CombinationController con) {
+        creators.put(CombinationView.class, (Callable<CombinationView>) () -> {
+            for (Group item : shopItems) {
+                if (item.getChildren().size() == 1) {
+                    return new CombinationView(item, con);
+                }
+            }
+            return null;
+        });
+
+        FXMLLOADER("/CombinationView.fxml");
+
+    }
+
+    public void loadVerval(VervallenController con) {
+        creators.put(VervallenView.class, (Callable<VervallenView>) () -> new VervallenView(con, groepen.get("vervalGroup")));
+        FXMLLOADER("/CombinationView.fxml");
+    }
+
+    public void createLobbySettingsView(LobbySettingsController con) {
         Group localGroup = new Group();
         creators.put(LobbySettingsView.class, (Callable<LobbySettingsView>) () -> new LobbySettingsView(localGroup, con));
         FXMLLOADER("/LobbyScreen/CreateLobbySettings.fxml");
@@ -115,11 +177,7 @@ public class SceneManager {
     }
 
 
-
-
-
-
-    public void createInLobbyView(InLobbyController con){
+    public void createInLobbyView(InLobbyController con) {
         Group localGroup = new Group();
         creators.put(InLobbyView.class, (Callable<InLobbyView>) () -> new InLobbyView(localGroup, con));
         FXMLLOADER("/LobbyScreen/InLobbyScreen.fxml");
@@ -136,7 +194,7 @@ public class SceneManager {
         FXMLLOADER("/PlayerView.fxml");
     }
 
-    public void loadShop(ShopController shopCon){
+    public void loadShop(ShopController shopCon) {
         creators.put(ShopView.class, (Callable<ShopView>) () -> new ShopView(groepen.get("shopGroup"), shopCon));
         FXMLLOADER("/ShopView.fxml");
     }
@@ -151,7 +209,7 @@ public class SceneManager {
         FXMLLOADER("/TurnView.fxml");
     }
 
-    public void loadDice(DiceController diceCon){
+    public void loadDice(DiceController diceCon) {
         new DiceView(diceCon, groepen.get("diceGroup"));
     }
 
@@ -175,6 +233,7 @@ public class SceneManager {
                 }
             }
         });
+
         try {
             fxmlLoader.load();
         } catch (IOException e) {

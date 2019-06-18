@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.control.Button?>
+<Pane fx:id="root" layoutX="0" layoutY="0" prefHeight="100.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.VervallenView">
+   <children>
+      <Button fx:id="vervalButton" layoutY="238.0" mnemonicParsing="false" onAction="#inVerval" text="vervallen" />
+   </children>
+</Pane>
