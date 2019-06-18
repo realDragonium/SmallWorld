@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+
+<Group fx:id="groupFXML" layoutY="20" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.TurnView">
+    <children>
+        <TextField layoutY="40.0" fx:id="turnField"/>
+        <TextField layoutY="80.0" fx:id="faseField"/>
+    </children>
+</Group>
