@@ -56,22 +56,6 @@ public class LobbyController {
 	}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	public void exitLobby(int decreaseLobbySize) {   
 		lobbymodel.exitLobby(decreaseLobbySize);
 	}

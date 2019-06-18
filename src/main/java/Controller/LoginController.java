@@ -7,6 +7,10 @@ import models.LoginModel;
 import observers.LoginObserver;
 import Controller.HomeScreenController;
 
+
+
+
+
 public class LoginController {
 	private FirebaseServiceOwn fb = Applicatie.getFirebaseService();
     private LoginModel hsModel = new LoginModel();
