@@ -23,7 +23,6 @@ public class LobbySettingsModel implements LobbySettingsObservable {
 
     @Override
     public void unregister(LobbySettingsObserver mvo) {
-
     }
 
     public String getNameLobby(){

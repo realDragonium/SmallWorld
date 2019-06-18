@@ -34,9 +34,7 @@ public class LobbySettingsView implements LobbySettingsObserver{
 
     public void submit(){
         textLobby = lobbyNaam.getText();
-
         playerAmount = box.getValue();
-
        // createLobby();
         System.out.println(textLobby + playerAmount);
         con.lobbyView(textLobby, playerAmount);
@@ -56,7 +54,6 @@ public class LobbySettingsView implements LobbySettingsObserver{
         group.getChildren().add(root);
         con.register(this);
         playerAmountBox();
-
     }
 
     public void lobbyName(){}

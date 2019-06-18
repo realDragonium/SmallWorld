@@ -38,7 +38,6 @@ public class LobbyView implements LobbyObserver {
             panel.add(btn, 0, gridCounter);
             panel.getChildren().get(gridCounter).setId("button" + gridCounter);
             gridCounter++;
-
             btn.setOnAction(d -> {
                 if (activeButton != null) {
                     activeButton.setStyle(" -fx-background-color:   -fx-background");

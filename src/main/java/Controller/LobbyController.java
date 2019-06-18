@@ -22,8 +22,6 @@ public class LobbyController {
 		SceneManager.getInstance().createLobbyView(this);
 	}
 
-
-
 	public LobbyController(String lobbyName, String playerAmount){
 		lobbymodel.setLobbyName(lobbyName);
 		lobbymodel.setPlayerAmount(playerAmount);
