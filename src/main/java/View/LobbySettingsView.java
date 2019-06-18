@@ -23,9 +23,9 @@ public class LobbySettingsView implements LobbySettingsObserver{
     public Button hosten;
     public Button test;
 
-    public GridPane lobbyLijst;
-    private Button[] lobbyQuantity = new Button[5];
-    private int gridCounter = 0;
+    //public GridPane lobbyLijst;
+    //private Button[] lobbyQuantity = new Button[5];
+   // private int gridCounter = 0;
 
     public LobbySettingsView(Group group, LobbySettingsController con) {
         this.group = group;
@@ -42,17 +42,6 @@ public class LobbySettingsView implements LobbySettingsObserver{
         con.lobbyView(textLobby, playerAmount);
         // con.lobbyView(textLobby);   // gaat terug naar lobby overzicht
     }
-
-
-    public void createLobby() {
-
-
-
-
-        }
-
-
-
 
     public void back(){
         con.lobbyView();

@@ -3,16 +3,14 @@ package Firebase;
 import Objects.RaceFiche;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
+import com.google.cloud.firestore.EventListener;
 import com.google.firebase.database.annotations.NotNull;
 import com.google.firebase.database.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class FirebaseServiceOwn {
-
     private Firestore firestore;
     private CollectionReference colRef;
     private DocumentReference gameRef;
@@ -81,6 +79,45 @@ public class FirebaseServiceOwn {
                 else System.out.print("Current data: null");
             }
         });
+    }
+
+    // create a lobby
+    public void createLobby(int playerAmount, String lobbyNaam){
+        HashMap<String, Object> lobbySettings = new HashMap<>();
+        lobbySettings.put("Naam", lobbyNaam);
+        lobbySettings.put("Amount", playerAmount);
+        firestore.collection("Lobby").document(lobbyNaam).set(lobbySettings);
+    }
+
+    //LobbyListener
+    public void LobbyListener(final FirebaseLobbyObserver controller){
+        CollectionReference docRef = firestore.collection("Lobby");
+        docRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirestoreException error) {
+                if (error != null) {
+                    System.err.println("Listen failed: " + error);
+                    return;
+                }
+                List<String> buttonLijst = new ArrayList<>();
+                for(DocumentSnapshot doc : snapshot.getDocuments()){
+                    //System.out.println("fb: "+doc.getId());
+                    buttonLijst.add(doc.getId());
+                }
+                controller.update(buttonLijst);
+            }
+        });
+    }
+
+    // retrieves active lobbies
+    public List<String> getActiveLobbies() throws ExecutionException, InterruptedException {
+        ApiFuture<QuerySnapshot> querys = firestore.collection("Lobby").get();
+        QuerySnapshot query = querys.get();
+        List<String> namen = new ArrayList<>();
+        for(QueryDocumentSnapshot QDoc: query){
+            namen.add(QDoc.getId());
+            System.out.println(QDoc.getId());
+        }
+        return namen;
     }
 
     //player Updates

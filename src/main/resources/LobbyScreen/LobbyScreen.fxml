@@ -2,7 +2,6 @@
 
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.GridPane?>
@@ -21,7 +20,6 @@
       <Button fx:id="terug" layoutX="178.0" layoutY="353.0" mnemonicParsing="false" onAction="#terug" prefHeight="25.0" prefWidth="100.0" text="Terug" />
       <Button fx:id="hosten" layoutX="364.0" layoutY="353.0" mnemonicParsing="false" onAction="#hostGame" prefHeight="25.0" prefWidth="100.0" text="Host game" />
       <Button fx:id="join" layoutX="542.0" layoutY="353.0" mnemonicParsing="false" onAction="#join" prefHeight="25.0" prefWidth="100.0" text="Join" />
-      <TextField fx:id="textfield1" layoutX="364.0" layoutY="116.0" prefHeight="25.0" prefWidth="315.0" />
-      <GridPane fx:id="pane1" layoutX="164.0" layoutY="98.0" prefHeight="200.0" prefWidth="200.0" />
+      <GridPane fx:id="panel" layoutX="164.0" layoutY="98.0" />
    </children>
 </Group>

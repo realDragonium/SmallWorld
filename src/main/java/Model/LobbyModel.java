@@ -12,12 +12,12 @@ public class LobbyModel implements LobbyObservable {
 	private String lobbySize[];  // max 4 spelers
 	private int lobbySizeCounter = 0;
 	private int lobbyAmount = 0;
-
 	private String playerAmount;
-
 	private String[] spelers = {"Speler 1", "Speler 2", "Speler 3", "Speler 4"};
-
 	private String lobbyNaam;
+	private List<String> lobbynamen = new ArrayList<>();
+
+
 
 	public String getLobbyNaam() {
 		notifyAllObservers();
@@ -48,10 +48,9 @@ public class LobbyModel implements LobbyObservable {
 	}
 
 	public void hostLobby(String lobNaam) {
-
 		lobbySize = new String[4];           // Lege array die 4 groot is.
 		lobbyAmount++;  // aantal lobbies = +1
-		
+
 		lobbyNaam = lobNaam;
 		System.out.println(lobbyNaam);
 		spelerToevoegen();
@@ -59,18 +58,33 @@ public class LobbyModel implements LobbyObservable {
 	}
 
 	public void exitLobby(int decreaseLobbySize) {
-
 		lobbyAmount = decreaseLobbySize;
 		lobbyAmount--;
 		lobbySizeCounter--;           
 		System.out.println("Lobby is verwijderd   ");
-
 		notifyAllObservers();
 	}
 
 	public void joinGame() {
 		spelerToevoegen();
 	}
+
+
+
+
+
+	public void newLobbyList(List<String> namen){
+		lobbynamen = namen;
+//		System.out.println(namen.size());
+		notifyAllObservers();
+	}
+
+
+
+
+
+
+
 
 	public void spelerToevoegen() {
 		try {
@@ -94,8 +108,13 @@ public class LobbyModel implements LobbyObservable {
 	@Override
 	public void notifyAllObservers() {
 		for(LobbyObserver obs : observers) {
-			obs.update();
+			obs.update(this);
 		}
+	}
+
+	@Override
+	public List<String> getLobbyName() {
+		return lobbynamen;
 	}
 
 	@Override

@@ -11,12 +11,10 @@ public class LobbySettingsController {
 
     public LobbySettingsController(){
         SceneManager.getInstance().createLobbySettingsView(this);
-
     }
 
     public void lobbyView(String lobbyNaam, String playerAmount){
         new LobbyController(lobbyNaam, playerAmount);
-
     }
 
     public void lobbyView(){
@@ -26,9 +24,6 @@ public class LobbySettingsController {
     public void startLobby(){
         new InLobbyController();
     }
-
-
-
 
     public void register(LobbySettingsObserver ob){
         mod.register(ob);
