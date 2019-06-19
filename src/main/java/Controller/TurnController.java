@@ -10,7 +10,7 @@ public class TurnController {
 
     private TurnModel model;
     private GameController gameCon;
-    private int startingPlayer;
+    private int currentPlayer;
 
 
     TurnController(GameController gameCon){
@@ -21,8 +21,8 @@ public class TurnController {
     }
 
     public void decideStartingPlayer(){
-        startingPlayer = new Random().nextInt(4) + 1;
-        gameCon.setCurrentPlayer(startingPlayer);
+        currentPlayer = new Random().nextInt(4) + 1;
+        gameCon.setCurrentPlayer(currentPlayer);
 
     }
 
@@ -33,11 +33,11 @@ public class TurnController {
     void nextTurn(){
         if(gameCon.isGameOver()) return;
         model.nextTurn();
-        int player = (model.currentTurn - 1) + startingPlayer;
-        if(player > 4){
-            player = player - startingPlayer;
+        currentPlayer++;
+        if(currentPlayer == 5){
+            currentPlayer = 1;
         }
-        gameCon.changePlayerTurn("player"+player);
+        gameCon.changePlayerTurn("player"+currentPlayer);
     }
 
     String getCurrentPlayer() {

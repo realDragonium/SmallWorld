@@ -95,7 +95,7 @@ public class GameController {
     }
 
     public PlayerController getCurrentPlayer(){
-        return players.get(turnCon.getCurrentPlayer());
+        return currentPlayer;
     }
 
     private void createAttCon(){
