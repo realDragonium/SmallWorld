@@ -222,19 +222,21 @@ public class FirebaseServiceOwn {
         for(QueryDocumentSnapshot iets : list){
             colRef.document(lobbyName).collection("Areas").document(iets.getId()).set(iets.getData());
 //            firestore.collection("Maps").document("4PlayerMap").collection("Areas").document(iets.getId()).set(list.get(0).getData());
-//            iets.getData()
         }
-
-
-
-//        firestore.collection("Maps").document("4PlayerMap").collection("Areas").document()
-//        gameRef.collection("Areas").document(areaId).set(area);
     }
 
     public void startGame(String lobbyNaam) {
         firestore.collection("Lobby").document(lobbyNaam).update("begin", true);
         setGame(lobbyNaam);
 
+        TimerTask deleteLobby = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> firestore.collection("Lobby").document(lobbyNaam).delete());
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(deleteLobby, 5000);
 //        firestore.collection("Games").document(lobbyNaam).collection("Players").document("player1").set(info);
     }
 
@@ -244,7 +246,13 @@ public class FirebaseServiceOwn {
     }
 
 
-//    public void
+    public void updateTime(boolean endPhase, String phase, int timer){
+        Map<String, Object> info = new HashMap<>();
+        info.put("endPhase", endPhase);
+        info.put("phase", phase);
+        info.put("timer", timer);
+        gameRef.collection("Extras").document("Timer").set(info);
+    }
 
     /**
      * Overschrijft een document als het als bestaat of maakt een nieuwe aan.
