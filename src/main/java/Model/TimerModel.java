@@ -20,14 +20,6 @@ public class TimerModel implements TimerObservable, ChangeListener {
         return timerDone;
     }
 
-    public void addSecond(){
-        elapsedTime++;
-        if(elapsedTime >= timeAmount){
-            timerDone = true;
-        }
-        notifyAllObservers();
-    }
-
     @Override
     public void register(TimerObserver to) {
         observer = to;
@@ -40,7 +32,7 @@ public class TimerModel implements TimerObservable, ChangeListener {
 
     @Override
     public int getSeconds() {
-        return timeAmount - elapsedTime;
+        return elapsedTime;
     }
 
     @Override

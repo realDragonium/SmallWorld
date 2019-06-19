@@ -30,7 +30,6 @@ class GameTurn implements FirebaseControllerObserver {
 
         fb.timerListen(this);
         SceneManager.getInstance().switchToSpectatingView();
-        startPreperationPhase();
     }
 
     void endPhase() {
@@ -104,6 +103,7 @@ class GameTurn implements FirebaseControllerObserver {
         if(endPhase){
             endPhase();
             phaseTimer.setTime(timer);
+            gameCon.getGameTimer().resetTimer();
         }
     }
 }

@@ -17,6 +17,7 @@ public class GameController {
     private RoundController roundCon;
     private TurnController turnCon;
     private Map2DController mapCon;
+    private String lobbyName;
     private VervallenController vervCon;
     private GameTimer gameTimer;
     private AttackController attCon;
@@ -30,6 +31,7 @@ public class GameController {
     public GameController(String lobbyName, String playerID) {
         myPlayerId = playerID;
         model = new GameModel(8, 8);
+        this.lobbyName = lobbyName;
 
         fb.setGame(lobbyName);
 
@@ -145,12 +147,11 @@ public class GameController {
     private void startGame(){
 
         gameTurn = new GameTurn(this, currentPlayer);
-        if(myPlayerId.equals("player1")) {
-            createGameTimer();
-        }
+        createGameTimer();
     }
 
     public void createGameTimer(){
+        System.out.println("hij maakt timer aan");
         gameTimer = new GameTimer(this, 10);
     }
 
@@ -168,5 +169,9 @@ public class GameController {
 
     public GameTimer getGameTimer() {
         return gameTimer;
+    }
+
+    public String getLobbyname(){
+        return lobbyName;
     }
 }
