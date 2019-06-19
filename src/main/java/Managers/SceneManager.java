@@ -28,10 +28,7 @@ public class SceneManager {
     }
 
     public static SceneManager getInstance() {
-        if (sceneManager == null) {
-            sceneManager = new SceneManager();
-        }
-
+        if (sceneManager == null) sceneManager = new SceneManager();
         return sceneManager;
     }
 

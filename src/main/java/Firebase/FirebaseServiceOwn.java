@@ -94,7 +94,7 @@ public class FirebaseServiceOwn {
     }
 
     //Is er nog plek in deze lobby?
-    public boolean joinLobby(String lobbyNaam, String Name){
+    public int joinLobby(String lobbyNaam, String Name){
         DocumentReference docRef = firestore.collection("Lobby").document(lobbyNaam);
         DocumentSnapshot doc = null;
         try {
@@ -108,10 +108,11 @@ public class FirebaseServiceOwn {
         for(int i = 1; i < 5; i++) {
             if (lobbySet.get("player" + i) == null) {
                 docRef.update("player" + i, Name);
-                return true;
+                System.out.println(i);
+                return i;
             }
         }
-        return false;
+        return 0;
     }
 
     public void leaveLobby(String lobbyNaam, String Name){
