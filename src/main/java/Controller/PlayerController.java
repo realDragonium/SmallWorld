@@ -24,9 +24,6 @@ public class PlayerController implements FirebaseControllerObserver {
         model = new PlayerModel(playerID);
         this.gameCon = gameCon;
         SceneManager.getInstance().loadPlayer(playerID, this);
-        Map<String, Object> info = new HashMap<>();
-        info.put("Name", app.getAccountCon().getAccountName());
-        fb.registerPlayer(gameCon.getPlayer().getId(), info);
         fb.playerListen(playerID, this);
     }
 
@@ -36,7 +33,10 @@ public class PlayerController implements FirebaseControllerObserver {
         combinations.add(combo);
         combo.setPlayer(this);
         setFiches(combo.getRace().fichesCount());
-        fb.playerUpdateFiches(gameCon.getPlayer().getId(), combo.getRace().fichesCount());
+        Map<String, Object> info = new HashMap<>();
+        info.put("fiches", model.getFiches());
+        info.put("punten", model.getPunten());
+        fb.playerUpdate(gameCon.getPlayer().getId(), info);
     }
 
     public void showActiveCombiFichesLeft() {
@@ -93,6 +93,7 @@ public class PlayerController implements FirebaseControllerObserver {
     public void update(DocumentSnapshot ds) {
         if(gameCon.getCurrentPlayer()==this) return;
         model.fiches = (int) Math.round(ds.getDouble("fiches"));
+        model.punten = (int) Math.round(ds.getDouble("fiches"));
         model.notifyObserver();
     }
 

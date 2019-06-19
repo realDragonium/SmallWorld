@@ -19,8 +19,10 @@ public class LobbyController {
 
 	public void joinLobby(String Name){
 		Applicatie app = SceneManager.getInstance().getApp();
-		if(app.getFirebaseService().joinLobby(Name, app.getAccountCon().getAccountName())){
-			new InLobbyController(Name);
+		int id = app.getFirebaseService().joinLobby(Name, app.getAccountCon().getAccountName());
+		if(id>0){
+
+			new InLobbyController(Name, id);
 		}
 	}
 

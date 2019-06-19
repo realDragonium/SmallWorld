@@ -5,6 +5,7 @@ import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
 import Model.GameModel;
 import Objects.RattenKracht;
+import com.google.cloud.firestore.Firestore;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,20 +18,31 @@ public class GameController {
     private TurnController turnCon;
     private Map2DController mapCon;
     private VervallenController vervCon;
-    private AreaController areaCon;
     private AttackController attCon;
     private ShopController shopCon;
     private GameTurn gameTurn;
+    private PlayerController myPlayer;
     private String myPlayerId;
-
+    private Applicatie app = SceneManager.getInstance().getApp();
+    private FirebaseServiceOwn fb = app.getFirebaseService();
 
     public GameController(String lobbyName, String playerID) {
         myPlayerId = playerID;
-        SceneManager.getInstance().getApp().getFirebaseService().setGame(lobbyName);
         model = new GameModel(8, 8);
+        fb.setGame(lobbyName);
+        Map<String, Object> info = new HashMap<>();
+        info.put("Name", app.getAccountCon().getAccountName());
+        info.put("fiches", 0);
+        info.put("punten", 5);
+        fb.registerPlayer(playerID, info);
         SceneManager.getInstance().createGameView(this);
         SceneManager.getInstance().makeMap();
         createGameParts();
+        startGame();
+    }
+
+    public String getMyPlayerId(){
+        return myPlayerId;
     }
 
     public PlayerController getPlayer(){
@@ -87,7 +99,7 @@ public class GameController {
     }
 
     public PlayerController getCurrentPlayer(){
-        return players.get(turnCon.getCurrentPlayer());
+        return currentPlayer;
     }
 
     private void createAttCon(){
@@ -108,8 +120,6 @@ public class GameController {
         return mapCon;
     }
 
-    AreaController getAreaCon(){return areaCon;}
-
     VervallenController getVervCon(){return vervCon;}
 
     AttackController getAttCon(){
@@ -129,10 +139,18 @@ public class GameController {
 
 
     private void startGame(){
-
+        gameTurn = new GameTurn(this, currentPlayer);
     }
 
     public void nextTurn() {
         turnCon.nextTurn();
+    }
+
+    public PlayerController getMyPlayer() {
+        return myPlayer;
+    }
+
+    public void setCurrentPlayer(int i) {
+        currentPlayer = getPlayer("player" + i);
     }
 }

@@ -1,12 +1,17 @@
 package Controller;
 
+import Firebase.FirebaseControllerObserver;
 import Managers.SceneManager;
 import Model.InLobbyModel;
 import Observer.InLobbyObserver;
 import Applicatie.Applicatie;
+import com.google.cloud.firestore.DocumentSnapshot;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 
-public class InLobbyController {
+import java.util.Map;
+
+public class InLobbyController implements FirebaseControllerObserver {
     Applicatie app = SceneManager.getInstance().getApp();
     InLobbyModel mod = new InLobbyModel();
 
@@ -14,14 +19,17 @@ public class InLobbyController {
         SceneManager.getInstance().createInLobbyView(this);
     }
 
-    public InLobbyController(String lobbyNaam, int playerAmount){
+    public InLobbyController(String lobbyNaam, int id){
+        app.getAccountCon().setPlayerId("player"+id);
         SceneManager.getInstance().createInLobbyView(this);
         setLobbyNaam(lobbyNaam);
+        app.getFirebaseService().inLobbyListener(lobbyNaam, this);
     }
 
     public InLobbyController(String lobbyNaam){
         SceneManager.getInstance().createInLobbyView(this);
         setLobbyNaam(lobbyNaam);
+        SceneManager.getInstance().getApp().getFirebaseService().inLobbyListener(lobbyNaam, this);
     }
 
     public void setLobbyNaam(String lobbyNaam){
@@ -29,6 +37,7 @@ public class InLobbyController {
     }
 
     public void start(){            // start button
+        SceneManager.getInstance().getApp().getFirebaseService().startGame(mod.getLobbyNaam());
         new GameController(mod.getLobbyNaam(), app.getAccountCon().getPlayerId());  // starten van het spel
     }
 
@@ -46,9 +55,16 @@ public class InLobbyController {
         mod.unregister(ob);
     }
 
+    public void startAlso(){
+        System.out.println("test");
+        new GameController(mod.getLobbyNaam(), app.getAccountCon().getPlayerId());
+    }
 
-
-
-
-
+    @Override
+    public void update(DocumentSnapshot ds) {
+        Map<String, Object> map = ds.getData();
+        if(((Boolean)map.get("begin"))){
+            Platform.runLater(() -> new GameController(mod.getLobbyNaam(), app.getAccountCon().getPlayerId()));
+        }
+    }
 }

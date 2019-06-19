@@ -1,11 +1,14 @@
 package Firebase;
 
+import Controller.GameController;
+import Managers.SceneManager;
 import Objects.RaceFiche;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.cloud.firestore.EventListener;
 import com.google.firebase.database.annotations.NotNull;
 import com.google.firebase.database.annotations.Nullable;
+import javafx.application.Platform;
 
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -28,6 +31,7 @@ public class FirebaseServiceOwn {
     public Firestore getFireStore(){
         return firestore;
     }
+
     /**
      * Geeft een update naar de meegeleverde controller
      * op het moment dat er een wijziging in het firebase document plaatsvindt.
@@ -53,7 +57,7 @@ public class FirebaseServiceOwn {
     }
 
     public void playerListen(String player, final FirebaseControllerObserver controller) {
-        DocumentReference docRef = gameRef.collection("Spelers").document(player);
+        DocumentReference docRef = gameRef.collection("Players").document(player);
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirestoreException error) {
                 if (error != null) {
@@ -66,7 +70,7 @@ public class FirebaseServiceOwn {
     }
 
     //AreaRegister
-    public void AreaListener(String areaId, final FirebaseControllerObserver controller){
+    public void AreaListener(String areaId, final FirebaseControllerObserver controller) {
         DocumentReference docRef = gameRef.collection("Areas").document(areaId);
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirestoreException error) {
@@ -80,10 +84,11 @@ public class FirebaseServiceOwn {
     }
 
     // create a lobby
-    public boolean createLobby(int playerAmount, String lobbyNaam, String name){
+    public boolean createLobby(int playerAmount, String lobbyNaam, String name) {
         HashMap<String, Object> lobbySettings = new HashMap<>();
         lobbySettings.put("Naam", lobbyNaam);
         lobbySettings.put("Amount", playerAmount);
+        lobbySettings.put("begin", false);
         lobbySettings.put("player1", name);
         lobbySettings.put("player2", null);
         lobbySettings.put("player3", null);
@@ -93,7 +98,7 @@ public class FirebaseServiceOwn {
     }
 
     //Is er nog plek in deze lobby?
-    public boolean joinLobby(String lobbyNaam, String Name){
+    public int joinLobby(String lobbyNaam, String Name) {
         DocumentReference docRef = firestore.collection("Lobby").document(lobbyNaam);
         DocumentSnapshot doc = null;
         try {
@@ -104,16 +109,17 @@ public class FirebaseServiceOwn {
             e.printStackTrace();
         }
         Map<String, Object> lobbySet = doc.getData();
-        for(int i = 1; i < 5; i++) {
+        for (int i = 1; i < 5; i++) {
             if (lobbySet.get("player" + i) == null) {
                 docRef.update("player" + i, Name);
-                return true;
+                System.out.println("join lobby");
+                return i;
             }
         }
-        return false;
+        return 0;
     }
 
-    public void leaveLobby(String lobbyNaam, String Name){
+    public void leaveLobby(String lobbyNaam, String Name) {
         DocumentReference docRef = firestore.collection("Lobby").document(lobbyNaam);
         DocumentSnapshot doc = null;
         try {
@@ -124,20 +130,35 @@ public class FirebaseServiceOwn {
             e.printStackTrace();
         }
         Map<String, Object> lobbySet = doc.getData();
-        for(int i = 1; i < 5; i++) {
+        for (int i = 1; i < 5; i++) {
             if (lobbySet.get("player" + i).equals(Name)) {
                 docRef.update("player" + i, null);
-                if(i == 1) firestore.collection("Lobby").document(lobbyNaam).delete();
+                if (i == 1) firestore.collection("Lobby").document(lobbyNaam).delete();
                 return;
             }
         }
     }
 
+    //InLobbyListener
+    public void inLobbyListener(String lobbyName, final FirebaseControllerObserver controller) {
+        DocumentReference docRef = firestore.collection("Lobby").document(lobbyName);
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirestoreException error) {
+                if (error != null) {
+                    System.err.println("Listen failed: " + error);
+                    return;
+                }
+                if (snapshot != null && snapshot.exists()) {
+                    controller.update(snapshot);
+                }
+            }
+        });
+    }
 
 
     //Werkt wel niet toegepast, runtime items toevoegen vind javafx niet leuk.
     //LobbyListener
-    public void LobbyListener(final FirebaseLobbyObserver controller){
+    public void LobbyListener(final FirebaseLobbyObserver controller) {
         CollectionReference docRef = firestore.collection("Lobby");
         docRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
             public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirestoreException error) {
@@ -146,7 +167,7 @@ public class FirebaseServiceOwn {
                     return;
                 }
                 List<String> buttonLijst = new ArrayList<>();
-                for(DocumentSnapshot doc : snapshot.getDocuments()){
+                for (DocumentSnapshot doc : snapshot.getDocuments()) {
                     //System.out.println("fb: "+doc.getId());
                     buttonLijst.add(doc.getId());
                 }
@@ -160,7 +181,7 @@ public class FirebaseServiceOwn {
         ApiFuture<QuerySnapshot> querys = firestore.collection("Lobby").get();
         QuerySnapshot query = querys.get();
         List<String> namen = new ArrayList<>();
-        for(QueryDocumentSnapshot QDoc: query){
+        for (QueryDocumentSnapshot QDoc : query) {
             namen.add(QDoc.getId());
             System.out.println(QDoc.getId());
         }
@@ -168,21 +189,33 @@ public class FirebaseServiceOwn {
     }
 
     //player Updates
-    public void playerUpdateFiches(String player, int fichesCount){
-        DocumentReference docRef = gameRef.collection("Spelers").document(player);
+    public void playerUpdateFiches(String player, int fichesCount) {
+        DocumentReference docRef = gameRef.collection("Players").document(player);
         docRef.update("fiche", fichesCount);
     }
+    public void playerUpdate(String id, Map<String, Object> info) {
+        gameRef.collection("Players").document(id).update(info);
+    }
+
 
     //areaUpdates
-    public void areaUpdateFiches(String areaId, int count){
+    public void areaUpdateFiches(String areaId, int count) {
         DocumentReference docRef = gameRef.collection("Areas").document(areaId);
         docRef.update("fiches", count);
     }
 
     //Areas setten in firebase
-    public void setAreas(String areaId, Map<String, Object> area){
+    public void setAreas(String areaId, Map<String, Object> area) {
         gameRef.collection("Areas").document(areaId).set(area);
     }
+
+    public void startGame(String lobbyNaam) {
+        firestore.collection("Lobby").document(lobbyNaam).update("begin", true);
+        setGame(lobbyNaam);
+
+//        firestore.collection("Games").document(lobbyNaam).collection("Players").document("player1").set(info);
+    }
+
 
     public void registerPlayer(String playerId, Map<String, Object> info){
         gameRef.collection("Players").document(playerId).set(info);
@@ -277,6 +310,8 @@ public class FirebaseServiceOwn {
         }
         return null;
     }
+
+
 }
 
 

@@ -7,7 +7,7 @@ public class PlayerModel implements PlayerObservable {
     private PlayerObserver observer;
     private String playerID;
     public int fiches;
-    private int punten;
+    public int punten;
 
     public PlayerModel(String playerId) {
         playerID = playerId;

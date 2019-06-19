@@ -21,26 +21,40 @@ public class SceneManager {
     private static SceneManager sceneManager;
     private Applicatie app;
     private Group gameView;
+    private Pane currentPane;
 
     public Applicatie getApp(){
         return app;
     }
 
     public static SceneManager getInstance() {
-        if (sceneManager == null) {
-            sceneManager = new SceneManager();
-        }
-
+        if (sceneManager == null) sceneManager = new SceneManager();
         return sceneManager;
     }
 
     public void changeToScene(Parent group) {
-        Scene scene = new Scene(group);
-        app.changeScene(scene);
+        currentPane.getChildren().clear();
+        System.out.println(group.getChildrenUnmodifiable());
+        currentPane.getChildren().add(group);
+    }
+
+    public void addToScene(String group){
+        currentPane.getChildren().add(groepen.get(group));
     }
 
     public void registerApp(Applicatie newApp) {
         this.app = newApp;
+    }
+
+    public void switchToSpectatingView(){
+        Pane pane = new Pane();
+        System.out.println("voeg toe");
+        pane.getChildren().add(groepen.get("mapGroup"));
+        pane.getChildren().add(groepen.get("playerGroup"));
+        pane.getChildren().add(groepen.get("timerGroup"));
+        pane.getChildren().add(groepen.get("turnGroup"));
+        pane.getChildren().add(groepen.get("roundGroup"));
+        changeToScene(pane);
     }
 
     public void switchToPreperationPhase() {
@@ -55,7 +69,7 @@ public class SceneManager {
         changeToScene(pane);
     }
 
-    public void switchToAttackPhase() {
+    public void switchToAttackPhase(){
         Pane pane = new Pane();
         pane.getChildren().add(groepen.get("mapGroup"));
         pane.getChildren().add(groepen.get("playerGroup"));
@@ -76,13 +90,6 @@ public class SceneManager {
         changeToScene(pane);
     }
 
-    public void LeaderboardView(LeaderboardController con) {
-        Group localGroup = new Group();
-        creators.put(LeaderboardView.class, (Callable<LeaderboardView>) () -> new LeaderboardView(localGroup, con));
-        FXMLLOADER("/Leaderboard/Leaderboard.fxml");
-        changeToScene(localGroup);
-    }
-
     public void createLoginView(LoginController loginController) {
         Group localGroup = new Group();
         creators.put(LoginView.class, () -> {
@@ -99,6 +106,15 @@ public class SceneManager {
         changeToScene(localGroup);
     }
 
+    public void LeaderboardView(LeaderboardController leaderboardCon){
+        Group localGroup = new Group();
+        creators.put(LeaderboardView.class, (Callable<LeaderboardView>) () -> new LeaderboardView(localGroup, leaderboardCon));
+        FXMLLOADER("/Leaderboard/Leaderboard.fxml");
+        changeToScene(localGroup);
+    }
+
+
+
     public void createGameView(GameController gameCon) {
         gameView = new Group();
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -113,6 +129,11 @@ public class SceneManager {
             e.printStackTrace();
         }
         changeToScene(gameView);
+    }
+
+
+    public void startGame(){
+        new GameController("First", "player1");
     }
 
     public void createAreaView(AreaController areaController, Group area) {
@@ -240,4 +261,7 @@ public class SceneManager {
         }
     }
 
+    public void setPane(Pane root) {
+        currentPane = root;
+    }
 }
