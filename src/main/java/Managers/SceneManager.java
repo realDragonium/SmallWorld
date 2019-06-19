@@ -116,7 +116,6 @@ public class SceneManager {
 
 
     public void createGameView(GameController gameCon) {
-
         gameView = new Group();
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/GameMain.fxml"));
@@ -130,6 +129,11 @@ public class SceneManager {
             e.printStackTrace();
         }
         changeToScene(gameView);
+    }
+
+
+    public void startGame(){
+        new GameController("First", "player1");
     }
 
     public void createAreaView(AreaController areaController, Group area) {

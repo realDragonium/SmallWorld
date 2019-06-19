@@ -1,6 +1,8 @@
 package Observer;
 
+import Observable.InLobbyObservable;
+
 public interface InLobbyObserver {
 
-    void update();
+    void update(InLobbyObservable ilo);
 }
