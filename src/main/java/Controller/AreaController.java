@@ -26,20 +26,15 @@ public class AreaController implements FirebaseControllerObserver {
 		map2DCon = mapCon;
 		this.gameCon = gameCon;
 		SceneManager.getInstance().createAreaView(this, area);
-		setAreaInFirebase();
+//		setAreaInFirebase();
 		fb.AreaListener(model.getId(), this);
 	}
 
 	String getId(){return model.getId();}
 
-	public void setAreaInFirebase(){
-		Map<String, Object> area = new HashMap<>();
-		area.put("fiches", model.getNumberOfFiches());
-		area.put("owner", null);
-		area.put("oldOwner", null);
-		area.put("oldFiches", null);
-		fb.setAreas(model.getId(), area);
-	}
+//	public void setAreaInFirebase(){
+//		fb.setAreas();
+//	}
 
 	int numbersNeeded(){
 		return model.numbersNeeded();

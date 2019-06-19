@@ -33,7 +33,7 @@ public class GameController {
         Map<String, Object> info = new HashMap<>();
         info.put("Name", app.getAccountCon().getAccountName());
         info.put("fiches", 0);
-        info.put("punten", 5);
+        info.put("punten", 0);
         fb.registerPlayer(playerID, info);
         SceneManager.getInstance().createGameView(this);
         SceneManager.getInstance().makeMap();
