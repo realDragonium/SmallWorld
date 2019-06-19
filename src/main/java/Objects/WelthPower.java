@@ -1,5 +1,6 @@
 package Objects;
 
+import Controller.CombinationController;
 import Enum.TurnFase;
 
 public class WelthPower implements Power {
@@ -7,14 +8,15 @@ public class WelthPower implements Power {
     private String id = "Welth";
     private boolean used = false;
     private TurnFase usablePhase = TurnFase.preparing;
+    private CombinationController combiCon;
 
     @Override
     public void doAction(){
-        System.out.println("plus 7 points");
-        used = true;
+        if(!used){
+            combiCon.getPlayer().addPoints(7);
+            used = true;
+        }
     }
-
-
 
     @Override
     public String getId() {
@@ -24,5 +26,10 @@ public class WelthPower implements Power {
     @Override
     public boolean checkPhaseAction(TurnFase phase) {
         return phase.equals(usablePhase);
+    }
+
+    @Override
+    public void setCombiCon(CombinationController combiCon) {
+        this.combiCon = combiCon;
     }
 }
