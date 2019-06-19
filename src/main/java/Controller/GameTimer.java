@@ -43,8 +43,7 @@ public class GameTimer {
             Map<String, Object> info = new HashMap<>();
             info.put("endPhase", true);
             info.put("time", maxTime);
-            System.out.println(gameCon.getLobbyname());
-            fb.getFireStore().collection("Games").document(gameCon.getLobbyname()).collection("Extras").document("Timer").set(info);
+            fb.resetTimer(info);
         }
     }
 

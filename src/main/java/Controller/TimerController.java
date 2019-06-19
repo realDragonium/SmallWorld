@@ -1,13 +1,8 @@
 package Controller;
 
-import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
 import Model.TimerModel;
 import Observer.TimerObserver;
-import javafx.application.Platform;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class TimerController {
 

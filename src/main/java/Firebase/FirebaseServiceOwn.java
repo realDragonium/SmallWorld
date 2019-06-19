@@ -135,6 +135,11 @@ public class FirebaseServiceOwn {
         return 0;
     }
 
+    public void resetTimer(Map<String, Object> info) {
+        System.out.println(info.toString());
+        gameRef.collection("Extras").document("Timer").set(info);
+    }
+
     public void leaveLobby(String lobbyNaam, String Name) {
         DocumentReference docRef = firestore.collection("Lobby").document(lobbyNaam);
         DocumentSnapshot doc = null;
@@ -203,7 +208,6 @@ public class FirebaseServiceOwn {
         List<String> namen = new ArrayList<>();
         for (QueryDocumentSnapshot QDoc : query) {
             namen.add(QDoc.getId());
-            System.out.println(QDoc.getId());
         }
         return namen;
     }
@@ -262,7 +266,7 @@ public class FirebaseServiceOwn {
 
     public void updateTimer(boolean endPhase, int time){
         Map<String, Object> info = new HashMap<>();
-        info.put("endPhase", true);
+        info.put("endPhase", endPhase);
         info.put("time", time);
         gameRef.collection("Extras").document("Timer").set(info);
     }
@@ -378,6 +382,7 @@ public class FirebaseServiceOwn {
         }
         return null;
     }
+
 
 
 }
