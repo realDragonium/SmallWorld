@@ -1,8 +1,5 @@
 package Firebase;
 
-import Controller.GameController;
-import Managers.SceneManager;
-import Objects.RaceFiche;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.cloud.firestore.EventListener;
@@ -265,14 +262,13 @@ public class FirebaseServiceOwn {
     public void createTimer(String lobbyName){
         Map<String, Object> info = new HashMap<>();
         info.put("endPhase", false);
-        info.put("timer", 50);
         colRef.document(lobbyName).collection("Extras").document("Timer").set(info);
     }
 
-    public void updateTimer(boolean endPhase, int timer){
+    public void updateTimer(boolean endPhase, int time){
         Map<String, Object> info = new HashMap<>();
-        info.put("endPhase", endPhase);
-        info.put("timer", timer);
+        info.put("endPhase", true);
+        info.put("time", time);
         gameRef.collection("Extras").document("Timer").set(info);
     }
 
