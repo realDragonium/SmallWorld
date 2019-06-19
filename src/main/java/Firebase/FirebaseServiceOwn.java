@@ -84,7 +84,7 @@ public class FirebaseServiceOwn {
     }
 
     // create a lobby
-    public boolean createLobby(int playerAmount, String lobbyNaam, String name) {
+    public void createLobby(int playerAmount, String lobbyNaam, String name) {
         HashMap<String, Object> lobbySettings = new HashMap<>();
         lobbySettings.put("Naam", lobbyNaam);
         lobbySettings.put("Amount", playerAmount);
@@ -94,7 +94,8 @@ public class FirebaseServiceOwn {
         lobbySettings.put("player3", null);
         lobbySettings.put("player4", null);
         firestore.collection("Lobby").document(lobbyNaam).set(lobbySettings);
-        return true;
+
+        setAreas(lobbyNaam);
     }
 
     //Is er nog plek in deze lobby?
@@ -133,7 +134,10 @@ public class FirebaseServiceOwn {
         for (int i = 1; i < 5; i++) {
             if (lobbySet.get("player" + i).equals(Name)) {
                 docRef.update("player" + i, null);
-                if (i == 1) firestore.collection("Lobby").document(lobbyNaam).delete();
+                if (i == 1){
+                    firestore.collection("Lobby").document(lobbyNaam).delete();
+                    colRef.document(lobbyNaam).delete();
+                }
                 return;
             }
         }
@@ -206,8 +210,25 @@ public class FirebaseServiceOwn {
     }
 
     //Areas setten in firebase
-    public void setAreas(String areaId, Map<String, Object> area) {
-        gameRef.collection("Areas").document(areaId).set(area);
+    public void setAreas(String lobbyName) {
+        List<QueryDocumentSnapshot> list = null;
+        try {
+            list = firestore.collection("Maps").document("4PlayerMap").collection("Areas").get().get().getDocuments();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        for(QueryDocumentSnapshot iets : list){
+            colRef.document(lobbyName).collection("Areas").document(iets.getId()).set(iets.getData());
+//            firestore.collection("Maps").document("4PlayerMap").collection("Areas").document(iets.getId()).set(list.get(0).getData());
+//            iets.getData()
+        }
+
+
+
+//        firestore.collection("Maps").document("4PlayerMap").collection("Areas").document()
+//        gameRef.collection("Areas").document(areaId).set(area);
     }
 
     public void startGame(String lobbyNaam) {
@@ -221,6 +242,9 @@ public class FirebaseServiceOwn {
     public void registerPlayer(String playerId, Map<String, Object> info){
         gameRef.collection("Players").document(playerId).set(info);
     }
+
+
+//    public void
 
     /**
      * Overschrijft een document als het als bestaat of maakt een nieuwe aan.
