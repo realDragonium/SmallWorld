@@ -5,6 +5,7 @@ import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
 import Model.GameModel;
 import Objects.RattenKracht;
+import com.google.cloud.firestore.Firestore;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,19 +23,22 @@ public class GameController {
     private GameTurn gameTurn;
     private PlayerController myPlayer;
     private String myPlayerId;
-
+    private Applicatie app = SceneManager.getInstance().getApp();
+    private FirebaseServiceOwn fb = app.getFirebaseService();
 
     public GameController(String lobbyName, String playerID) {
         myPlayerId = playerID;
         model = new GameModel(8, 8);
-        SceneManager.getInstance().getApp().getFirebaseService().setGame(lobbyName);
-        System.out.println("test");
+        fb.setGame(lobbyName);
+        Map<String, Object> info = new HashMap<>();
+        info.put("Name", app.getAccountCon().getAccountName());
+        info.put("fiches", 0);
+        info.put("punten", 5);
+        fb.registerPlayer(playerID, info);
         SceneManager.getInstance().createGameView(this);
-        System.out.println("test2");
         SceneManager.getInstance().makeMap();
         createGameParts();
         startGame();
-
     }
 
     public String getMyPlayerId(){

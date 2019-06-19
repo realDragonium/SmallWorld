@@ -24,11 +24,11 @@ public class FirebaseServiceOwn {
         this.colRef = this.firestore.collection("Games");
     }
 
-    public void setGame(String lobbyName) {
+    public void setGame(String lobbyName){
         gameRef = colRef.document(lobbyName);
     }
 
-    public Firestore getFireStore() {
+    public Firestore getFireStore(){
         return firestore;
     }
 
@@ -57,7 +57,7 @@ public class FirebaseServiceOwn {
     }
 
     public void playerListen(String player, final FirebaseControllerObserver controller) {
-        DocumentReference docRef = gameRef.collection("Spelers").document(player);
+        DocumentReference docRef = gameRef.collection("Players").document(player);
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirestoreException error) {
                 if (error != null) {
@@ -149,9 +149,7 @@ public class FirebaseServiceOwn {
                     return;
                 }
                 if (snapshot != null && snapshot.exists()) {
-//                    if (snapshot.getBoolean("begin")) {
                     controller.update(snapshot);
-//                    }
                 }
             }
         });
@@ -192,9 +190,13 @@ public class FirebaseServiceOwn {
 
     //player Updates
     public void playerUpdateFiches(String player, int fichesCount) {
-        DocumentReference docRef = gameRef.collection("Spelers").document(player);
+        DocumentReference docRef = gameRef.collection("Players").document(player);
         docRef.update("fiche", fichesCount);
     }
+    public void playerUpdate(String id, Map<String, Object> info) {
+        gameRef.collection("Players").document(id).update(info);
+    }
+
 
     //areaUpdates
     public void areaUpdateFiches(String areaId, int count) {
@@ -209,8 +211,15 @@ public class FirebaseServiceOwn {
 
     public void startGame(String lobbyNaam) {
         firestore.collection("Lobby").document(lobbyNaam).update("begin", true);
+        setGame(lobbyNaam);
+
+//        firestore.collection("Games").document(lobbyNaam).collection("Players").document("player1").set(info);
     }
 
+
+    public void registerPlayer(String playerId, Map<String, Object> info){
+        gameRef.collection("Players").document(playerId).set(info);
+    }
 
     /**
      * Overschrijft een document als het als bestaat of maakt een nieuwe aan.
@@ -301,6 +310,7 @@ public class FirebaseServiceOwn {
         }
         return null;
     }
+
 
 }
 
