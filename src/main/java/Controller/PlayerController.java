@@ -9,11 +9,14 @@ import Observer.PlayerObserver;
 import com.google.cloud.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PlayerController implements FirebaseControllerObserver {
     private GameController gameCon;
-    private FirebaseServiceOwn fb = SceneManager.getInstance().getApp().getFirebaseService();
+    private Applicatie app = SceneManager.getInstance().getApp();
+    private FirebaseServiceOwn fb = app.getFirebaseService();
     private PlayerModel model;
     private List<CombinationController> combinations = new ArrayList<>();
 
@@ -21,7 +24,9 @@ public class PlayerController implements FirebaseControllerObserver {
         model = new PlayerModel(playerID);
         this.gameCon = gameCon;
         SceneManager.getInstance().loadPlayer(playerID, this);
-        SceneManager.getInstance().getApp().getFirebaseService().playerListen(playerID, this);
+        Map<String, Object> info = new HashMap<>();
+        info.put("Name", app.getAccountCon().getAccountName());
+        fb.registerPlayer(gameCon.getPlayer().getId(), info);
         fb.playerListen(playerID, this);
     }
 
@@ -31,6 +36,7 @@ public class PlayerController implements FirebaseControllerObserver {
         combinations.add(combo);
         combo.setPlayer(this);
         setFiches(combo.getRace().fichesCount());
+        fb.playerUpdateFiches(gameCon.getPlayer().getId(), combo.getRace().fichesCount());
     }
 
     public void showActiveCombiFichesLeft() {

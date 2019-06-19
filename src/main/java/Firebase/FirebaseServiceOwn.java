@@ -184,6 +184,10 @@ public class FirebaseServiceOwn {
         gameRef.collection("Areas").document(areaId).set(area);
     }
 
+    public void registerPlayer(String playerId, Map<String, Object> info){
+        gameRef.collection("Players").document(playerId).set(info);
+    }
+
     /**
      * Overschrijft een document als het als bestaat of maakt een nieuwe aan.
      * Wees hier dus voorzichtig mee.

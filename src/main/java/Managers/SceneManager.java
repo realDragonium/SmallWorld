@@ -99,10 +99,7 @@ public class SceneManager {
         changeToScene(localGroup);
     }
 
-
-
     public void createGameView(GameController gameCon) {
-
         gameView = new Group();
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/GameMain.fxml"));
