@@ -47,6 +47,10 @@ public class InLobbyView implements InLobbyObserver {
 
     @Override
     public void update(InLobbyObservable ilo){
+        System.out.println(ilo.getPlayer1());
+        System.out.println(ilo.getPlayer2());
+        System.out.println(ilo.getPlayer3());
+        System.out.println(ilo.getPlayer4());
         Player1.setText(ilo.getPlayer1());
         Player2.setText(ilo.getPlayer2());
         Player3.setText(ilo.getPlayer3());

@@ -64,7 +64,6 @@ public class InLobbyController implements FirebaseControllerObserver {
     public void update(DocumentSnapshot ds) {
 
         Map<String, Object> map = ds.getData();
-        System.out.println((String)map.get("player1"));
         mod.setPlayer( 1, (String)map.get("player1"));
         mod.setPlayer( 2, (String)map.get("player2"));
         mod.setPlayer( 3, (String)map.get("player3"));

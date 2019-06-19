@@ -93,7 +93,6 @@ public class InLobbyModel implements InLobbyObservable {
                 player4 = player;
                 break;
         }
-        System.out.println("yooo");
         notifyAllObservers();
 
         }
