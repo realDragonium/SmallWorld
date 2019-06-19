@@ -21,6 +21,7 @@ public class SceneManager {
     private static SceneManager sceneManager;
     private Applicatie app;
     private Group gameView;
+    private Pane currentPane;
 
     public SceneManager() {
     }
@@ -34,8 +35,12 @@ public class SceneManager {
     }
 
     public void changeToScene(Parent group) {
-        Scene scene = new Scene(group);
-        this.app.changeScene(scene);
+        currentPane.getChildren().clear();
+        currentPane.getChildren().add(group);
+    }
+
+    public void addToScene(Parent group){
+        currentPane.getChildren().add(group);
     }
 
     public void registerApp(Applicatie newApp) {
@@ -230,5 +235,9 @@ public class SceneManager {
             var4.printStackTrace();
         }
 
+    }
+
+    public void setPane(Pane root) {
+        currentPane = root;
     }
 }
