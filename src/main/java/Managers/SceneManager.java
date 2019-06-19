@@ -21,6 +21,7 @@ public class SceneManager {
     private static SceneManager sceneManager;
     private Applicatie app;
     private Group gameView;
+    private Pane currentPane;
 
     public Applicatie getApp(){
         return app;
@@ -35,8 +36,12 @@ public class SceneManager {
     }
 
     public void changeToScene(Parent group) {
-        Scene scene = new Scene(group);
-        app.changeScene(scene);
+        currentPane.getChildren().clear();
+        currentPane.getChildren().add(group);
+    }
+
+    public void addToScene(Parent group){
+        currentPane.getChildren().add(group);
     }
 
     public void registerApp(Applicatie newApp) {
@@ -55,7 +60,7 @@ public class SceneManager {
         changeToScene(pane);
     }
 
-    public void switchToAttackPhase() {
+    public void switchToAttackPhase(){
         Pane pane = new Pane();
         pane.getChildren().add(groepen.get("mapGroup"));
         pane.getChildren().add(groepen.get("playerGroup"));
@@ -76,13 +81,6 @@ public class SceneManager {
         changeToScene(pane);
     }
 
-    public void LeaderboardView(LeaderboardController con) {
-        Group localGroup = new Group();
-        creators.put(LeaderboardView.class, (Callable<LeaderboardView>) () -> new LeaderboardView(localGroup, con));
-        FXMLLOADER("/Leaderboard/Leaderboard.fxml");
-        changeToScene(localGroup);
-    }
-
     public void createLoginView(LoginController loginController) {
         Group localGroup = new Group();
         creators.put(LoginView.class, () -> {
@@ -96,6 +94,13 @@ public class SceneManager {
         Group localGroup = new Group();
         creators.put(HomeScreenView.class, (Callable<HomeScreenView>) () -> new HomeScreenView(hsController, localGroup));
         FXMLLOADER("/HomeScreen/Homescreen.fxml");
+        changeToScene(localGroup);
+    }
+
+    public void LeaderboardView(LeaderboardController leaderboardCon){
+        Group localGroup = new Group();
+        creators.put(LeaderboardView.class, (Callable<LeaderboardView>) () -> new LeaderboardView(localGroup, leaderboardCon));
+        FXMLLOADER("/Leaderboard/Leaderboard.fxml");
         changeToScene(localGroup);
     }
 
@@ -243,4 +248,7 @@ public class SceneManager {
         }
     }
 
+    public void setPane(Pane root) {
+        currentPane = root;
+    }
 }

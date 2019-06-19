@@ -6,6 +6,7 @@ import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class Applicatie {
@@ -14,8 +15,8 @@ public class Applicatie {
     private double windowAnchorX = 50;
     private double windowAnchorY= 50;
     private Stage primaryStage;
-    private Group root = new Group();
-    private FirebaseServiceOwn fb;
+    private Pane root = new Pane();
+    private static FirebaseServiceOwn fb;
     private AccountController accountCon;
 
     public Applicatie(Stage primaryStage) {
@@ -38,8 +39,10 @@ public class Applicatie {
     }
 
     private void loadPrimaryStage() {
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, width,height);
+        SceneManager.getInstance().setPane(root);
         primaryStage.setScene(scene);
+        primaryStage.setFullScreen(true);
         primaryStage.setTitle("Small World");
 //        primaryStage.setX(windowAnchorX);
 //        primaryStage.setY(windowAnchorY);
@@ -50,9 +53,10 @@ public class Applicatie {
        /// new LobbyController();
     }
 
-    public void changeScene(Scene scene) {
+    public void loadScene(Scene scene) {
         primaryStage.setScene(scene);
-        //primaryStage.setFullScreen(true);
+
+        SceneManager.getInstance().setPane(root);
     }
 }
 
