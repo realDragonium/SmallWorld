@@ -10,7 +10,7 @@ import java.util.Observer;
 
 public class InLobbyModel implements InLobbyObservable {
     private List<InLobbyObserver> observers = new ArrayList<>();
-
+    private boolean start = false;
     private String lobbyNaam;
 
     public void setLobbyNaam(String lobbyNaam){
@@ -21,14 +21,17 @@ public class InLobbyModel implements InLobbyObservable {
         return lobbyNaam;
     }
 
+    public void startGame(boolean start){
+        this.start = start;
+        notifyAllObservers();
+    }
 
     @Override
     public void notifyAllObservers() {
         for(InLobbyObserver obs : observers) {
-            obs.update();
+            obs.update(this);
         }
     }
-
 
     @Override
     public void register(InLobbyObserver ob){
@@ -38,6 +41,11 @@ public class InLobbyModel implements InLobbyObservable {
     @Override
     public void unregister(InLobbyObserver ob){
         observers.remove(ob);
+    }
+
+    @Override
+    public boolean getStart() {
+        return start;
     }
 
 }

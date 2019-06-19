@@ -25,15 +25,16 @@ public class GameController {
 
     public GameController(String lobbyName, String playerID) {
         myPlayerId = playerID;
-        SceneManager.getInstance().getApp().getFirebaseService().setGame(lobbyName);
         model = new GameModel(8, 8);
+        SceneManager.getInstance().getApp().getFirebaseService().setGame(lobbyName);
+        System.out.println("test");
         SceneManager.getInstance().createGameView(this);
+        System.out.println("test2");
         SceneManager.getInstance().makeMap();
         createGameParts();
     }
 
     public String getMyPlayerId(){
-        System.out.println(myPlayerId);
         return myPlayerId;
     }
 

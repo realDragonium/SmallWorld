@@ -2,6 +2,7 @@ package View;
 
 import Controller.InLobbyController;
 import Controller.LobbyController;
+import Observable.InLobbyObservable;
 import Observer.InLobbyObserver;
 import javafx.scene.Group;
 
@@ -39,7 +40,11 @@ public class InLobbyView implements InLobbyObserver {
 //    }
 
     @Override
-    public void update(){
+    public void update(InLobbyObservable ilo){
+        if(ilo.getStart()){
+            System.out.println("Gelukt!");
+            start();
+        }
     }
 
 

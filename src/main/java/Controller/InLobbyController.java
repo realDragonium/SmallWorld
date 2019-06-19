@@ -6,6 +6,7 @@ import Model.InLobbyModel;
 import Observer.InLobbyObserver;
 import Applicatie.Applicatie;
 import com.google.cloud.firestore.DocumentSnapshot;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 
 import java.util.Map;
@@ -22,7 +23,7 @@ public class InLobbyController implements FirebaseControllerObserver {
         app.getAccountCon().setPlayerId("player"+id);
         SceneManager.getInstance().createInLobbyView(this);
         setLobbyNaam(lobbyNaam);
-        SceneManager.getInstance().getApp().getFirebaseService().inLobbyListener(lobbyNaam, this);
+        app.getFirebaseService().inLobbyListener(lobbyNaam, this);
     }
 
     public InLobbyController(String lobbyNaam){
@@ -54,20 +55,16 @@ public class InLobbyController implements FirebaseControllerObserver {
         mod.unregister(ob);
     }
 
-    public void startAlo(){
+    public void startAlso(){
+        System.out.println("test");
         new GameController(mod.getLobbyNaam(), app.getAccountCon().getPlayerId());
     }
 
     @Override
     public void update(DocumentSnapshot ds) {
         Map<String, Object> map = ds.getData();
-        System.out.println(ds.getData());
-        System.out.println(ds.getBoolean("begin"));
-        if(ds.getBoolean("begin")){
-            System.out.println("test");
-            System.out.println(mod.getLobbyNaam());
-            System.out.println(app.getAccountCon().getPlayerId());
-            startAlo();
+        if(((Boolean)map.get("begin"))){
+            Platform.runLater(() -> new GameController(mod.getLobbyNaam(), app.getAccountCon().getPlayerId()));
         }
     }
 }
