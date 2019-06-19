@@ -33,25 +33,20 @@ public class GameController {
         myPlayerId = playerID;
         model = new GameModel(8, 8);
         this.lobbyName = lobbyName;
-
-        fb.setGame(lobbyName);
-        try {
-            fb.getTop3Player();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Map<String, Object> info = new HashMap<>();
-        info.put("Name", app.getAccountCon().getAccountName());
-        info.put("fiches", 0);
-        info.put("punten", 0);
-        fb.registerPlayer(playerID, info);
-
+        setMuFirebaseStufF();
         SceneManager.getInstance().createGameView(this);
         SceneManager.getInstance().makeMap();
         createGameParts();
         startGame();
+    }
+
+    public void setMuFirebaseStufF(){
+        fb.setGame(lobbyName);
+        Map<String, Object> info = new HashMap<>();
+        info.put("Name", app.getAccountCon().getAccountName());
+        info.put("fiches", 0);
+        info.put("punten", 0);
+        fb.registerPlayer(myPlayerId, info);
     }
 
     public String getMyPlayerId(){

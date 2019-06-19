@@ -37,14 +37,14 @@ public class GameTimer {
     }
 
     public void timerAction(){
-        timeLeft --;
+        timeLeft--;
         gameCon.getGameTurn().phaseTimer.setTime(timeLeft);
         if (timeLeft == 0) {
             Map<String, Object> info = new HashMap<>();
             info.put("endPhase", true);
             info.put("time", maxTime);
             System.out.println(gameCon.getLobbyname());
-            fb.getFireStore().collection("Lobby").document(gameCon.getLobbyname()).collection("Extras").document("Timer").set(info);
+            fb.getFireStore().collection("Games").document(gameCon.getLobbyname()).collection("Extras").document("Timer").set(info);
         }
     }
 
