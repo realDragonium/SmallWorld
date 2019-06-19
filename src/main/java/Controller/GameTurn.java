@@ -18,6 +18,9 @@ class GameTurn {
     GameTurn(GameController gameCon, PlayerController player){
         this.gameCon = gameCon;
         this.currentPlayer = player;
+        System.out.println("Begin beurt: " + currentPlayer.getId());
+        System.out.println("Jij bent speler: " + gameCon.getMyPlayerId());
+
         startPreperationPhase();
     }
 
@@ -32,6 +35,7 @@ class GameTurn {
                 break;
 
             case redeploying:
+
                 System.out.println("end of ending phase");
                 gameCon.nextTurn();
                 break;
@@ -39,33 +43,44 @@ class GameTurn {
     }
 
     void startPreperationPhase(){
+        phaseTimer = new TimerController(this);
+        SceneManager.getInstance().switchToSpectatingView();
         currentPhase = TurnFase.preparing;
-        SceneManager.getInstance().switchToPreperationPhase();
-        if(currentPlayer.hasActiveCombination()){
+        if(currentPlayer.getId().equals(gameCon.getMyPlayerId())) {
+            SceneManager.getInstance().switchToPreperationPhase();
+
+        if(currentPlayer.hasActiveCombination()) {
             currentPlayer.returnFiches();
             currentPlayer.getActiveCombination().checkForSpecialActions(currentPhase);
+            }
         }
-        phaseTimer = new TimerController(this);
-
-
     }
 
     void startAttackPhase(){
-        currentPhase = TurnFase.conquering;
-        SceneManager.getInstance().switchToAttackPhase();
         phaseTimer = new TimerController(this);
-        if(currentPlayer.hasActiveCombination()) {
-            currentPlayer.getActiveCombination().checkForSpecialActions(currentPhase);
+        SceneManager.getInstance().switchToSpectatingView();
+        currentPhase = TurnFase.conquering;
+        if(currentPlayer.getId().equals(gameCon.getMyPlayerId())) {
+            SceneManager.getInstance().switchToAttackPhase();
+
+            if (currentPlayer.hasActiveCombination()) {
+                currentPlayer.getActiveCombination().checkForSpecialActions(currentPhase);
+            }
         }
     }
 
-    void startEndingPhase(){
-        currentPhase = TurnFase.redeploying;
-        SceneManager.getInstance().switchToEndingPhase();
-        currentPlayer.addRoundPoints();
+    void startEndingPhase() {
         phaseTimer = new TimerController(this);
-        if(currentPlayer.hasActiveCombination()) {
-            currentPlayer.getActiveCombination().checkForSpecialActions(currentPhase);
+        SceneManager.getInstance().switchToSpectatingView();
+        currentPhase = TurnFase.redeploying;
+        if (currentPlayer.getId().equals(gameCon.getMyPlayerId())) {
+            SceneManager.getInstance().switchToEndingPhase();
+            currentPlayer.addRoundPoints();
+
+
+            if (currentPlayer.hasActiveCombination()) {
+                currentPlayer.getActiveCombination().checkForSpecialActions(currentPhase);
+            }
         }
     }
 }

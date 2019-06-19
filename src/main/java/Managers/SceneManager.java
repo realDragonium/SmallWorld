@@ -34,15 +34,27 @@ public class SceneManager {
 
     public void changeToScene(Parent group) {
         currentPane.getChildren().clear();
+        System.out.println(group.getChildrenUnmodifiable());
         currentPane.getChildren().add(group);
     }
 
-    public void addToScene(Parent group){
-        currentPane.getChildren().add(group);
+    public void addToScene(String group){
+        currentPane.getChildren().add(groepen.get(group));
     }
 
     public void registerApp(Applicatie newApp) {
         this.app = newApp;
+    }
+
+    public void switchToSpectatingView(){
+        Pane pane = new Pane();
+        System.out.println("voeg toe");
+        pane.getChildren().add(groepen.get("mapGroup"));
+        pane.getChildren().add(groepen.get("playerGroup"));
+        pane.getChildren().add(groepen.get("timerGroup"));
+        pane.getChildren().add(groepen.get("turnGroup"));
+        pane.getChildren().add(groepen.get("roundGroup"));
+        changeToScene(pane);
     }
 
     public void switchToPreperationPhase() {
@@ -104,7 +116,6 @@ public class SceneManager {
 
 
     public void createGameView(GameController gameCon) {
-
         gameView = new Group();
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/GameMain.fxml"));
@@ -118,6 +129,11 @@ public class SceneManager {
             e.printStackTrace();
         }
         changeToScene(gameView);
+    }
+
+
+    public void startGame(){
+        new GameController("First", "player1");
     }
 
     public void createAreaView(AreaController areaController, Group area) {

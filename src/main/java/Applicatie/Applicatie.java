@@ -54,6 +54,7 @@ public class Applicatie {
     }
 
     public void loadScene(Scene scene) {
+        System.out.println("switched!");
         primaryStage.setScene(scene);
 
         SceneManager.getInstance().setPane(root);
