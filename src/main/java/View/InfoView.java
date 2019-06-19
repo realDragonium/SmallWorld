@@ -1,22 +1,52 @@
 package View;
 
 import Controller.InfoController;
+import Observer.infoObserver;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.TextArea;
+import observable.infoObservable;
+
+import java.awt.*;
 
 
-public class InfoView {
+
+public class InfoView implements infoObserver {
     Group infoGroup;
     InfoController infoCon;
     @FXML
-    Pane pane;
+    public Group pane;
+
+    @FXML
+    public TextArea infoText;
+
+    @FXML
+    public MenuItem  button;
 
     public InfoView(Group groep, InfoController infoController) {
         infoGroup = groep;
         infoCon = infoController;
+        infoCon.register(this);
     }
 
-    public void initialize() {infoGroup.getChildren().add(pane);
+    @FXML
+    public void showInfo(){
+        infoText.setText("test");
+      }
+
+    @Override
+    public void update(infoObservable ob){
+        infoText.setWrapText(true);
+        infoText.setText(ob.currentText());
+
     }
+
+
+
+    public void initialize() {
+        System.out.println("test");
+        infoGroup.getChildren().add(pane);
+        System.out.println("test2");
+    }
+
 }

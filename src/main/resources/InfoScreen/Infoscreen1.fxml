@@ -1,73 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.Group?>
 
-<Pane fx:id = "Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.InfoView">
+<Group fx:id="pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.InfoView">
    <children>
       <ImageView fitHeight="800.0" fitWidth="1600.0">
          <image>
-            <Image url="@images.png" />
+            <Image url="@background.png" />
          </image>
       </ImageView>
-      <VBox layoutY="27.0" prefHeight="774.0" prefWidth="200.0">
-         <children>
-            <Button mnemonicParsing="false" prefWidth="200.0" text="Close">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefWidth="200.0" text="Races">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefWidth="200.0" text="Powers">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefWidth="200.0" text="Areas">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefWidth="200.0" text="Rules">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefWidth="200.0" text="Button">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Button>
-         </children>
-      </VBox>
-      <MenuBar layoutY="2.0" prefWidth="1600.0">
+      <MenuBar fx:id="infoMenu" layoutY="2.0" prefHeight="25.0" prefWidth="1600.0">
          <menus>
             <Menu mnemonicParsing="false" text="The Board">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Races" />
-                  <MenuItem mnemonicParsing="false" text="Fiches" />
+                  <Menu mnemonicParsing="false" text="Races">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Humans" />
+                        <MenuItem mnemonicParsing="false" text="Wizards" />
+                        <MenuItem mnemonicParsing="false" text="Dwarves" />
+                        <MenuItem mnemonicParsing="false" text="Giants" />
+                        <MenuItem mnemonicParsing="false" text="Tritons" />
+                        <MenuItem mnemonicParsing="false" text="Ratmen" />
+                     </items>
+                  </Menu>
+                  <MenuItem mnemonicParsing="false" onAction="#showInfo" text="Fiches" />
                   <MenuItem mnemonicParsing="false" text="Areas" />
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="The Rules">
+            <Menu mnemonicParsing="false" text="First Turn">
                <items>
-                  <MenuItem mnemonicParsing="false" text="First Turn" />
-                  <MenuItem mnemonicParsing="false" text="Conquering Regions" />
-                  <MenuItem mnemonicParsing="false" text="Following Turns" />
-                  <MenuItem mnemonicParsing="false" text="End of the Game" />
+                  <MenuItem mnemonicParsing="false" text="Picking a Race and Special Power Combo" />
+                  <Menu mnemonicParsing="false" text="Conquering Regions">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="First Conquest" />
+                      <MenuItem mnemonicParsing="false" text=" Conquering a Region" />
+                        <MenuItem mnemonicParsing="false" text="Enemy Losses &amp; Withdrawals" />
+                        <MenuItem mnemonicParsing="false" text=" Following Conquests" />
+                        <MenuItem mnemonicParsing="false" text="Final Conquest Attempt/ReinforcementDie Roll" />
+                        <MenuItem mnemonicParsing="false" text=" Troop Redeployment" />
+                    </items>
+                  </Menu>
+                  <MenuItem mnemonicParsing="false" text="Scoring Victory Coins" />
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Exit" />
+            <Menu mnemonicParsing="false" text=" Following turns">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Entering In Decline" />
+                  <Menu mnemonicParsing="false" text="Expanding through new Conquests">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text=" Ready your Troops" />
+                        <MenuItem mnemonicParsing="false" text="Conquer" />
+                        <MenuItem mnemonicParsing="false" text="Abandoning a Region" />
+                    </items>
+                  </Menu>
+               </items>
+            </Menu>
          </menus>
       </MenuBar>
+      <TextArea fx:id="infoText" layoutX="301.0" layoutY="159.0" prefHeight="482.0" prefWidth="998.0" />
    </children>
-</Pane>
+</Group>

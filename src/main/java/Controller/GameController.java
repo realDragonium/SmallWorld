@@ -23,6 +23,7 @@ public class GameController {
         model = new GameModel(8, 8);
         SceneManager.getInstance().createGameView(this);
         SceneManager.getInstance().makeMap();
+        InfoController infoCon = new InfoController();
         createGameParts();
     }
 

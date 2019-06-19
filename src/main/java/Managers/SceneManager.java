@@ -49,11 +49,13 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("timerGroup"));
         pane.getChildren().add(groepen.get("turnGroup"));
         pane.getChildren().add(groepen.get("roundGroup"));
+        pane.getChildren().add(groepen.get("infoGroup"));
         changeToScene(pane);
     }
 
     public void switchToAttackPhase(){
         Pane pane = new Pane();
+        pane.getChildren().add(groepen.get("infoGroup"));
         pane.getChildren().add(groepen.get("mapGroup"));
         pane.getChildren().add(groepen.get("playerGroup"));
         pane.getChildren().add(groepen.get("timerGroup"));
@@ -70,6 +72,7 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("timerGroup"));
         pane.getChildren().add(groepen.get("turnGroup"));
         pane.getChildren().add(groepen.get("roundGroup"));
+        pane.getChildren().add(groepen.get("infoGroup"));
         changeToScene(pane);
     }
 
@@ -161,7 +164,7 @@ public class SceneManager {
     }
     public void loadInfoscreen( InfoController InfoCon) {
         creators.put(InfoView.class, (Callable<InfoView>) () -> new InfoView(groepen.get("infoGroup"),InfoCon));
-        FXMLLOADER("/PlayerView.fxml");
+        FXMLLOADER("/InfoScreen/Infoscreen1.fxml");
     }
 
 

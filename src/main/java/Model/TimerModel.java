@@ -12,7 +12,7 @@ public class TimerModel implements TimerObservable, ChangeListener {
 
     int elapsedTime;
     TimerObserver observer;
-    int timeAmount = 10;
+    int timeAmount = 1000000;
     boolean timerDone = false;
 
     public boolean timerIsDone(){
