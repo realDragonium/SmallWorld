@@ -64,20 +64,25 @@ public class FirebaseServiceOwn {
                     System.err.println("Listen failed: " + error);
                     return;
                 }
-                if (snapshot != null && snapshot.exists()) controller.update(snapshot);
+                if (snapshot != null && snapshot.exists()) {
+                    controller.update(snapshot);
+                }
             }
         });
     }
 
     public void timerListen(final FirebaseControllerObserver controller) {
-        DocumentReference docRef = gameRef.collection("Extra").document("Timer");
+        DocumentReference docRef = gameRef.collection("Extras").document("Timer");
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirestoreException error) {
                 if (error != null) {
                     System.err.println("Listen failed: " + error);
                     return;
                 }
-                if (snapshot != null && snapshot.exists()) controller.update(snapshot);
+                if (snapshot != null && snapshot.exists()) {
+                    System.out.println("En werkt deze nog?");
+                    controller.update(snapshot);
+                }
             }
         });
     }
@@ -210,7 +215,7 @@ public class FirebaseServiceOwn {
     //player Updates
     public void playerUpdateFiches(String player, int fichesCount) {
         DocumentReference docRef = gameRef.collection("Players").document(player);
-        docRef.update("fiche", fichesCount);
+        docRef.update("fiches", fichesCount);
     }
     public void playerUpdate(String id, Map<String, Object> info) {
         gameRef.collection("Players").document(id).update(info);
