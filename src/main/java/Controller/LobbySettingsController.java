@@ -21,7 +21,7 @@ public class LobbySettingsController {
 
     public void startLobby(String lobbyNaam, int playerAmount){
         fb.createLobby(playerAmount, lobbyNaam, app.getAccountCon().getAccountName());
-        new InLobbyController(lobbyNaam, playerAmount);
+        new InLobbyController(lobbyNaam, 1);
     }
 
     public void register(LobbySettingsObserver ob){

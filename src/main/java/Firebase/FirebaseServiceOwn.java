@@ -108,6 +108,7 @@ public class FirebaseServiceOwn {
         for(int i = 1; i < 5; i++) {
             if (lobbySet.get("player" + i) == null) {
                 docRef.update("player" + i, Name);
+                System.out.println(i);
                 return i;
             }
         }
