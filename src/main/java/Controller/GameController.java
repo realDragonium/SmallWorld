@@ -30,6 +30,7 @@ public class GameController {
     private FirebaseServiceOwn fb = app.getFirebaseService();
 
     public GameController(String lobbyName, String playerID) {
+        System.out.println(this);
         myPlayerId = playerID;
         model = new GameModel(8, 8);
         this.lobbyName = lobbyName;
@@ -38,6 +39,7 @@ public class GameController {
         SceneManager.getInstance().makeMap();
         createGameParts();
         startGame();
+        createGameTimer();
     }
 
     public void setMuFirebaseStufF(){
@@ -149,11 +151,10 @@ public class GameController {
     private void startGame(){
 
         gameTurn = new GameTurn(this, currentPlayer);
-        createGameTimer();
+
     }
 
     public void createGameTimer(){
-        System.out.println("hij maakt timer aan");
         gameTimer = new GameTimer(this, 10);
     }
 

@@ -83,6 +83,7 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("timerGroup"));
         pane.getChildren().add(groepen.get("turnGroup"));
         pane.getChildren().add(groepen.get("roundGroup"));
+        pane.getChildren().add(groepen.get("redeployingGroup"));
         changeToScene(pane);
     }
 
@@ -127,10 +128,6 @@ public class SceneManager {
         changeToScene(gameView);
     }
 
-
-    public void startGame(){
-        new GameController("First", "player1");
-    }
 
     public void createAreaView(AreaController areaController, Group area) {
         new AreaView(area, areaController);

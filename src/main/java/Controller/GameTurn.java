@@ -98,12 +98,11 @@ class GameTurn implements FirebaseControllerObserver {
 
     @Override
     public void update(DocumentSnapshot ds) {
-        if (ds.getBoolean("endPhase")) {
             Platform.runLater(() -> {
                 endPhase();
                 phaseTimer.setTime(10);
                 gameCon.getGameTimer().resetTimer();
             });
-        }
+
     }
 }
