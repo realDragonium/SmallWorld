@@ -1,9 +1,11 @@
 package Controller;
 
+import Firebase.FirebaseControllerObserver;
 import Managers.SceneManager;
 import Enum.TurnFase;
+import com.google.cloud.firestore.DocumentSnapshot;
 
-class GameTurn {
+class GameTurn implements FirebaseControllerObserver {
 
     GameController gameCon;
     TimerController phaseTimer;
@@ -82,5 +84,10 @@ class GameTurn {
                 currentPlayer.getActiveCombination().checkForSpecialActions(currentPhase);
             }
         }
+    }
+
+    @Override
+    public void update(DocumentSnapshot ds) {
+
     }
 }

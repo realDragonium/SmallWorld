@@ -243,6 +243,9 @@ public class FirebaseServiceOwn {
         gameRef.collection("Players").document(playerId).set(info);
     }
 
+
+//    public void
+
     /**
      * Overschrijft een document als het als bestaat of maakt een nieuwe aan.
      * Wees hier dus voorzichtig mee.
