@@ -200,6 +200,11 @@ public class FirebaseServiceOwn {
         gameRef.collection("Areas").document(areaId).set(area);
     }
 
+    public void startGame(String lobbyNaam) {
+        firestore.collection("Lobby").document(lobbyNaam).update("begin", true);
+    }
+
+
     /**
      * Overschrijft een document als het als bestaat of maakt een nieuwe aan.
      * Wees hier dus voorzichtig mee.
@@ -289,6 +294,7 @@ public class FirebaseServiceOwn {
         }
         return null;
     }
+
 }
 
 

@@ -34,6 +34,7 @@ public class InLobbyController implements FirebaseControllerObserver {
     }
 
     public void start(){            // start button
+        SceneManager.getInstance().getApp().getFirebaseService().startGame(mod.getLobbyNaam());
         new GameController(mod.getLobbyNaam(), app.getAccountCon().getPlayerId());  // starten van het spel
     }
 
