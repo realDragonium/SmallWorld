@@ -24,9 +24,4 @@ public class LeaderboardController {
 
 
 
-
-//    public void backMenu(){
-//        new HomeScreenView();
-//
-//    }
 }

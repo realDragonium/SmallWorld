@@ -5,22 +5,31 @@ import Controller.HomeScreenController;
 import Controller.LeaderboardController;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import observable.LeaderboardObservable;
 import Observer.LeaderboardObserver;
 import javafx.fxml.FXML;
 
 
 public class LeaderboardView implements LeaderboardObserver {
-    LeaderboardController con;
+    LeaderboardController leadCon;
+
+    public Label place1;
+    public Label place2;
+    public Label place3;
+
+
 
     public Group root;
     private Group group;
     public Button hoofdmenu;
 
-    public LeaderboardView(Group group, LeaderboardController con){
+    public LeaderboardView(Group group, LeaderboardController leadCon){
         this.group = group;
-        this.con = con;
+        this.leadCon = leadCon;
+
     }
+
 
 
     public void back(){
@@ -56,7 +65,7 @@ public class LeaderboardView implements LeaderboardObserver {
 
     public void initialize(){
         group.getChildren().add(root);
-        con.registreer(this);
+        leadCon.registreer(this);
 
     }
 
@@ -65,15 +74,20 @@ public class LeaderboardView implements LeaderboardObserver {
 
     @Override
     public void update(LeaderboardObservable ob) {
-        System.out.println("joe joe" +ob.getWaarde()) ;
+        place1.setText(ob.getPlace1());
+        place2.setText(ob.getPlace2());
+        place3.setText(ob.getPlace3());
+
     }
 
     public void registreer(){
-        con.registreer(this);
+        leadCon.registreer(this);
     }
 @FXML
     public void drukKnop(){
-        con.addValue();
+    leadCon.addValue();
 
     }
+
+
 }
