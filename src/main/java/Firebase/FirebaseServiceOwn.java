@@ -12,6 +12,7 @@ import javafx.application.Platform;
 
 import java.util.*;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.IntStream;
 
 public class FirebaseServiceOwn {
     private Firestore firestore;
@@ -108,9 +109,7 @@ public class FirebaseServiceOwn {
         lobbySettings.put("Amount", playerAmount);
         lobbySettings.put("begin", false);
         lobbySettings.put("player1", name);
-        lobbySettings.put("player2", null);
-        lobbySettings.put("player3", null);
-        lobbySettings.put("player4", null);
+        IntStream.range(2, playerAmount).forEach(i -> lobbySettings.put("player"+i, null));
         firestore.collection("Lobby").document(lobbyNaam).set(lobbySettings);
 
         createTimer(lobbyNaam);
@@ -275,6 +274,14 @@ public class FirebaseServiceOwn {
         info.put("endPhase", endPhase);
         info.put("timer", timer);
         gameRef.collection("Extras").document("Timer").set(info);
+    }
+
+    public List<String> getTop3Player(){
+        List<String> top3 = new ArrayList<>();
+        ApiFuture<QuerySnapshot> players = gameRef.collection("Players").get();
+
+
+        return top3;
     }
 
     /**
