@@ -52,6 +52,8 @@ public class CombinationController {
         return power;
     }
 
+
+
     void returnFiches() {
             race.returnFiches();
     }
