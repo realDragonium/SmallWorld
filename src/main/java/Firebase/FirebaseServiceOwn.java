@@ -143,6 +143,7 @@ public class FirebaseServiceOwn {
         }
     }
 
+
     //InLobbyListener
     public void inLobbyListener(String lobbyName, final FirebaseControllerObserver controller) {
         DocumentReference docRef = firestore.collection("Lobby").document(lobbyName);
