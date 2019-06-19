@@ -30,12 +30,15 @@ public class GameController {
     public GameController(String lobbyName, String playerID) {
         myPlayerId = playerID;
         model = new GameModel(8, 8);
+
         fb.setGame(lobbyName);
+
         Map<String, Object> info = new HashMap<>();
         info.put("Name", app.getAccountCon().getAccountName());
         info.put("fiches", 0);
         info.put("punten", 0);
         fb.registerPlayer(playerID, info);
+
         SceneManager.getInstance().createGameView(this);
         SceneManager.getInstance().makeMap();
         createGameParts();
