@@ -111,4 +111,8 @@ public class PlayerController implements FirebaseControllerObserver {
     public GameController getGameCon() {
         return gameCon;
     }
+
+    public void addPoints(int i) {
+        model.addPunten(i);
+    }
 }

@@ -21,7 +21,7 @@ public class TurnController {
     }
 
     public void decideStartingPlayer(){
-        currentPlayer = new Random().nextInt(4) + 1;
+        currentPlayer = 1;
         gameCon.setCurrentPlayer(currentPlayer);
 
     }
@@ -31,6 +31,7 @@ public class TurnController {
     }
 
     void nextTurn(){
+        System.out.println("volgende beurt");
         if(gameCon.isGameOver()) return;
         model.nextTurn();
         currentPlayer++;
