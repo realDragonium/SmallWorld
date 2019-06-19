@@ -108,7 +108,7 @@ public class FirebaseServiceOwn {
         lobbySettings.put("player4", null);
         firestore.collection("Lobby").document(lobbyNaam).set(lobbySettings);
 
-        createTimer();
+        createTimer(lobbyNaam);
         setAreas(lobbyNaam);
     }
 
@@ -258,12 +258,12 @@ public class FirebaseServiceOwn {
         gameRef.collection("Players").document(playerId).set(info);
     }
 
-    public void createTimer(){
+    public void createTimer(String lobbyName){
         Map<String, Object> info = new HashMap<>();
         info.put("endPhase", false);
         info.put("phase", "preparing");
         info.put("timer", 50);
-        gameRef.collection("Extras").document("Timer").set(info);
+        colRef.document(lobbyName).collection("Extras").document("Timer").set(info);
     }
 
     public void updateTimer(boolean endPhase, String phase, int timer){
