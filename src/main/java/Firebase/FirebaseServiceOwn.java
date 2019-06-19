@@ -109,7 +109,7 @@ public class FirebaseServiceOwn {
             e.printStackTrace();
         }
         Map<String, Object> lobbySet = doc.getData();
-        for (int i = 1; i < 5; i++) {
+        for (int i = 1; i < ((int)lobbySet.get("Amount") + 1); i++) {
             if (lobbySet.get("player" + i) == null) {
                 docRef.update("player" + i, Name);
                 System.out.println("join lobby");
