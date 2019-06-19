@@ -8,7 +8,7 @@ import Objects.RaceFiche;
 import Observer.AreaObserver;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.scene.Group;
-import Applicatie.Applicatie;
+import Enum.AreaProperty;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -86,5 +86,14 @@ public class AreaController implements FirebaseControllerObserver {
 		AttackController attCon = gameCon.getAttCon();
 		attCon.getTargetArea();
 		attCon.attackAreaLocal();
+	}
+
+	public AreaProperty getSpecialProp() {
+		return model.getSpecialProp();
+	}
+
+
+	public boolean isNextToWater() {
+		return model.isNextToWater();
 	}
 }

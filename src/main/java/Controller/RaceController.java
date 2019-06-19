@@ -87,4 +87,8 @@ public class RaceController {
 	boolean checkPhaseActoin(TurnFase curPhase) {
 		return kracht.checkPhaseAction(curPhase);
 	}
+
+    public CombinationController getCombiCon() {
+		return combiCon;
+    }
 }

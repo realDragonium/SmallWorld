@@ -100,4 +100,8 @@ public class PlayerController implements FirebaseControllerObserver {
             model.addPunten(combi.getRace().getAreasAmount());
         }
     }
+
+    public GameController getGameCon() {
+        return gameCon;
+    }
 }

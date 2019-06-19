@@ -102,27 +102,27 @@ public class GameController {
         attCon = new AttackController(this);
     }
 
-    RoundController getRoundCon(){
+    public RoundController getRoundCon(){
         return roundCon;
     }
 
-    ShopController getShopCon(){return shopCon;}
+    public ShopController getShopCon(){return shopCon;}
 
-    TurnController getTurnCon(){
+    public TurnController getTurnCon(){
         return turnCon;
     }
 
-    Map2DController getMapCon(){
+    public Map2DController getMapCon(){
         return mapCon;
     }
 
-    VervallenController getVervCon(){return vervCon;}
+    public VervallenController getVervCon(){return vervCon;}
 
-    AttackController getAttCon(){
+    public AttackController getAttCon(){
         return attCon;
     }
 
-    GameTurn getGameTurn() { return gameTurn;}
+    public GameTurn getGameTurn() { return gameTurn;}
 
     void endGame(){
         System.out.println("Game Ended!");
@@ -149,4 +149,5 @@ public class GameController {
     public void setCurrentPlayer(int i) {
         currentPlayer = getPlayer("player" + i);
     }
+
 }
