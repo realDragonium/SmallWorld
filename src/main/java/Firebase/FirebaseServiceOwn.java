@@ -261,15 +261,13 @@ public class FirebaseServiceOwn {
     public void createTimer(String lobbyName){
         Map<String, Object> info = new HashMap<>();
         info.put("endPhase", false);
-        info.put("phase", "preparing");
         info.put("timer", 50);
         colRef.document(lobbyName).collection("Extras").document("Timer").set(info);
     }
 
-    public void updateTimer(boolean endPhase, String phase, int timer){
+    public void updateTimer(boolean endPhase, int timer){
         Map<String, Object> info = new HashMap<>();
         info.put("endPhase", endPhase);
-        info.put("phase", phase);
         info.put("timer", timer);
         gameRef.collection("Extras").document("Timer").set(info);
     }

@@ -15,26 +15,30 @@ class GameTurn implements FirebaseControllerObserver {
     private FirebaseServiceOwn fb = SceneManager.getInstance().getApp().getFirebaseService();
 
     void endTurn() {
-        currentPhase = TurnFase.redeploying;
-        phaseTimer.timerEnded();
+        gameCon.getGameTimer().endPhase();
     }
+
     TurnFase currentPhase;
     PlayerController currentPlayer;
 
-    GameTurn(GameController gameCon, PlayerController player){
+    public GameTurn(GameController gameCon, PlayerController player){
         this.gameCon = gameCon;
         this.currentPlayer = player;
         System.out.println("Begin beurt: " + currentPlayer.getId());
         System.out.println("Jij bent speler: " + gameCon.getMyPlayerId());
+        phaseTimer = new TimerController(this);
 
-        fb.updateTimer(false, "redeploying", 50);
         fb.timerListen(this);
-
+        SceneManager.getInstance().switchToSpectatingView();
         startPreperationPhase();
     }
 
     void endPhase() {
         switch(currentPhase){
+            case none:
+                startPreperationPhase();
+                break;
+
             case preparing:
                 startAttackPhase();
                 break;
@@ -44,20 +48,18 @@ class GameTurn implements FirebaseControllerObserver {
                 break;
 
             case redeploying:
-
-                System.out.println("end of ending phase");
+                SceneManager.getInstance().switchToSpectatingView();
                 gameCon.nextTurn();
                 break;
         }
     }
 
     void startPreperationPhase(){
-        phaseTimer = new TimerController(this);
-        SceneManager.getInstance().switchToSpectatingView();
+
         currentPhase = TurnFase.preparing;
+
         if(currentPlayer.getId().equals(gameCon.getMyPlayerId())) {
             SceneManager.getInstance().switchToPreperationPhase();
-
             if(currentPlayer.hasActiveCombination()) {
                 currentPlayer.returnFiches();
                 SceneManager.getInstance().addToScene("vervalGroup");
@@ -70,8 +72,6 @@ class GameTurn implements FirebaseControllerObserver {
     }
 
     void startAttackPhase(){
-        phaseTimer = new TimerController(this);
-        SceneManager.getInstance().switchToSpectatingView();
         currentPhase = TurnFase.conquering;
         if(currentPlayer.getId().equals(gameCon.getMyPlayerId())) {
             SceneManager.getInstance().switchToAttackPhase();
@@ -83,13 +83,10 @@ class GameTurn implements FirebaseControllerObserver {
     }
 
     void startEndingPhase() {
-        phaseTimer = new TimerController(this);
-        SceneManager.getInstance().switchToSpectatingView();
         currentPhase = TurnFase.redeploying;
         if (currentPlayer.getId().equals(gameCon.getMyPlayerId())) {
             SceneManager.getInstance().switchToEndingPhase();
             currentPlayer.addRoundPoints();
-
 
             if (currentPlayer.hasActiveCombination()) {
                 currentPlayer.getActiveCombination().checkForSpecialActions(currentPhase);
@@ -100,8 +97,11 @@ class GameTurn implements FirebaseControllerObserver {
     @Override
     public void update(DocumentSnapshot ds) {
         System.out.println("Timer Update!");
-        boolean endPhae = ds.getBoolean("endPhase");
-        String phase = ds.getString("phase");
+        boolean endPhase = ds.getBoolean("endPhase");
         int timer = (int) Math.round(ds.getDouble("timer"));
+        phaseTimer.setTime(timer);
+        if(endPhase){
+            endPhase();
+        }
     }
 }

@@ -1,5 +1,7 @@
 package Model;
 
+import Firebase.FirebaseServiceOwn;
+import Managers.SceneManager;
 import Observer.TimerObserver;
 import Observable.TimerObservable;
 
@@ -7,6 +9,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class TimerModel implements TimerObservable, ChangeListener {
+
 
     int elapsedTime;
     TimerObserver observer;
@@ -42,11 +45,17 @@ public class TimerModel implements TimerObservable, ChangeListener {
 
     @Override
     public void notifyAllObservers() {
+
         observer.update(this);
     }
 
     @Override
     public void stateChanged(ChangeEvent e) {
 
+    }
+
+    public void setTimer(int timer) {
+        elapsedTime = timer;
+        notifyAllObservers();
     }
 }

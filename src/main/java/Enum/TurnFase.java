@@ -1,5 +1,5 @@
 package Enum;
 
 public enum TurnFase {
-    preparing, conquering, redeploying
+    preparing, conquering, redeploying, none
 }

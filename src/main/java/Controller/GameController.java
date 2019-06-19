@@ -18,6 +18,7 @@ public class GameController {
     private TurnController turnCon;
     private Map2DController mapCon;
     private VervallenController vervCon;
+    private GameTimer gameTimer;
     private AttackController attCon;
     private ShopController shopCon;
     private GameTurn gameTurn;
@@ -139,7 +140,15 @@ public class GameController {
 
 
     private void startGame(){
+
         gameTurn = new GameTurn(this, currentPlayer);
+        if(myPlayerId.equals("player1")) {
+            createGameTimer();
+        }
+    }
+
+    public void createGameTimer(){
+        gameTimer = new GameTimer(this, 10);
     }
 
     public void nextTurn() {
@@ -154,4 +163,7 @@ public class GameController {
         currentPlayer = getPlayer("player" + i);
     }
 
+    public GameTimer getGameTimer() {
+        return gameTimer;
+    }
 }
