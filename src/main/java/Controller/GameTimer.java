@@ -17,7 +17,7 @@ public class GameTimer {
         this.gameCon = gameCon;
         timeLeft = time;
         FirebaseServiceOwn fb = SceneManager.getInstance().getApp().getFirebaseService();
-        fb.updateTimer(timeLeft == 0, timeLeft);
+        fb.updateTimer(false, time);
         TimerTask start = new TimerTask() {
 
             @Override
@@ -25,9 +25,10 @@ public class GameTimer {
                 Platform.runLater(new Runnable() {
                     public void run() {
                         timeLeft --;
-                        fb.updateTimer(timeLeft == 0, timeLeft);
+
                         if (timeLeft == 0) {
                             timeLeft = time;
+                            fb.updateTimer(true, time);
                         }
                     }
                 });

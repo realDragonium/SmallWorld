@@ -63,6 +63,7 @@ class GameTurn implements FirebaseControllerObserver {
             if(currentPlayer.hasActiveCombination()) {
                 currentPlayer.returnFiches();
                 SceneManager.getInstance().addToScene("vervalGroup");
+                currentPlayer.getActiveCombination().checkForSpecialActions(currentPhase);
             }
             else{
                 SceneManager.getInstance().addToScene("shopGroup");
@@ -74,10 +75,11 @@ class GameTurn implements FirebaseControllerObserver {
     void startAttackPhase(){
         currentPhase = TurnFase.conquering;
         if(currentPlayer.getId().equals(gameCon.getMyPlayerId())) {
-            SceneManager.getInstance().switchToAttackPhase();
-
             if (currentPlayer.hasActiveCombination()) {
-                currentPlayer.getActiveCombination().checkForSpecialActions(currentPhase);
+                SceneManager.getInstance().switchToAttackPhase();
+            }
+            else{
+                endTurn();
             }
         }
     }
@@ -99,9 +101,9 @@ class GameTurn implements FirebaseControllerObserver {
         System.out.println("Timer Update!");
         boolean endPhase = ds.getBoolean("endPhase");
         int timer = (int) Math.round(ds.getDouble("timer"));
-        phaseTimer.setTime(timer);
         if(endPhase){
             endPhase();
+            phaseTimer.setTime(timer);
         }
     }
 }
