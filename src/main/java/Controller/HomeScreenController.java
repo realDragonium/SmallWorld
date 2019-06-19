@@ -1,8 +1,8 @@
 package Controller;
 
 import Managers.SceneManager;
-import models.HomeScreenModel;
-import observers.HomeScreenObserver;
+import Model.HomeScreenModel;
+import Observer.HomeScreenObserver;
 
 public class HomeScreenController {
 	

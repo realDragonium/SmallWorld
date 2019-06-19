@@ -1,6 +1,6 @@
-package observers;
+package Observer;
 
-import observable.HomeScreenObservable;
+import Observable.HomeScreenObservable;
 
 public interface HomeScreenObserver {
     public void update(HomeScreenObservable hso);

@@ -1,10 +1,8 @@
 package Model;
 
-import Controller.GameController;
 import Observer.TimerObserver;
-import observable.TimerObservable;
+import Observable.TimerObservable;
 
-import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 

@@ -2,8 +2,6 @@ import Applicatie.Applicatie;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class Main extends Application {
 
 	@Override
@@ -11,8 +9,7 @@ public class Main extends Application {
 		new Applicatie(primaryStage);
 	}
 	
-	public static void main(String[] args) throws IOException, InterruptedException {
-//		Applicatie.getFirebaseService().testen();
+	public static void main(String[] args) {
 		launch(args);
 	}
 }

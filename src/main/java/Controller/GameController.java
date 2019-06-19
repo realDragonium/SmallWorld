@@ -1,5 +1,7 @@
 package Controller;
 
+import Applicatie.Applicatie;
+import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
 import Model.GameModel;
 import Objects.RattenKracht;
@@ -19,9 +21,12 @@ public class GameController {
     private AttackController attCon;
     private ShopController shopCon;
     private GameTurn gameTurn;
+    private String myPlayerId;
 
 
-    public GameController() {
+    public GameController(String lobbyName, String playerID) {
+        myPlayerId = playerID;
+        SceneManager.getInstance().getApp().getFirebaseService().setGame(lobbyName);
         model = new GameModel(8, 8);
         SceneManager.getInstance().createGameView(this);
         SceneManager.getInstance().makeMap();
@@ -33,21 +38,20 @@ public class GameController {
     }
 
     public void changePlayerTurn(String player){
-
         currentPlayer = players.get(player);
         createGameTurn();
     }
 
     public void createGameParts() {
-
         createPlayer();
         createShop();
         createVerval();
 
         createTurnsAndRounds();
+        new DiceController();
         new KnoppenController(this);
-        createAttCon();
 
+        createAttCon();
         mapCon = new Map2DController(this);
     }
 

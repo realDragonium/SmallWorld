@@ -1,6 +1,6 @@
 package Observer;
 
-import observable.ShopObservable;
+import Observable.ShopObservable;
 
 public interface ShopObserver {
     void update(ShopObservable so);
