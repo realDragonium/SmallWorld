@@ -25,7 +25,7 @@ public class KnoppenController {
     public void attackCountry() {
         AttackController attCon = gameCon.getAttCon();
         attCon.getTargetArea();
-        attCon.attackArea();
+        attCon.attackAreaLocal();
     }
 
     public void fichesOver() {
@@ -33,4 +33,6 @@ public class KnoppenController {
     }
 
     public void nextPhase(){gameCon.getGameTurn().endPhase();}
+
+    public void inVerval() {gameCon.getVervCon().inVerval();}
 }

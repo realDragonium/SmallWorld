@@ -1,7 +1,7 @@
 package Controller;
 
-import Applicatie.Applicatie;
 import Firebase.FirebaseControllerObserver;
+import Applicatie.Applicatie;
 import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
 import Model.PlayerModel;
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class PlayerController implements FirebaseControllerObserver {
     private GameController gameCon;
-    private FirebaseServiceOwn fb = Applicatie.getFirebaseService();
+    private FirebaseServiceOwn fb = SceneManager.getInstance().getApp().getFirebaseService();
     private PlayerModel model;
     private List<CombinationController> combinations = new ArrayList<>();
 
@@ -21,6 +21,7 @@ public class PlayerController implements FirebaseControllerObserver {
         model = new PlayerModel(playerID);
         this.gameCon = gameCon;
         SceneManager.getInstance().loadPlayer(playerID, this);
+        SceneManager.getInstance().getApp().getFirebaseService().playerListen(playerID, this);
         fb.playerListen(playerID, this);
     }
 
@@ -32,14 +33,11 @@ public class PlayerController implements FirebaseControllerObserver {
         setFiches(combo.getRace().fichesCount());
     }
 
-
-
     public void showActiveCombiFichesLeft() {
         for (CombinationController combiCon : combinations) {
             combiCon.getRace().fichesOver();
         }
     }
-
 
     public CombinationController getActiveCombination() {
         if (combinations.size() > 0) return combinations.get(0);
@@ -60,6 +58,19 @@ public class PlayerController implements FirebaseControllerObserver {
         fb.playerUpdateFiches(model.getId(), fiches);
     }
 
+    public boolean hasCombination(){
+        return (combinations.size() > 0);
+    }
+
+    public boolean hasActiveCombination(){
+        if(hasCombination()) {
+            if( combinations.get(0).isActive()){
+                return true;
+            }
+        }
+        return false;
+    }
+
     void lowerFiches(int count) {
         model.fiches -= count;
         model.notifyObserver();
@@ -75,7 +86,7 @@ public class PlayerController implements FirebaseControllerObserver {
     @Override
     public void update(DocumentSnapshot ds) {
         if(gameCon.getCurrentPlayer()==this) return;
-        //model.fiches = (int) Math.round(ds.getDouble("fiches"));
+        model.fiches = (int) Math.round(ds.getDouble("fiches"));
         model.notifyObserver();
     }
 
@@ -84,6 +95,9 @@ public class PlayerController implements FirebaseControllerObserver {
     }
 
     public void addRoundPoints() {
-        model.addPunten(getActiveCombination().getRace().getAreasAmount());
+        if(hasCombination()){
+            for(CombinationController combi : combinations)
+            model.addPunten(combi.getRace().getAreasAmount());
+        }
     }
 }

@@ -1,14 +1,30 @@
 package Controller;
 
+import Enum.TurnFase;
+import Model.CombinationModel;
+import Objects.Power;
+import Observer.CombinationObserver;
+
 public class CombinationController {
 
     private RaceController race;
-    private PowerController power;
+    private Power power;
     private PlayerController player;
+    private CombinationModel model;
 
-    public CombinationController(RaceController race, PowerController power){
+    public void registerObserver(CombinationObserver obs){
+        model.register(obs);
+    }
+
+    boolean isActive(){
+        return model.isActive();
+    }
+
+    CombinationController(RaceController race, Power power){
         this.race = race;
         this.power = power;
+        model = new CombinationModel(race.getId(), power.getId());
+        //SceneManager.getInstance().loadCombination(this);
     }
 
     public void setPlayer(PlayerController player){
@@ -19,15 +35,32 @@ public class CombinationController {
         return this.player;
     }
 
+    void checkForSpecialActions(TurnFase curPhase){
+        if(race.checkPhaseActoin(curPhase)){
+            race.doKractAction();
+        }
+        if(power.checkPhaseAction(curPhase)){
+            power.doAction();
+        }
+    }
+
     public RaceController getRace(){
         return race;
     }
 
-    public PowerController getPower(){
+    public Power getPower(){
         return power;
     }
 
-    public void returnFiches() {
+    void returnFiches() {
             race.returnFiches();
+    }
+
+    void setToNonActive() {
+        model.setToNonActive();
+    }
+
+    void destroyAllFichesButOne() {
+        race.destroyAllFichesButOne();
     }
 }

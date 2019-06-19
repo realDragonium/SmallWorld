@@ -1,5 +1,7 @@
 package Controller;
 
+import Applicatie.Applicatie;
+import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
 import Model.GameModel;
 import Objects.RattenKracht;
@@ -14,12 +16,17 @@ public class GameController {
     private RoundController roundCon;
     private TurnController turnCon;
     private Map2DController mapCon;
+    private VervallenController vervCon;
+    private AreaController areaCon;
     private AttackController attCon;
     private ShopController shopCon;
     private GameTurn gameTurn;
+    private String myPlayerId;
 
 
-    public GameController() {
+    public GameController(String lobbyName, String playerID) {
+        myPlayerId = playerID;
+        SceneManager.getInstance().getApp().getFirebaseService().setGame(lobbyName);
         model = new GameModel(8, 8);
         SceneManager.getInstance().createGameView(this);
         SceneManager.getInstance().makeMap();
@@ -32,22 +39,27 @@ public class GameController {
     }
 
     public void changePlayerTurn(String player){
-
         currentPlayer = players.get(player);
         createGameTurn();
     }
 
     public void createGameParts() {
-
         createPlayer();
         createShop();
+        createVerval();
 
         createTurnsAndRounds();
+        new DiceController();
         new KnoppenController(this);
-        createAttCon();
 
+        createAttCon();
         mapCon = new Map2DController(this);
     }
+
+    private void createVerval() {
+        vervCon = new VervallenController(this);
+    }
+
     private void createPlayer(){
         players.put("player0", new PlayerController("player0", this));
         players.put("player1", new PlayerController("player1", this));
@@ -96,6 +108,10 @@ public class GameController {
     Map2DController getMapCon(){
         return mapCon;
     }
+
+    AreaController getAreaCon(){return areaCon;}
+
+    VervallenController getVervCon(){return vervCon;}
 
     AttackController getAttCon(){
         return attCon;

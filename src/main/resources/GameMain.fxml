@@ -9,9 +9,11 @@
         <Group id="playerGroup" />
         <Group id="roundGroup" />
         <Group id="shopGroup" />
-        <Group id="timerGroup" />
+        <Group id="timerGroup"/>
         <Group id="turnGroup" />
         <Group id="mapGroup" />
+        <Group id="vervalGroup"/>
+        <Group id="diceGroup"/>
         <Group id="infoGroup"/>
     </children>
 </Pane>
