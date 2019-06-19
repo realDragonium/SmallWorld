@@ -55,4 +55,12 @@ public class LeaderboardModel implements LeaderboardObservable {
     }
 
 
+    public void playerValue(String place1, String place2, String place3) {
+
+        this.place1 = place1;
+        this.place2 = place2;
+        this.place3 = place3;
+        notifyAllObs();
+
+    }
 }
