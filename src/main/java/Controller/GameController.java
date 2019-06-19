@@ -32,6 +32,8 @@ public class GameController {
         SceneManager.getInstance().createGameView(this);
         SceneManager.getInstance().makeMap();
         createGameParts();
+        startGame();
+
     }
 
     public String getMyPlayerId(){
@@ -132,7 +134,7 @@ public class GameController {
 
 
     private void startGame(){
-
+        gameTurn = new GameTurn(this, currentPlayer);
     }
 
     public void nextTurn() {
@@ -141,5 +143,9 @@ public class GameController {
 
     public PlayerController getMyPlayer() {
         return myPlayer;
+    }
+
+    public void setCurrentPlayer(int i) {
+        currentPlayer = getPlayer("player" + i);
     }
 }
