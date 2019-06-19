@@ -5,7 +5,6 @@ import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
 import Model.LobbySettingsModel;
 import Observer.LobbySettingsObserver;
-import View.LobbyView;
 
 public class LobbySettingsController {
     Applicatie app = SceneManager.getInstance().getApp();
@@ -22,7 +21,7 @@ public class LobbySettingsController {
 
     public void startLobby(String lobbyNaam, int playerAmount){
         fb.createLobby(playerAmount, lobbyNaam, app.getAccountCon().getAccountName());
-        new InLobbyController(lobbyNaam, playerAmount);
+        new InLobbyController(lobbyNaam, 1);
     }
 
     public void register(LobbySettingsObserver ob){

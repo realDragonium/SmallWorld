@@ -84,6 +84,7 @@ public class FirebaseServiceOwn {
         HashMap<String, Object> lobbySettings = new HashMap<>();
         lobbySettings.put("Naam", lobbyNaam);
         lobbySettings.put("Amount", playerAmount);
+        lobbySettings.put("begin", false);
         lobbySettings.put("player1", name);
         lobbySettings.put("player2", null);
         lobbySettings.put("player3", null);
@@ -93,7 +94,7 @@ public class FirebaseServiceOwn {
     }
 
     //Is er nog plek in deze lobby?
-    public boolean joinLobby(String lobbyNaam, String Name){
+    public int joinLobby(String lobbyNaam, String Name){
         DocumentReference docRef = firestore.collection("Lobby").document(lobbyNaam);
         DocumentSnapshot doc = null;
         try {
@@ -107,10 +108,11 @@ public class FirebaseServiceOwn {
         for(int i = 1; i < 5; i++) {
             if (lobbySet.get("player" + i) == null) {
                 docRef.update("player" + i, Name);
-                return true;
+                System.out.println(i);
+                return i;
             }
         }
-        return false;
+        return 0;
     }
 
     public void leaveLobby(String lobbyNaam, String Name){
@@ -131,6 +133,21 @@ public class FirebaseServiceOwn {
                 return;
             }
         }
+    }
+
+    //InLobbyListener
+    public void inLobbyListener(String lobbyName, final FirebaseControllerObserver controller){
+        DocumentReference docRef = firestore.collection("Lobby").document(lobbyName);
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirestoreException error) {
+                if (error != null) {
+                    System.err.println("Listen failed: " + error);
+                    return;
+                }
+                if (snapshot != null && snapshot.exists()) controller.update(snapshot);
+            }
+        });
+
     }
 
 
@@ -183,6 +200,11 @@ public class FirebaseServiceOwn {
     public void setAreas(String areaId, Map<String, Object> area){
         gameRef.collection("Areas").document(areaId).set(area);
     }
+
+    public void startGame(String lobbyNaam) {
+        firestore.collection("Lobby").document(lobbyNaam).update("begin", true);
+    }
+
 
     /**
      * Overschrijft een document als het als bestaat of maakt een nieuwe aan.
@@ -273,6 +295,7 @@ public class FirebaseServiceOwn {
         }
         return null;
     }
+
 }
 
 

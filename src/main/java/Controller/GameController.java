@@ -17,7 +17,6 @@ public class GameController {
     private TurnController turnCon;
     private Map2DController mapCon;
     private VervallenController vervCon;
-    private AreaController areaCon;
     private AttackController attCon;
     private ShopController shopCon;
     private GameTurn gameTurn;
@@ -31,6 +30,11 @@ public class GameController {
         SceneManager.getInstance().createGameView(this);
         SceneManager.getInstance().makeMap();
         createGameParts();
+    }
+
+    public String getMyPlayerId(){
+        System.out.println(myPlayerId);
+        return myPlayerId;
     }
 
     public PlayerController getPlayer(){
@@ -107,8 +111,6 @@ public class GameController {
     Map2DController getMapCon(){
         return mapCon;
     }
-
-    AreaController getAreaCon(){return areaCon;}
 
     VervallenController getVervCon(){return vervCon;}
 

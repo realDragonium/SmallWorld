@@ -1,12 +1,16 @@
 package Controller;
 
+import Firebase.FirebaseControllerObserver;
 import Managers.SceneManager;
 import Model.InLobbyModel;
 import Observer.InLobbyObserver;
 import Applicatie.Applicatie;
+import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.scene.Scene;
 
-public class InLobbyController {
+import java.util.Map;
+
+public class InLobbyController implements FirebaseControllerObserver {
     Applicatie app = SceneManager.getInstance().getApp();
     InLobbyModel mod = new InLobbyModel();
 
@@ -14,14 +18,17 @@ public class InLobbyController {
         SceneManager.getInstance().createInLobbyView(this);
     }
 
-    public InLobbyController(String lobbyNaam, int playerAmount){
+    public InLobbyController(String lobbyNaam, int id){
+        app.getAccountCon().setPlayerId("player"+id);
         SceneManager.getInstance().createInLobbyView(this);
         setLobbyNaam(lobbyNaam);
+        SceneManager.getInstance().getApp().getFirebaseService().inLobbyListener(lobbyNaam, this);
     }
 
     public InLobbyController(String lobbyNaam){
         SceneManager.getInstance().createInLobbyView(this);
         setLobbyNaam(lobbyNaam);
+        SceneManager.getInstance().getApp().getFirebaseService().inLobbyListener(lobbyNaam, this);
     }
 
     public void setLobbyNaam(String lobbyNaam){
@@ -29,6 +36,7 @@ public class InLobbyController {
     }
 
     public void start(){            // start button
+        SceneManager.getInstance().getApp().getFirebaseService().startGame(mod.getLobbyNaam());
         new GameController(mod.getLobbyNaam(), app.getAccountCon().getPlayerId());  // starten van het spel
     }
 
@@ -46,9 +54,20 @@ public class InLobbyController {
         mod.unregister(ob);
     }
 
+    public void startAlo(){
+        new GameController(mod.getLobbyNaam(), app.getAccountCon().getPlayerId());
+    }
 
-
-
-
-
+    @Override
+    public void update(DocumentSnapshot ds) {
+        Map<String, Object> map = ds.getData();
+        System.out.println(ds.getData());
+        System.out.println(ds.getBoolean("begin"));
+        if(ds.getBoolean("begin")){
+            System.out.println("test");
+            System.out.println(mod.getLobbyNaam());
+            System.out.println(app.getAccountCon().getPlayerId());
+            startAlo();
+        }
+    }
 }

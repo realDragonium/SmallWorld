@@ -42,7 +42,7 @@ public class Applicatie {
         Scene scene = new Scene(root, width,height);
         SceneManager.getInstance().setPane(root);
         primaryStage.setScene(scene);
-        primaryStage.setFullScreen(true);
+//        primaryStage.setFullScreen(true);
         primaryStage.setTitle("Small World");
 //        primaryStage.setX(windowAnchorX);
 //        primaryStage.setY(windowAnchorY);
