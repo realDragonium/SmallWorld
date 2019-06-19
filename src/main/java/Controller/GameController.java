@@ -33,6 +33,11 @@ public class GameController {
         createGameParts();
     }
 
+    public String getMyPlayerId(){
+        System.out.println(myPlayerId);
+        return myPlayerId;
+    }
+
     public PlayerController getPlayer(){
         return currentPlayer;
     }

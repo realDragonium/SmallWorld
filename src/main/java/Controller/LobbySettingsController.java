@@ -5,7 +5,6 @@ import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
 import Model.LobbySettingsModel;
 import Observer.LobbySettingsObserver;
-import View.LobbyView;
 
 public class LobbySettingsController {
     Applicatie app = SceneManager.getInstance().getApp();

@@ -1,12 +1,16 @@
 package Controller;
 
+import Firebase.FirebaseControllerObserver;
 import Managers.SceneManager;
 import Model.InLobbyModel;
 import Observer.InLobbyObserver;
 import Applicatie.Applicatie;
+import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.scene.Scene;
 
-public class InLobbyController {
+import java.util.Map;
+
+public class InLobbyController implements FirebaseControllerObserver {
     Applicatie app = SceneManager.getInstance().getApp();
     InLobbyModel mod = new InLobbyModel();
 
@@ -17,6 +21,7 @@ public class InLobbyController {
     public InLobbyController(String lobbyNaam, int playerAmount){
         SceneManager.getInstance().createInLobbyView(this);
         setLobbyNaam(lobbyNaam);
+        SceneManager.getInstance().getApp().getFirebaseService().inLobbyListener(lobbyNaam, this);
     }
 
     public InLobbyController(String lobbyNaam){
@@ -47,8 +52,11 @@ public class InLobbyController {
     }
 
 
-
-
-
-
+    @Override
+    public void update(DocumentSnapshot ds) {
+        Map<String, Object> map = ds.getData();
+        if(Boolean.valueOf(map.get("begin").toString())){
+            new GameController(mod.getLobbyNaam(), app.getAccountCon().getPlayerId());
+        }
+    }
 }

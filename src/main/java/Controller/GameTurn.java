@@ -22,7 +22,6 @@ class GameTurn {
     }
 
     void endPhase() {
-
         switch(currentPhase){
             case preparing:
                 startAttackPhase();

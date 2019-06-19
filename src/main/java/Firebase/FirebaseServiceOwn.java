@@ -84,6 +84,7 @@ public class FirebaseServiceOwn {
         HashMap<String, Object> lobbySettings = new HashMap<>();
         lobbySettings.put("Naam", lobbyNaam);
         lobbySettings.put("Amount", playerAmount);
+        lobbySettings.put("begin", false);
         lobbySettings.put("player1", name);
         lobbySettings.put("player2", null);
         lobbySettings.put("player3", null);
@@ -131,6 +132,21 @@ public class FirebaseServiceOwn {
                 return;
             }
         }
+    }
+
+    //InLobbyListener
+    public void inLobbyListener(String lobbyName, final FirebaseControllerObserver controller){
+        DocumentReference docRef = firestore.collection("Lobby").document(lobbyName);
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirestoreException error) {
+                if (error != null) {
+                    System.err.println("Listen failed: " + error);
+                    return;
+                }
+                if (snapshot != null && snapshot.exists()) controller.update(snapshot);
+            }
+        });
+
     }
 
 
