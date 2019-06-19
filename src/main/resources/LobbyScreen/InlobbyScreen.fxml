@@ -9,6 +9,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
 <Group fx:id="root" style="-fx-background-color: yellow;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.InLobbyView">
    <children>
       <ImageView fitHeight="466.0" fitWidth="864.0" pickOnBounds="true" preserveRatio="true">
@@ -24,7 +26,15 @@
       <Button fx:id="start" layoutX="560.0" layoutY="353.0" mnemonicParsing="false" onAction="#start" prefHeight="25.0" prefWidth="100.0" text="Start game" />
       <GridPane layoutX="168.0" layoutY="88.0" prefHeight="252.0" prefWidth="492.0">
          <children>
-            <TextField layoutX="3.0" opacity="0.58" prefHeight="252.0" prefWidth="487.0" style="-fx-background-color: black;" />
+            <Pane layoutX="3.0" opacity="0.58" prefHeight="252.0" prefWidth="487.0" style="-fx-background-color: black;">
+               <children>
+                  <Text fx:id="Player1" layoutY="00" style="-fx-color: red;"/>
+                  <Text fx:id="Player2" layoutY="50" style="-fx-color: red;"/>
+                  <Text fx:id="Player3" layoutY="80" style="-fx-color: red;"/>
+                  <Text fx:id="Player4" layoutY="110" style="-fx-color: red;"/>
+               </children>
+            </Pane>
+
          </children>
          <columnConstraints>
             <ColumnConstraints />

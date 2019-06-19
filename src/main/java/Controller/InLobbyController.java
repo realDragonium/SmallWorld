@@ -62,7 +62,13 @@ public class InLobbyController implements FirebaseControllerObserver {
 
     @Override
     public void update(DocumentSnapshot ds) {
+
         Map<String, Object> map = ds.getData();
+        System.out.println((String)map.get("player1"));
+        mod.setPlayer( 1, (String)map.get("player1"));
+        mod.setPlayer( 2, (String)map.get("player2"));
+        mod.setPlayer( 3, (String)map.get("player3"));
+        mod.setPlayer( 4, (String)map.get("player4"));
         if(((Boolean)map.get("begin"))){
             Platform.runLater(() -> new GameController(mod.getLobbyNaam(), app.getAccountCon().getPlayerId()));
         }
