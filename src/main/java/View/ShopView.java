@@ -2,14 +2,13 @@ package View;
 
 import Controller.ShopController;
 import Observer.ShopObserver;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import observable.ShopObservable;
+import Observable.ShopObservable;
 
 
 public class ShopView implements ShopObserver {
@@ -32,7 +31,7 @@ public class ShopView implements ShopObserver {
 
 
     private Button lastActiveButton;
-    ShopController shopCon;
+    private ShopController shopCon;
     Group group;
 
     public ShopView(Group group, ShopController shopCon){

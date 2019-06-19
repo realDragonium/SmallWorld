@@ -1,13 +1,9 @@
 package Controller;
 
-import Managers.SceneManager;
+import Enum.TurnFase;
 import Model.CombinationModel;
 import Objects.Power;
 import Observer.CombinationObserver;
-import observable.CombinationObservable;
-import Enum.TurnFase;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CombinationController {
 
@@ -20,11 +16,11 @@ public class CombinationController {
         model.register(obs);
     }
 
-    public boolean isActive(){
+    boolean isActive(){
         return model.isActive();
     }
 
-    public CombinationController(RaceController race, Power power){
+    CombinationController(RaceController race, Power power){
         this.race = race;
         this.power = power;
         model = new CombinationModel(race.getId(), power.getId());
@@ -39,7 +35,7 @@ public class CombinationController {
         return this.player;
     }
 
-    public void checkForSpecialActions(TurnFase curPhase){
+    void checkForSpecialActions(TurnFase curPhase){
         if(race.checkPhaseActoin(curPhase)){
             race.doKractAction();
         }
@@ -56,15 +52,15 @@ public class CombinationController {
         return power;
     }
 
-    public void returnFiches() {
+    void returnFiches() {
             race.returnFiches();
     }
 
-    public void setToNonActive() {
+    void setToNonActive() {
         model.setToNonActive();
     }
 
-    public void destroyAllFichesButOne() {
+    void destroyAllFichesButOne() {
         race.destroyAllFichesButOne();
     }
 }

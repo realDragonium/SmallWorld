@@ -10,7 +10,7 @@ public class TurnController {
     private GameController gameCon;
 
 
-    public TurnController(GameController gameCon){
+    TurnController(GameController gameCon){
         model = new TurnModel(4);
         this.gameCon = gameCon;
         SceneManager.getInstance().loadTurn(this);
@@ -22,7 +22,6 @@ public class TurnController {
     }
 
     void nextTurn(){
-        System.out.println("volgende beurt");
         if(model.currentTurn >= model.getTurnPerRound()) {
             model.currentTurn = 0;
             gameCon.getRoundCon().nextRound();
@@ -32,7 +31,7 @@ public class TurnController {
         gameCon.changePlayerTurn("player"+model.currentTurn);
     }
 
-    public String getCurrentPlayer() {
+    String getCurrentPlayer() {
         return "player" + model.currentTurn;
     }
 }

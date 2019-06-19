@@ -1,6 +1,6 @@
 package Applicatie;
 
-import Controller.FirebaseController;
+import Controller.AccountController;
 import Controller.LoginController;
 import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
@@ -17,6 +17,7 @@ public class Applicatie {
     private Stage primaryStage;
     private Pane root = new Pane();
     private static FirebaseServiceOwn fb;
+    private AccountController accountCon;
 
     public Applicatie(Stage primaryStage) {
         SceneManager.getInstance().registerApp(this);
@@ -24,9 +25,17 @@ public class Applicatie {
         loadPrimaryStage();
     }
 
-    public static FirebaseServiceOwn getFirebaseService(){
+    public void setAccount(AccountController accountCon){
+        this.accountCon = accountCon;
+    }
+
+    public FirebaseServiceOwn getFirebaseService(){
         if(fb == null) fb = new FirebaseServiceOwn();
         return fb;
+    }
+
+    public AccountController getAccountCon(){
+        return accountCon;
     }
 
     private void loadPrimaryStage() {
@@ -40,9 +49,8 @@ public class Applicatie {
 //        primaryStage.setFullScreen(true);
         primaryStage.show();
 
-        new FirebaseController();
-
-        new LoginController();
+       new LoginController();
+       /// new LobbyController();
     }
 
     public void loadScene(Scene scene) {

@@ -13,10 +13,10 @@ public class ShopController {
 
     GameController gameCon;
     ShopModel model = new ShopModel();
-    List<RaceController> races = new ArrayList<>();
-    List<Power> powers = new ArrayList<>();
+    private List<RaceController> races = new ArrayList<>();
+    private List<Power> powers = new ArrayList<>();
 
-    public ShopController(GameController gameCon){
+     ShopController(GameController gameCon){
         this.gameCon = gameCon;
         SceneManager.getInstance().loadShop(this);
 
@@ -52,7 +52,7 @@ public class ShopController {
         powers.add(new AlchemistPower());
     }
 
-    public void makeNewCombination(){
+    private void makeNewCombination(){
         RaceController race = getRandomRace();
         Power power = getRandomPower();
         if(race != null && power != null) {
@@ -62,14 +62,14 @@ public class ShopController {
         }
     }
 
-    public RaceController getRandomRace(){
+    private RaceController getRandomRace(){
         if(races.size() != 0) {
             return races.remove(new Random().nextInt(races.size()));
         }
         return null;
     }
 
-    public Power getRandomPower(){
+    private Power getRandomPower(){
         if(powers.size() != 0) {
             return powers.remove(new Random().nextInt(powers.size()));
         }

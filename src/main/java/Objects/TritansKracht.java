@@ -4,7 +4,7 @@ import Enum.TurnFase;
 
 public class TritansKracht implements Kracht{
 
-    TurnFase phase = TurnFase.conquering;
+    private TurnFase phase = TurnFase.conquering;
 
     @Override
     public Kracht getKracht() {

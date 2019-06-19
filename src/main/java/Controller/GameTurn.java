@@ -3,25 +3,25 @@ package Controller;
 import Managers.SceneManager;
 import Enum.TurnFase;
 
-public class GameTurn {
+class GameTurn {
 
     GameController gameCon;
     TimerController phaseTimer;
 
-    public void endTurn() {
+    void endTurn() {
         currentPhase = TurnFase.redeploying;
         phaseTimer.timerEnded();
     }
     TurnFase currentPhase;
     PlayerController currentPlayer;
 
-    public GameTurn(GameController gameCon, PlayerController player){
+    GameTurn(GameController gameCon, PlayerController player){
         this.gameCon = gameCon;
         this.currentPlayer = player;
         startPreperationPhase();
     }
 
-    public void endPhase() {
+    void endPhase() {
 
         switch(currentPhase){
             case preparing:
@@ -36,10 +36,10 @@ public class GameTurn {
                 System.out.println("end of ending phase");
                 gameCon.nextTurn();
                 break;
+        }
     }
-}
 
-    public void startPreperationPhase(){
+    void startPreperationPhase(){
         currentPhase = TurnFase.preparing;
         SceneManager.getInstance().switchToPreperationPhase();
         if(currentPlayer.hasActiveCombination()){
@@ -51,7 +51,7 @@ public class GameTurn {
 
     }
 
-    public void startAttackPhase(){
+    void startAttackPhase(){
         currentPhase = TurnFase.conquering;
         SceneManager.getInstance().switchToAttackPhase();
         phaseTimer = new TimerController(this);
@@ -60,7 +60,7 @@ public class GameTurn {
         }
     }
 
-    public void startEndingPhase(){
+    void startEndingPhase(){
         currentPhase = TurnFase.redeploying;
         SceneManager.getInstance().switchToEndingPhase();
         currentPlayer.addRoundPoints();

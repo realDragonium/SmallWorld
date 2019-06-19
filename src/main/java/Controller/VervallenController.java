@@ -7,7 +7,7 @@ public class VervallenController {
 
     GameController gameCon;
 
-    public VervallenController(GameController gameCon){
+    VervallenController(GameController gameCon){
         this.gameCon = gameCon;
         SceneManager.getInstance().loadVerval(this);
     }

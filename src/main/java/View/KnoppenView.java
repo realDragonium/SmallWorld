@@ -17,8 +17,6 @@ public class KnoppenView {
     public Button infoButton;
     public Button attackButton;
     public Button availableButton;
-    public Button nextTurnButton;
-    public Button nextRoundButton;
     public Button nextFaseButton;
 
     public KnoppenView(Group group, KnoppenController knopCon){
@@ -38,6 +36,5 @@ public class KnoppenView {
     public void fichesOver(){
         knopCon.fichesOver();
     }
-
     public void nextPhase(){knopCon.nextPhase();}
 }

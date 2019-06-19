@@ -6,8 +6,8 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import observable.LoginObservable;
-import observers.LoginObserver;
+import Observable.LoginObservable;
+import Observer.LoginObserver;
 
 public class LoginView implements LoginObserver{
 	@FXML

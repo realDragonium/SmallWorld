@@ -4,7 +4,7 @@ import Enum.TurnFase;
 
 public class WizzardsKracht implements Kracht{
 
-    TurnFase phase = TurnFase.redeploying;
+    private TurnFase phase = TurnFase.redeploying;
 
     @Override
     public Kracht getKracht() {
