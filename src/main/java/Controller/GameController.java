@@ -20,11 +20,13 @@ public class GameController {
     private AttackController attCon;
     private ShopController shopCon;
     private GameTurn gameTurn;
+    private PlayerController myPlayer;
     private String myPlayerId;
 
 
     public GameController(String lobbyName, String playerID) {
         myPlayerId = playerID;
+        myPlayer = getPlayer(playerID);
         SceneManager.getInstance().getApp().getFirebaseService().setGame(lobbyName);
         model = new GameModel(8, 8);
         SceneManager.getInstance().createGameView(this);
@@ -33,7 +35,6 @@ public class GameController {
     }
 
     public String getMyPlayerId(){
-        System.out.println(myPlayerId);
         return myPlayerId;
     }
 
@@ -136,5 +137,9 @@ public class GameController {
 
     public void nextTurn() {
         turnCon.nextTurn();
+    }
+
+    public PlayerController getMyPlayer() {
+        return myPlayer;
     }
 }

@@ -18,6 +18,9 @@ class GameTurn {
     GameTurn(GameController gameCon, PlayerController player){
         this.gameCon = gameCon;
         this.currentPlayer = player;
+        System.out.println("Begin beurt: " + currentPlayer.getId());
+        System.out.println("Jij bent speler: " + gameCon.getMyPlayerId());
+        if(currentPlayer.equals(gameCon.getMyPlayer()))
         startPreperationPhase();
     }
 
