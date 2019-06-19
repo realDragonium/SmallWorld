@@ -69,6 +69,19 @@ public class FirebaseServiceOwn {
         });
     }
 
+    public void timerListen(final FirebaseControllerObserver controller) {
+        DocumentReference docRef = gameRef.collection("Extra").document("Timer");
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirestoreException error) {
+                if (error != null) {
+                    System.err.println("Listen failed: " + error);
+                    return;
+                }
+                if (snapshot != null && snapshot.exists()) controller.update(snapshot);
+            }
+        });
+    }
+
     //AreaRegister
     public void AreaListener(String areaId, final FirebaseControllerObserver controller) {
         DocumentReference docRef = gameRef.collection("Areas").document(areaId);
@@ -95,6 +108,7 @@ public class FirebaseServiceOwn {
         lobbySettings.put("player4", null);
         firestore.collection("Lobby").document(lobbyNaam).set(lobbySettings);
 
+        createTimer();
         setAreas(lobbyNaam);
     }
 
@@ -237,7 +251,6 @@ public class FirebaseServiceOwn {
         };
         Timer timer = new Timer();
         timer.schedule(deleteLobby, 5000);
-//        firestore.collection("Games").document(lobbyNaam).collection("Players").document("player1").set(info);
     }
 
 
@@ -245,8 +258,15 @@ public class FirebaseServiceOwn {
         gameRef.collection("Players").document(playerId).set(info);
     }
 
+    public void createTimer(){
+        Map<String, Object> info = new HashMap<>();
+        info.put("endPhase", false);
+        info.put("phase", "preparing");
+        info.put("timer", 50);
+        gameRef.collection("Extras").document("Timer").set(info);
+    }
 
-    public void updateTime(boolean endPhase, String phase, int timer){
+    public void updateTimer(boolean endPhase, String phase, int timer){
         Map<String, Object> info = new HashMap<>();
         info.put("endPhase", endPhase);
         info.put("phase", phase);

@@ -1,14 +1,18 @@
 package Controller;
 
 import Firebase.FirebaseControllerObserver;
+import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
 import Enum.TurnFase;
 import com.google.cloud.firestore.DocumentSnapshot;
+
+import java.util.Map;
 
 class GameTurn implements FirebaseControllerObserver {
 
     GameController gameCon;
     TimerController phaseTimer;
+    private FirebaseServiceOwn fb = SceneManager.getInstance().getApp().getFirebaseService();
 
     void endTurn() {
         currentPhase = TurnFase.redeploying;
@@ -22,6 +26,9 @@ class GameTurn implements FirebaseControllerObserver {
         this.currentPlayer = player;
         System.out.println("Begin beurt: " + currentPlayer.getId());
         System.out.println("Jij bent speler: " + gameCon.getMyPlayerId());
+
+        fb.updateTimer(false, "redeploying", 50);
+        fb.timerListen(this);
 
         startPreperationPhase();
     }
@@ -88,6 +95,9 @@ class GameTurn implements FirebaseControllerObserver {
 
     @Override
     public void update(DocumentSnapshot ds) {
-
+        System.out.println("Timer Update!");
+        boolean endPhae = ds.getBoolean("endPhase");
+        String phase = ds.getString("phase");
+        int timer = (int) Math.round(ds.getDouble("timer"));
     }
 }
