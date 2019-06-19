@@ -9,6 +9,7 @@ import com.google.cloud.firestore.Firestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class GameController {
     private GameModel model;
@@ -32,7 +33,13 @@ public class GameController {
         model = new GameModel(8, 8);
 
         fb.setGame(lobbyName);
-
+        try {
+            fb.getTop3Player();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Map<String, Object> info = new HashMap<>();
         info.put("Name", app.getAccountCon().getAccountName());
         info.put("fiches", 0);

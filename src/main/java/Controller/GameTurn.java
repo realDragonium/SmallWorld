@@ -98,7 +98,6 @@ class GameTurn implements FirebaseControllerObserver {
 
     @Override
     public void update(DocumentSnapshot ds) {
-        System.out.println("Timer Update!");
         boolean endPhase = ds.getBoolean("endPhase");
         int timer = (int) Math.round(ds.getDouble("timer"));
         if(endPhase){

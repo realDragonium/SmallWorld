@@ -26,15 +26,10 @@ public class AreaController implements FirebaseControllerObserver {
 		map2DCon = mapCon;
 		this.gameCon = gameCon;
 		SceneManager.getInstance().createAreaView(this, area);
-//		setAreaInFirebase();
 		fb.AreaListener(model.getId(), this);
 	}
 
 	String getId(){return model.getId();}
-
-//	public void setAreaInFirebase(){
-//		fb.setAreas();
-//	}
 
 	int numbersNeeded(){
 		return model.numbersNeeded();
@@ -76,7 +71,7 @@ public class AreaController implements FirebaseControllerObserver {
 
 	@Override
 	public void update(DocumentSnapshot ds) {
-		if(ds.get("oldowner") == null) return;
+		if(ds.get("o") == null) return;
 
 		AttackController attCon = gameCon.getAttCon();
 		attCon.getTargetArea();

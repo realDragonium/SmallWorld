@@ -49,9 +49,7 @@ public class LobbyModel implements ObservableLobby {
 	public void hostLobby(String lobNaam) {
 		lobbySize = new String[4];           // Lege array die 4 groot is.
 		lobbyAmount++;  // aantal lobbies = +1
-
 		lobbyNaam = lobNaam;
-		System.out.println(lobbyNaam);
 		spelerToevoegen();
 		notifyAllObservers();
 	}
@@ -59,8 +57,7 @@ public class LobbyModel implements ObservableLobby {
 	public void exitLobby(int decreaseLobbySize) {
 		lobbyAmount = decreaseLobbySize;
 		lobbyAmount--;
-		lobbySizeCounter--;           
-		System.out.println("Lobby is verwijderd   ");
+		lobbySizeCounter--;
 		notifyAllObservers();
 	}
 
@@ -89,11 +86,9 @@ public class LobbyModel implements ObservableLobby {
 		try {
 			if(lobbySizeCounter < 4) {
 				lobbySize[lobbySizeCounter] = spelers[lobbySizeCounter];
-				System.out.println(lobbySize[lobbySizeCounter]);
 				lobbySizeCounter++;
 			}
 		} catch(ArrayIndexOutOfBoundsException e){
-			System.out.println("Lobby zit vol");
 			}
 	}
 	

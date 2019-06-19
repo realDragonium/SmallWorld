@@ -34,7 +34,6 @@ public class SceneManager {
 
     public void changeToScene(Parent group) {
         currentPane.getChildren().clear();
-        System.out.println(group.getChildrenUnmodifiable());
         currentPane.getChildren().add(group);
     }
 

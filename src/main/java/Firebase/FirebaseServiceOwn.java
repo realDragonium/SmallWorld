@@ -208,11 +208,13 @@ public class FirebaseServiceOwn {
         return namen;
     }
 
-    //player Updates
+    //player Updates fiches only
     public void playerUpdateFiches(String player, int fichesCount) {
         DocumentReference docRef = gameRef.collection("Players").document(player);
         docRef.update("fiches", fichesCount);
     }
+
+    //set player data
     public void playerUpdate(String id, Map<String, Object> info) {
         gameRef.collection("Players").document(id).update(info);
     }
@@ -227,16 +229,9 @@ public class FirebaseServiceOwn {
     //Areas setten in firebase
     public void setAreas(String lobbyName) {
         List<QueryDocumentSnapshot> list = null;
-        try {
-            list = firestore.collection("Maps").document("4PlayerMap").collection("Areas").get().get().getDocuments();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        list = getQuerySnapshot(firestore.collection("Maps").document("4PlayerMap").collection("Areas").get()).getDocuments();
         for(QueryDocumentSnapshot iets : list){
             colRef.document(lobbyName).collection("Areas").document(iets.getId()).set(iets.getData());
-//            firestore.collection("Maps").document("4PlayerMap").collection("Areas").document(iets.getId()).set(list.get(0).getData());
         }
     }
 
@@ -272,13 +267,16 @@ public class FirebaseServiceOwn {
         gameRef.collection("Extras").document("Timer").set(info);
     }
 
-    public List<String> getTop3Player(){
-        List<String> top3 = new ArrayList<>();
-        ApiFuture<QuerySnapshot> players = gameRef.collection("Players").get();
-
-
-        return top3;
+    public Map<String, Double> getTop3Player(){
+        Map<String, Double> map = new TreeMap<>();
+        QuerySnapshot players = getQuerySnapshot(gameRef.collection("Players").get());
+        for(QueryDocumentSnapshot qDoc: players.getDocuments()){
+            map.put(qDoc.getString("Name"), qDoc.getDouble("punten"));
+        }
+        return map;
     }
+
+
 
     /**
      * Overschrijft een document als het als bestaat of maakt een nieuwe aan.
@@ -362,6 +360,17 @@ public class FirebaseServiceOwn {
         ApiFuture<DocumentSnapshot> future = docRef.get();
         try {
             return future.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private QuerySnapshot getQuerySnapshot(ApiFuture<QuerySnapshot> querySnapshotApiFuture){
+        try {
+            return querySnapshotApiFuture.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

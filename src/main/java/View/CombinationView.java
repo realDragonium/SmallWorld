@@ -32,8 +32,6 @@ public class CombinationView implements CombinationObserver {
 
     @Override
     public void update(CombinationObservable co) {
-        System.out.println("lets go");
-        System.out.println(co.getRaceId());
         Race.setText(co.getRaceId());
         Power.setText(co.getPowerId());
     }

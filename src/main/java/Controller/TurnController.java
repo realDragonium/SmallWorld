@@ -31,7 +31,6 @@ public class TurnController {
     }
 
     void nextTurn(){
-        System.out.println("volgende beurt");
         if(gameCon.isGameOver()) return;
         model.nextTurn();
         currentPlayer++;
