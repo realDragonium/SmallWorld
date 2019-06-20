@@ -9,6 +9,7 @@ import Observer.AreaObserver;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.scene.Group;
 import Enum.AreaProperty;
+import Enum.AreaType;
 
 import java.util.Stack;
 
@@ -95,5 +96,9 @@ public class AreaController implements FirebaseControllerObserver {
 
 	public void addFiche(RaceFiche fiche) {
 		model.addFiche(fiche);
+	}
+
+	public AreaType getAreaType() {
+		return model.getAreaType();
 	}
 }

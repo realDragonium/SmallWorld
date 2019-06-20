@@ -19,6 +19,11 @@ public class RaceController {
 	RaceController(Kracht kracht, String id, int ficheAmount) {
 		this.kracht = kracht;
 		model = new RaceModel(id, ficheAmount);
+		kracht.setRaceCon(this);
+	}
+
+	public List<AreaController> getAllAreas(){
+		return model.getAreas();
 	}
 
 	int fichesCount(){
@@ -76,7 +81,7 @@ public class RaceController {
 		model.removeArea(area);
 	}
 
-	int getAreasAmount() {
+	public int getAreasAmount() {
 		return model.getAreas().size();
 	}
 
