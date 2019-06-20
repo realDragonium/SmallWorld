@@ -30,17 +30,17 @@
             <Font size="22.0" />
          </font>
       </Label>
-      <Label layoutX="785.0" layoutY="345.0" text="120">
+      <Label fx:id="points1" layoutX="785.0" layoutY="345.0" text="120">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="790.0" layoutY="565.0" text="95">
+      <Label fx:id="points2" layoutX="790.0" layoutY="565.0" text="95">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="790.0" layoutY="785.0" text="60">
+      <Label fx:id="points3" layoutX="790.0" layoutY="785.0" text="60">
          <font>
             <Font size="15.0" />
          </font>

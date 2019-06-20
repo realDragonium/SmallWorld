@@ -38,9 +38,9 @@ public class HomeScreenView implements HomeScreenObserver{
     @FXML
     private void createGame(){
 
-		//new LeaderboardController();
+		new LeaderboardController();
     	//new GameController("First", "player1");
-		new LobbyController();
+		//new LobbyController();
 	}
 
 	@FXML
