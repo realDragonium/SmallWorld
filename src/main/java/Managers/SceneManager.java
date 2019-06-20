@@ -19,6 +19,7 @@ public class SceneManager {
     private Map<String, Group> groepen = new HashMap();
     private List<Group> shopItems = new ArrayList<>();
     private static SceneManager sceneManager;
+    private List<Group> standardPane = new ArrayList<>();
     private Applicatie app;
     private Group gameView;
     private Pane currentPane;
@@ -41,15 +42,21 @@ public class SceneManager {
         currentPane.getChildren().add(groepen.get(group));
     }
 
-    public void removeFromScene(String item){
+    public void addToStandardScene(String group){
+        standardPane.add(groepen.get(group));
+        addToScene(group);
+    }
+
+    public void removeFromStandardScene(String item){
         Node toDelete = null;
         Group groupToDelete = groepen.get(item);
-        for(Node group : currentPane.getChildren()){
+        for(Group group : standardPane){
             if(group.equals(groupToDelete)){
                 toDelete = group;
             }
         }
         if(toDelete != null){
+            standardPane.remove(toDelete);
             currentPane.getChildren().remove(toDelete);
         }
     }
@@ -64,8 +71,12 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("playerGroup"));
         pane.getChildren().add(groepen.get("timerGroup"));
         pane.getChildren().add(groepen.get("turnGroup"));
+        pane.getChildren().add(groepen.get("buttonGroup"));
         pane.getChildren().add(groepen.get("roundGroup"));
         pane.getChildren().add(groepen.get("smallworldGroup"));
+        for(Node group : standardPane){
+            pane.getChildren().add(group);
+        }
         System.out.println(pane.getChildren());
         changeToScene(pane);
     }
@@ -76,8 +87,12 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("playerGroup"));
         pane.getChildren().add(groepen.get("timerGroup"));
         pane.getChildren().add(groepen.get("turnGroup"));
+        pane.getChildren().add(groepen.get("buttonGroup"));
         pane.getChildren().add(groepen.get("roundGroup"));
         pane.getChildren().add(groepen.get("smallworldGroup"));
+        for(Node group : standardPane){
+            pane.getChildren().add(group);
+        }
         System.out.println(pane.getChildren());
         changeToScene(pane);
     }
@@ -87,11 +102,14 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("mapGroup"));
         pane.getChildren().add(groepen.get("playerGroup"));
         pane.getChildren().add(groepen.get("timerGroup"));
-        pane.getChildren().add(groepen.get("buttonGroup"));
-        pane.getChildren().add(groepen.get("attackGroup"));
         pane.getChildren().add(groepen.get("turnGroup"));
+        pane.getChildren().add(groepen.get("buttonGroup"));
         pane.getChildren().add(groepen.get("roundGroup"));
         pane.getChildren().add(groepen.get("smallworldGroup"));
+        pane.getChildren().add(groepen.get("attackGroup"));
+        for(Group group : standardPane){
+            pane.getChildren().add(group);
+        }
         System.out.println(pane.getChildren());
         changeToScene(pane);
     }
@@ -102,8 +120,13 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("playerGroup"));
         pane.getChildren().add(groepen.get("timerGroup"));
         pane.getChildren().add(groepen.get("turnGroup"));
+        pane.getChildren().add(groepen.get("buttonGroup"));
         pane.getChildren().add(groepen.get("roundGroup"));
+        pane.getChildren().add(groepen.get("smallworldGroup"));
         pane.getChildren().add(groepen.get("redeployingGroup"));
+        for(Node group : standardPane){
+            pane.getChildren().add(group);
+        }
         changeToScene(pane);
     }
 
@@ -171,6 +194,12 @@ public class SceneManager {
         }
 
     }
+
+    public void loadInfoscreen(InfoController con) {
+        creators.put(InfoView.class, (Callable<InfoView>) () -> new InfoView( groepen.get("infoGroup"), con));
+        FXMLLOADER("/InfoScreen/Infoscreen1.fxml");
+    }
+
 
     public void loadSmallworld(){
         creators.put(gameLogoView.class, (Callable<gameLogoView>) () ->new gameLogoView(groepen.get("smallworldGroup")));

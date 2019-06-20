@@ -15,6 +15,7 @@
         <Group id="vervalGroup" />
         <Group id="diceGroup" />
         <Group id="redeployingGroup" />
+        <Group id="infoGroup"/>
         <Group id="smallworldGroup"/>
         <Group id="attackGroup"/>
     </children>
