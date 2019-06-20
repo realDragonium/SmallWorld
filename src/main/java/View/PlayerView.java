@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 public class PlayerView implements PlayerObserver {
 
@@ -17,11 +18,11 @@ public class PlayerView implements PlayerObserver {
     @FXML
     public Pane pane;
     @FXML
-    public TextField playerId;
+    public Text playerId;
     @FXML
-    public TextField fiches;
+    public Text fiches;
     @FXML
-    public TextField punten;
+    public Text punten;
 
     public PlayerView(String id, Group group, PlayerController playerCon){
         this.playerCon = playerCon;
@@ -30,10 +31,13 @@ public class PlayerView implements PlayerObserver {
     }
 
     public void initialize() {
-        group.getChildren().add(pane);
-        playerId.setText(id);
-        playerCon.register(this);
-        pane.setLayoutY((150*Integer.parseInt(id.split("yer")[1])));
+        if(Integer.parseInt(id.split("yer")[1]) != 0){
+            group.getChildren().add(pane);
+            playerId.setText(id);
+            playerCon.register(this);
+            pane.setLayoutY((150*Integer.parseInt(id.split("yer")[1])));
+        }
+
     }
 
     @Override
@@ -42,7 +46,7 @@ public class PlayerView implements PlayerObserver {
     }
 
     private void updateFields(int fiches, int punten){
-        this.fiches.setText("fiches: " + fiches);
-        this.punten.setText("punten: " + punten);
+        this.fiches.setText("" +fiches);
+        this.punten.setText("" + punten);
     }
 }

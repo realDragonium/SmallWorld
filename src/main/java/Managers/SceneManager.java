@@ -52,6 +52,8 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("timerGroup"));
         pane.getChildren().add(groepen.get("turnGroup"));
         pane.getChildren().add(groepen.get("roundGroup"));
+        pane.getChildren().add(groepen.get("smallworldGroup"));
+        System.out.println(pane.getChildren());
         changeToScene(pane);
     }
 
@@ -62,6 +64,8 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("timerGroup"));
         pane.getChildren().add(groepen.get("turnGroup"));
         pane.getChildren().add(groepen.get("roundGroup"));
+        pane.getChildren().add(groepen.get("smallworldGroup"));
+        System.out.println(pane.getChildren());
         changeToScene(pane);
     }
 
@@ -73,6 +77,8 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("buttonGroup"));
         pane.getChildren().add(groepen.get("turnGroup"));
         pane.getChildren().add(groepen.get("roundGroup"));
+        pane.getChildren().add(groepen.get("smallworldGroup"));
+        System.out.println(pane.getChildren());
         changeToScene(pane);
     }
 
@@ -109,7 +115,6 @@ public class SceneManager {
         FXMLLOADER("/Leaderboard/Leaderboard.fxml");
         changeToScene(localGroup);
     }
-
 
 
     public void createGameView(GameController gameCon) {
@@ -151,6 +156,11 @@ public class SceneManager {
             e.printStackTrace();
         }
 
+    }
+
+    public void loadSmallworld(){
+        creators.put(gameLogoView.class, (Callable<gameLogoView>) () ->new gameLogoView(groepen.get("smallworldGroup")));
+        FXMLLOADER("/SmallWorld.fxml");
     }
 
     public void loadTimer(TimerController con) {
