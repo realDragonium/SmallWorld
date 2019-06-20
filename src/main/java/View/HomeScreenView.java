@@ -1,7 +1,7 @@
 package View;
 
 import Controller.HomeScreenController;
-import Controller.LobbyController;
+import Controller.LeaderboardController;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -35,8 +35,8 @@ public class HomeScreenView implements HomeScreenObserver{
 
     @FXML
     private void createGame(){
-    	//new GameController("First", "player1");
-		new LobbyController();
+    	//new GameController();
+		new LeaderboardController();
 	}
 
 	@FXML
