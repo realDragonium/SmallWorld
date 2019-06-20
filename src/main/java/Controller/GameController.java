@@ -165,7 +165,7 @@ public class GameController {
     }
 
     public void createGameTimer(){
-        gameTimer = new GameTimer(this, 10);
+        gameTimer = new GameTimer(this, 30);
     }
 
     public void nextTurn() {

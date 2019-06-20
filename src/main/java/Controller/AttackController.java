@@ -38,15 +38,14 @@ public class AttackController {
             if (player.getActiveCombination().getRace().hasEnoughFiches(fichesCountNeeded)) {
                 attack(player);
             }
-            else if(player.getActiveCombination().getRace().fichesCount() == 1){
+            else if(player.getActiveCombination().getRace().fichesCount() == 1 && !diceUsed){
                 int waarde = gameCon.getDiceCon().ClickedDice();
                 diceUsed = true;
                 if (player.getActiveCombination().getRace().hasEnoughFiches(fichesCountNeeded + waarde)) {
                     attack(player);
                 }
-                gameCon.getGameTurn().endTurn();
             }
-        } else gameCon.getGameTurn().endTurn();
+        }
     }
 
 
