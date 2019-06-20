@@ -96,4 +96,11 @@ public class RaceController {
 		model.addFiche(oneFiche);
 		updatePlayerFicheAmount();
     }
+
+	public RaceFiche removeFiche() {
+		RaceFiche tempFiche = model.getFiche();
+		updatePlayerFicheAmount();
+		return tempFiche;
+
+	}
 }

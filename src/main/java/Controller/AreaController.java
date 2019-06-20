@@ -92,4 +92,8 @@ public class AreaController implements FirebaseControllerObserver {
 	public int getFichesAmount() {
 		return model.getNumberOfFiches();
 	}
+
+	public void addFiche(RaceFiche fiche) {
+		model.addFiche(fiche);
+	}
 }

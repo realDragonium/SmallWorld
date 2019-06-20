@@ -98,7 +98,13 @@ public class AreaModel implements AreaObservable {
     }
 
     public RaceFiche getOneFiche() {
-        return raceFiches.pop();
+        RaceFiche tempFiche = raceFiches.pop();
+        notifyObserver();
+        return tempFiche;
+    }
+
+    public void addFiche(RaceFiche fiche) {
+        raceFiches.add(fiche);
         notifyObserver();
     }
 }
