@@ -1,7 +1,8 @@
 package Model;
 
+import Observable.LeaderboardObservable;
 import javafx.scene.control.Label;
-import observable.LeaderboardObservable;
+import Observable.LeaderboardObservable;
 import Observer.LeaderboardObserver;
 
 import java.util.ArrayList;

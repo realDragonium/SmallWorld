@@ -1,6 +1,7 @@
 package View;
 
 import Controller.DiceController;
+import Managers.SceneManager;
 import Observer.DiceObserver;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -13,7 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import observable.DiceObservable;
+import Observable.DiceObservable;
 
 import java.util.ArrayList;
 
@@ -42,17 +43,6 @@ public class DiceView implements DiceObserver {
     );
 
 
-    public void onClick() {
-
-        showImageView.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                playAnimation();
-
-            }
-        });
-    }
-
     ArrayList<Image> list = new ArrayList<>();
     int counter = 0;
 
@@ -63,8 +53,6 @@ public class DiceView implements DiceObserver {
 
         diceController.registreer(this);
         createScene();
-        onClick();
-
     }
 
     public void createScene() {
@@ -84,18 +72,12 @@ public class DiceView implements DiceObserver {
         gridPane.setTranslateY(720);
     }
 
-    public void playAnimation() {
+    public void playAnimation(int waarde) {
 
-        for (counter = 0; counter < list.size(); counter++) {
-//            showImageView.setImage(list.get((int) (Math.random() * 6)));
-
-//            showImageView.setImage(list.get((int) (Math.random() * 6)));
-//		showImageView  = new ImageView("/images/DiceTwo.jpg");
-
-
-        }
         timeline.play();
-        timeline.setOnFinished(e -> diceController.ClickedDice());
+        timeline.setOnFinished(e -> {
+            showImageView.setImage(list.get(waarde));
+        });
 
 
     }
@@ -103,7 +85,9 @@ public class DiceView implements DiceObserver {
 
     @Override
     public void update(DiceObservable ob) {
-
+        if(ob.isPlaying()){
+            playAnimation(ob.getWaarde());
+        }
     }
 }
 

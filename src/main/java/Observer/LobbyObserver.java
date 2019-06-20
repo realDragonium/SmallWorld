@@ -1,8 +1,10 @@
 
 package Observer;
 
+import Observable.ObservableLobby;
+
 public interface LobbyObserver {
-	
-	void update(boolean mode);
+
+	void update(ObservableLobby lo);
 
 }

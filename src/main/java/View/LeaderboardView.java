@@ -5,8 +5,9 @@ import Controller.HomeScreenController;
 import Controller.LeaderboardController;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import Observable.LeaderboardObservable;
 import javafx.scene.control.Label;
-import observable.LeaderboardObservable;
+import Observable.LeaderboardObservable;
 import Observer.LeaderboardObserver;
 import javafx.fxml.FXML;
 
@@ -29,7 +30,6 @@ public class LeaderboardView implements LeaderboardObserver {
         this.leadCon = leadCon;
 
     }
-
 
 
     public void back(){
@@ -88,6 +88,4 @@ public class LeaderboardView implements LeaderboardObserver {
     leadCon.addValue();
 
     }
-
-
 }

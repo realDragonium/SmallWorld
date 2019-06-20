@@ -6,7 +6,14 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import observable.TimerObservable;
+import Observable.TimerObservable;
+
+
+/** @author Yoran de Vos
+ *  De TimerView class weergeeft een timer aan de speler, zodat die weet hoeveel tijd die heeft in een spelfase.
+ *
+ */
+
 
 public class TimerView implements TimerObserver {
 
@@ -19,6 +26,14 @@ public class TimerView implements TimerObserver {
     @FXML
     public TextField timer;
 
+
+    /**
+     *
+     * @param group wordt in de constructor meegegeven om alle omvattende nodes uit het fxml mee te sturen.
+     * @param timerCon is een variable van de TimerController waar alle logica staat.
+     */
+
+
     public TimerView(Group group, TimerController timerCon){
         this.group = group;
         this.timerCon = timerCon;
@@ -26,9 +41,14 @@ public class TimerView implements TimerObserver {
     }
 
     public void initialize(){
-        System.out.println(pane);
         group.getChildren().add(pane);
     }
+
+
+    /**
+     *
+     * @param ao is van de TimerObservable. Wordt meegestuurd aan de update methode, waardoor de View (observer) een update krijgt van de model (Observable)
+     */
 
     @Override
     public void update(TimerObservable ao) {

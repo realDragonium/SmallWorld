@@ -14,5 +14,6 @@
         <Group id="mapGroup" />
         <Group id="vervalGroup"/>
         <Group id="diceGroup"/>
+        <Group id="redeployingGroup"/>
     </children>
 </Pane>

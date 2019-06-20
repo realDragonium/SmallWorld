@@ -1,6 +1,6 @@
-package observers;
+package Observer;
 
-import observable.LoginObservable;
+import Observable.LoginObservable;
 
 public interface LoginObserver {
 	void update(LoginObservable lo);

@@ -4,17 +4,26 @@ import Managers.SceneManager;
 import Model.TurnModel;
 import Observer.TurnObserver;
 
+import java.util.Random;
+
 public class TurnController {
 
     private TurnModel model;
     private GameController gameCon;
+    private int currentPlayer;
 
 
-    public TurnController(GameController gameCon){
+    TurnController(GameController gameCon){
         model = new TurnModel(4);
         this.gameCon = gameCon;
         SceneManager.getInstance().loadTurn(this);
-        gameCon.changePlayerTurn("player"+model.currentTurn);
+        decideStartingPlayer();
+    }
+
+    public void decideStartingPlayer(){
+        currentPlayer = 1;
+        gameCon.setCurrentPlayer(currentPlayer);
+
     }
 
     public void register(TurnObserver to){
@@ -22,20 +31,16 @@ public class TurnController {
     }
 
     void nextTurn(){
-        System.out.println("volgende beurt");
-        if(model.currentTurn >= model.getTurnPerRound()) {
-            model.currentTurn = 0;
-            gameCon.getRoundCon().nextRound();
-        }
         if(gameCon.isGameOver()) return;
         model.nextTurn();
-        gameCon.changePlayerTurn("player"+model.currentTurn);
+        currentPlayer++;
+        if(currentPlayer == 5){
+            currentPlayer = 1;
+        }
+        gameCon.changePlayerTurn("player"+currentPlayer);
     }
 
-    public String getCurrentPlayer() {
+    String getCurrentPlayer() {
         return "player" + model.currentTurn;
-    }
-
-    public void skipTurnPlayerVerval() {
     }
 }

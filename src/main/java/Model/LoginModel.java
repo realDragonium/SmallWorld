@@ -1,10 +1,10 @@
-package models;
+package Model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import observable.LoginObservable;
-import observers.LoginObserver;
+import Observable.LoginObservable;
+import Observer.LoginObserver;
 
 public class LoginModel implements LoginObservable {
 	private List<LoginObserver> observers = new ArrayList<>();

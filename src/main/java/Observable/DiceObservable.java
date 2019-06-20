@@ -1,4 +1,4 @@
-package observable;
+package Observable;
 
 import Observer.DiceObserver;
 
@@ -7,4 +7,5 @@ public interface DiceObservable {
     void notifyAllObs();
     int getWaarde();
 
+    boolean isPlaying();
 }

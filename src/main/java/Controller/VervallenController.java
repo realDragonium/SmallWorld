@@ -7,7 +7,7 @@ public class VervallenController {
 
     GameController gameCon;
 
-    public VervallenController(GameController gameCon){
+    VervallenController(GameController gameCon){
         this.gameCon = gameCon;
         SceneManager.getInstance().loadVerval(this);
     }
@@ -18,7 +18,6 @@ public class VervallenController {
         makeCombinationNonActive();
         makePlayerSkipTurn();
         //eindig zijn beurt
-        gameCon.getTurnCon().nextTurn();
     }
 
 
@@ -36,6 +35,6 @@ public class VervallenController {
 
     //methode volgende ronde van dezelfde player overgeslagen (kom ik niet uit) (
     private void makePlayerSkipTurn(){
-        gameCon.getTurnCon().skipTurnPlayerVerval();
+        gameCon.getGameTurn().endTurn();
     }
 }

@@ -1,14 +1,15 @@
 package Model;
 
-import Controller.GameController;
+import Firebase.FirebaseServiceOwn;
+import Managers.SceneManager;
 import Observer.TimerObserver;
-import observable.TimerObservable;
+import Observable.TimerObservable;
 
-import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class TimerModel implements TimerObservable, ChangeListener {
+
 
     int elapsedTime;
     TimerObserver observer;
@@ -17,14 +18,6 @@ public class TimerModel implements TimerObservable, ChangeListener {
 
     public boolean timerIsDone(){
         return timerDone;
-    }
-
-    public void addSecond(){
-        elapsedTime++;
-        if(elapsedTime >= timeAmount){
-            timerDone = true;
-        }
-        notifyAllObservers();
     }
 
     @Override
@@ -39,16 +32,22 @@ public class TimerModel implements TimerObservable, ChangeListener {
 
     @Override
     public int getSeconds() {
-        return timeAmount - elapsedTime;
+        return elapsedTime;
     }
 
     @Override
     public void notifyAllObservers() {
+
         observer.update(this);
     }
 
     @Override
     public void stateChanged(ChangeEvent e) {
 
+    }
+
+    public void setTimer(int timer) {
+        elapsedTime = timer;
+        notifyAllObservers();
     }
 }

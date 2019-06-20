@@ -1,16 +1,33 @@
 package Controller;
 
 
+import Applicatie.Applicatie;
 import Managers.SceneManager;
 import Model.LobbyModel;
 import Observer.LobbyObserver;
 
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 public class LobbyController {
+
 	LobbyModel lobbymodel = new LobbyModel();
-	//LobbySettingsController con = new LobbySettingsController();
 
 	public LobbyController(){
 		SceneManager.getInstance().createLobbyView(this);
+	}
+
+	public void joinLobby(String Name){
+		Applicatie app = SceneManager.getInstance().getApp();
+		int id = app.getFirebaseService().joinLobby(Name, app.getAccountCon().getAccountName());
+		if(id>0){
+
+			new InLobbyController(Name, id);
+		}
+	}
+
+	public String getLobbyNaam(){
+		return lobbymodel.getLobbyNaam();
 	}
 
 	public void register(LobbyObserver ob) {
@@ -21,39 +38,21 @@ public class LobbyController {
 		lobbymodel.hostLobby(lobbyName);
 	}
 
-
-
-
-//	public void startInLobbyScreen(){
-//		new InLobbyController();
-//	}
-
-//	public void startInLobbyScreen(String lobbyNaam){
-//		new InLobbyController(lobbyNaam);
-//	}
-
-//
-//
-//	public void setLobbyName(String lobbyName){
-//		con.setLobbyName(lobbyName);
-//	}
-//
-//	public void getLobbyName(String lobbyName){
-//		con.setLobbyName(lobbyName);
-//	}
-
-
-
-
-
 	public void lobbyEdit(){
 		new LobbySettingsController();
 	}
 
+	public List<String> getFirebaseLobbyNamen(){
+		try {
+			return SceneManager.getInstance().getApp().getFirebaseService().getActiveLobbies();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
-//	public void lobbyEdit(String lobbyNaam){
-//		new LobbySettingsController(lobbyNaam);
-//	}
 
 	public void exitLobby(int decreaseLobbySize) {   
 		lobbymodel.exitLobby(decreaseLobbySize);
@@ -63,12 +62,6 @@ public class LobbyController {
 		lobbymodel.getLobbyAmount();
 	}
 
-
-
-
-	public void lobbyNaamOpvragen() {
-		lobbymodel.lobbyNaamOpvragen();
-	}
 
 	public void spelerToevoegen() {            // berekening om speler toe te voegen
 		lobbymodel.spelerToevoegen();
@@ -81,5 +74,7 @@ public class LobbyController {
 	public int getLobbySizeCounter() {
 		return lobbymodel.getLobbySizeCounter();
 	}
-	
+
+
+
 }

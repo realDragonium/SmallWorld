@@ -1,27 +1,30 @@
 package Controller;
 
+import Firebase.FirebaseControllerObserver;
 import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
 import Model.AreaModel;
 import Objects.RaceFiche;
 import Observer.AreaObserver;
+import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.scene.Group;
+import Enum.AreaProperty;
 
-import java.util.Collections;
 import java.util.Stack;
 
-public class AreaController {
+public class AreaController implements FirebaseControllerObserver {
 
 	private Map2DController map2DCon;
 	private AreaModel model;
 	private GameController gameCon;
-	private FirebaseServiceOwn fb = Applicatie.Applicatie.getFirebaseService();
-
+	private FirebaseServiceOwn fb = SceneManager.getInstance().getApp().getFirebaseService();
+	
 	public AreaController(Group area, Map2DController mapCon, GameController gameCon) {
 		model = new AreaModel(area.getChildren().get(0).getId());
 		map2DCon = mapCon;
 		this.gameCon = gameCon;
 		SceneManager.getInstance().createAreaView(this, area);
+		fb.AreaListener(model.getId(), this);
 	}
 
 	String getId(){return model.getId();}
@@ -32,7 +35,7 @@ public class AreaController {
 
 	void attackArea(Stack<RaceFiche> fiches){
 		model.setFiches(fiches);
-		fb.mapUpdateFiches(model.getId(), fiches.size());
+		fb.areaUpdateFiches(model.getId(), model.getNumberOfFiches());
 	}
 
 	void setPlayerOwner(PlayerController player){
@@ -44,8 +47,12 @@ public class AreaController {
 	}
 
 	Stack<RaceFiche> removeFiches(){
-		fb.mapUpdateFiches(model.getId(), 0);
+		fb.areaUpdateFiches(model.getId(), 0);
 		return model.getAllFiches();
+	}
+
+	RaceFiche getOneFiche(){
+		return model.getOneFiche();
 	}
 
 	void changeActive(){model.changeActive();}
@@ -61,14 +68,28 @@ public class AreaController {
 	public void destroyAllButOne(){model.getAllButOne();}
 
     public void returnAllButOne(RaceController raceController) {
-
 		raceController.pushFiches(model.getAllButOne());
     }
 
+	@Override
+	public void update(DocumentSnapshot ds) {
+		if(ds.get("o") == null) return;
+
+		AttackController attCon = gameCon.getAttCon();
+		attCon.getTargetArea();
+		attCon.attackAreaLocal();
+	}
+
+	public AreaProperty getSpecialProp() {
+		return model.getSpecialProp();
+	}
 
 
+	public boolean isNextToWater() {
+		return model.isNextToWater();
+	}
 
-
-
-
+	public int getFichesAmount() {
+		return model.getNumberOfFiches();
+	}
 }

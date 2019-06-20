@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import observable.CombinationObservable;
+import Observable.CombinationObservable;
 
 public class CombinationView implements CombinationObserver {
 
@@ -32,8 +32,6 @@ public class CombinationView implements CombinationObserver {
 
     @Override
     public void update(CombinationObservable co) {
-        System.out.println("lets go");
-        System.out.println(co.getRaceId());
         Race.setText(co.getRaceId());
         Power.setText(co.getPowerId());
     }
