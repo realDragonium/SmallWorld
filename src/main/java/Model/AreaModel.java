@@ -147,4 +147,8 @@ public class AreaModel implements AreaObservable {
     public boolean isAttackAble(){
         return attackAble;
     }
+
+    public List<String> getNeigbours() {
+        return neighbours;
+    }
 }

@@ -3,6 +3,8 @@ package Controller;
 import Enum.TurnFase;
 import Managers.SceneManager;
 
+import java.util.List;
+
 public class AttackController {
 
     private GameController gameCon;
@@ -36,7 +38,7 @@ public class AttackController {
             player.getActiveCombination().checkForSpecialActions(TurnFase.conquering);
             if (player.getActiveCombination().getRace().hasEnoughFiches(fichesCountNeeded)) {
                 if(player.getActiveCombination().getRace().getAllAreas().size() == 0) firstAttack(player);
-                else attack(player);
+                else isNeighbour(player);
             }
             else if(player.getActiveCombination().getRace().fichesCount() == 1 && !diceUsed){
                 int waarde = gameCon.getDiceCon().ClickedDice();
@@ -54,7 +56,6 @@ public class AttackController {
         }
     }
 
-
     void attack(PlayerController player){
         if(!targetArea.isAttackAble()) return;
         if (targetArea.getOwnerPlayer() != null && targetArea.getOwnerPlayer() != gameCon.getMyPlayer()) {
@@ -70,4 +71,19 @@ public class AttackController {
         getTargetArea();
         attackAreaLocal();
     }
+
+    void isNeighbour(PlayerController player){
+        if(isNeighbour(player.getActiveCombination().getRace().getAllAreas())){
+            attack(player);
+        }
+    }
+
+    private boolean isNeighbour(List<AreaController> areas){
+        String Id = targetArea.getId();
+        for(AreaController area : areas){
+            if(area.getNeighbours().contains(Id)) return true;
+        }
+        return false;
+    }
+
 }
