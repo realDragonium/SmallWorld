@@ -32,6 +32,8 @@ public class AttackController {
         if(player.hasActiveCombination()){
             player.getActiveCombination().checkForSpecialActions(TurnFase.conquering);
             if (player.getActiveCombination().getRace().hasEnoughFiches(fichesCountNeeded)) {
+                int waarde = gameCon.getDiceCon().ClickedDice();
+                System.out.println(waarde);
                 if (targetArea.getOwnerPlayer() != null) {
                     System.out.println("OMG er staat iemand op... dan maar met meer aanvallen!");
                     targetArea.getOwnerPlayer().getActiveCombination().getRace().pushFiches(targetArea.removeFiches());

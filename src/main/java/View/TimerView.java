@@ -47,7 +47,7 @@ public class TimerView implements TimerObserver {
 
     /**
      *
-     * @param ao is van de TimerObservable. Wordt meegestuurd aan de update methode, waardoor de View (observer) een update krijgt van de model (observable)
+     * @param ao is van de TimerObservable. Wordt meegestuurd aan de update methode, waardoor de View (observer) een update krijgt van de model (Observable)
      */
 
     @Override

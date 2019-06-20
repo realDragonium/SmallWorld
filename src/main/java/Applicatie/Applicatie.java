@@ -51,7 +51,7 @@ public class Applicatie {
         primaryStage.show();
 
        new LoginController();
-//       new LobbyController();
+      // new LobbyController();
     }
 
     public void loadScene(Scene scene) {

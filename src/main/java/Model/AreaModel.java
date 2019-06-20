@@ -77,8 +77,9 @@ public class AreaModel implements AreaObservable {
     }
 
     public RaceFiche getOneFiche() {
+        RaceFiche one = raceFiches.pop();
         notifyObserver();
-        return raceFiches.pop();
+        return one;
     }
 
     @Override

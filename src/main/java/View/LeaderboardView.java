@@ -32,7 +32,6 @@ public class LeaderboardView implements LeaderboardObserver {
     }
 
 
-
     public void back(){
         new HomeScreenController();
 
@@ -89,6 +88,4 @@ public class LeaderboardView implements LeaderboardObserver {
     leadCon.addValue();
 
     }
-
-
 }

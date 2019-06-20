@@ -27,6 +27,7 @@ public class GameController {
     private PlayerController myPlayer;
     private RedeployingController redCon;
     private String myPlayerId;
+    private DiceController diceCon;
     private Applicatie app = SceneManager.getInstance().getApp();
     private FirebaseServiceOwn fb = app.getFirebaseService();
 
@@ -71,7 +72,7 @@ public class GameController {
         createVerval();
 
         createTurnsAndRounds();
-        new DiceController();
+        diceCon = new DiceController();
         new KnoppenController(this);
 
         redCon = new RedeployingController(this);
@@ -138,6 +139,8 @@ public class GameController {
     public AttackController getAttCon(){
         return attCon;
     }
+
+    public DiceController getDiceCon() {return diceCon;}
 
     public GameTurn getGameTurn() { return gameTurn;}
 
