@@ -33,16 +33,16 @@ public class AreaModel implements AreaObservable {
     }
 
     public void setFiches(int fiches){
-        IntStream.range(0, fiches).forEach(o -> {
-            raceFiches = new Stack<>();
-            raceFiches.push(new RaceFiche());
-            System.out.println("test"+o);
-        });
-        System.out.println(raceFiches.size());
+        raceFiches = new Stack<>();
+        IntStream.range(0, fiches).forEach(o -> raceFiches.push(new RaceFiche()));
     }
 
     public void setNeighbours(List<String> neighbour){
         neighbours = neighbour;
+    }
+
+    public PlayerController getPlayer(){
+        return player;
     }
 
     public void setBorderArea(boolean bArea){
@@ -52,7 +52,6 @@ public class AreaModel implements AreaObservable {
     public void setAreaType(String type){
         this.specialProperty = AreaProperty.valueOf(type);
     }
-
 
     public String getId() {
         return id;

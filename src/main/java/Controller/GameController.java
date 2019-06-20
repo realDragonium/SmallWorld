@@ -53,6 +53,8 @@ public class GameController {
         fb.registerPlayer(myPlayerId, info);
     }
 
+
+
     public String getMyPlayerId(){
         return myPlayerId;
     }
@@ -81,6 +83,8 @@ public class GameController {
         mapCon = new Map2DController(this);
     }
 
+
+
     private void createVerval() {
         vervCon = new VervallenController(this);
     }
@@ -91,6 +95,7 @@ public class GameController {
         players.put("player2", new PlayerController("player2", this));
         players.put("player3", new PlayerController("player3", this));
         players.put("player4", new PlayerController("player4", this));
+        myPlayer = players.get(myPlayerId);
     }
 
     private void createShop(){
@@ -105,8 +110,6 @@ public class GameController {
     private void createGameTurn(){
         gameTurn = new GameTurn(this, currentPlayer);
     }
-
-
 
     PlayerController getPlayer(String id){
         return players.get(id);
@@ -153,11 +156,8 @@ public class GameController {
         return model.gameEnded;
     }
 
-
     private void startGame(){
-
         gameTurn = new GameTurn(this, currentPlayer);
-
     }
 
     public void createGameTimer(){

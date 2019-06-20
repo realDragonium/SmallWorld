@@ -19,6 +19,9 @@ import java.util.List;
  * @author Lars Puente Blom
  * @version Juni 2019
  *
+ *
+ *
+ *
  */
 
 public class LobbyView implements LobbyObserver {
@@ -33,7 +36,6 @@ public class LobbyView implements LobbyObserver {
 
 
     /**
-     *
      * @param group is given argument for the scene manager
      * @param con is given argument to the controller so that its mvc.
      */

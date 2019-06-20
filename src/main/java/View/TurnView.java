@@ -14,8 +14,6 @@ import javafx.scene.text.Text;
 
 /**@author Yoran
  *
- *
- *
  */
 
 public class TurnView implements TurnObserver {

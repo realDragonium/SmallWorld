@@ -15,8 +15,6 @@ public class VervallenController {
     public VervallenController() {
 
     }
-
-
     public void inVerval() {
         makeFicheToOne();
         makeCombinationNonActive();
