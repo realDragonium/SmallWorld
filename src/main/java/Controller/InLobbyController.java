@@ -20,10 +20,17 @@ public class InLobbyController implements FirebaseControllerObserver {
     Applicatie app = SceneManager.getInstance().getApp();
     InLobbyModel mod = new InLobbyModel();
 
+
     public InLobbyController(){
         SceneManager.getInstance().createInLobbyView(this);
     }
 
+
+    /**
+     *
+     * @param lobbyNaam
+     * @param id
+     */
     public InLobbyController(String lobbyNaam, int id){
         app.getAccountCon().setPlayerId("player"+id);
         SceneManager.getInstance().createInLobbyView(this);
@@ -37,14 +44,21 @@ public class InLobbyController implements FirebaseControllerObserver {
         SceneManager.getInstance().getApp().getFirebaseService().inLobbyListener(lobbyNaam, this);
     }
 
+    /**
+     * @param lobbyNaam
+     */
     public void setLobbyNaam(String lobbyNaam){
         mod.setLobbyNaam(lobbyNaam);
     }
 
+    /**
+     *
+     */
     public void start(){            // start button
         SceneManager.getInstance().getApp().getFirebaseService().startGame(mod.getLobbyNaam());
         //new GameController(mod.getLobbyNaam(), app.getAccountCon().getPlayerId());  // starten van het spel
     }
+
 
     public void exitLobby(){
         Applicatie app = SceneManager.getInstance().getApp();
@@ -52,14 +66,27 @@ public class InLobbyController implements FirebaseControllerObserver {
         new LobbyController();
     }
 
+    /**
+     * @param ob registers the observer and giving it to the register method in the InlobbyModel
+     */
     public void register(InLobbyObserver ob){
         mod.register(ob);
     }
 
+
+    /**
+     *
+     * @param ob
+     */
     public void unregister(InLobbyObserver ob){
         mod.unregister(ob);
     }
 
+
+    /**
+     *
+     * @param ds
+     */
     @Override
     public void update(DocumentSnapshot ds) {
         Map<String, Object> map = ds.getData();
@@ -71,4 +98,7 @@ public class InLobbyController implements FirebaseControllerObserver {
             Platform.runLater(() -> new GameController(mod.getLobbyNaam(), app.getAccountCon().getPlayerId()));
         }
     }
+
+
+
 }
