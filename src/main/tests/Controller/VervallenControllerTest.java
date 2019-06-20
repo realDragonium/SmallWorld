@@ -1,28 +1,49 @@
 package Controller;
 
+import Model.CombinationModel;
 import org.junit.Before;
 import org.junit.Test;
+
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
+
+/**
+ * @author : Martijn van der Steen
+ * @version : Juni 2019
+ */
 
 public class VervallenControllerTest {
 
     VervallenController vervCon;
     CombinationController combCon;
+    CombinationModel combmodel;
+
+
+    /**
+     *
+     */
 
     //testen of een speler active of nonactive kan zijn
     @Before
     public void setUp(){
-        //gameCon.getCurrentPlayer().getActiveCombination().setToNonActive();
-        //CombinationController combCon = new CombinationController()
+        combmodel = new CombinationModel(" ", " ");
         combCon = new CombinationController();
-        vervCon = new VervallenController();
-        vervCon.inVerval();
+        //vervCon = new VervallenController();
     }
+
+
+    /**
+     *
+     *
+     *
+     *
+     */
 
     @Test
     public void testActive(){
 
-        //PlayerModel active = new PlayerModel("mannetje");
-        //assertFalse(mannetje.gameCon.isActive());
+        assertTrue(combmodel.isActive());
+
     }
 
     @Test

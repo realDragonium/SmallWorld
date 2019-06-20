@@ -24,7 +24,7 @@ public class TimerModelTest {
 
     @Test
     public void testAddSecond() {
-        timerModel.addSecond();
+
 
         assertEquals(1, timerModel.getSeconds());
         assertFalse(true);
