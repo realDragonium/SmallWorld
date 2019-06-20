@@ -29,6 +29,7 @@ public class ShopController {
         if(model.getShopItems().size() > item) {
             gameCon.getCurrentPlayer().buyFromShop(model.getShopItems().get(item), item);
             model.removeItem(item);
+            gameCon.getGameTurn().endTurn();
         }
     }
 
