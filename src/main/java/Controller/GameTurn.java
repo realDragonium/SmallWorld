@@ -10,7 +10,6 @@ import javafx.application.Platform;
 class GameTurn implements FirebaseControllerObserver {
 
     GameController gameCon;
-    TimerController phaseTimer;
     private FirebaseServiceOwn fb = SceneManager.getInstance().getApp().getFirebaseService();
 
     void endTurn() {
@@ -27,12 +26,10 @@ class GameTurn implements FirebaseControllerObserver {
         currentPhase = TurnFase.none;
         System.out.println("Begin beurt: " + currentPlayer.getId());
         System.out.println("Jij bent speler: " + gameCon.getMyPlayerId());
-        phaseTimer = new TimerController(this);
         SceneManager.getInstance().switchToSpectatingView();
     }
 
     void endPhase() {
-        System.out.println(currentPhase);
         switch (currentPhase) {
             case none:
                 startPreperationPhase();
@@ -45,7 +42,9 @@ class GameTurn implements FirebaseControllerObserver {
                 break;
             case redeploying:
                 SceneManager.getInstance().switchToSpectatingView();
+                currentPhase = TurnFase.none;
                 gameCon.nextTurn();
+
                 break;
         }
     }
@@ -94,9 +93,9 @@ class GameTurn implements FirebaseControllerObserver {
     @Override
     public void update(DocumentSnapshot ds) {
         Platform.runLater(() -> {
+            gameCon.getTimer().setTime(gameCon.getGameTimer().maxTime);
+            gameCon.getGameTimer().resetTimer(ds.getBoolean("endPhase"));
             endPhase();
-            phaseTimer.setTime((int)Math.round(ds.getDouble("time")));
-            gameCon.getGameTimer().resetTimer();
         });
     }
 }

@@ -8,19 +8,14 @@ import java.util.List;
 /**  This Model-class is part of the MVC design pattern and shows the lobby screen (available lobbies).
  * @author: Lars Puente Blom
  * @version: June 2019
- *
  */
 
 public class LobbyModel implements ObservableLobby {
-
 	private List<LobbyObserver> observers = new ArrayList<>();
 	private List<String> lobbynamen = new ArrayList<>();
-	//private String lobbySize[];  // max 4 spelers
-	//private int lobbySizeCounter = 0;
-	//private int lobbyAmount = 0;
-	//private String playerAmount;
-	//private String[] spelers = {"Speler 1", "Speler 2", "Speler 3", "Speler 4"};
-	//private String lobbyNaam;
+
+
+	// returns a list of lobbyNames
 	@Override
 	public List<String> getLobbyName() {
 		return lobbynamen;

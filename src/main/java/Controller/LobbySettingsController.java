@@ -17,6 +17,7 @@ public class LobbySettingsController {
     FirebaseServiceOwn fb = app.getFirebaseService();
     LobbySettingsModel mod = new LobbySettingsModel();
 
+
     public LobbySettingsController(){
         SceneManager.getInstance().createLobbySettingsView(this);
     }
@@ -25,11 +26,19 @@ public class LobbySettingsController {
         new LobbyController();
     }
 
+
+    /**
+     * @param lobbyNaam contains the entered lobbyNaam by the player who hosted the lobby
+     * @param playerAmount contains the amount of players thats been selected
+     */
     public void startLobby(String lobbyNaam, int playerAmount){
         fb.createLobby(playerAmount, lobbyNaam, app.getAccountCon().getAccountName());
         new InLobbyController(lobbyNaam, 1);
     }
 
+    /**
+     * @param ob
+     */
     public void register(LobbySettingsObserver ob){
         mod.register(ob);
     }

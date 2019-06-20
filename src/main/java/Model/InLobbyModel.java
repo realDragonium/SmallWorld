@@ -20,19 +20,30 @@ public class InLobbyModel implements InLobbyObservable {
     private String player3;
     private String player4;
 
+
+
     public void setLobbyNaam(String lobbyNaam){
         this.lobbyNaam = lobbyNaam;
     }
+
+
 
     public String getLobbyNaam(){
         return lobbyNaam;
     }
 
+
+    /**
+     *
+     * @param start
+     */
     public void startGame(boolean start){
         this.start = start;
         notifyAllObservers();
     }
 
+
+    // Notifies all observers in the list of observers
     @Override
     public void notifyAllObservers() {
         for(InLobbyObserver obs : observers) {
@@ -50,6 +61,11 @@ public class InLobbyModel implements InLobbyObservable {
         observers.remove(ob);
     }
 
+
+    /**
+     *
+     * @return
+     */
     @Override
     public String getPlayer1() {
         return player1;
