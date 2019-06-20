@@ -76,6 +76,11 @@ public class AreaModel implements AreaObservable {
         return temp;
     }
 
+    public RaceFiche getOneFiche() {
+        notifyObserver();
+        return raceFiches.pop();
+    }
+
     @Override
     public void register(AreaObserver ao) {
         observer = ao;
@@ -95,10 +100,5 @@ public class AreaModel implements AreaObservable {
     @Override
     public int getNumberOfFiches() {
         return fichesCount;
-    }
-
-    public RaceFiche getOneFiche() {
-        return raceFiches.pop();
-        notifyObserver();
     }
 }

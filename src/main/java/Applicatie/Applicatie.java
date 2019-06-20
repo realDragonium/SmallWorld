@@ -50,8 +50,8 @@ public class Applicatie {
 //        primaryStage.setFullScreen(true);
         primaryStage.show();
 
-       //new LoginController();
-       new LobbyController();
+       new LoginController();
+//       new LobbyController();
     }
 
     public void loadScene(Scene scene) {
