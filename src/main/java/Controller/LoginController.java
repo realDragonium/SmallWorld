@@ -25,7 +25,9 @@ public class LoginController {
     public void register(String username, String password){
         if(fb.register(username, password)) {
             loginModel.loginAccepted(true);
-        } else loginModel.setFailedAttempt();
+            app.setAccount(new AccountController(username));
+        }
+        else loginModel.setFailedAttempt();
     }
     
     public void register(LoginObserver lo) {
