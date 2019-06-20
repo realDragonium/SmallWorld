@@ -116,14 +116,7 @@ public class FirebaseServiceOwn {
     //Is er nog plek in deze lobby?
     public int joinLobby(String lobbyNaam, String Name) {
         DocumentReference docRef = firestore.collection("Lobby").document(lobbyNaam);
-        DocumentSnapshot doc = null;
-        try {
-            doc = docRef.get().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        DocumentSnapshot doc = getDocSnapshot(firestore.collection("Lobby").document(lobbyNaam));
         Map<String, Object> lobbySet = doc.getData();
         for (int i = 1; i < 5; i++) {
             if (lobbySet.get("player" + i) == null) {
@@ -234,9 +227,15 @@ public class FirebaseServiceOwn {
     public void setAreas(String lobbyName) {
         List<QueryDocumentSnapshot> list = null;
         list = getQuerySnapshot(firestore.collection("Maps").document("4PlayerMap").collection("Areas").get()).getDocuments();
+        Map<String, Object> map = new HashMap<String, Object>();
         for(QueryDocumentSnapshot iets : list){
-            colRef.document(lobbyName).collection("Areas").document(iets.getId()).set(iets.getData());
+            map.put("fiches", iets.get("fiches"));
+            colRef.document(lobbyName).collection("Areas").document(iets.getId()).set(map);
         }
+    }
+
+    public DocumentSnapshot getAreaInfo(String areaId){
+        return getDocSnapshot(firestore.collection("Maps").document("4PlayerMap").collection("Areas").document(areaId));
     }
 
     public void startGame(String lobbyNaam) {
@@ -261,6 +260,7 @@ public class FirebaseServiceOwn {
     public void createTimer(String lobbyName){
         Map<String, Object> info = new HashMap<>();
         info.put("endPhase", false);
+        info.put("time", 10);
         colRef.document(lobbyName).collection("Extras").document("Timer").set(info);
     }
 
@@ -273,7 +273,7 @@ public class FirebaseServiceOwn {
     // Ophalen caan de speler naam samen met het aantal punten die de speler heeft gehaald.
     public TreeMap<Double, String> getTop3Player(){
         TreeMap<Double, String> map = new TreeMap<>();
-        QuerySnapshot players = getQuerySnapshot(colRef.document("TestDataTop3").collection("Players").get());
+        QuerySnapshot players = getQuerySnapshot(gameRef.collection("Players").get());
         for(QueryDocumentSnapshot qDoc: players.getDocuments()){
             map.put(qDoc.getDouble("punten"), qDoc.getString("Name"));
         }
