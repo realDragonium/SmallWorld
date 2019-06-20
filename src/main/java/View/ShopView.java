@@ -68,9 +68,9 @@ public class ShopView implements ShopObserver {
 
     @Override
     public void update(ShopObservable so) {
-        for(int i = 1; i < 7; i++) {
-            ((Text) ((Group)pane.getChildren().get(i)).getChildren().get(0)).setText(so.getPlayer(i));
-            ((Text) ((Group)pane.getChildren().get(i)).getChildren().get(1)).setText(so.getPower(i));
+        for(int i = 0; i < 6; i++) {
+            ((Text) ((Group)pane.getChildren().get(i+1)).getChildren().get(0)).setText(so.getPlayer(i));
+            ((Text) ((Group)pane.getChildren().get(i+1)).getChildren().get(1)).setText(so.getPower(i));
         }
     }
 }
