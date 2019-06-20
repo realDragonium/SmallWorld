@@ -32,11 +32,11 @@ public class AttackController {
     void attackAreaLocal() {
         fichesCountNeeded = targetArea.numbersNeeded();
         final PlayerController player = gameCon.getCurrentPlayer();
-        System.out.println(player.getId() + " is attacking");
         if(player.hasActiveCombination()){
             player.getActiveCombination().checkForSpecialActions(TurnFase.conquering);
             if (player.getActiveCombination().getRace().hasEnoughFiches(fichesCountNeeded)) {
-                attack(player);
+                if(player.getActiveCombination().getRace().getAllAreas().size() == 0) firstAttack(player);
+                else attack(player);
             }
             else if(player.getActiveCombination().getRace().fichesCount() == 1 && !diceUsed){
                 int waarde = gameCon.getDiceCon().ClickedDice();
@@ -48,19 +48,22 @@ public class AttackController {
         }
     }
 
+    void firstAttack(PlayerController player){
+        if(targetArea.firstAttackArea()){
+            attack(player);
+        }
+    }
+
 
     void attack(PlayerController player){
-        if (targetArea.getOwnerPlayer() != null) {
+        if(!targetArea.isAttackAble()) return;
+        if (targetArea.getOwnerPlayer() != null && targetArea.getOwnerPlayer() != gameCon.getMyPlayer()) {
             targetArea.getOwnerPlayer().getActiveCombination().getRace().pushFiches(targetArea.removeFiches());
             targetArea.getOwnerPlayer().getActiveCombination().getRace().removeArea(targetArea);
         }
         player.getActiveCombination().getRace().addArea(targetArea);
         targetArea.attackArea(player.getActiveCombination().getRace().getFiches(fichesCountNeeded));
         targetArea.setPlayerOwner(player);
-    }
-
-    void attackFromFirebase(){
-
     }
 
     public void attackCountry() {

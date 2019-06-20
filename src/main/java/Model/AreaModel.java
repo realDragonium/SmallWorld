@@ -27,9 +27,6 @@ public class AreaModel implements AreaObservable {
 
     public AreaModel(String id) {
         this.id = id;
-//        Map<String, Object> info = SceneManager.getInstance().getApp().getFirebaseService().getAreaSettings(id);
-//        IntStream.range(0, (int) (Math.random() * 3)).forEach(i -> raceFiches.push(new RaceFiche()));
-//        fichesCount = raceFiches.size();
     }
 
     public void setFiches(int fiches){
@@ -47,6 +44,10 @@ public class AreaModel implements AreaObservable {
 
     public void setBorderArea(boolean bArea){
         borderArea = bArea;
+    }
+
+    public boolean firstAttackArea(){
+        return borderArea && attackAble;
     }
 
     public void setAreaType(String type){
@@ -141,5 +142,9 @@ public class AreaModel implements AreaObservable {
 
     public void setAttackAble(boolean attackAble) {
         this.attackAble = attackAble;
+    }
+
+    public boolean isAttackAble(){
+        return attackAble;
     }
 }

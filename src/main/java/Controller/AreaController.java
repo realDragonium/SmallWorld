@@ -139,4 +139,12 @@ public class AreaController implements FirebaseControllerObserver {
     public AreaType getAreaType() {
         return model.getAreaType();
     }
+
+    public boolean firstAttackArea(){
+        return model.firstAttackArea();
+    }
+
+    public boolean isAttackAble() {
+        return model.isAttackAble();
+    }
 }
