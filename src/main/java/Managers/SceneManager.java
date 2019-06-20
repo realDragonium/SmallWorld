@@ -222,6 +222,11 @@ public class SceneManager {
         FXMLLOADER("/TurnView.fxml");
     }
 
+    public void loadRedeploying(RedeployingController redeployingCon) {
+        creators.put(RedeployingView.class, (Callable<RedeployingView>) () -> new RedeployingView(redeployingCon, groepen.get("redeployingGroup")));
+        FXMLLOADER("/RedeployingView.fxml");
+    }
+
     public void loadDice(DiceController diceCon) {
         new DiceView(diceCon, groepen.get("diceGroup"));
     }

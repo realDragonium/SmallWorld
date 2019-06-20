@@ -25,6 +25,7 @@ public class GameController {
     private ShopController shopCon;
     private GameTurn gameTurn;
     private PlayerController myPlayer;
+    private RedeployingController redCon;
     private String myPlayerId;
     private Applicatie app = SceneManager.getInstance().getApp();
     private FirebaseServiceOwn fb = app.getFirebaseService();
@@ -72,6 +73,8 @@ public class GameController {
         createTurnsAndRounds();
         new DiceController();
         new KnoppenController(this);
+
+        redCon = new RedeployingController(this);
 
         createAttCon();
         mapCon = new Map2DController(this);

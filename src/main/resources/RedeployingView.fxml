@@ -5,10 +5,10 @@
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.Group?>
-<Pane fx:id="pane" layoutX="1000" layoutY="300" prefHeight="600.0" prefWidth="116.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ShopView">
+<Pane fx:id="pane" layoutX="1000" layoutY="300" prefHeight="600.0" prefWidth="116.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.RedeployingView">
    <children>
-      <Button fx:id = "add"/>
-      <Button fx:id = "remove" layoutY = "50"/>
+      <Button fx:id = "add" text = "add fiches" onAction="#addButton"/>
+      <Button fx:id = "remove" layoutY = "50" text = "remove fiches" onAction="#removeButton"/>
 
    </children>
 </Pane>

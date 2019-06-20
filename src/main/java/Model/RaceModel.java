@@ -26,6 +26,10 @@ public class RaceModel {
 		});
 	}
 
+	public RaceFiche getFiche(){
+		return availableFiches.pop();
+	}
+
 	public Stack<RaceFiche> getFiches(int count){
 		Stack<RaceFiche> leaveFiches = new Stack<>();
 		IntStream.range(0, count).forEach(i -> leaveFiches.push(availableFiches.pop()));
@@ -74,5 +78,9 @@ public class RaceModel {
 			area.destroyAllButOne();
 		}
 		availableFiches = new Stack<>();
+    }
+
+    public void addFiche(RaceFiche oneFiche) {
+		availableFiches.add(oneFiche);
     }
 }

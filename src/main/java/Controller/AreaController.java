@@ -9,9 +9,8 @@ import Observer.AreaObserver;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.scene.Group;
 import Enum.AreaProperty;
+import Enum.AreaType;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Stack;
 
 public class AreaController implements FirebaseControllerObserver {
@@ -53,6 +52,10 @@ public class AreaController implements FirebaseControllerObserver {
 		return model.getAllFiches();
 	}
 
+	RaceFiche getOneFiche(){
+		return model.getOneFiche();
+	}
+
 	void changeActive(){model.changeActive();}
 
 	public void register(AreaObserver ao){model.register(ao);}
@@ -85,5 +88,17 @@ public class AreaController implements FirebaseControllerObserver {
 
 	public boolean isNextToWater() {
 		return model.isNextToWater();
+	}
+
+	public int getFichesAmount() {
+		return model.getNumberOfFiches();
+	}
+
+	public void addFiche(RaceFiche fiche) {
+		model.addFiche(fiche);
+	}
+
+	public AreaType getAreaType() {
+		return model.getAreaType();
 	}
 }
