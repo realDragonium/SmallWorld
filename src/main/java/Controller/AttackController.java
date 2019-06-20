@@ -27,11 +27,11 @@ public class AttackController {
         return targetArea;
     }
 
-    void getTargetArea() {
+    private void getTargetArea() {
         targetArea = gameCon.getMapCon().getActiveAreas().get(0);
     }
 
-    void attackAreaLocal() {
+    private void attackAreaLocal() {
         fichesCountNeeded = targetArea.numbersNeeded();
         final PlayerController player = gameCon.getCurrentPlayer();
         if(player.hasActiveCombination()){
@@ -50,13 +50,13 @@ public class AttackController {
         }
     }
 
-    void firstAttack(PlayerController player){
+    private void firstAttack(PlayerController player){
         if(targetArea.firstAttackArea()){
             attack(player);
         }
     }
 
-    void attack(PlayerController player){
+    private void attack(PlayerController player){
         if(!targetArea.isAttackAble()) return;
         if (targetArea.getOwnerPlayer() != null && targetArea.getOwnerPlayer() != gameCon.getMyPlayer()) {
             targetArea.getOwnerPlayer().getActiveCombination().getRace().pushFiches(targetArea.removeFiches());
@@ -72,7 +72,7 @@ public class AttackController {
         attackAreaLocal();
     }
 
-    void isNeighbour(PlayerController player){
+    private void isNeighbour(PlayerController player){
         if(isNeighbour(player.getActiveCombination().getRace().getAllAreas())){
             attack(player);
         }
