@@ -7,6 +7,7 @@ import javafx.scene.Group;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import Observable.TimerObservable;
+import javafx.scene.text.Text;
 
 
 /** @author Yoran de Vos
@@ -24,7 +25,7 @@ public class TimerView implements TimerObserver {
     public Pane pane;
 
     @FXML
-    public TextField timer;
+    public Text timer;
 
 
     /**

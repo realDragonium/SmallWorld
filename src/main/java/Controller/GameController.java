@@ -70,7 +70,7 @@ public class GameController {
         createPlayer();
         createShop();
         createVerval();
-
+        SceneManager.getInstance().loadSmallworld();
         createTurnsAndRounds();
         diceCon = new DiceController();
         new KnoppenController(this);

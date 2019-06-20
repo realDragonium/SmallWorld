@@ -52,6 +52,8 @@ class GameTurn implements FirebaseControllerObserver {
 
     void startPreperationPhase() {
         currentPhase = TurnFase.preparing;
+        gameCon.getTurnCon().setFase(currentPhase);
+
         if (currentPlayer.getId().equals(gameCon.getMyPlayerId())) {
             SceneManager.getInstance().switchToPreperationPhase();
             if (currentPlayer.hasActiveCombination()) {
@@ -67,6 +69,7 @@ class GameTurn implements FirebaseControllerObserver {
 
     void startAttackPhase() {
         currentPhase = TurnFase.conquering;
+        gameCon.getTurnCon().setFase(currentPhase);
         if (currentPlayer.getId().equals(gameCon.getMyPlayerId())) {
             if (currentPlayer.hasActiveCombination()) {
                 SceneManager.getInstance().switchToAttackPhase();
@@ -78,6 +81,7 @@ class GameTurn implements FirebaseControllerObserver {
 
     void startEndingPhase() {
         currentPhase = TurnFase.redeploying;
+        gameCon.getTurnCon().setFase(currentPhase);
         if (currentPlayer.getId().equals(gameCon.getMyPlayerId())) {
             SceneManager.getInstance().switchToEndingPhase();
             currentPlayer.addRoundPoints();

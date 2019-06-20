@@ -3,8 +3,10 @@ package Controller;
 import Managers.SceneManager;
 import Model.TurnModel;
 import Observer.TurnObserver;
+import Enum.TurnFase;
 
 import java.util.Random;
+
 
 public class TurnController {
 
@@ -42,5 +44,9 @@ public class TurnController {
 
     String getCurrentPlayer() {
         return "player" + model.currentTurn;
+    }
+
+    public void setFase(TurnFase currentPhase) {
+        model.setFase(currentPhase);
     }
 }
