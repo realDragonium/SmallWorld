@@ -1,6 +1,7 @@
 package Applicatie;
 
 import Controller.AccountController;
+import Controller.LobbyController;
 import Controller.LoginController;
 import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
@@ -49,12 +50,13 @@ public class Applicatie {
 //        primaryStage.setFullScreen(true);
         primaryStage.show();
 
-       new LoginController();
-       /// new LobbyController();
+       //new LoginController();
+       new LobbyController();
     }
 
     public void loadScene(Scene scene) {
         System.out.println("switched!");
+        primaryStage.setFullScreen(false);
         primaryStage.setScene(scene);
 
         SceneManager.getInstance().setPane(root);
