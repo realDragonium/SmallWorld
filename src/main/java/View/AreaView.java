@@ -33,8 +33,8 @@ public class AreaView implements AreaObserver {
         Bounds boundsInScene = shape.localToScene(shape.getBoundsInLocal());
 
         if(text.getX() > 0) return;
-        text.setX((boundsInScene.getMaxX() - boundsInScene.getMinX()) /2 + boundsInScene.getMinX() - 200);
-        text.setY((boundsInScene.getMaxY() - boundsInScene.getMinY()) /2 + boundsInScene.getMinY());
+        text.setX((boundsInScene.getMaxX() - boundsInScene.getMinX()) /2 + boundsInScene.getMinX() - 600);
+        text.setY((boundsInScene.getMaxY() - boundsInScene.getMinY()) /2 + boundsInScene.getMinY() - 150);
     }
 
 
@@ -50,8 +50,6 @@ public class AreaView implements AreaObserver {
     public void update(AreaObservable ao) {
         shape.setFill((ao.getActive()) ? color.getColor().darker() : color.getColor());
         int numbers = ao.getNumberOfFiches();
-        Platform.runLater( () -> {
-            text.setText(String.valueOf(numbers));
-        });
+        Platform.runLater( () -> text.setText(String.valueOf(numbers)));
     }
 }

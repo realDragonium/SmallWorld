@@ -7,6 +7,7 @@ import Model.GameModel;
 import Objects.RattenKracht;
 import com.google.cloud.firestore.Firestore;
 
+import javax.sound.sampled.Line;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -75,6 +76,7 @@ public class GameController {
         SceneManager.getInstance().loadSmallworld();
         createTurnsAndRounds();
         diceCon = new DiceController();
+        new InfoController();
         new KnoppenController(this);
 
         redCon = new RedeployingController(this);
