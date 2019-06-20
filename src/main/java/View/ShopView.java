@@ -10,6 +10,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import Observable.ShopObservable;
 
+/**
+ *  Gemaakt door Yoran op 17-6-2019.
+ *  ShopView class weergeeft a.h.v. een FXML tag de buttons, waardoor de speler een ras kan kopen.
+ *
+ */
+
 
 public class ShopView implements ShopObserver {
 
@@ -54,6 +60,8 @@ public class ShopView implements ShopObserver {
     public void initialize() {
         group.getChildren().add(pane);
     }
+
+
     public void showCombination(){
 
     }

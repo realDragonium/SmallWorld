@@ -8,10 +8,9 @@ import Objects.RaceFiche;
 import Observer.AreaObserver;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.scene.Group;
-import Applicatie.Applicatie;
+import Enum.AreaProperty;
+import Enum.AreaType;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Stack;
 
 public class AreaController implements FirebaseControllerObserver {
@@ -28,20 +27,10 @@ public class AreaController implements FirebaseControllerObserver {
 		map2DCon = mapCon;
 		this.gameCon = gameCon;
 		SceneManager.getInstance().createAreaView(this, area);
-		setAreaInFirebase();
 		fb.AreaListener(model.getId(), this);
 	}
 
 	String getId(){return model.getId();}
-
-	public void setAreaInFirebase(){
-		Map<String, Object> area = new HashMap<>();
-		area.put("fiches", model.getNumberOfFiches());
-		area.put("owner", null);
-		area.put("oldOwner", null);
-		area.put("oldFiches", null);
-		fb.setAreas(model.getId(), area);
-	}
 
 	int numbersNeeded(){
 		return model.numbersNeeded();
@@ -65,6 +54,10 @@ public class AreaController implements FirebaseControllerObserver {
 		return model.getAllFiches();
 	}
 
+	RaceFiche getOneFiche(){
+		return model.getOneFiche();
+	}
+
 	void changeActive(){model.changeActive();}
 
 	public void register(AreaObserver ao){model.register(ao);}
@@ -83,10 +76,31 @@ public class AreaController implements FirebaseControllerObserver {
 
 	@Override
 	public void update(DocumentSnapshot ds) {
-		if(ds.get("oldowner") == null) return;
+		if(ds.get("o") == null) return;
 
 		AttackController attCon = gameCon.getAttCon();
 		attCon.getTargetArea();
 		attCon.attackAreaLocal();
+	}
+
+	public AreaProperty getSpecialProp() {
+		return model.getSpecialProp();
+	}
+
+
+	public boolean isNextToWater() {
+		return model.isNextToWater();
+	}
+
+	public int getFichesAmount() {
+		return model.getNumberOfFiches();
+	}
+
+	public void addFiche(RaceFiche fiche) {
+		model.addFiche(fiche);
+	}
+
+	public AreaType getAreaType() {
+		return model.getAreaType();
 	}
 }

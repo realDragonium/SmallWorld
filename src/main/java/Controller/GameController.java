@@ -5,9 +5,11 @@ import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
 import Model.GameModel;
 import Objects.RattenKracht;
+import com.google.cloud.firestore.Firestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class GameController {
     private GameModel model;
@@ -16,25 +18,38 @@ public class GameController {
     private RoundController roundCon;
     private TurnController turnCon;
     private Map2DController mapCon;
+    private String lobbyName;
     private VervallenController vervCon;
+    private GameTimer gameTimer;
     private AttackController attCon;
     private ShopController shopCon;
     private GameTurn gameTurn;
     private PlayerController myPlayer;
+    private RedeployingController redCon;
     private String myPlayerId;
-
+    private Applicatie app = SceneManager.getInstance().getApp();
+    private FirebaseServiceOwn fb = app.getFirebaseService();
 
     public GameController(String lobbyName, String playerID) {
+        System.out.println(this);
         myPlayerId = playerID;
         model = new GameModel(8, 8);
-        SceneManager.getInstance().getApp().getFirebaseService().setGame(lobbyName);
-        System.out.println("test");
+        this.lobbyName = lobbyName;
+        setMuFirebaseStufF();
         SceneManager.getInstance().createGameView(this);
-        System.out.println("test2");
         SceneManager.getInstance().makeMap();
         createGameParts();
         startGame();
+        createGameTimer();
+    }
 
+    public void setMuFirebaseStufF(){
+        fb.setGame(lobbyName);
+        Map<String, Object> info = new HashMap<>();
+        info.put("Name", app.getAccountCon().getAccountName());
+        info.put("fiches", 0);
+        info.put("punten", 0);
+        fb.registerPlayer(myPlayerId, info);
     }
 
     public String getMyPlayerId(){
@@ -58,6 +73,8 @@ public class GameController {
         createTurnsAndRounds();
         new DiceController();
         new KnoppenController(this);
+
+        redCon = new RedeployingController(this);
 
         createAttCon();
         mapCon = new Map2DController(this);
@@ -95,34 +112,34 @@ public class GameController {
     }
 
     public PlayerController getCurrentPlayer(){
-        return players.get(turnCon.getCurrentPlayer());
+        return currentPlayer;
     }
 
     private void createAttCon(){
         attCon = new AttackController(this);
     }
 
-    RoundController getRoundCon(){
+    public RoundController getRoundCon(){
         return roundCon;
     }
 
-    ShopController getShopCon(){return shopCon;}
+    public ShopController getShopCon(){return shopCon;}
 
-    TurnController getTurnCon(){
+    public TurnController getTurnCon(){
         return turnCon;
     }
 
-    Map2DController getMapCon(){
+    public Map2DController getMapCon(){
         return mapCon;
     }
 
-    VervallenController getVervCon(){return vervCon;}
+    public VervallenController getVervCon(){return vervCon;}
 
-    AttackController getAttCon(){
+    public AttackController getAttCon(){
         return attCon;
     }
 
-    GameTurn getGameTurn() { return gameTurn;}
+    public GameTurn getGameTurn() { return gameTurn;}
 
     void endGame(){
         System.out.println("Game Ended!");
@@ -135,7 +152,13 @@ public class GameController {
 
 
     private void startGame(){
+
         gameTurn = new GameTurn(this, currentPlayer);
+
+    }
+
+    public void createGameTimer(){
+        gameTimer = new GameTimer(this, 10);
     }
 
     public void nextTurn() {
@@ -148,5 +171,13 @@ public class GameController {
 
     public void setCurrentPlayer(int i) {
         currentPlayer = getPlayer("player" + i);
+    }
+
+    public GameTimer getGameTimer() {
+        return gameTimer;
+    }
+
+    public String getLobbyname(){
+        return lobbyName;
     }
 }

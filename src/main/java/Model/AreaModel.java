@@ -4,7 +4,8 @@ import Controller.PlayerController;
 import Objects.RaceFiche;
 import Observable.AreaObservable;
 import Observer.AreaObserver;
-
+import Enum.AreaProperty;
+import Enum.AreaType;
 import java.util.Stack;
 import java.util.stream.IntStream;
 
@@ -16,6 +17,9 @@ public class AreaModel implements AreaObservable {
     private String id;
     public int fichesCount;
     public PlayerController player;
+    private AreaType type;
+    private boolean nextToWater = false;
+    private AreaProperty specialProperty = AreaProperty.None;
 
     public AreaModel(String id) {
         this.id = id;
@@ -52,6 +56,14 @@ public class AreaModel implements AreaObservable {
         return tempFiches;
     }
 
+    public AreaProperty getSpecialProp(){
+        return specialProperty;
+    }
+
+    public boolean isNextToWater(){
+        return nextToWater;
+    }
+
     public Stack<RaceFiche> getAllButOne(){
         Stack<RaceFiche> temp = new Stack<>();
         if(raceFiches.size() > 0) {
@@ -84,5 +96,20 @@ public class AreaModel implements AreaObservable {
     @Override
     public int getNumberOfFiches() {
         return fichesCount;
+    }
+
+    public RaceFiche getOneFiche() {
+        RaceFiche tempFiche = raceFiches.pop();
+        notifyObserver();
+        return tempFiche;
+    }
+
+    public void addFiche(RaceFiche fiche) {
+        raceFiches.add(fiche);
+        notifyObserver();
+    }
+
+    public AreaType getAreaType() {
+        return type;
     }
 }

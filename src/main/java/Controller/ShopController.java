@@ -7,7 +7,6 @@ import Observer.ShopObserver;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class ShopController {
 
@@ -27,7 +26,6 @@ public class ShopController {
     }
 
     public void buyingItem(int item){
-        System.out.println(gameCon.getCurrentPlayer().getId() + " is buying");
         if(model.getShopItems().size() > item) {
             gameCon.getCurrentPlayer().buyFromShop(model.getShopItems().get(item), item);
             model.removeItem(item);
@@ -40,10 +38,10 @@ public class ShopController {
 
     private void createShopItems(){
         races.add(new RaceController(new RattenKracht(), "rats", 12));
-        races.add(new RaceController(new WizzardsKracht(), "wizzards", 12));
-        races.add(new RaceController(new DwarvesKracht(), "dwarves", 12));
-        races.add(new RaceController(new TritansKracht(), "tritans", 12));
-        races.add(new RaceController(new HumanKracht(), "humans", 12));
+        races.add(new RaceController(new WizzardsKracht(), "wizzards", 8));
+        races.add(new RaceController(new DwarvesKracht(), "dwarves", 7));
+        races.add(new RaceController(new TritansKracht(), "tritans", 10));
+        races.add(new RaceController(new HumanKracht(), "humans", 9));
 
         powers.add(new AlchemistPower());
         powers.add(new WelthPower());
@@ -64,14 +62,14 @@ public class ShopController {
 
     private RaceController getRandomRace(){
         if(races.size() != 0) {
-            return races.remove(new Random().nextInt(races.size()));
+            return races.remove(0);
         }
         return null;
     }
 
     private Power getRandomPower(){
         if(powers.size() != 0) {
-            return powers.remove(new Random().nextInt(powers.size()));
+            return powers.remove(0);
         }
         return null;
     }

@@ -19,6 +19,11 @@ public class RaceController {
 	RaceController(Kracht kracht, String id, int ficheAmount) {
 		this.kracht = kracht;
 		model = new RaceModel(id, ficheAmount);
+		kracht.setRaceCon(this);
+	}
+
+	public List<AreaController> getAllAreas(){
+		return model.getAreas();
 	}
 
 	int fichesCount(){
@@ -76,7 +81,7 @@ public class RaceController {
 		model.removeArea(area);
 	}
 
-	int getAreasAmount() {
+	public int getAreasAmount() {
 		return model.getAreas().size();
 	}
 
@@ -86,5 +91,21 @@ public class RaceController {
 
 	boolean checkPhaseActoin(TurnFase curPhase) {
 		return kracht.checkPhaseAction(curPhase);
+	}
+
+    public CombinationController getCombiCon() {
+		return combiCon;
+    }
+
+    public void addFiche(RaceFiche oneFiche) {
+		model.addFiche(oneFiche);
+		updatePlayerFicheAmount();
+    }
+
+	public RaceFiche removeFiche() {
+		RaceFiche tempFiche = model.getFiche();
+		updatePlayerFicheAmount();
+		return tempFiche;
+
 	}
 }

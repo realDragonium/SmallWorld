@@ -24,9 +24,10 @@ public class CombinationController {
         return model.isActive();
     }
 
-    CombinationController(RaceController race, Power power){
+    public CombinationController(RaceController race, Power power){
         this.race = race;
         this.power = power;
+        power.setCombiCon(this);
         model = new CombinationModel(race.getId(), power.getId());
         //SceneManager.getInstance().loadCombination(this);
     }

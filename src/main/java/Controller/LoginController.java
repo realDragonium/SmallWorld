@@ -6,6 +6,10 @@ import Managers.SceneManager;
 import Model.LoginModel;
 import Observer.LoginObserver;
 
+
+
+
+
 public class LoginController {
     Applicatie app = SceneManager.getInstance().getApp();
 	private FirebaseServiceOwn fb = app.getFirebaseService();

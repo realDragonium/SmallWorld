@@ -11,6 +11,16 @@ import javafx.scene.layout.GridPane;
 import Observable.ObservableLobby;
 import java.util.List;
 
+// Get the single object for the SpelbordController
+// U
+// Elke class hoort een stukje javadoc te hebben
+
+/** This View-class is part of the MVC design pattern and shows the lobby screen (available lobbies).
+ * @author Lars Puente Blom
+ * @version Juni 2019
+ *
+ */
+
 public class LobbyView implements LobbyObserver {
     LobbyController lobbyCon;
     private Group group;
@@ -18,19 +28,27 @@ public class LobbyView implements LobbyObserver {
     public Button terug, hosten;
     public GridPane panel;
     private Button activeButton;
-    private int gridCounter = 0;
+    private int gridCounter = 0;             // startwaarde aantal aangemaakte lobbies = 0
     private GridPane grid= new GridPane();
+
+
+    /**
+     *
+     * @param group is given argument for the scene manager
+     * @param con is given argument to the controller so that its mvc.
+     */
 
     public LobbyView(Group group, LobbyController con) {
         this.group = group;
         this.lobbyCon = con;
     }
 
+    // Is called after all @FXML are injected (in this case the public defined attributes)
     public void initialize() {
         group.getChildren().add(root);
         lobbyCon.register(this);
         panel.setVgap(10);
-        List<String> lijst = lobbyCon.getFirebaseLobbyNamen();
+        List<String> lijst = lobbyCon.getFirebaseLobbyNamen();   // Gets lobbynames from firebase and puts in a list
 
         for(String lobbyNaam: lijst) {
             Button btn = new Button(lobbyNaam);
@@ -59,6 +77,11 @@ public class LobbyView implements LobbyObserver {
         lobbyCon.lobbyEdit();
     }
 
+    /**
+     *
+     * @param lobbyNaam geeft de lobby naam mee om toe te vogen
+     */
+
     public void addLobbyFirebase(String lobbyNaam) {
         panel.add(new Button(lobbyNaam), 0, gridCounter);
     }
@@ -74,9 +97,9 @@ public class LobbyView implements LobbyObserver {
         }
     }
 
-    public String getLobbyNaam() {
-        return lobbyCon.getLobbyNaam();
-    }
+//    public String getLobbyNaam() {
+//        return lobbyCon.getLobbyNaam();
+//    }
 
     @Override
     public void update(ObservableLobby lo) {
