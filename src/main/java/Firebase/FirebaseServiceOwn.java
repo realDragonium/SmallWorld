@@ -270,12 +270,12 @@ public class FirebaseServiceOwn {
         info.put("time", time);
         gameRef.collection("Extras").document("Timer").set(info);
     }
-
-    public Map<String, Double> getTop3Player(){
-        Map<String, Double> map = new TreeMap<>();
-        QuerySnapshot players = getQuerySnapshot(gameRef.collection("Players").get());
+    // Ophalen caan de speler naam samen met het aantal punten die de speler heeft gehaald.
+    public TreeMap<Double, String> getTop3Player(){
+        TreeMap<Double, String> map = new TreeMap<>();
+        QuerySnapshot players = getQuerySnapshot(colRef.document("TestDataTop3").collection("Players").get());
         for(QueryDocumentSnapshot qDoc: players.getDocuments()){
-            map.put(qDoc.getString("Name"), qDoc.getDouble("punten"));
+            map.put(qDoc.getDouble("punten"), qDoc.getString("Name"));
         }
         return map;
     }
@@ -382,9 +382,6 @@ public class FirebaseServiceOwn {
         }
         return null;
     }
-
-
-
 }
 
 

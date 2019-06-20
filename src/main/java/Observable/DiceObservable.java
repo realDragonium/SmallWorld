@@ -7,4 +7,5 @@ public interface DiceObservable {
     void notifyAllObs();
     int getWaarde();
 
+    boolean isPlaying();
 }

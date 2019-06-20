@@ -4,6 +4,7 @@ import Controller.AreaController;
 import Enum.AreaColor;
 import Observable.AreaObservable;
 import Observer.AreaObserver;
+import javafx.application.Platform;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -49,6 +50,8 @@ public class AreaView implements AreaObserver {
     public void update(AreaObservable ao) {
         shape.setFill((ao.getActive()) ? color.getColor().darker() : color.getColor());
         int numbers = ao.getNumberOfFiches();
-        text.setText(String.valueOf(numbers));
+        Platform.runLater( () -> {
+            text.setText(String.valueOf(numbers));
+        });
     }
 }

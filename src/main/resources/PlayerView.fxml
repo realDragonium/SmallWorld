@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<Pane fx:id="pane" layoutX="900" prefHeight="141.0" prefWidth="116.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PlayerView">
+<Pane fx:id="pane" layoutX="100" prefHeight="120.0" prefWidth="300.0" style="-fx-background-color: rgb(170, 190, 221); -fx-border-color: black;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PlayerView">
    <children>
-      <TextField fx:id="playerId" layoutX="14.0" layoutY="14.0" prefHeight="31.0" prefWidth="85.0" />
-      <TextField fx:id="fiches" layoutX="14.0" layoutY="52.0" prefHeight="31.0" prefWidth="85.0" text="fiches: " />
-      <TextField fx:id="punten" layoutX="14.0" layoutY="92.0" prefHeight="31.0" prefWidth="85.0" text="punten: " />
+
+      <Text layoutX="14.0" layoutY="30.0" text="player: ">
+         <font>
+            <Font size="21.0" />
+         </font></Text>
+      <Text fx:id="playerId" layoutX="200.0" layoutY="30.0">
+         <font>
+            <Font size="21.0" />
+         </font></Text>
+      <Text layoutX="14.0" layoutY="60.0" text="fiches: ">
+         <font>
+            <Font size="21.0" />
+         </font></Text>
+      <Text fx:id="fiches" layoutX="200.0" layoutY="60.0" text="0">
+         <font>
+            <Font size="21.0" />
+         </font></Text>
+      <Text layoutX="14.0" layoutY="90.0" text="punten: ">
+         <font>
+            <Font size="21.0" />
+         </font></Text>
+      <Text fx:id="punten" layoutX="200.0" layoutY="90.0" text="0">
+         <font>
+            <Font size="21.0" />
+         </font></Text>
    </children>
 </Pane>

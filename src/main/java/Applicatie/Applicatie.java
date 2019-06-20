@@ -43,7 +43,7 @@ public class Applicatie {
         Scene scene = new Scene(root, width,height);
         SceneManager.getInstance().setPane(root);
         primaryStage.setScene(scene);
-//        primaryStage.setFullScreen(true);
+        primaryStage.setFullScreen(true);
         primaryStage.setTitle("Small World");
 //        primaryStage.setX(windowAnchorX);
 //        primaryStage.setY(windowAnchorY);
@@ -56,7 +56,7 @@ public class Applicatie {
 
     public void loadScene(Scene scene) {
         System.out.println("switched!");
-        primaryStage.setFullScreen(false);
+        primaryStage.setFullScreen(true);
         primaryStage.setScene(scene);
 
         SceneManager.getInstance().setPane(root);
