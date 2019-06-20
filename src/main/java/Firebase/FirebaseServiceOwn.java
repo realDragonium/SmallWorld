@@ -230,7 +230,6 @@ public class FirebaseServiceOwn {
         Map<String, Object> map = new HashMap<String, Object>();
         for(QueryDocumentSnapshot iets : list){
             map.put("fiches", iets.get("fiches"));
-//            System.out.println(iets.getId());
             colRef.document(lobbyName).collection("Areas").document(iets.getId()).set(map);
         }
     }

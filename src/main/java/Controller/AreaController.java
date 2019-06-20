@@ -107,6 +107,7 @@ public class AreaController implements FirebaseControllerObserver {
 
     @Override
     public void update(DocumentSnapshot ds) {
+        if(gameCon.getCurrentPlayer() == gameCon.getMyPlayer()) return;
         Platform.runLater(() -> {
             if (model.getPlayer() == gameCon.getMyPlayer()) {
                 model.getPlayer().getActiveCombination().getRace().pushFiches(removeFiches());
