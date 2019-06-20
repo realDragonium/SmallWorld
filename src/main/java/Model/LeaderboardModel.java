@@ -13,6 +13,10 @@ public class LeaderboardModel implements LeaderboardObservable {
     String place1;
     String place2;
     String place3;
+    String points1;
+    String points2;
+    String points3;
+
     String waarde = "";
 
     List<LeaderboardObserver> lijst = new ArrayList<>();
@@ -55,6 +59,21 @@ public class LeaderboardModel implements LeaderboardObservable {
         return place3;
     }
 
+    @Override
+    public String getValue1() {
+        return points1;
+    }
+
+    @Override
+    public String getValue2() {
+        return points2;
+    }
+
+    @Override
+    public String getValue3() {
+        return points3;
+    }
+
 
     public void playerValue(String place1, String place2, String place3) {
 
@@ -63,5 +82,12 @@ public class LeaderboardModel implements LeaderboardObservable {
         this.place3 = place3;
         notifyAllObs();
 
+    }
+
+    public void playerPoints(String value1, String value2, String value3) {
+        this.points1 = value1;
+        this.points2 = value2;
+        this.points3 = value3;
+        notifyAllObs();
     }
 }

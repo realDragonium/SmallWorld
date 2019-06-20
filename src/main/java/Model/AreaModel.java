@@ -28,15 +28,17 @@ public class AreaModel implements AreaObservable {
     public AreaModel(String id) {
         this.id = id;
 //        Map<String, Object> info = SceneManager.getInstance().getApp().getFirebaseService().getAreaSettings(id);
-        IntStream.range(0, (int) (Math.random() * 3)).forEach(i -> raceFiches.push(new RaceFiche()));
-        fichesCount = raceFiches.size();
+//        IntStream.range(0, (int) (Math.random() * 3)).forEach(i -> raceFiches.push(new RaceFiche()));
+//        fichesCount = raceFiches.size();
     }
 
     public void setFiches(int fiches){
         IntStream.range(0, fiches).forEach(o -> {
             raceFiches = new Stack<>();
             raceFiches.push(new RaceFiche());
+            System.out.println("test"+o);
         });
+        System.out.println(raceFiches.size());
     }
 
     public void setNeighbours(List<String> neighbour){

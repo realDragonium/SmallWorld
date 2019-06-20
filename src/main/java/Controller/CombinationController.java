@@ -12,6 +12,10 @@ public class CombinationController {
     private PlayerController player;
     private CombinationModel model;
 
+    public CombinationController() {
+
+    }
+
     public void registerObserver(CombinationObserver obs){
         model.register(obs);
     }
@@ -52,6 +56,8 @@ public class CombinationController {
     public Power getPower(){
         return power;
     }
+
+
 
     void returnFiches() {
             race.returnFiches();
