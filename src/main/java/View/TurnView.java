@@ -13,8 +13,6 @@ import Enum.TurnFase;
 
 /**@author Yoran
  *
- *
- *
  */
 
 public class TurnView implements TurnObserver {
