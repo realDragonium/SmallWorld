@@ -10,6 +10,7 @@ import com.google.cloud.firestore.Firestore;
 import javax.sound.sampled.Line;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
 import java.util.concurrent.ExecutionException;
 
 public class GameController {
@@ -21,6 +22,7 @@ public class GameController {
     private Map2DController mapCon;
     private String lobbyName;
     private VervallenController vervCon;
+    private TimerController timeCon;
     private GameTimer gameTimer;
     private AttackController attCon;
     private ShopController shopCon;
@@ -78,7 +80,7 @@ public class GameController {
         diceCon = new DiceController();
         new InfoController();
         new KnoppenController(this);
-
+        timeCon = new TimerController(getGameTurn());
         redCon = new RedeployingController(this);
 
         createAttCon();
@@ -180,6 +182,10 @@ public class GameController {
 
     public GameTimer getGameTimer() {
         return gameTimer;
+    }
+
+    public TimerController getTimer(){
+        return timeCon;
     }
 
     public String getLobbyname(){

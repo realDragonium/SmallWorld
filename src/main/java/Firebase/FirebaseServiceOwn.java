@@ -73,12 +73,12 @@ public class FirebaseServiceOwn {
         DocumentReference docRef = gameRef.collection("Extras").document("Timer");
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirestoreException error) {
+
                 if (error != null) {
                     System.err.println("Listen failed: " + error);
                     return;
                 }
                 if (snapshot != null && snapshot.exists()) {
-                    System.out.println("En werkt deze nog?");
                     controller.update(snapshot);
                 }
             }

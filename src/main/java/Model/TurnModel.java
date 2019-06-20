@@ -62,5 +62,6 @@ public class TurnModel implements TurnObservable {
 
     public void setFase(TurnFase currentPhase) {
         fase = currentPhase;
+        notifyObservers();
     }
 }

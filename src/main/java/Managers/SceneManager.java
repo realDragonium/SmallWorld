@@ -77,7 +77,6 @@ public class SceneManager {
         for(Node group : standardPane){
             pane.getChildren().add(group);
         }
-        System.out.println(pane.getChildren());
         changeToScene(pane);
     }
 
@@ -93,7 +92,6 @@ public class SceneManager {
         for(Node group : standardPane){
             pane.getChildren().add(group);
         }
-        System.out.println(pane.getChildren());
         changeToScene(pane);
     }
 
@@ -110,7 +108,6 @@ public class SceneManager {
         for(Group group : standardPane){
             pane.getChildren().add(group);
         }
-        System.out.println(pane.getChildren());
         changeToScene(pane);
     }
 
