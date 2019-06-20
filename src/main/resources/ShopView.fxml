@@ -38,7 +38,7 @@
                <font>
                   <Font size="21.0" />
                </font></Text>
-            <Button id="0" fx:id="buy2" layoutX="300.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" style="-fx-background-color: rgb(224, 158, 145);" text="Buy 2">
+            <Button id="1" fx:id="buy2" layoutX="300.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" style="-fx-background-color: rgb(224, 158, 145);" text="Buy 2">
                <font>
                   <Font size="21.0" />
                </font></Button>
@@ -54,7 +54,7 @@
                <font>
                   <Font size="21.0" />
                </font></Text>
-            <Button id="0" fx:id="buy3" layoutX="300.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" style="-fx-background-color: rgb(224, 158, 145);" text="Buy 3">
+            <Button id="2" fx:id="buy3" layoutX="300.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" style="-fx-background-color: rgb(224, 158, 145);" text="Buy 3">
                <font>
                   <Font size="21.0" />
                </font></Button>
@@ -70,7 +70,7 @@
                <font>
                   <Font size="21.0" />
                </font></Text>
-            <Button id="0" fx:id="buy4" layoutX="300.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" style="-fx-background-color: rgb(224, 158, 145);" text="Buy 4">
+            <Button id="3" fx:id="buy4" layoutX="300.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" style="-fx-background-color: rgb(224, 158, 145);" text="Buy 4">
                <font>
                   <Font size="21.0" />
                </font></Button>
@@ -86,7 +86,7 @@
                <font>
                   <Font size="21.0" />
                </font></Text>
-            <Button id="0" fx:id="buy5" layoutX="300.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" style="-fx-background-color: rgb(224, 158, 145);" text="Buy 5">
+            <Button id="4" fx:id="buy5" layoutX="300.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" style="-fx-background-color: rgb(224, 158, 145);" text="Buy 5">
                <font>
                   <Font size="21.0" />
                </font></Button>
@@ -103,7 +103,7 @@
                <font>
                   <Font size="21.0" />
                </font></Text>
-            <Button id="0" fx:id="buy6" layoutX="300.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" style="-fx-background-color: rgb(224, 158, 145);" text="Buy 6">
+            <Button id="5" fx:id="buy6" layoutX="300.0" mnemonicParsing="false" onAction="#buyItem" onMouseEntered="#setActive" style="-fx-background-color: rgb(224, 158, 145);" text="Buy 6">
                <font>
                   <Font size="21.0" />
                </font></Button>
