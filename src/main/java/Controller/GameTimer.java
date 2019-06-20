@@ -53,7 +53,7 @@ public class GameTimer {
     }
 
     public void endPhase(){
-        timeLeft = 1;
+        Platform.runLater(()->timeLeft = 1);
     }
 
     public void stopTimer(){

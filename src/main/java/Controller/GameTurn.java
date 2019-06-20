@@ -95,7 +95,7 @@ class GameTurn implements FirebaseControllerObserver {
     public void update(DocumentSnapshot ds) {
         Platform.runLater(() -> {
             endPhase();
-            phaseTimer.setTime(10);
+            phaseTimer.setTime((int)Math.round(ds.getDouble("time")));
             gameCon.getGameTimer().resetTimer();
         });
     }

@@ -41,6 +41,19 @@ public class SceneManager {
         currentPane.getChildren().add(groepen.get(group));
     }
 
+    public void removeFromScene(String item){
+        Node toDelete = null;
+        Group groupToDelete = groepen.get(item);
+        for(Node group : currentPane.getChildren()){
+            if(group.equals(groupToDelete)){
+                toDelete = group;
+            }
+        }
+        if(toDelete != null){
+            currentPane.getChildren().remove(toDelete);
+        }
+    }
+
     public void registerApp(Applicatie newApp) {
         this.app = newApp;
     }
@@ -75,6 +88,7 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("playerGroup"));
         pane.getChildren().add(groepen.get("timerGroup"));
         pane.getChildren().add(groepen.get("buttonGroup"));
+        pane.getChildren().add(groepen.get("attackGroup"));
         pane.getChildren().add(groepen.get("turnGroup"));
         pane.getChildren().add(groepen.get("roundGroup"));
         pane.getChildren().add(groepen.get("smallworldGroup"));
@@ -230,6 +244,11 @@ public class SceneManager {
     public void loadTurn(TurnController turnCon) {
         creators.put(TurnView.class, (Callable<TurnView>) () -> new TurnView(groepen.get("turnGroup"), turnCon));
         FXMLLOADER("/TurnView.fxml");
+    }
+
+    public void loadAttack(AttackController attackCon) {
+        creators.put(AttackView.class, (Callable<AttackView>) () -> new AttackView(groepen.get("attackGroup"), attackCon));
+        FXMLLOADER("/AttackView.fxml");
     }
 
     public void loadRedeploying(RedeployingController redeployingCon) {

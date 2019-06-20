@@ -16,5 +16,6 @@
         <Group id="diceGroup" />
         <Group id="redeployingGroup" />
         <Group id="smallworldGroup"/>
+        <Group id="attackGroup"/>
     </children>
 </Pane>

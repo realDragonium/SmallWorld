@@ -1,16 +1,20 @@
 package Controller;
 
 import Enum.TurnFase;
+import Managers.SceneManager;
 
 public class AttackController {
 
     private GameController gameCon;
     private AreaController targetArea;
     private int fichesCountNeeded;
+    private boolean diceUsed = false;
 
 
     AttackController(GameController gameCon) {
+
         this.gameCon = gameCon;
+        SceneManager.getInstance().loadAttack(this);
     }
 
     public void removeFichesNeeded(int amount){
@@ -32,22 +36,36 @@ public class AttackController {
         if(player.hasActiveCombination()){
             player.getActiveCombination().checkForSpecialActions(TurnFase.conquering);
             if (player.getActiveCombination().getRace().hasEnoughFiches(fichesCountNeeded)) {
-                int waarde = gameCon.getDiceCon().ClickedDice();
-                System.out.println(waarde);
-                if (targetArea.getOwnerPlayer() != null) {
-                    System.out.println("OMG er staat iemand op... dan maar met meer aanvallen!");
-                    targetArea.getOwnerPlayer().getActiveCombination().getRace().pushFiches(targetArea.removeFiches());
-                    targetArea.getOwnerPlayer().getActiveCombination().getRace().removeArea(targetArea);
-                }
-                System.out.println("Aanvallen met: " + fichesCountNeeded);
-                player.getActiveCombination().getRace().addArea(targetArea);
-                targetArea.attackArea(player.getActiveCombination().getRace().getFiches(fichesCountNeeded));
-                targetArea.setPlayerOwner(player);
+                attack(player);
             }
-        } else System.out.println("Niet genoeg fiches in je bezit!");
+            else if(player.getActiveCombination().getRace().fichesCount() == 1){
+                int waarde = gameCon.getDiceCon().ClickedDice();
+                diceUsed = true;
+                if (player.getActiveCombination().getRace().hasEnoughFiches(fichesCountNeeded + waarde)) {
+                    attack(player);
+                }
+                gameCon.getGameTurn().endTurn();
+            }
+        } else gameCon.getGameTurn().endTurn();
+    }
+
+
+    void attack(PlayerController player){
+        if (targetArea.getOwnerPlayer() != null) {
+            targetArea.getOwnerPlayer().getActiveCombination().getRace().pushFiches(targetArea.removeFiches());
+            targetArea.getOwnerPlayer().getActiveCombination().getRace().removeArea(targetArea);
+        }
+        player.getActiveCombination().getRace().addArea(targetArea);
+        targetArea.attackArea(player.getActiveCombination().getRace().getFiches(fichesCountNeeded));
+        targetArea.setPlayerOwner(player);
     }
 
     void attackFromFirebase(){
 
+    }
+
+    public void attackCountry() {
+        getTargetArea();
+        attackAreaLocal();
     }
 }

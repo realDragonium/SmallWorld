@@ -6,7 +6,7 @@
 <Pane fx:id="pane" layoutX="1000" layoutY="10" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.KnoppenView">
    <children>
       <Button fx:id="infoButton" layoutY="7.0" mnemonicParsing="false" onAction="#showInfo" text="Info" />
-      <Button fx:id="attackButton" layoutY="47.0" mnemonicParsing="false" onAction="#attackCountry" text="Attack" />
+
       <Button fx:id="availableButton" layoutY="87.0" mnemonicParsing="false" onAction="#fichesOver" text="Available" />
       <Button fx:id="nextFaseButton" layoutY="207.0" mnemonicParsing="false" onAction="#nextPhase" text="next Fase" />
    </children>
