@@ -9,6 +9,7 @@ import com.google.cloud.firestore.Firestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class GameController {
     private GameModel model;
@@ -17,29 +18,38 @@ public class GameController {
     private RoundController roundCon;
     private TurnController turnCon;
     private Map2DController mapCon;
+    private String lobbyName;
     private VervallenController vervCon;
     private GameTimer gameTimer;
     private AttackController attCon;
     private ShopController shopCon;
     private GameTurn gameTurn;
     private PlayerController myPlayer;
+    private RedeployingController redCon;
     private String myPlayerId;
     private Applicatie app = SceneManager.getInstance().getApp();
     private FirebaseServiceOwn fb = app.getFirebaseService();
 
     public GameController(String lobbyName, String playerID) {
+        System.out.println(this);
         myPlayerId = playerID;
         model = new GameModel(8, 8);
+        this.lobbyName = lobbyName;
+        setMuFirebaseStufF();
+        SceneManager.getInstance().createGameView(this);
+        SceneManager.getInstance().makeMap();
+        createGameParts();
+        startGame();
+        createGameTimer();
+    }
+
+    public void setMuFirebaseStufF(){
         fb.setGame(lobbyName);
         Map<String, Object> info = new HashMap<>();
         info.put("Name", app.getAccountCon().getAccountName());
         info.put("fiches", 0);
         info.put("punten", 0);
-        fb.registerPlayer(playerID, info);
-        SceneManager.getInstance().createGameView(this);
-        SceneManager.getInstance().makeMap();
-        createGameParts();
-        startGame();
+        fb.registerPlayer(myPlayerId, info);
     }
 
     public String getMyPlayerId(){
@@ -63,6 +73,8 @@ public class GameController {
         createTurnsAndRounds();
         new DiceController();
         new KnoppenController(this);
+
+        redCon = new RedeployingController(this);
 
         createAttCon();
         mapCon = new Map2DController(this);
@@ -142,9 +154,7 @@ public class GameController {
     private void startGame(){
 
         gameTurn = new GameTurn(this, currentPlayer);
-        if(myPlayerId.equals("player1")) {
-            createGameTimer();
-        }
+
     }
 
     public void createGameTimer(){
@@ -165,5 +175,9 @@ public class GameController {
 
     public GameTimer getGameTimer() {
         return gameTimer;
+    }
+
+    public String getLobbyname(){
+        return lobbyName;
     }
 }

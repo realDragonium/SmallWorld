@@ -10,8 +10,6 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.scene.Group;
 import Enum.AreaProperty;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Stack;
 
 public class AreaController implements FirebaseControllerObserver {
@@ -26,15 +24,10 @@ public class AreaController implements FirebaseControllerObserver {
 		map2DCon = mapCon;
 		this.gameCon = gameCon;
 		SceneManager.getInstance().createAreaView(this, area);
-//		setAreaInFirebase();
 		fb.AreaListener(model.getId(), this);
 	}
 
 	String getId(){return model.getId();}
-
-//	public void setAreaInFirebase(){
-//		fb.setAreas();
-//	}
 
 	int numbersNeeded(){
 		return model.numbersNeeded();
@@ -58,6 +51,10 @@ public class AreaController implements FirebaseControllerObserver {
 		return model.getAllFiches();
 	}
 
+	RaceFiche getOneFiche(){
+		return model.getOneFiche();
+	}
+
 	void changeActive(){model.changeActive();}
 
 	public void register(AreaObserver ao){model.register(ao);}
@@ -76,7 +73,7 @@ public class AreaController implements FirebaseControllerObserver {
 
 	@Override
 	public void update(DocumentSnapshot ds) {
-		if(ds.get("oldowner") == null) return;
+		if(ds.get("o") == null) return;
 
 		AttackController attCon = gameCon.getAttCon();
 		attCon.getTargetArea();
@@ -90,5 +87,9 @@ public class AreaController implements FirebaseControllerObserver {
 
 	public boolean isNextToWater() {
 		return model.isNextToWater();
+	}
+
+	public int getFichesAmount() {
+		return model.getNumberOfFiches();
 	}
 }

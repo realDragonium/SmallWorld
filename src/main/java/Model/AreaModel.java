@@ -21,7 +21,6 @@ public class AreaModel implements AreaObservable {
     private AreaProperty specialProperty = AreaProperty.None;
 
     public AreaModel(String id) {
-        System.out.println(id);
         this.id = id;
         IntStream.range(0, (int) (Math.random() * 3)).forEach(i -> raceFiches.push(new RaceFiche()));
         fichesCount = raceFiches.size();
@@ -96,5 +95,10 @@ public class AreaModel implements AreaObservable {
     @Override
     public int getNumberOfFiches() {
         return fichesCount;
+    }
+
+    public RaceFiche getOneFiche() {
+        return raceFiches.pop();
+        notifyObserver();
     }
 }

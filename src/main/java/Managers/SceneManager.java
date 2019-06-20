@@ -34,7 +34,6 @@ public class SceneManager {
 
     public void changeToScene(Parent group) {
         currentPane.getChildren().clear();
-        System.out.println(group.getChildrenUnmodifiable());
         currentPane.getChildren().add(group);
     }
 
@@ -84,6 +83,7 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("timerGroup"));
         pane.getChildren().add(groepen.get("turnGroup"));
         pane.getChildren().add(groepen.get("roundGroup"));
+        pane.getChildren().add(groepen.get("redeployingGroup"));
         changeToScene(pane);
     }
 
@@ -128,10 +128,6 @@ public class SceneManager {
         changeToScene(gameView);
     }
 
-
-    public void startGame(){
-        new GameController("First", "player1");
-    }
 
     public void createAreaView(AreaController areaController, Group area) {
         new AreaView(area, areaController);
@@ -224,6 +220,11 @@ public class SceneManager {
     public void loadTurn(TurnController turnCon) {
         creators.put(TurnView.class, (Callable<TurnView>) () -> new TurnView(groepen.get("turnGroup"), turnCon));
         FXMLLOADER("/TurnView.fxml");
+    }
+
+    public void loadRedeploying(RedeployingController redeployingCon) {
+        creators.put(RedeployingView.class, (Callable<RedeployingView>) () -> new RedeployingView(redeployingCon, groepen.get("redeployingGroup")));
+        FXMLLOADER("/RedeployingView.fxml");
     }
 
     public void loadDice(DiceController diceCon) {

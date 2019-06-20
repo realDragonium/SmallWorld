@@ -27,7 +27,6 @@ public class ShopController {
     }
 
     public void buyingItem(int item){
-        System.out.println(gameCon.getCurrentPlayer().getId() + " is buying");
         if(model.getShopItems().size() > item) {
             gameCon.getCurrentPlayer().buyFromShop(model.getShopItems().get(item), item);
             model.removeItem(item);

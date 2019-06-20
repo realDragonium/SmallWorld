@@ -75,4 +75,8 @@ public class RaceModel {
 		}
 		availableFiches = new Stack<>();
     }
+
+    public void addFiche(RaceFiche oneFiche) {
+		availableFiches.add(oneFiche);
+    }
 }

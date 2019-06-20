@@ -91,4 +91,9 @@ public class RaceController {
     public CombinationController getCombiCon() {
 		return combiCon;
     }
+
+    public void addFiche(RaceFiche oneFiche) {
+		model.addFiche(oneFiche);
+		updatePlayerFicheAmount();
+    }
 }
