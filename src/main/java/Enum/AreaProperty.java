@@ -1,5 +1,5 @@
 package Enum;
 
 public enum AreaProperty {
-    Resource, Mountain, Crystal, Cave, None
+    mine, mountain, magicsource, cavern, none
 }

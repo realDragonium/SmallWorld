@@ -5,8 +5,9 @@ import Objects.RaceFiche;
 import Observable.AreaObservable;
 import Observer.AreaObserver;
 import Enum.AreaProperty;
+import Enum.AreaType;
 
-import java.util.Stack;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class AreaModel implements AreaObservable {
@@ -17,14 +18,39 @@ public class AreaModel implements AreaObservable {
     private String id;
     public int fichesCount;
     public PlayerController player;
+    private AreaType type;
     private boolean nextToWater = false;
-    private AreaProperty specialProperty = AreaProperty.None;
+    private boolean borderArea = false;
+    private AreaProperty specialProperty = AreaProperty.none;
+    private List<String> neighbours = new ArrayList<>();
+    private boolean attackAble = true;
 
     public AreaModel(String id) {
         this.id = id;
+//        Map<String, Object> info = SceneManager.getInstance().getApp().getFirebaseService().getAreaSettings(id);
         IntStream.range(0, (int) (Math.random() * 3)).forEach(i -> raceFiches.push(new RaceFiche()));
         fichesCount = raceFiches.size();
     }
+
+    public void setFiches(int fiches){
+        IntStream.range(0, fiches).forEach(o -> {
+            raceFiches = new Stack<>();
+            raceFiches.push(new RaceFiche());
+        });
+    }
+
+    public void setNeighbours(List<String> neighbour){
+        neighbours = neighbour;
+    }
+
+    public void setBorderArea(boolean bArea){
+        borderArea = bArea;
+    }
+
+    public void setAreaType(String type){
+        this.specialProperty = AreaProperty.valueOf(type);
+    }
+
 
     public String getId() {
         return id;
@@ -76,12 +102,6 @@ public class AreaModel implements AreaObservable {
         return temp;
     }
 
-    public RaceFiche getOneFiche() {
-        RaceFiche one = raceFiches.pop();
-        notifyObserver();
-        return one;
-    }
-
     @Override
     public void register(AreaObserver ao) {
         observer = ao;
@@ -100,6 +120,25 @@ public class AreaModel implements AreaObservable {
 
     @Override
     public int getNumberOfFiches() {
-        return fichesCount;
+        return raceFiches.size();
+    }
+
+    public RaceFiche getOneFiche() {
+        RaceFiche tempFiche = raceFiches.pop();
+        notifyObserver();
+        return tempFiche;
+    }
+
+    public void addFiche(RaceFiche fiche) {
+        raceFiches.add(fiche);
+        notifyObserver();
+    }
+
+    public AreaType getAreaType() {
+        return type;
+    }
+
+    public void setAttackAble(boolean attackAble) {
+        this.attackAble = attackAble;
     }
 }

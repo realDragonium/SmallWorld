@@ -1,11 +1,16 @@
 package View;
 
 import Controller.InLobbyController;
-import Controller.LobbyController;
 import Observable.InLobbyObservable;
 import Observer.InLobbyObserver;
 import javafx.scene.Group;
 import javafx.scene.text.Text;
+
+/**  This View-class is part of the MVC design pattern and shows the In-existing lobby screen.
+ * @author: Lars Puente Blom
+ * @version: June 2019
+ *
+ */
 
 public class InLobbyView implements InLobbyObserver {
 
@@ -30,20 +35,18 @@ public class InLobbyView implements InLobbyObserver {
     }
 
 
-    public void start(){            // start button
-        con.start();  // starten van het spel
+    // starten van het spel
+    public void start(){
+        con.start();
     }
 
-    public void joinen(){
-      //  spelerToevoegen();
-    }
+//    public void joinen(){
+//      //  spelerToevoegen();
+//    }
 
     public void exit(){
         con.exitLobby();
     }
-
-//    public void start(){
-//    }
 
     @Override
     public void update(InLobbyObservable ilo){
@@ -52,8 +55,7 @@ public class InLobbyView implements InLobbyObserver {
         Player3.setText(ilo.getPlayer3());
         Player4.setText(ilo.getPlayer4());
         if(ilo.getStart()){
-
-            System.out.println("Gelukt!");
+            //System.out.println("Gelukt!");
             start();
         }
     }

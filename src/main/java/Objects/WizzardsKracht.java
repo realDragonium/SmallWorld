@@ -1,10 +1,16 @@
 package Objects;
 
+import Controller.RaceController;
 import Enum.TurnFase;
 
 public class WizzardsKracht implements Kracht{
 
     private TurnFase phase = TurnFase.redeploying;
+
+    @Override
+    public void setRaceCon(RaceController raceCon) {
+
+    }
 
     @Override
     public Kracht getKracht() {

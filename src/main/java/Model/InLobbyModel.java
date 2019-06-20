@@ -1,12 +1,15 @@
 package Model;
 
 import Observer.InLobbyObserver;
-import Observer.LobbyObserver;
 import Observable.InLobbyObservable;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observer;
+
+/**  This Model-class is part of the MVC design pattern and shows the In-existing lobby screen.
+ * @author: Lars Puente Blom
+ * @version: June 2019
+ *
+ */
 
 public class InLobbyModel implements InLobbyObservable {
     private List<InLobbyObserver> observers = new ArrayList<>();
@@ -16,12 +19,6 @@ public class InLobbyModel implements InLobbyObservable {
     private String player2;
     private String player3;
     private String player4;
-
-
-    public void addPlayer(){
-
-    }
-
 
     public void setLobbyNaam(String lobbyNaam){
         this.lobbyNaam = lobbyNaam;
@@ -96,6 +93,5 @@ public class InLobbyModel implements InLobbyObservable {
         notifyAllObservers();
 
         }
-
     }
 

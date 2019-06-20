@@ -7,9 +7,13 @@ import Model.AreaModel;
 import Objects.RaceFiche;
 import Observer.AreaObserver;
 import com.google.cloud.firestore.DocumentSnapshot;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import Enum.AreaProperty;
+import Enum.AreaType;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
 
 public class AreaController implements FirebaseControllerObserver {
@@ -73,11 +77,15 @@ public class AreaController implements FirebaseControllerObserver {
 
 	@Override
 	public void update(DocumentSnapshot ds) {
-		if(ds.get("o") == null) return;
-
-		AttackController attCon = gameCon.getAttCon();
-		attCon.getTargetArea();
-		attCon.attackAreaLocal();
+		System.out.println(ds.getData());
+		Platform.runLater(()-> {
+			model.setAreaType(ds.getString("type"));
+			model.setFiches((int)Math.round(ds.getDouble("fiches")));
+			model.setBorderArea(ds.getBoolean("borderArea"));
+			model.setNeighbours((List<String>) ds.get("neighbours"));
+			model.setAttackAble(ds.getBoolean("attackAble"));
+			model.notifyObserver();
+		});
 	}
 
 	public AreaProperty getSpecialProp() {
@@ -91,5 +99,13 @@ public class AreaController implements FirebaseControllerObserver {
 
 	public int getFichesAmount() {
 		return model.getNumberOfFiches();
+	}
+
+	public void addFiche(RaceFiche fiche) {
+		model.addFiche(fiche);
+	}
+
+	public AreaType getAreaType() {
+		return model.getAreaType();
 	}
 }
