@@ -6,6 +6,12 @@ import Managers.SceneManager;
 import Model.LobbySettingsModel;
 import Observer.LobbySettingsObserver;
 
+
+/**  This Controller-class is part of the MVC design pattern and shows the lobbySettings screen.
+ * @author: Lars Puente Blom
+ * @version: June 2019
+ */
+
 public class LobbySettingsController {
     Applicatie app = SceneManager.getInstance().getApp();
     FirebaseServiceOwn fb = app.getFirebaseService();

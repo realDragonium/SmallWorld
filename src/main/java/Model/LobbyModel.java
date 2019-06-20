@@ -2,9 +2,14 @@ package Model;
 
 import Observer.LobbyObserver;
 import Observable.ObservableLobby;
-
 import java.util.ArrayList;
 import java.util.List;
+
+/**  This Model-class is part of the MVC design pattern and shows the lobby screen (available lobbies).
+ * @author: Lars Puente Blom
+ * @version: June 2019
+ *
+ */
 
 public class LobbyModel implements ObservableLobby {
 
@@ -16,15 +21,10 @@ public class LobbyModel implements ObservableLobby {
 	//private String playerAmount;
 	//private String[] spelers = {"Speler 1", "Speler 2", "Speler 3", "Speler 4"};
 	//private String lobbyNaam;
-
-
-
-	
 	@Override
 	public List<String> getLobbyName() {
 		return lobbynamen;
 	}
-
 
 	// adds an observers to the observer list
 	@Override
@@ -45,6 +45,26 @@ public class LobbyModel implements ObservableLobby {
 			obs.update(this);
 		}
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
