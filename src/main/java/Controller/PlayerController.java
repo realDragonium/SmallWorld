@@ -91,9 +91,10 @@ public class PlayerController implements FirebaseControllerObserver {
 
     @Override
     public void update(DocumentSnapshot ds) {
-        if(gameCon.getCurrentPlayer()==this) return;
+        System.out.println(ds.getData());
+//        if(gameCon.getCurrentPlayer()==this) return;
         model.fiches = (int) Math.round(ds.getDouble("fiches"));
-        model.punten = (int) Math.round(ds.getDouble("fiches"));
+        model.punten = (int) Math.round(ds.getDouble("punten"));
         model.notifyObserver();
     }
 
@@ -110,5 +111,9 @@ public class PlayerController implements FirebaseControllerObserver {
 
     public GameController getGameCon() {
         return gameCon;
+    }
+
+    public void addPoints(int i) {
+        model.addPunten(i);
     }
 }

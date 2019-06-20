@@ -1,8 +1,5 @@
 package Firebase;
 
-import Controller.GameController;
-import Managers.SceneManager;
-import Objects.RaceFiche;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.cloud.firestore.EventListener;
@@ -12,6 +9,7 @@ import javafx.application.Platform;
 
 import java.util.*;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.IntStream;
 
 public class FirebaseServiceOwn {
     private Firestore firestore;
@@ -64,7 +62,25 @@ public class FirebaseServiceOwn {
                     System.err.println("Listen failed: " + error);
                     return;
                 }
-                if (snapshot != null && snapshot.exists()) controller.update(snapshot);
+                if (snapshot != null && snapshot.exists()) {
+                    controller.update(snapshot);
+                }
+            }
+        });
+    }
+
+    public void timerListen(final FirebaseControllerObserver controller) {
+        DocumentReference docRef = gameRef.collection("Extras").document("Timer");
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirestoreException error) {
+                if (error != null) {
+                    System.err.println("Listen failed: " + error);
+                    return;
+                }
+                if (snapshot != null && snapshot.exists()) {
+                    System.out.println("En werkt deze nog?");
+                    controller.update(snapshot);
+                }
             }
         });
     }
@@ -84,17 +100,17 @@ public class FirebaseServiceOwn {
     }
 
     // create a lobby
-    public boolean createLobby(int playerAmount, String lobbyNaam, String name) {
+    public void createLobby(int playerAmount, String lobbyNaam, String name) {
         HashMap<String, Object> lobbySettings = new HashMap<>();
         lobbySettings.put("Naam", lobbyNaam);
         lobbySettings.put("Amount", playerAmount);
         lobbySettings.put("begin", false);
         lobbySettings.put("player1", name);
-        lobbySettings.put("player2", null);
-        lobbySettings.put("player3", null);
-        lobbySettings.put("player4", null);
+        IntStream.range(2, playerAmount).forEach(i -> lobbySettings.put("player"+i, null));
         firestore.collection("Lobby").document(lobbyNaam).set(lobbySettings);
-        return true;
+
+        createTimer(lobbyNaam);
+        setAreas(lobbyNaam);
     }
 
     //Is er nog plek in deze lobby?
@@ -119,6 +135,11 @@ public class FirebaseServiceOwn {
         return 0;
     }
 
+    public void resetTimer(Map<String, Object> info) {
+        System.out.println(info.toString());
+        gameRef.collection("Extras").document("Timer").set(info);
+    }
+
     public void leaveLobby(String lobbyNaam, String Name) {
         DocumentReference docRef = firestore.collection("Lobby").document(lobbyNaam);
         DocumentSnapshot doc = null;
@@ -133,7 +154,10 @@ public class FirebaseServiceOwn {
         for (int i = 1; i < 5; i++) {
             if (lobbySet.get("player" + i).equals(Name)) {
                 docRef.update("player" + i, null);
-                if (i == 1) firestore.collection("Lobby").document(lobbyNaam).delete();
+                if (i == 1){
+                    firestore.collection("Lobby").document(lobbyNaam).delete();
+                    colRef.document(lobbyNaam).delete();
+                }
                 return;
             }
         }
@@ -184,16 +208,17 @@ public class FirebaseServiceOwn {
         List<String> namen = new ArrayList<>();
         for (QueryDocumentSnapshot QDoc : query) {
             namen.add(QDoc.getId());
-            System.out.println(QDoc.getId());
         }
         return namen;
     }
 
-    //player Updates
+    //player Updates fiches only
     public void playerUpdateFiches(String player, int fichesCount) {
         DocumentReference docRef = gameRef.collection("Players").document(player);
-        docRef.update("fiche", fichesCount);
+        docRef.update("fiches", fichesCount);
     }
+
+    //set player data
     public void playerUpdate(String id, Map<String, Object> info) {
         gameRef.collection("Players").document(id).update(info);
     }
@@ -206,21 +231,56 @@ public class FirebaseServiceOwn {
     }
 
     //Areas setten in firebase
-    public void setAreas(String areaId, Map<String, Object> area) {
-        gameRef.collection("Areas").document(areaId).set(area);
+    public void setAreas(String lobbyName) {
+        List<QueryDocumentSnapshot> list = null;
+        list = getQuerySnapshot(firestore.collection("Maps").document("4PlayerMap").collection("Areas").get()).getDocuments();
+        for(QueryDocumentSnapshot iets : list){
+            colRef.document(lobbyName).collection("Areas").document(iets.getId()).set(iets.getData());
+        }
     }
 
     public void startGame(String lobbyNaam) {
         firestore.collection("Lobby").document(lobbyNaam).update("begin", true);
         setGame(lobbyNaam);
 
-//        firestore.collection("Games").document(lobbyNaam).collection("Players").document("player1").set(info);
+        TimerTask deleteLobby = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> firestore.collection("Lobby").document(lobbyNaam).delete());
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(deleteLobby, 5000);
     }
 
 
     public void registerPlayer(String playerId, Map<String, Object> info){
         gameRef.collection("Players").document(playerId).set(info);
     }
+
+    public void createTimer(String lobbyName){
+        Map<String, Object> info = new HashMap<>();
+        info.put("endPhase", false);
+        colRef.document(lobbyName).collection("Extras").document("Timer").set(info);
+    }
+
+    public void updateTimer(boolean endPhase, int time){
+        Map<String, Object> info = new HashMap<>();
+        info.put("endPhase", endPhase);
+        info.put("time", time);
+        gameRef.collection("Extras").document("Timer").set(info);
+    }
+
+    public Map<String, Double> getTop3Player(){
+        Map<String, Double> map = new TreeMap<>();
+        QuerySnapshot players = getQuerySnapshot(gameRef.collection("Players").get());
+        for(QueryDocumentSnapshot qDoc: players.getDocuments()){
+            map.put(qDoc.getString("Name"), qDoc.getDouble("punten"));
+        }
+        return map;
+    }
+
+
 
     /**
      * Overschrijft een document als het als bestaat of maakt een nieuwe aan.
@@ -311,6 +371,18 @@ public class FirebaseServiceOwn {
         }
         return null;
     }
+
+    private QuerySnapshot getQuerySnapshot(ApiFuture<QuerySnapshot> querySnapshotApiFuture){
+        try {
+            return querySnapshotApiFuture.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 
 }

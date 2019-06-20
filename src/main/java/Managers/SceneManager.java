@@ -34,7 +34,6 @@ public class SceneManager {
 
     public void changeToScene(Parent group) {
         currentPane.getChildren().clear();
-        System.out.println(group.getChildrenUnmodifiable());
         currentPane.getChildren().add(group);
     }
 
@@ -48,7 +47,6 @@ public class SceneManager {
 
     public void switchToSpectatingView(){
         Pane pane = new Pane();
-        System.out.println("voeg toe");
         pane.getChildren().add(groepen.get("mapGroup"));
         pane.getChildren().add(groepen.get("playerGroup"));
         pane.getChildren().add(groepen.get("timerGroup"));
@@ -60,12 +58,10 @@ public class SceneManager {
     public void switchToPreperationPhase() {
         Pane pane = new Pane();
         pane.getChildren().add(groepen.get("mapGroup"));
-        pane.getChildren().add(groepen.get("shopGroup"));
         pane.getChildren().add(groepen.get("playerGroup"));
         pane.getChildren().add(groepen.get("timerGroup"));
         pane.getChildren().add(groepen.get("turnGroup"));
         pane.getChildren().add(groepen.get("roundGroup"));
-        pane.getChildren().add(groepen.get("vervalGroup"));
         changeToScene(pane);
     }
 
@@ -87,6 +83,7 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("timerGroup"));
         pane.getChildren().add(groepen.get("turnGroup"));
         pane.getChildren().add(groepen.get("roundGroup"));
+        pane.getChildren().add(groepen.get("redeployingGroup"));
         changeToScene(pane);
     }
 
@@ -131,10 +128,6 @@ public class SceneManager {
         changeToScene(gameView);
     }
 
-
-    public void startGame(){
-        new GameController("First", "player1");
-    }
 
     public void createAreaView(AreaController areaController, Group area) {
         new AreaView(area, areaController);

@@ -9,6 +9,7 @@ import com.google.cloud.firestore.Firestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class GameController {
     private GameModel model;
@@ -17,7 +18,9 @@ public class GameController {
     private RoundController roundCon;
     private TurnController turnCon;
     private Map2DController mapCon;
+    private String lobbyName;
     private VervallenController vervCon;
+    private GameTimer gameTimer;
     private AttackController attCon;
     private ShopController shopCon;
     private GameTurn gameTurn;
@@ -27,18 +30,25 @@ public class GameController {
     private FirebaseServiceOwn fb = app.getFirebaseService();
 
     public GameController(String lobbyName, String playerID) {
+        System.out.println(this);
         myPlayerId = playerID;
         model = new GameModel(8, 8);
-        fb.setGame(lobbyName);
-        Map<String, Object> info = new HashMap<>();
-        info.put("Name", app.getAccountCon().getAccountName());
-        info.put("fiches", 0);
-        info.put("punten", 5);
-        fb.registerPlayer(playerID, info);
+        this.lobbyName = lobbyName;
+        setMuFirebaseStufF();
         SceneManager.getInstance().createGameView(this);
         SceneManager.getInstance().makeMap();
         createGameParts();
         startGame();
+        createGameTimer();
+    }
+
+    public void setMuFirebaseStufF(){
+        fb.setGame(lobbyName);
+        Map<String, Object> info = new HashMap<>();
+        info.put("Name", app.getAccountCon().getAccountName());
+        info.put("fiches", 0);
+        info.put("punten", 0);
+        fb.registerPlayer(myPlayerId, info);
     }
 
     public String getMyPlayerId(){
@@ -139,7 +149,13 @@ public class GameController {
 
 
     private void startGame(){
+
         gameTurn = new GameTurn(this, currentPlayer);
+
+    }
+
+    public void createGameTimer(){
+        gameTimer = new GameTimer(this, 10);
     }
 
     public void nextTurn() {
@@ -154,4 +170,11 @@ public class GameController {
         currentPlayer = getPlayer("player" + i);
     }
 
+    public GameTimer getGameTimer() {
+        return gameTimer;
+    }
+
+    public String getLobbyname(){
+        return lobbyName;
+    }
 }
