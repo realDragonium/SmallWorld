@@ -4,12 +4,16 @@ import Controller.LobbySettingsController;
 import Observer.LobbySettingsObserver;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
+
+
+/**  This View-class is part of the MVC design pattern and shows the lobbySettings screen.
+ * @author: Lars Puente Blom
+ * @version: June 2019
+ */
 
 public class LobbySettingsView implements LobbySettingsObserver{
     ObservableList list = FXCollections.observableArrayList("2 players", "3 players", "4 players");
@@ -60,8 +64,5 @@ public class LobbySettingsView implements LobbySettingsObserver{
     @Override
     public void update() {
     }
-
-
-
 
 }

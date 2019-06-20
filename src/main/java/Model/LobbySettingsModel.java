@@ -5,6 +5,12 @@ import Observable.LobbySettingsObservable;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**  This Model-class is part of the MVC design pattern and shows the lobbySettings screen.
+ * @author: Lars Puente Blom
+ * @version: June 2019
+ */
+
 public class LobbySettingsModel implements LobbySettingsObservable {
     private List<LobbySettingsObserver> observers = new ArrayList<>();
     private String lobbyNaam;
@@ -28,8 +34,5 @@ public class LobbySettingsModel implements LobbySettingsObservable {
     public String getNameLobby(){
         return lobbyNaam;
     }
-
-
-
 
 }

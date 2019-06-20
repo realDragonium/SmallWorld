@@ -7,9 +7,14 @@ import Observer.InLobbyObserver;
 import Applicatie.Applicatie;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.application.Platform;
-import javafx.scene.Scene;
-
 import java.util.Map;
+
+/**  This Controller-class is part of the MVC design pattern and shows the In-existing lobby screen.
+ * @author: Lars Puente Blom
+ * @version: June 2019
+ *
+ */
+
 
 public class InLobbyController implements FirebaseControllerObserver {
     Applicatie app = SceneManager.getInstance().getApp();

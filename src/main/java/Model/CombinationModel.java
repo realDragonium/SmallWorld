@@ -18,6 +18,7 @@ public class CombinationModel implements CombinationObservable {
         this.powerId = powerId;
     }
 
+
     public boolean isActive(){
         return active;
     }
