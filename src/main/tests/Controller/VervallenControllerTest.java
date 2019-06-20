@@ -9,6 +9,7 @@ public class VervallenControllerTest {
     CombinationController combCon;
 
     //testen of een speler active of nonactive kan zijn
+
     @Before
     public void setUp(){
         //gameCon.getCurrentPlayer().getActiveCombination().setToNonActive();
