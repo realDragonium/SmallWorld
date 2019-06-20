@@ -12,6 +12,10 @@ public class CombinationController {
     private PlayerController player;
     private CombinationModel model;
 
+    public CombinationController() {
+
+    }
+
     public void registerObserver(CombinationObserver obs){
         model.register(obs);
     }

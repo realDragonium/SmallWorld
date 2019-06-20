@@ -12,6 +12,10 @@ public class VervallenController {
         SceneManager.getInstance().loadVerval(this);
     }
 
+    public VervallenController() {
+
+    }
+
 
     public void inVerval() {
         makeFicheToOne();

@@ -3,6 +3,7 @@ package Model;
 import Observer.TimerObserver;
 import Observable.TimerObservable;
 
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -12,6 +13,10 @@ public class TimerModel implements TimerObservable, ChangeListener {
     TimerObserver observer;
     int timeAmount = 10;
     boolean timerDone = false;
+
+    public TimerModel(){
+
+    }
 
     public boolean timerIsDone(){
         return timerDone;
