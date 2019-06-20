@@ -81,8 +81,15 @@ public class AreaController implements FirebaseControllerObserver {
 	public void update(DocumentSnapshot ds) {
 		System.out.println(ds.getData());
 		Platform.runLater(()-> {
+			if(model.getPlayer() == gameCon.getMyPlayer()){
+				model.getPlayer().getActiveCombination().getRace().pushFiches(removeFiches());
+				model.player = null;
+			} else{
+				model.setFiches((int)Math.round(ds.getDouble("fiches")));
+			}
+
+
 			model.setAreaType(ds.getString("type"));
-			model.setFiches((int)Math.round(ds.getDouble("fiches")));
 			model.setBorderArea(ds.getBoolean("borderArea"));
 			model.setNeighbours((List<String>) ds.get("neighbours"));
 			model.setAttackAble(ds.getBoolean("attackAble"));
