@@ -7,6 +7,7 @@ import Model.GameModel;
 import Objects.RattenKracht;
 import com.google.cloud.firestore.Firestore;
 
+import javax.sound.sampled.Line;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -27,6 +28,7 @@ public class GameController {
     private PlayerController myPlayer;
     private RedeployingController redCon;
     private String myPlayerId;
+    private DiceController diceCon;
     private Applicatie app = SceneManager.getInstance().getApp();
     private FirebaseServiceOwn fb = app.getFirebaseService();
 
@@ -52,6 +54,8 @@ public class GameController {
         fb.registerPlayer(myPlayerId, info);
     }
 
+
+
     public String getMyPlayerId(){
         return myPlayerId;
     }
@@ -69,9 +73,10 @@ public class GameController {
         createPlayer();
         createShop();
         createVerval();
-
+        SceneManager.getInstance().loadSmallworld();
         createTurnsAndRounds();
-        new DiceController();
+        diceCon = new DiceController();
+        new InfoController();
         new KnoppenController(this);
 
         redCon = new RedeployingController(this);
@@ -79,6 +84,8 @@ public class GameController {
         createAttCon();
         mapCon = new Map2DController(this);
     }
+
+
 
     private void createVerval() {
         vervCon = new VervallenController(this);
@@ -90,6 +97,7 @@ public class GameController {
         players.put("player2", new PlayerController("player2", this));
         players.put("player3", new PlayerController("player3", this));
         players.put("player4", new PlayerController("player4", this));
+        myPlayer = players.get(myPlayerId);
     }
 
     private void createShop(){
@@ -104,8 +112,6 @@ public class GameController {
     private void createGameTurn(){
         gameTurn = new GameTurn(this, currentPlayer);
     }
-
-
 
     PlayerController getPlayer(String id){
         return players.get(id);
@@ -139,6 +145,8 @@ public class GameController {
         return attCon;
     }
 
+    public DiceController getDiceCon() {return diceCon;}
+
     public GameTurn getGameTurn() { return gameTurn;}
 
     void endGame(){
@@ -150,11 +158,8 @@ public class GameController {
         return model.gameEnded;
     }
 
-
     private void startGame(){
-
         gameTurn = new GameTurn(this, currentPlayer);
-
     }
 
     public void createGameTimer(){

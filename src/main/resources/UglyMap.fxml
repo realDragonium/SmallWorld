@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane fx:id = "pane" layoutX="200" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Map2DView">
+<Pane fx:id="pane" layoutX="600" layoutY="150" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Map2DView">
     <children>
         <Group>
             <children>

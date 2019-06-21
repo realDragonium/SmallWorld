@@ -15,7 +15,6 @@ public class KnoppenView {
     @FXML
     public Pane pane;
     public Button infoButton;
-    public Button attackButton;
     public Button availableButton;
     public Button nextFaseButton;
 
@@ -30,9 +29,6 @@ public class KnoppenView {
 
     @FXML
     public void showInfo(){knopCon.showInfo();}
-    public void attackCountry(){
-        knopCon.attackCountry();
-    }
     public void fichesOver(){
         knopCon.fichesOver();
     }

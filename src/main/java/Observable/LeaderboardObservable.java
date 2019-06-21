@@ -6,6 +6,11 @@ public interface LeaderboardObservable {
     void register(LeaderboardObserver ob);
     void notifyAllObs();
     String getWaarde();
-
+    String getPlace1();
+    String getPlace2();
+    String getPlace3();
+    String getValue1();
+    String getValue2();
+    String getValue3();
 
 }

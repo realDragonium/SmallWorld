@@ -24,10 +24,11 @@ public class VervallenControllerTest {
      */
 
     //testen of een speler active of nonactive kan zijn
+
     @Before
     public void setUp(){
         combmodel = new CombinationModel(" ", " ");
-        combCon = new CombinationController();
+        //combCon = new CombinationController();
         //vervCon = new VervallenController();
     }
 

@@ -9,11 +9,10 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.TextField;
 import Enum.TurnFase;
+import javafx.scene.text.Text;
 
 
 /**@author Yoran
- *
- *
  *
  */
 
@@ -24,8 +23,8 @@ public class TurnView implements TurnObserver {
 
     @FXML
     public Group groupFXML;
-    public TextField turnField;
-    public TextField faseField;
+    public Text turnField;
+    public Text faseField;
 
     /**
      *
@@ -52,8 +51,8 @@ public class TurnView implements TurnObserver {
      */
 
     private void setTextFields(int getal, TurnFase fase){
-        turnField.setText("Turn: "+ getal);
-        faseField.setText("Fase: " + fase.toString());
+        turnField.setText("" + getal);
+        faseField.setText("" + fase.toString());
     }
 
     @Override

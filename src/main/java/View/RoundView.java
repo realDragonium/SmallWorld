@@ -5,7 +5,8 @@ import Observable.RoundObservable;
 import Observer.RoundObserver;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
-import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+
 
 public class RoundView implements RoundObserver {
 
@@ -13,7 +14,7 @@ public class RoundView implements RoundObserver {
     private RoundController roundCon;
 
     @FXML
-    public TextField roundField;
+    public Text roundField;
     public Group groupFXML;
 
     public RoundView(Group group, RoundController roundCon){
@@ -24,13 +25,20 @@ public class RoundView implements RoundObserver {
     public void initialize() {
         group.getChildren().add(groupFXML);
         roundCon.register(this);
+        roundField.setX(20);
+        roundField.setY(35);
     }
     @Override
     public void update(RoundObservable ro) {
         setTextRoundField(ro.getRound());
     }
 
+
+    /**
+     * @param getal is meegegeven integer om de juiste ronde te zetten.
+     */
     private void setTextRoundField(int getal){
         roundField.setText("Round: "+ getal);
     }
+
 }

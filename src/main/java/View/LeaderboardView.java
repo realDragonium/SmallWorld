@@ -6,20 +6,31 @@ import Controller.LeaderboardController;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import Observable.LeaderboardObservable;
+import javafx.scene.control.Label;
+import Observable.LeaderboardObservable;
 import Observer.LeaderboardObserver;
 import javafx.fxml.FXML;
 
 
 public class LeaderboardView implements LeaderboardObserver {
-    LeaderboardController con;
+    LeaderboardController leadCon;
+
+    public Label place1;
+    public Label place2;
+    public Label place3;
+    public Label points1;
+    public Label points2;
+    public Label points3;
+
 
     public Group root;
     private Group group;
     public Button hoofdmenu;
 
-    public LeaderboardView(Group group, LeaderboardController con){
+    public LeaderboardView(Group group, LeaderboardController leadCon){
         this.group = group;
-        this.con = con;
+        this.leadCon = leadCon;
+
     }
 
 
@@ -56,7 +67,7 @@ public class LeaderboardView implements LeaderboardObserver {
 
     public void initialize(){
         group.getChildren().add(root);
-        con.registreer(this);
+        leadCon.registreer(this);
 
     }
 
@@ -65,15 +76,21 @@ public class LeaderboardView implements LeaderboardObserver {
 
     @Override
     public void update(LeaderboardObservable ob) {
-        System.out.println("joe joe" +ob.getWaarde()) ;
+        place1.setText(ob.getPlace1());
+        place2.setText(ob.getPlace2());
+        place3.setText(ob.getPlace3());
+        points1.setText(ob.getValue1());
+        points2.setText(ob.getValue2());
+        points3.setText(ob.getValue3());
+
     }
 
     public void registreer(){
-        con.registreer(this);
+        leadCon.registreer(this);
     }
 @FXML
     public void drukKnop(){
-        con.addValue();
+    leadCon.addValue();
 
     }
 }
