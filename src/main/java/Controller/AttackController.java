@@ -43,8 +43,8 @@ public class AttackController {
             else if(player.getActiveCombination().getRace().fichesCount() == 1 && !diceUsed){
                 int waarde = gameCon.getDiceCon().ClickedDice();
                 diceUsed = true;
-                if (player.getActiveCombination().getRace().hasEnoughFiches(fichesCountNeeded + waarde)) {
-                    attack(player);
+                if (player.getActiveCombination().getRace().hasEnoughFiches(fichesCountNeeded - waarde)) {
+                    attack(player, 1);
                 }
             }
         }
@@ -52,18 +52,18 @@ public class AttackController {
 
     private void firstAttack(PlayerController player){
         if(targetArea.firstAttackArea()){
-            attack(player);
+            attack(player, fichesCountNeeded);
         }
     }
 
-    private void attack(PlayerController player){
+    private void attack(PlayerController player, int fiches){
         if(!targetArea.isAttackAble()) return;
         if (targetArea.getOwnerPlayer() != null && targetArea.getOwnerPlayer() != gameCon.getMyPlayer()) {
             targetArea.getOwnerPlayer().getActiveCombination().getRace().pushFiches(targetArea.removeFiches());
             targetArea.getOwnerPlayer().getActiveCombination().getRace().removeArea(targetArea);
         }
         player.getActiveCombination().getRace().addArea(targetArea);
-        targetArea.attackArea(player.getActiveCombination().getRace().getFiches(fichesCountNeeded));
+        targetArea.attackArea(player.getActiveCombination().getRace().getFiches(fiches));
         targetArea.setPlayerOwner(player);
     }
 
@@ -74,7 +74,7 @@ public class AttackController {
 
     private void isNeighbour(PlayerController player){
         if(isNeighbour(player.getActiveCombination().getRace().getAllAreas())){
-            attack(player);
+            attack(player, fichesCountNeeded);
         }
     }
 

@@ -24,7 +24,6 @@ public class TritansKracht implements Kracht{
         if(raceCon.getCombiCon().getPlayer().getGameCon().getAttCon().getAttackArea().isNextToWater()){
             raceCon.getCombiCon().getPlayer().getGameCon().getAttCon().removeFichesNeeded(1);
         }
-        System.out.println("Op landen naast water heb je 1 extra aanvals punt");
     }
 
     @Override
