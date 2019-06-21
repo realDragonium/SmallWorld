@@ -21,6 +21,7 @@
             <Image url="@SmallWorldLogo.png" />
          </image>
       </ImageView>
+
       <TextField fx:id="Username" layoutX="781.0" layoutY="429.0" prefHeight="61.0" prefWidth="353.0" promptText="Username" text="admin">
       	<font>
       		<Font size="25.0" />
@@ -36,6 +37,13 @@
             <Font size="25.0" />
          </font>
       </Text>
+
+      <Text fx:id="failed" fill="RED" layoutX="499.0" layoutY="349.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Failed to login! please try again with a different username or password">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+
       <Text layoutX="900.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
          <font>
             <Font size="25.0" />

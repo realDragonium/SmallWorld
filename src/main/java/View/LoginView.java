@@ -1,6 +1,7 @@
 package View;
 
 import Controller.LoginController;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -8,6 +9,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import Observable.LoginObservable;
 import Observer.LoginObserver;
+import javafx.scene.text.Text;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class LoginView implements LoginObserver{
 	@FXML
@@ -18,6 +23,8 @@ public class LoginView implements LoginObserver{
 	private TextField Password;
 	@FXML
 	private Button registeerButton;
+	@FXML
+	private Text failed;
 
 	private Group group;
 	private LoginController loginController;
@@ -38,10 +45,20 @@ public class LoginView implements LoginObserver{
 //		loginController.goToHomeScreen(); //voor als je geen internet hebt
 	}
 
-	@FXML
-    private void goToHomeScreen() {
+	private void goToHomeScreen(){
     	loginController.goToHomeScreen();
-    }
+	}
+
+	private void showFailedAttempt(){
+		failed.setOpacity(1);
+		TimerTask start = new TimerTask() {
+			@Override
+			public void run() {
+				Platform.runLater(() -> failed.setOpacity(0));
+			}
+		};
+		new Timer().schedule(start, 3000);
+	}
 
     @FXML
 	private void registeren(){
@@ -50,8 +67,7 @@ public class LoginView implements LoginObserver{
 
 	@Override
 	public void update(LoginObservable lo) {
-		if(lo.getLoginState()) {
-			goToHomeScreen();
-		}
+		if(!lo.getLoginState()) showFailedAttempt();
+		else goToHomeScreen();
 	}
 }

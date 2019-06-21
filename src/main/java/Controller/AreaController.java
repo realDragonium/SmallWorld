@@ -1,19 +1,17 @@
 package Controller;
 
+import Enum.AreaProperty;
+import Enum.AreaType;
 import Firebase.FirebaseControllerObserver;
 import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
 import Model.AreaModel;
 import Objects.RaceFiche;
 import Observer.AreaObserver;
-import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.application.Platform;
 import javafx.scene.Group;
-import Enum.AreaProperty;
-import Enum.AreaType;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -84,7 +82,7 @@ public class AreaController implements FirebaseControllerObserver {
         model.getAllButOne();
     }
 
-    public void returnAllButOne(RaceController raceController) {
+    void returnAllButOne(RaceController raceController) {
         raceController.pushFiches(model.getAllButOne());
     }
 
@@ -144,11 +142,7 @@ public class AreaController implements FirebaseControllerObserver {
         return model.firstAttackArea();
     }
 
-    public boolean isAttackAble() {
-        return model.isAttackAble();
-    }
+    public boolean isAttackAble() { return model.isAttackAble();}
 
-    public List<String> getNeighbours() {
-        return model.getNeigbours();
-    }
+    public List<String> getNeighbours() { return model.getNeigbours();}
 }

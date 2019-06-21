@@ -12,19 +12,15 @@ import java.util.Map;
 /**  This Controller-class is part of the MVC design pattern and shows the In-existing lobby screen.
  * @author: Lars Puente Blom
  * @version: June 2019
- *
  */
-
 
 public class InLobbyController implements FirebaseControllerObserver {
     Applicatie app = SceneManager.getInstance().getApp();
     InLobbyModel mod = new InLobbyModel();
 
-
     public InLobbyController(){
         SceneManager.getInstance().createInLobbyView(this);
     }
-
 
     /**
      *
@@ -38,6 +34,11 @@ public class InLobbyController implements FirebaseControllerObserver {
         app.getFirebaseService().inLobbyListener(lobbyNaam, this);
     }
 
+    /**
+     * @param lobbyNaam
+     * Creates the InlobbyView and sets the lobbynaam.
+     * Puts
+     */
     public InLobbyController(String lobbyNaam){
         SceneManager.getInstance().createInLobbyView(this);
         setLobbyNaam(lobbyNaam);
@@ -82,9 +83,7 @@ public class InLobbyController implements FirebaseControllerObserver {
         mod.unregister(ob);
     }
 
-
     /**
-     *
      * @param ds
      */
     @Override

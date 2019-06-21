@@ -6,10 +6,6 @@ import Managers.SceneManager;
 import Model.LoginModel;
 import Observer.LoginObserver;
 
-
-
-
-
 public class LoginController {
     Applicatie app = SceneManager.getInstance().getApp();
 	private FirebaseServiceOwn fb = app.getFirebaseService();
@@ -21,15 +17,17 @@ public class LoginController {
     
     public void validateLoginInfo(String username, String password) {
     	if(fb.login(username, password)) {
-    		loginModel.loginAccepted(true);
+            loginModel.loginAccepted(true);
             app.setAccount(new AccountController(username));
-    	}
+    	} else loginModel.setFailedAttempt();
     }
 
-    public void register(String username, String password){
-        if(fb.register(username, password)) {
+    public void register(String username, String password) {
+        if (fb.register(username, password)) {
             loginModel.loginAccepted(true);
+            app.setAccount(new AccountController(username));
         }
+        else loginModel.setFailedAttempt();
     }
     
     public void register(LoginObserver lo) {
