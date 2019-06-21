@@ -4,7 +4,7 @@ import Observable.TimerObservable;
 
 /** This interface is the TimerObserver which is implemented by the timerView class.
  * @author Mahad Musse
- * @Version June 2019
+ * @version June 2019
  */
 
 public interface TimerObserver {

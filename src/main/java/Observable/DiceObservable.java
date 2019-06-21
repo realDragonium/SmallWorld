@@ -4,7 +4,7 @@ import Observer.DiceObserver;
 
 /**
  * This interface is the DiceObservable which is implemented by the DiceModel class.
- * @author
+ * @author Wino Sabelis
  * @version June 2019
  */
 

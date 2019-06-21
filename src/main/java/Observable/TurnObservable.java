@@ -5,7 +5,7 @@ import Enum.TurnFase;
 
 /**
  * This interface is the TurnObservable which is implemented by the TurnModel class.
- * @author
+ * @author Martijn van der Steen
  * @version June 2019
  */
 public interface TurnObservable {

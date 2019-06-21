@@ -4,7 +4,7 @@ import Observer.AreaObserver;
 
 /**
  * This interface is the AreaObservable which is implemented by the AreaModel class.
- * @author
+ * @author Beau Mosterd
  * @version June 2019
  */
 

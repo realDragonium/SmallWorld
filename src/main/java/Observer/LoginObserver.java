@@ -4,7 +4,7 @@ import Observable.LoginObservable;
 
 /** This interface is the LoginObserver which is implemented by the loginView class.
  * @author Beau Mosterd
- * @Version June 2019
+ * @version June 2019
  */
 public interface LoginObserver {
 
