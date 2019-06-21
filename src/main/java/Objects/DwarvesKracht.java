@@ -5,6 +5,13 @@ import Controller.RaceController;
 import Enum.TurnFase;
 import Enum.AreaProperty;
 
+/** this handles the logic for the dwarven kracht
+ *
+ * @author yoran
+ * @version June 2019
+ *
+ */
+
 public class DwarvesKracht implements Kracht{
 
     private TurnFase phase = TurnFase.redeploying;
