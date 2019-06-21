@@ -38,13 +38,18 @@ public class TurnController {
     }
 
     void nextTurn(){
-        if(gameCon.isGameOver()) return;
         model.nextTurn();
-        currentPlayer++;
-        if(currentPlayer == 5){
-            currentPlayer = 1;
+        gameCon.changePlayerTurn(model.currentPlayerId);
+        if(model.currentPlayerId.equals("player1")){
+            gameCon.getRoundCon().nextRound();
         }
-        gameCon.changePlayerTurn("player"+currentPlayer);
+//        if(gameCon.isGameOver()) return;
+//        model.nextTurn();
+//        currentPlayer++;
+//        if(currentPlayer == 5){
+//            currentPlayer = 1;
+//        }
+//        gameCon.changePlayerTurn("player"+currentPlayer);
     }
 
     String getCurrentPlayer() {
