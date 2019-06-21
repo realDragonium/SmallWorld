@@ -80,16 +80,14 @@ public class AreaController implements FirebaseControllerObserver {
         map2DCon.selectSingleArea(this);
     }
 
-    public void inVerval() {
-        destroyAllButOne();
-    }
-
     public void destroyAllButOne() {
         model.getAllButOne();
+        fb.areaUpdateFiches("fiches", model.getNumberOfFiches());
     }
 
     void returnAllButOne(RaceController raceController) {
         raceController.pushFiches(model.getAllButOne());
+        fb.areaUpdateFiches("fiches", model.getNumberOfFiches());
     }
 
     private void getAreaInfo() {
@@ -126,7 +124,6 @@ public class AreaController implements FirebaseControllerObserver {
     public AreaProperty getSpecialProp() {
         return model.getSpecialProp();
     }
-
 
     public boolean isNextToWater() {
         return model.isNextToWater();

@@ -18,10 +18,10 @@ public class VervallenView {
         this.vervalCon = vervalCon;
         this.group = group;
     }
+
     public void initialize(){
         group.getChildren().addAll(root);
     }
-
 
 
     public void inVerval(){vervalCon.inVerval();}
