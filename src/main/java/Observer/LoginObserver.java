@@ -3,8 +3,8 @@ package Observer;
 import Observable.LoginObservable;
 
 /** This interface is the LoginObserver which is implemented by the loginView class.
- * @author:
- * @Version:
+ * @author Beau Mosterd
+ * @Version June 2019
  */
 public interface LoginObserver {
 
