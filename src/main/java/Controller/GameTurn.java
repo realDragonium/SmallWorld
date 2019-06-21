@@ -24,12 +24,12 @@ class GameTurn implements FirebaseControllerObserver {
         this.gameCon = gameCon;
         currentPlayer = player;
         currentPhase = TurnFase.none;
-        System.out.println("Begin beurt: " + currentPlayer.getId());
-        System.out.println("Jij bent speler: " + gameCon.getMyPlayerId());
+
         SceneManager.getInstance().switchToSpectatingView();
     }
 
     void endPhase() {
+        System.out.println("switching van: " + currentPhase);
         switch (currentPhase) {
             case none:
                 startPreperationPhase();
@@ -44,7 +44,6 @@ class GameTurn implements FirebaseControllerObserver {
                 SceneManager.getInstance().switchToSpectatingView();
                 currentPhase = TurnFase.none;
                 gameCon.nextTurn();
-
                 break;
         }
     }
@@ -93,9 +92,16 @@ class GameTurn implements FirebaseControllerObserver {
     @Override
     public void update(DocumentSnapshot ds) {
         Platform.runLater(() -> {
+            endPhase();
             gameCon.getTimer().setTime(gameCon.getGameTimer().maxTime);
             gameCon.getGameTimer().resetTimer(ds.getBoolean("endPhase"));
-            endPhase();
         });
+    }
+
+    public void newTurn(PlayerController currentPlayer) {
+        this.currentPlayer = currentPlayer;
+        endPhase();
+        System.out.println("Begin beurt: " + currentPlayer.getId());
+        System.out.println("Jij bent speler: " + gameCon.getMyPlayerId());
     }
 }

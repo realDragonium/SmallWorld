@@ -47,7 +47,7 @@ public class HomeScreenView implements HomeScreenObserver{
     	for(Node node2 : ((HBox) e.getSource()).getChildren()) {
 	    	if(node2.getId().equals("Power")) {
 		    	TranslateTransition translateTransition = new TranslateTransition(); 
-				translateTransition.setDuration(Duration.millis(500));
+				translateTransition.setDuration(Duration.millis(100));
 				translateTransition.setByX(-50 - ((ImageView)node2).getTranslateX()); 
 				translateTransition.setCycleCount(1); 
 				translateTransition.setAutoReverse(false); 
@@ -56,7 +56,7 @@ public class HomeScreenView implements HomeScreenObserver{
 	    	}
 			if(node2.getId().equals("Ras")) {
 				TranslateTransition translateTransition2 = new TranslateTransition(); 
-				translateTransition2.setDuration(Duration.millis(500));
+				translateTransition2.setDuration(Duration.millis(100));
 				translateTransition2.setByX(10 - ((ImageView) node2).getTranslateX()); 
 				translateTransition2.setCycleCount(1); 
 				translateTransition2.setAutoReverse(false); 
@@ -72,7 +72,7 @@ public class HomeScreenView implements HomeScreenObserver{
 	    	if(node2.getId().equals("Power")) {
 		
 				TranslateTransition translateTransition = new TranslateTransition(); 
-				translateTransition.setDuration(Duration.millis(200));
+				translateTransition.setDuration(Duration.millis(50));
 				translateTransition.setByX(-((ImageView)((HBox)  e.getSource()).getChildren().get(0)).getTranslateX());
 				translateTransition.setCycleCount(1); 
 				translateTransition.setAutoReverse(false); 
@@ -81,7 +81,7 @@ public class HomeScreenView implements HomeScreenObserver{
 	    	}
 	    	if(node2.getId().equals("Ras")) {
 				TranslateTransition translateTransition2 = new TranslateTransition(); 
-				translateTransition2.setDuration(Duration.millis(200));
+				translateTransition2.setDuration(Duration.millis(50));
 				translateTransition2.setByX(-((ImageView)node2).getTranslateX()); 
 				translateTransition2.setCycleCount(1); 
 				translateTransition2.setAutoReverse(false); 
