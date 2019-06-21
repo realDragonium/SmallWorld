@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import Observable.ObservableLobby;
 import java.util.List;
-
 // Get the single object for the SpelbordController
 // U
 // Elke class hoort een stukje javadoc te hebben
@@ -39,6 +38,7 @@ public class LobbyView implements LobbyObserver {
         this.group = group;
         this.lobbyCon = con;
     }
+
     // Is called after all @FXML are injected (in this case the public defined attributes)
     public void initialize() {
         group.getChildren().add(root);
@@ -99,7 +99,6 @@ public class LobbyView implements LobbyObserver {
             System.out.println("Max aantal lobbies");
         }
     }
-
 
     /** The view gets the update from the ObservableLobby.
      * @param lo gets send along to get
