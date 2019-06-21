@@ -1,14 +1,15 @@
 package Model;
 
-import Controller.AreaController;
 import Controller.PlayerController;
+import Enum.AreaProperty;
+import Enum.AreaType;
 import Objects.RaceFiche;
 import Observable.AreaObservable;
 import Observer.AreaObserver;
-import Enum.AreaProperty;
-import Enum.AreaType;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 import java.util.stream.IntStream;
 
 public class AreaModel implements AreaObservable {
@@ -26,7 +27,6 @@ public class AreaModel implements AreaObservable {
     private boolean attackAble = true;
 
     public AreaModel(String id) {
-
         this.id = id;
         type = AreaType.valueOf(id.split("_")[0]);
     }
@@ -34,6 +34,7 @@ public class AreaModel implements AreaObservable {
     public void setFiches(int fiches){
         raceFiches = new Stack<>();
         IntStream.range(0, fiches).forEach(o -> raceFiches.push(new RaceFiche()));
+        notifyObserver();
     }
 
     public void setNeighbours(List<String> neighbour){
@@ -53,7 +54,7 @@ public class AreaModel implements AreaObservable {
     }
 
     public void setAreaType(String type){
-        this.specialProperty = AreaProperty.valueOf(type);
+        specialProperty = AreaProperty.valueOf(type);
     }
 
     public String getId() {
