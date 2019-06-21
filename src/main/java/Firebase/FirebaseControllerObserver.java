@@ -4,8 +4,8 @@ import com.google.cloud.firestore.DocumentSnapshot;
 
 /**
  * This interface is the FirebaseControllerObserver which is implemented by the classes: PlayerController, AreaController, ShopController , GameTurn
- * @author
- * @version
+ * @author Beau Mosterd
+ * @version June 2019
  */
 
 public interface FirebaseControllerObserver {

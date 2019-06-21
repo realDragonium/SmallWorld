@@ -4,8 +4,8 @@ import java.util.List;
 
 /**
  * This interface is the FirebaseLobbyObserver.
- * @author
- * @version
+ * @author Beau Mosterd
+ * @version June 2019
  */
 public interface FirebaseLobbyObserver {
 
