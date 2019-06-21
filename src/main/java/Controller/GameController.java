@@ -68,7 +68,7 @@ public class GameController {
 
     public void changePlayerTurn(String player){
         currentPlayer = players.get(player);
-        createGameTurn();
+        setGameTurn();
     }
 
     public void createGameParts() {
@@ -111,8 +111,8 @@ public class GameController {
         turnCon = new TurnController(this);
     }
 
-    private void createGameTurn(){
-        gameTurn = new GameTurn(this, currentPlayer);
+    private void setGameTurn(){
+        gameTurn.newTurn(currentPlayer);
     }
 
     PlayerController getPlayer(String id){
@@ -169,6 +169,7 @@ public class GameController {
     }
 
     public void nextTurn() {
+
         turnCon.nextTurn();
     }
 

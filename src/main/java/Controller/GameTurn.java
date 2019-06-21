@@ -7,6 +7,13 @@ import Managers.SceneManager;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.application.Platform;
 
+/** This class handles the game turn logic, it decides what phase it is and what should happen in the phase.
+ * There should only be one GameTurn at a time.
+ *
+ * @author yoran
+ * @version June 2019
+ */
+
 class GameTurn implements FirebaseControllerObserver {
 
     GameController gameCon;
@@ -24,12 +31,12 @@ class GameTurn implements FirebaseControllerObserver {
         this.gameCon = gameCon;
         currentPlayer = player;
         currentPhase = TurnFase.none;
-        System.out.println("Begin beurt: " + currentPlayer.getId());
-        System.out.println("Jij bent speler: " + gameCon.getMyPlayerId());
+
         SceneManager.getInstance().switchToSpectatingView();
     }
 
     void endPhase() {
+        System.out.println("switching van: " + currentPhase);
         switch (currentPhase) {
             case none:
                 startPreperationPhase();
@@ -44,7 +51,6 @@ class GameTurn implements FirebaseControllerObserver {
                 SceneManager.getInstance().switchToSpectatingView();
                 currentPhase = TurnFase.none;
                 gameCon.nextTurn();
-
                 break;
         }
     }
@@ -55,10 +61,12 @@ class GameTurn implements FirebaseControllerObserver {
 
         if (currentPlayer.getId().equals(gameCon.getMyPlayerId())) {
             SceneManager.getInstance().switchToPreperationPhase();
+
             if (currentPlayer.hasActiveCombination()) {
                 currentPlayer.returnFiches();
-                SceneManager.getInstance().addToScene("vervalGroup");
                 currentPlayer.getActiveCombination().checkForSpecialActions(currentPhase);
+
+                SceneManager.getInstance().addToScene("vervalGroup");
             } else {
                 SceneManager.getInstance().addToScene("shopGroup");
             }
@@ -93,9 +101,16 @@ class GameTurn implements FirebaseControllerObserver {
     @Override
     public void update(DocumentSnapshot ds) {
         Platform.runLater(() -> {
+            endPhase();
             gameCon.getTimer().setTime(gameCon.getGameTimer().maxTime);
             gameCon.getGameTimer().resetTimer(ds.getBoolean("endPhase"));
-            endPhase();
         });
+    }
+
+    public void newTurn(PlayerController currentPlayer) {
+        this.currentPlayer = currentPlayer;
+        endPhase();
+        System.out.println("Begin beurt: " + currentPlayer.getId());
+        System.out.println("Jij bent speler: " + gameCon.getMyPlayerId());
     }
 }

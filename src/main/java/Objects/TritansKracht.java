@@ -3,6 +3,14 @@ package Objects;
 import Controller.RaceController;
 import Enum.TurnFase;
 
+/** The titans kracht class implements Kracht
+ *  handles the logic for the titans kracht
+ *
+ * @author yoran
+ * @version June 2019
+ *
+ */
+
 public class TritansKracht implements Kracht{
 
     private TurnFase phase = TurnFase.conquering;
@@ -24,7 +32,6 @@ public class TritansKracht implements Kracht{
         if(raceCon.getCombiCon().getPlayer().getGameCon().getAttCon().getAttackArea().isNextToWater()){
             raceCon.getCombiCon().getPlayer().getGameCon().getAttCon().removeFichesNeeded(1);
         }
-        System.out.println("Op landen naast water heb je 1 extra aanvals punt");
     }
 
     @Override

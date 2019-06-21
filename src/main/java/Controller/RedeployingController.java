@@ -3,10 +3,22 @@ package Controller;
 import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
 
+/** This controller-class controlls the logic of the methods that can be called in the Redeploying phase
+ *
+ * @author yoran
+ * @version June 2019
+ *
+ */
+
 public class RedeployingController {
 
     GameController gameCon;
     FirebaseServiceOwn fb = SceneManager.getInstance().getApp().getFirebaseService();
+
+    /** Constructor where the view is being initialized
+     *
+     * @param gameCon
+     */
 
     RedeployingController(GameController gameCon){
         this.gameCon = gameCon;
@@ -14,18 +26,23 @@ public class RedeployingController {
 
     }
 
+
+
+
     public void removeFiche() {
         AreaController activeArea = getActiveArea();
         PlayerController player = gameCon.getCurrentPlayer();
 
         if(activeArea != null){
-            fb.areaUpdateFiches(activeArea.getId(), 0);
             if(activeArea.getOwnerPlayer().getId().equals(player.getId())){
                 if(activeArea.getFichesAmount() >= 1){
-                    player.getActiveCombination().getRace().addFiche(activeArea.getOneFiche());
                     if(activeArea.getFichesAmount() == 1){
                         player.addPoints(-1);
+                        player.getActiveCombination().getRace().removeArea(activeArea);
                     }
+                    player.getActiveCombination().getRace().addFiche(activeArea.getOneFiche());
+                    fb.areaUpdateFiches(activeArea.getId(), activeArea.getFichesAmount());
+
                 }
             }
         }
@@ -36,14 +53,19 @@ public class RedeployingController {
         PlayerController player = gameCon.getCurrentPlayer();
 
         if(activeArea != null){
-            fb.areaUpdateFiches(activeArea.getId(), 0);
             if(activeArea.getOwnerPlayer().getId().equals(player.getId())){
                 if(player.getActiveCombination().getRace().hasEnoughFiches(1)){
                     activeArea.addFiche(player.getActiveCombination().getRace().removeFiche());
+                    fb.areaUpdateFiches(activeArea.getId(), activeArea.getFichesAmount());
                 }
             }
         }
     }
+
+    /**
+     *
+     * @return returns the selected area
+     */
 
     private AreaController getActiveArea(){
         AreaController activeArea = null;

@@ -44,6 +44,7 @@ public class Applicatie {
         SceneManager.getInstance().setPane(root);
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true);
+        primaryStage.setFullScreen(true);
         primaryStage.setTitle("Small World");
         primaryStage.show();
 

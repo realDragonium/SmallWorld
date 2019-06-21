@@ -5,6 +5,12 @@ import Controller.RaceController;
 import Enum.TurnFase;
 import Enum.AreaType;
 
+/** this handles the logic for the human kracht
+ *
+ * @author yoran
+ * @version June 2019
+ */
+
 public class HumanKracht implements Kracht{
 
     private TurnFase phase = TurnFase.redeploying;
@@ -23,7 +29,7 @@ public class HumanKracht implements Kracht{
     @Override
     public void doAction() {
         for(AreaController area : raceCon.getAllAreas()){
-            if(area.getAreaType().equals(AreaType.swamp)){
+            if(area.getAreaType().equals(AreaType.farm)){
                 raceCon.getCombiCon().getPlayer().addPoints(1);
             }
         }
