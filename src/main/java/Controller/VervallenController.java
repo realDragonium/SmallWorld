@@ -36,7 +36,6 @@ public class VervallenController {
     //methode maakt in de Areacontroller fiches naar 1 per gebied (empty maar nog niet 1 per gebied)
     private void makeFicheToOne() {
         gameCon.getCurrentPlayer().getActiveCombination().destroyAllFichesButOne();
-
     }
 
     /**

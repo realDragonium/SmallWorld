@@ -88,8 +88,8 @@ public class AttackController {
      */
 
     private void attack(PlayerController player, int fiches){
-        if(!targetArea.isAttackAble()) return;
-        if (targetArea.getOwnerPlayer() != null && targetArea.getOwnerPlayer() != gameCon.getMyPlayer()) {
+        if(!targetArea.isAttackAble() || targetArea.getOwnerPlayer() == gameCon.getMyPlayer()) return;
+        if (targetArea.getOwnerPlayer() != null) {
             targetArea.getOwnerPlayer().getActiveCombination().getRace().pushFiches(targetArea.removeFiches());
             targetArea.getOwnerPlayer().getActiveCombination().getRace().removeArea(targetArea);
         }
@@ -113,7 +113,6 @@ public class AttackController {
             attack(player, fichesCountNeeded);
         }
     }
-
 
     /**
      * checking if the selected area is a neigbouring area
