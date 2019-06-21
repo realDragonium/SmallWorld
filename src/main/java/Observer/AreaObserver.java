@@ -5,7 +5,7 @@ import Observable.AreaObservable;
 /** This interface is the AreaObserver which is implemented by the AreaView class.
  *
  * @author Beau Mosterd
- * @Version June 2019
+ * @version June 2019
  */
 public interface AreaObserver {
 

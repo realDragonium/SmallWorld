@@ -4,7 +4,7 @@ import Observable.RoundObservable;
 
 /** This interface is the RoundObserver which is implemented by the roundView class.
  * @author Martijn van der Steen
- * @Version June 2019
+ * @version June 2019
  */
 public interface RoundObserver {
 

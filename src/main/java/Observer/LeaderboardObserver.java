@@ -4,7 +4,7 @@ import Observable.LeaderboardObservable;
 
 /** This interface is the LeaderbordObserver which is implemented by the leaderboardView class.
  * @author Wino Sabelis
- * @Version June 2019
+ * @version June 2019
  */
 public interface LeaderboardObserver {
 

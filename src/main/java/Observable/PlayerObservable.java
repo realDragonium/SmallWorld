@@ -4,7 +4,7 @@ import Observer.PlayerObserver;
 
 /**
  * This interface is the PlayerObservable which is implemented by the PlayerModel class.
- * @author
+ * @author Yoran de Vos
  * @version June 2019
  */
 

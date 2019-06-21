@@ -3,7 +3,7 @@ import Observable.infoObservable;
 
 /** This interface is the infoObserver which is implemented by the infoView class.
  * @author Mahad Musse
- * @Version June 2019
+ * @version June 2019
  */
 
 public interface infoObserver {

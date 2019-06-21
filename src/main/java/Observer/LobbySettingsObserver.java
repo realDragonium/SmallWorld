@@ -5,7 +5,7 @@ package Observer;
  * @author Lars Puente Blom
  * @author Beau Mosterd
  * @author Yoran de Vos
- * @Version June 2019
+ * @version June 2019
  */
 public interface LobbySettingsObserver {
 

@@ -3,7 +3,7 @@ import Observer.infoObserver;
 
 /**
  * This interface is the infoObservable which is implemented by the infoModel class.
- * @author
+ * @author Mahad Musse
  * @version June 2019
  */
 
