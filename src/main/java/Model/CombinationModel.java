@@ -19,7 +19,8 @@ public class CombinationModel implements CombinationObservable {
     }
 
 
-    public boolean isActive(){
+    public boolean isActive() {
+
         return active;
     }
 
