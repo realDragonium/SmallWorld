@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
 /**
  * @author : Martijn van der Steen
  * @version : Juni 2019
- */---
+ */
 
 public class VervallenView {
 

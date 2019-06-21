@@ -37,9 +37,11 @@ public class TurnController {
         model.register(to);
     }
 
+    //nextTurn aangeroepen door "einde Phase"
     void nextTurn(){
         model.nextTurn();
         gameCon.changePlayerTurn(model.currentPlayerId);
+        //als player1 weer aan de beurt is update de ronde
         if(model.currentPlayerId.equals("player1")){
             gameCon.getRoundCon().nextRound();
         }
