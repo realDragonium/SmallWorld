@@ -2,8 +2,8 @@ package Observer;
 import Observable.infoObservable;
 
 /** This interface is the infoObserver which is implemented by the infoView class.
- * @author:
- * @Version:
+ * @author Mahad Musse
+ * @Version June 2019
  */
 
 public interface infoObserver {

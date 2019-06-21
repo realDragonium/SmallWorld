@@ -3,8 +3,8 @@ package Observer;
 import Observable.RoundObservable;
 
 /** This interface is the RoundObserver which is implemented by the roundView class.
- * @author:
- * @Version:
+ * @author Martijn van der Steen
+ * @Version June 2019
  */
 public interface RoundObserver {
 
