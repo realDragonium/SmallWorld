@@ -40,6 +40,7 @@ public class LoginModel implements LoginObservable {
 	}
 
     public void setFailedAttempt() {
+		loginAccepted = false;
 		notifyAllObservers();
     }
 }

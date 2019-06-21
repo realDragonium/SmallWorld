@@ -45,6 +45,10 @@ public class LoginView implements LoginObserver{
 //		loginController.goToHomeScreen(); //voor als je geen internet hebt
 	}
 
+	private void goToHomeScreen(){
+    	loginController.goToHomeScreen();
+	}
+
 	private void showFailedAttempt(){
 		failed.setOpacity(1);
 		TimerTask start = new TimerTask() {
@@ -63,6 +67,7 @@ public class LoginView implements LoginObserver{
 
 	@Override
 	public void update(LoginObservable lo) {
-		showFailedAttempt();
+		if(!lo.getLoginState()) showFailedAttempt();
+		else goToHomeScreen();
 	}
 }
