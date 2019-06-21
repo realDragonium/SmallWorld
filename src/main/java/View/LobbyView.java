@@ -19,9 +19,6 @@ import java.util.List;
  * @author Lars Puente Blom
  * @version Juni 2019
  *
- *
- *
- *
  */
 
 public class LobbyView implements LobbyObserver {

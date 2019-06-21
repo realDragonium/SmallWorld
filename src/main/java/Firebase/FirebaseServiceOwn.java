@@ -173,8 +173,7 @@ public class FirebaseServiceOwn {
         });
     }
 
-
-    //Werkt wel niet toegepast, runtime items toevoegen vind javafx niet leuk.
+    //Werkt wel niet toegepast, runtime items toevoegen vindt javafx niet leuk.
     //LobbyListener
     public void LobbyListener(final FirebaseLobbyObserver controller) {
         CollectionReference docRef = firestore.collection("Lobby");

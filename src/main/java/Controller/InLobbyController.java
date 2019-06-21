@@ -15,7 +15,6 @@ import java.util.Map;
  *
  */
 
-
 public class InLobbyController implements FirebaseControllerObserver {
     Applicatie app = SceneManager.getInstance().getApp();
     InLobbyModel mod = new InLobbyModel();
@@ -24,7 +23,6 @@ public class InLobbyController implements FirebaseControllerObserver {
     public InLobbyController(){
         SceneManager.getInstance().createInLobbyView(this);
     }
-
 
     /**
      *
@@ -38,6 +36,11 @@ public class InLobbyController implements FirebaseControllerObserver {
         app.getFirebaseService().inLobbyListener(lobbyNaam, this);
     }
 
+    /**
+     * @param lobbyNaam
+     * Creates the InlobbyView and sets the lobbynaam.
+     * Puts 
+     */
     public InLobbyController(String lobbyNaam){
         SceneManager.getInstance().createInLobbyView(this);
         setLobbyNaam(lobbyNaam);
