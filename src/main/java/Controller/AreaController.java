@@ -114,9 +114,8 @@ public class AreaController implements FirebaseControllerObserver {
             if (model.getPlayer() == gameCon.getMyPlayer()) {
                 model.getPlayer().getActiveCombination().getRace().pushFiches(removeFiches());
                 model.player = null;
-            } else {
-                model.setFiches((int) Math.round(ds.getDouble("fiches")));
             }
+            model.setFiches((int) Math.round(ds.getDouble("fiches")));
             model.notifyObserver();
         });
     }
