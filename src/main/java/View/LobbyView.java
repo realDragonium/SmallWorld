@@ -18,7 +18,6 @@ import java.util.List;
 /** This View-class is part of the MVC design pattern and shows the lobby screen (available lobbies).
  * @author Lars Puente Blom
  * @version Juni 2019
- *
  */
 
 public class LobbyView implements LobbyObserver {
@@ -40,7 +39,6 @@ public class LobbyView implements LobbyObserver {
         this.group = group;
         this.lobbyCon = con;
     }
-
     // Is called after all @FXML are injected (in this case the public defined attributes)
     public void initialize() {
         group.getChildren().add(root);
