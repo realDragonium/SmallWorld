@@ -43,15 +43,11 @@ public class Applicatie {
         Scene scene = new Scene(root, width,height);
         SceneManager.getInstance().setPane(root);
         primaryStage.setScene(scene);
-        primaryStage.setFullScreen(true);
+        primaryStage.setMaximized(true);
         primaryStage.setTitle("Small World");
-//        primaryStage.setX(windowAnchorX);
-//        primaryStage.setY(windowAnchorY);
-//        primaryStage.setFullScreen(true);
         primaryStage.show();
 
        new LoginController();
-       //new LobbyController();
     }
 
     public void loadScene(Scene scene) {

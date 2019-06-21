@@ -1,13 +1,11 @@
 package Controller;
 
+import Enum.TurnFase;
 import Model.RaceModel;
 import Objects.Kracht;
 import Objects.RaceFiche;
 
-import java.awt.geom.Area;
-import java.util.ArrayList;
 import java.util.List;
-import Enum.TurnFase;
 import java.util.Stack;
 
 public class RaceController {
@@ -97,12 +95,12 @@ public class RaceController {
 		return combiCon;
     }
 
-    public void addFiche(RaceFiche oneFiche) {
+    void addFiche(RaceFiche oneFiche) {
 		model.addFiche(oneFiche);
 		updatePlayerFicheAmount();
     }
 
-	public RaceFiche removeFiche() {
+	RaceFiche removeFiche() {
 		RaceFiche tempFiche = model.getFiche();
 		updatePlayerFicheAmount();
 		return tempFiche;

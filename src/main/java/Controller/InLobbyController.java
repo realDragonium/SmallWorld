@@ -39,7 +39,7 @@ public class InLobbyController implements FirebaseControllerObserver {
     /**
      * @param lobbyNaam
      * Creates the InlobbyView and sets the lobbynaam.
-     * Puts 
+     * Puts
      */
     public InLobbyController(String lobbyNaam){
         SceneManager.getInstance().createInLobbyView(this);
@@ -85,9 +85,7 @@ public class InLobbyController implements FirebaseControllerObserver {
         mod.unregister(ob);
     }
 
-
     /**
-     *
      * @param ds
      */
     @Override

@@ -39,4 +39,7 @@ public class LoginModel implements LoginObservable {
 		return loginAccepted;
 	}
 
+    public void setFailedAttempt() {
+		notifyAllObservers();
+    }
 }

@@ -6,7 +6,7 @@ public class RedeployingController {
 
     GameController gameCon;
 
-    public RedeployingController(GameController gameCon){
+    RedeployingController(GameController gameCon){
         this.gameCon = gameCon;
         SceneManager.getInstance().loadRedeploying(this);
 
@@ -41,7 +41,7 @@ public class RedeployingController {
         }
     }
 
-    public AreaController getActiveArea(){
+    private AreaController getActiveArea(){
         AreaController activeArea = null;
 
         if(gameCon.getMapCon().getActiveAreas().size() > 0){

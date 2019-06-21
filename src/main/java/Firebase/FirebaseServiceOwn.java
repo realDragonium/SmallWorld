@@ -73,12 +73,12 @@ public class FirebaseServiceOwn {
         DocumentReference docRef = gameRef.collection("Extras").document("Timer");
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirestoreException error) {
+
                 if (error != null) {
                     System.err.println("Listen failed: " + error);
                     return;
                 }
                 if (snapshot != null && snapshot.exists()) {
-                    System.out.println("En werkt deze nog?");
                     controller.update(snapshot);
                 }
             }
@@ -111,6 +111,7 @@ public class FirebaseServiceOwn {
 
         createTimer(lobbyNaam);
         setAreas(lobbyNaam);
+        makeShop(lobbyNaam);
     }
 
     //Is er nog plek in deze lobby?
@@ -173,7 +174,24 @@ public class FirebaseServiceOwn {
         });
     }
 
-    //Werkt wel niet toegepast, runtime items toevoegen vindt javafx niet leuk.
+    //InLobbyListener
+    public void shopListener(final FirebaseControllerObserver controller) {
+        DocumentReference docRef = gameRef.collection("Extras").document("Shop");
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirestoreException error) {
+                if (error != null) {
+                    System.err.println("Listen failed: " + error);
+                    return;
+                }
+                if (snapshot != null && snapshot.exists()) {
+                    controller.update(snapshot);
+                }
+            }
+        });
+    }
+
+
+    //Werkt wel niet toegepast, runtime items toevoegen vind javafx niet leuk.
     //LobbyListener
     public void LobbyListener(final FirebaseLobbyObserver controller) {
         CollectionReference docRef = firestore.collection("Lobby");
@@ -222,6 +240,18 @@ public class FirebaseServiceOwn {
         docRef.update("fiches", count);
     }
 
+    public void makeShop(String lobbyName){
+        Map<String, Object> map = new HashMap<>();
+        map.put("bought", null);
+        colRef.document(lobbyName).collection("Extras").document("Shop").set(map);
+    }
+
+    public void boughShop(int item){
+        Map<String, Object> map = new HashMap<>();
+        map.put("bought", item);
+        gameRef.collection("Extras").document("Shop").set(map);
+    }
+
     //Areas setten in firebase
     public void setAreas(String lobbyName) {
         List<QueryDocumentSnapshot> list = null;
@@ -252,6 +282,8 @@ public class FirebaseServiceOwn {
     }
 
 
+
+
     public void registerPlayer(String playerId, Map<String, Object> info){
         gameRef.collection("Players").document(playerId).set(info);
     }
@@ -269,6 +301,7 @@ public class FirebaseServiceOwn {
         info.put("time", time);
         gameRef.collection("Extras").document("Timer").set(info);
     }
+
     // Ophalen caan de speler naam samen met het aantal punten die de speler heeft gehaald.
     public TreeMap<Double, String> getTop3Player(){
         TreeMap<Double, String> map = new TreeMap<>();
