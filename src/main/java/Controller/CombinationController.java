@@ -61,6 +61,9 @@ public class CombinationController {
 
     void setToNonActive() {
         model.setToNonActive();
+        for(AreaController area: getRace().getAllAreas()){
+            area.destroyAllButOne();
+        }
     }
 
     void destroyAllFichesButOne() {
