@@ -21,11 +21,13 @@ public class RedeployingController {
         if(activeArea != null){
             if(activeArea.getOwnerPlayer().getId().equals(player.getId())){
                 if(activeArea.getFichesAmount() >= 1){
-                    player.getActiveCombination().getRace().addFiche(activeArea.getOneFiche());
-                    fb.areaUpdateFiches(activeArea.getId(), activeArea.getFichesAmount());
                     if(activeArea.getFichesAmount() == 1){
                         player.addPoints(-1);
+                        player.getActiveCombination().getRace().removeArea(activeArea);
                     }
+                    player.getActiveCombination().getRace().addFiche(activeArea.getOneFiche());
+                    fb.areaUpdateFiches(activeArea.getId(), activeArea.getFichesAmount());
+
                 }
             }
         }

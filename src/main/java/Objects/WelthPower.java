@@ -7,7 +7,7 @@ public class WelthPower implements Power {
 
     private String id = "Welth";
     private boolean used = false;
-    private TurnFase usablePhase = TurnFase.preparing;
+    private TurnFase usablePhase = TurnFase.redeploying;
     private CombinationController combiCon;
 
     @Override

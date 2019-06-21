@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.AreaController;
 import Controller.PlayerController;
 import Objects.RaceFiche;
 import Observable.AreaObservable;
@@ -25,7 +26,9 @@ public class AreaModel implements AreaObservable {
     private boolean attackAble = true;
 
     public AreaModel(String id) {
+
         this.id = id;
+        type = AreaType.valueOf(id.split("_")[0]);
     }
 
     public void setFiches(int fiches){
@@ -84,7 +87,12 @@ public class AreaModel implements AreaObservable {
     }
 
     public boolean isNextToWater(){
-        return nextToWater;
+        for(String area : neighbours){
+            if(area.split("_")[0].equals("water")){
+                return true;
+            }
+        }
+        return false;
     }
 
     public Stack<RaceFiche> getAllButOne(){
