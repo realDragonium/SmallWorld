@@ -115,5 +115,6 @@ public class PlayerController implements FirebaseControllerObserver {
 
     public void addPoints(int i) {
         model.addPunten(i);
+        fb.changePointsPlayer(model.getId(), model.getPunten());
     }
 }
