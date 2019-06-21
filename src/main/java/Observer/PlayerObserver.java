@@ -3,8 +3,8 @@ package Observer;
 import Observable.PlayerObservable;
 
 /** This interface is the LobbyObserver which is implemented by the lobbyView class.
- * @author:
- * @Version:
+ * @author
+ * @Version June 2019
  */
 public interface PlayerObserver {
 

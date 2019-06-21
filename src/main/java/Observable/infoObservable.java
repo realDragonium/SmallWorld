@@ -4,7 +4,7 @@ import Observer.infoObserver;
 /**
  * This interface is the infoObservable which is implemented by the infoModel class.
  * @author
- * @version
+ * @version June 2019
  */
 
 public interface infoObservable {

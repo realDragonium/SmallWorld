@@ -5,7 +5,7 @@ import Observer.ShopObserver;
 /**
  * This interface is the ShopObservable which is implemented by the RoundModel class.
  * @author
- * @version
+ * @version June 2019
  */
 
 public interface ShopObservable {

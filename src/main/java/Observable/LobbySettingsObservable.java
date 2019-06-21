@@ -5,7 +5,7 @@ import Observer.LobbySettingsObserver;
 /**
  * This interface is the LobbySettingsObservable which is implemented by the LobbySettingsModel class.
  * @author
- * @version
+ * @version June 2019
  */
 
 public interface LobbySettingsObservable {

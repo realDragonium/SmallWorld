@@ -5,8 +5,8 @@ import Observable.CombinationObservable;
 
 /** This interface is the CombinationObserver which is implemented by the CombinationView class.
  *
- * @author:
- * @Version:
+ * @author
+ * @Version June 2019
  */
 public interface CombinationObserver {
 

@@ -5,7 +5,7 @@ import Observer.CombinationObserver;
 /**
  * This interface is the CombinationObservable which is implemented by the CombinationModel class.
  * @author
- * @version
+ * @version June 2019
  */
 
 public interface CombinationObservable {

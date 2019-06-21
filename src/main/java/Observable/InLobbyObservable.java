@@ -5,7 +5,7 @@ import Observer.InLobbyObserver;
 /**
  * This interface is the InLobbyObservable which is implemented by the InLobbyModel class.
  * @author
- * @version
+ * @version June 2019
  */
 
 public interface InLobbyObservable {

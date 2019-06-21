@@ -3,8 +3,8 @@ package Observer;
 import Observable.ShopObservable;
 
 /** This interface is the ShopObserver which is implemented by the shopView class.
- * @author:
- * @Version:
+ * @author
+ * @Version June 2019
  */
 
 public interface ShopObserver {

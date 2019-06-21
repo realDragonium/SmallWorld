@@ -5,7 +5,7 @@ import Observer.PlayerObserver;
 /**
  * This interface is the PlayerObservable which is implemented by the PlayerModel class.
  * @author
- * @version
+ * @version June 2019
  */
 
 public interface PlayerObservable {

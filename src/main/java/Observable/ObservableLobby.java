@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * This interface is the ObservableLobby which is implemented by the LobbyModel class.
  * @author
- * @version
+ * @version June 2019
  */
 
 public interface ObservableLobby {
