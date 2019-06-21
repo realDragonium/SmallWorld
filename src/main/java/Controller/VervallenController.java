@@ -3,6 +3,7 @@ package Controller;
 import Managers.SceneManager;
 
 /**
+ *
  * @author : Martijn van der Steen
  * @version : Juni 2019
  */
@@ -23,7 +24,6 @@ public class VervallenController {
     public void inVerval() {
         makeFicheToOne();
         makeCombinationNonActive();
-        makePlayerSkipTurn();
         //eindig zijn beurt
     }
 
@@ -48,9 +48,5 @@ public class VervallenController {
         gameCon.getCurrentPlayer().getActiveCombination().setToNonActive();
     }
 
-    //werkt nog niet
-    //methode volgende ronde van dezelfde player overgeslagen (kom ik niet uit) (
-    private void makePlayerSkipTurn(){
-        //gameCon.getGameTurn().endTurn();
-    }
+
 }

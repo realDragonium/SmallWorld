@@ -9,7 +9,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+/**
+ * @author : Martijn van der Steen
+ * @version : Juni 2019
+ */
+
 public class TurnModel implements TurnObservable {
+
+
     private List<TurnObserver> observers = new ArrayList<>();
     public int currentTurn;
     private int turnPerRound;
@@ -62,5 +69,6 @@ public class TurnModel implements TurnObservable {
 
     public void setFase(TurnFase currentPhase) {
         fase = currentPhase;
+        notifyObservers();
     }
 }

@@ -18,10 +18,6 @@ import java.util.List;
 /** This View-class is part of the MVC design pattern and shows the lobby screen (available lobbies).
  * @author Lars Puente Blom
  * @version Juni 2019
- *
- *
- *
- *
  */
 
 public class LobbyView implements LobbyObserver {
@@ -34,7 +30,6 @@ public class LobbyView implements LobbyObserver {
     private int gridCounter = 0;             // startwaarde aantal aangemaakte lobbies = 0
     private GridPane grid= new GridPane();
 
-
     /**
      * @param group is given argument for the scene manager
      * @param con is given argument to the controller so that its mvc.
@@ -44,7 +39,6 @@ public class LobbyView implements LobbyObserver {
         this.group = group;
         this.lobbyCon = con;
     }
-
     // Is called after all @FXML are injected (in this case the public defined attributes)
     public void initialize() {
         group.getChildren().add(root);
@@ -57,6 +51,8 @@ public class LobbyView implements LobbyObserver {
             panel.add(btn, 0, gridCounter);
             panel.getChildren().get(gridCounter).setId("button" + gridCounter);
             gridCounter++;
+
+            // On button clicked, the button will change red.
             btn.setOnAction(d -> {
                 if (activeButton != null) {
                     activeButton.setStyle(" -fx-background-color:   -fx-background");
@@ -67,21 +63,26 @@ public class LobbyView implements LobbyObserver {
         }
     }
 
+    /** The method terug creates a new HomeScreenController which gets loaded by the Scenemanager.
+     */
     public void terug() {
         new HomeScreenController();
     }
 
+    /** The method join
+     */
     public void join() {
         lobbyCon.joinLobby(activeButton.getText());               // start de LobbySettingView
     }
 
+    /** The method host is
+     */
     public void host(){
         lobbyCon.lobbyEdit();
     }
 
-    /**
-     *
-     * @param lobbyNaam geeft de lobby naam mee om toe te vogen
+    /** The method addLobbyFirebase adds a new button to a gridPane
+     * @param lobbyNaam gives the lobbynaam as parameter
      */
 
     public void addLobbyFirebase(String lobbyNaam) {
@@ -99,10 +100,10 @@ public class LobbyView implements LobbyObserver {
         }
     }
 
-//    public String getLobbyNaam() {
-//        return lobbyCon.getLobbyNaam();
-//    }
 
+    /** The view gets the update from the ObservableLobby.
+     * @param lo gets send along to get
+     */
     @Override
     public void update(ObservableLobby lo) {
         List<String> lobbynamen =  lo.getLobbyName();

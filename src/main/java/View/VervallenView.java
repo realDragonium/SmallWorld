@@ -5,18 +5,25 @@ import javafx.scene.Group;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
+/**
+ * @author : Martijn van der Steen
+ * @version : Juni 2019
+ */
+
 public class VervallenView {
 
-    /**
-     * @author : Martijn van der Steen
-     * @version : Juni 2019
-     */
+
     Group group;
     public Pane root;
 
     VervallenController vervalCon;
     TextField vervaltext;
 
+
+    /**
+     * @param vervalCon is een variable van de VervallenController waar logica staat om het ras van van activiteit te veranderen.
+     * @param group wordt in de constructor meegegeven om alle omvattende nodes uit het fxml mee te sturen
+     */
     public VervallenView(VervallenController vervalCon, Group group){
         this.vervalCon = vervalCon;
         this.group = group;

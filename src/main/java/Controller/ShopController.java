@@ -1,14 +1,17 @@
 package Controller;
 
+import Firebase.FirebaseControllerObserver;
 import Model.ShopModel;
 import Objects.*;
 import Managers.SceneManager;
 import Observer.ShopObserver;
+import com.google.cloud.firestore.DocumentSnapshot;
+import javafx.application.Platform;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopController {
+public class ShopController implements FirebaseControllerObserver {
 
     GameController gameCon;
     ShopModel model = new ShopModel();
@@ -22,12 +25,19 @@ public class ShopController {
         for (int i = 0; i < 6; i++) {
             makeNewCombination();
         }
+        SceneManager.getInstance().getApp().getFirebaseService().shopListener(this);
+    }
+
+    public void removeItem(double item){
+        model.removeItem((int)item);
     }
 
     public void buyingItem(int item) {
+        System.out.println(item);
+        System.out.println(model.getShopItems().size());
         if (model.getShopItems().size() > item) {
             gameCon.getCurrentPlayer().buyFromShop(model.getShopItems().get(item), item);
-            model.removeItem(item);
+            SceneManager.getInstance().getApp().getFirebaseService().boughShop(item);
             gameCon.getGameTurn().endTurn();
         }
     }
@@ -74,4 +84,9 @@ public class ShopController {
         return null;
     }
 
+    @Override
+    public void update(DocumentSnapshot ds) {
+        if(ds.get("bought")==null) return;
+        Platform.runLater(()-> removeItem(ds.getDouble("bought")));
+    }
 }

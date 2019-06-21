@@ -17,6 +17,7 @@ public class GameTimer {
     int maxTime;
     Timer gameTimer;
     boolean current = false;
+    boolean timerAvailable = true;
     FirebaseServiceOwn fb;
 
     public GameTimer(GameController gameCon, int time) {
@@ -38,17 +39,21 @@ public class GameTimer {
 
     public void timerAction(){
         timeLeft--;
-        gameCon.getGameTurn().phaseTimer.setTime(timeLeft);
-        if (timeLeft == 0 && gameCon.getCurrentPlayer().getId().equals(gameCon.getMyPlayerId())) {
+        gameCon.getTimer().setTime(timeLeft);
+        if (timeLeft == 0 && gameCon.getCurrentPlayer().getId().equals(gameCon.getMyPlayerId()) && timerAvailable) {
+            System.out.println("ik heb m geupdate");
             Map<String, Object> info = new HashMap<>();
             current = !current;
             info.put("endPhase", current);
             info.put("time", maxTime);
+            timerAvailable = false;
             fb.resetTimer(info);
         }
     }
 
-    public void resetTimer(){
+    public void resetTimer(boolean current){
+        this.current = current;
+        timerAvailable = true;
         timeLeft = maxTime;
     }
 

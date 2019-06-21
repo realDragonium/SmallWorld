@@ -8,7 +8,14 @@ import javafx.scene.Group;
 import javafx.scene.text.Text;
 
 
+/**
+ * @author : Martijn van der Steen
+ * @version : Juni 2019
+ */
+
 public class RoundView implements RoundObserver {
+
+
 
     private Group group;
     private RoundController roundCon;
@@ -21,6 +28,11 @@ public class RoundView implements RoundObserver {
         this.group = group;
         this.roundCon = roundCon;
     }
+
+
+    /**
+     * In the method initialize
+     */
 
     public void initialize() {
         group.getChildren().add(groupFXML);

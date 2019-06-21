@@ -12,9 +12,7 @@ import java.util.Map;
 /**  This Controller-class is part of the MVC design pattern and shows the In-existing lobby screen.
  * @author: Lars Puente Blom
  * @version: June 2019
- *
  */
-
 
 public class InLobbyController implements FirebaseControllerObserver {
     Applicatie app = SceneManager.getInstance().getApp();
@@ -24,6 +22,11 @@ public class InLobbyController implements FirebaseControllerObserver {
         SceneManager.getInstance().createInLobbyView(this);
     }
 
+    /**
+     *
+     * @param lobbyNaam
+     * @param id
+     */
     public InLobbyController(String lobbyNaam, int id){
         app.getAccountCon().setPlayerId("player"+id);
         SceneManager.getInstance().createInLobbyView(this);
@@ -31,20 +34,32 @@ public class InLobbyController implements FirebaseControllerObserver {
         app.getFirebaseService().inLobbyListener(lobbyNaam, this);
     }
 
+    /**
+     * @param lobbyNaam
+     * Creates the InlobbyView and sets the lobbynaam.
+     * Puts
+     */
     public InLobbyController(String lobbyNaam){
         SceneManager.getInstance().createInLobbyView(this);
         setLobbyNaam(lobbyNaam);
         SceneManager.getInstance().getApp().getFirebaseService().inLobbyListener(lobbyNaam, this);
     }
 
+    /**
+     * @param lobbyNaam
+     */
     public void setLobbyNaam(String lobbyNaam){
         mod.setLobbyNaam(lobbyNaam);
     }
 
+    /**
+     *
+     */
     public void start(){            // start button
         SceneManager.getInstance().getApp().getFirebaseService().startGame(mod.getLobbyNaam());
         //new GameController(mod.getLobbyNaam(), app.getAccountCon().getPlayerId());  // starten van het spel
     }
+
 
     public void exitLobby(){
         Applicatie app = SceneManager.getInstance().getApp();
@@ -52,14 +67,25 @@ public class InLobbyController implements FirebaseControllerObserver {
         new LobbyController();
     }
 
+    /**
+     * @param ob registers the observer and giving it to the register method in the InlobbyModel
+     */
     public void register(InLobbyObserver ob){
         mod.register(ob);
     }
 
+
+    /**
+     *
+     * @param ob
+     */
     public void unregister(InLobbyObserver ob){
         mod.unregister(ob);
     }
 
+    /**
+     * @param ds
+     */
     @Override
     public void update(DocumentSnapshot ds) {
         Map<String, Object> map = ds.getData();
@@ -71,4 +97,7 @@ public class InLobbyController implements FirebaseControllerObserver {
             Platform.runLater(() -> new GameController(mod.getLobbyNaam(), app.getAccountCon().getPlayerId()));
         }
     }
+
+
+
 }

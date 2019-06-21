@@ -16,7 +16,6 @@ public class AreaModel implements AreaObservable {
     private boolean active = false;
     private AreaObserver observer;
     private String id;
-    public int fichesCount;
     public PlayerController player;
     private AreaType type;
     private boolean nextToWater = false;
@@ -27,9 +26,6 @@ public class AreaModel implements AreaObservable {
 
     public AreaModel(String id) {
         this.id = id;
-//        Map<String, Object> info = SceneManager.getInstance().getApp().getFirebaseService().getAreaSettings(id);
-//        IntStream.range(0, (int) (Math.random() * 3)).forEach(i -> raceFiches.push(new RaceFiche()));
-//        fichesCount = raceFiches.size();
     }
 
     public void setFiches(int fiches){
@@ -49,6 +45,10 @@ public class AreaModel implements AreaObservable {
         borderArea = bArea;
     }
 
+    public boolean firstAttackArea(){
+        return borderArea && attackAble;
+    }
+
     public void setAreaType(String type){
         this.specialProperty = AreaProperty.valueOf(type);
     }
@@ -59,7 +59,6 @@ public class AreaModel implements AreaObservable {
 
     public void changeActive() {
         active = !active;
-        fichesCount = raceFiches.size();
         notifyObserver();
     }
 
@@ -71,14 +70,12 @@ public class AreaModel implements AreaObservable {
     //Ze worden overschreven omdat getAllFiches de hele lijst al mee geeft
     public void setFiches(Stack<RaceFiche> fiches) {
         raceFiches = fiches;
-        fichesCount = raceFiches.size();
         notifyObserver();
     }
 
     public Stack<RaceFiche> getAllFiches() {
         Stack<RaceFiche> tempFiches = raceFiches;
         raceFiches = new Stack<>();
-        fichesCount = raceFiches.size();
         return tempFiches;
     }
 
@@ -97,11 +94,33 @@ public class AreaModel implements AreaObservable {
             temp  = raceFiches;
             raceFiches = new Stack<>();
             raceFiches.add(tempFiche);
-            fichesCount = raceFiches.size();
             notifyObserver();
         }
         return temp;
     }
+
+    public RaceFiche getOneFiche() {
+        RaceFiche tempFiche = raceFiches.pop();
+        notifyObserver();
+        return tempFiche;
+    }
+
+    public void addFiche(RaceFiche fiche) {
+        raceFiches.add(fiche);
+        notifyObserver();
+    }
+
+    public AreaType getAreaType() {
+        return type;
+    }
+
+    public void setAttackAble(boolean attackAble) {
+        this.attackAble = attackAble;
+    }
+
+    public boolean isAttackAble(){return attackAble; }
+
+    public List<String> getNeigbours() {return neighbours;}
 
     @Override
     public void register(AreaObserver ao) {
@@ -122,24 +141,5 @@ public class AreaModel implements AreaObservable {
     @Override
     public int getNumberOfFiches() {
         return raceFiches.size();
-    }
-
-    public RaceFiche getOneFiche() {
-        RaceFiche tempFiche = raceFiches.pop();
-        notifyObserver();
-        return tempFiche;
-    }
-
-    public void addFiche(RaceFiche fiche) {
-        raceFiches.add(fiche);
-        notifyObserver();
-    }
-
-    public AreaType getAreaType() {
-        return type;
-    }
-
-    public void setAttackAble(boolean attackAble) {
-        this.attackAble = attackAble;
     }
 }

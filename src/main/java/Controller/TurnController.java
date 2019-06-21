@@ -7,8 +7,13 @@ import Enum.TurnFase;
 
 import java.util.Random;
 
+/**
+ * @author : Martijn van der Steen
+ * @version : Juni 2019
+ */
 
 public class TurnController {
+
 
     private TurnModel model;
     private GameController gameCon;

@@ -39,14 +39,10 @@ public class RaceModel {
 	public void pushFiches(Stack<RaceFiche> fiches){
 		availableFiches.addAll(fiches);
 	}
+
 	public List<AreaController> getAreas(){
 		return areas;
 	}
-
-//	public void addFichesToArea(AreaController area, int amount){
-////		for(int i = 0; i < amount)
-////			availableFiches.pop();
-////	}
 
 	public int getFichesCount(){
 		return availableFiches.size();
