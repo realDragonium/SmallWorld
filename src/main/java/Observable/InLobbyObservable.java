@@ -4,7 +4,9 @@ import Observer.InLobbyObserver;
 
 /**
  * This interface is the InLobbyObservable which is implemented by the InLobbyModel class.
- * @author
+ * @author Lars Puente Blom
+ * @author Beau Mosterd
+ * @author Yoran de Vos
  * @version June 2019
  */
 

@@ -4,7 +4,7 @@ import Observer.LoginObserver;
 
 /**
  * This interface is the LoginObservable which is implemented by the LoginModel class.
- * @author
+ * @author Yoran de Vos
  * @version June 2019
  */
 public interface LoginObservable {

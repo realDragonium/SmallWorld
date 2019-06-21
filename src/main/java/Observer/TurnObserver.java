@@ -5,7 +5,7 @@ package Observer;
 import Observable.TurnObservable;
 
 /** This interface is the TimerObserver which is implemented by the timerView class.
- * @author
+ * @author Martijn van der Steen
  * @Version June 2019
  */
 

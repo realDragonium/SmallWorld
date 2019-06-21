@@ -4,7 +4,7 @@ import Observer.TimerObserver;
 
 /**
  * This interface is the TimerObservable which is implemented by the TimerModel class.
- * @author
+ * @author Mahad Musse
  * @version June 2019
  */
 public interface TimerObservable {

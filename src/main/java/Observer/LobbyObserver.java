@@ -5,6 +5,8 @@ import Observable.ObservableLobby;
 
 /** This interface is the LobbyObserver which is implemented by the lobbyView class.
  * @author Lars Puente Blom
+ * @author Beau Mosterd
+ * @author Yoran de Vos
  * @Version June 2019
  */
 

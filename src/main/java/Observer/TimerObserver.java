@@ -3,7 +3,7 @@ package Observer;
 import Observable.TimerObservable;
 
 /** This interface is the TimerObserver which is implemented by the timerView class.
- * @author
+ * @author Mahad Musse
  * @Version June 2019
  */
 

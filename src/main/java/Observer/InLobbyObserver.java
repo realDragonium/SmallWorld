@@ -4,6 +4,8 @@ import Observable.InLobbyObservable;
 
 /** This interface is the InlobbyObserver which is implemented by the inlobbyView class.
  * @author Lars Puente Blom
+ * @author Beau Mosterd
+ * @author Yoran de Vos
  * @Version June 2019
  */
 

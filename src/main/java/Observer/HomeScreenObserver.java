@@ -4,7 +4,7 @@ import Observable.HomeScreenObservable;
 
 /** This interface is the HomeScreenObserver which is implemented by the HomeScreenView class.
  *
- * @author
+ * @author Yoran de Vos
  * @Version June 2019
  */
 public interface HomeScreenObserver {

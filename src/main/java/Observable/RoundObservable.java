@@ -4,7 +4,7 @@ import Observer.RoundObserver;
 
 /**
  * This interface is the RoundObservable which is implemented by the RoundModel class.
- * @author
+ * @author Martijn van der Steen
  * @version June 2019
  */
 

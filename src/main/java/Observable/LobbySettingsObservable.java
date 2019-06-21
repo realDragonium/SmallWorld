@@ -4,7 +4,9 @@ import Observer.LobbySettingsObserver;
 
 /**
  * This interface is the LobbySettingsObservable which is implemented by the LobbySettingsModel class.
- * @author
+ * @author Lars Puente Blom
+ * @author Beau Mosterd
+ * @author Yoran de Vos
  * @version June 2019
  */
 
