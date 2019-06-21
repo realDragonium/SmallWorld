@@ -1,10 +1,12 @@
 package Controller;
 
+import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
 
 public class RedeployingController {
 
     GameController gameCon;
+    FirebaseServiceOwn fb = SceneManager.getInstance().getApp().getFirebaseService();
 
     RedeployingController(GameController gameCon){
         this.gameCon = gameCon;
@@ -17,6 +19,7 @@ public class RedeployingController {
         PlayerController player = gameCon.getCurrentPlayer();
 
         if(activeArea != null){
+            fb.areaUpdateFiches(activeArea.getId(), 0);
             if(activeArea.getOwnerPlayer().getId().equals(player.getId())){
                 if(activeArea.getFichesAmount() >= 1){
                     player.getActiveCombination().getRace().addFiche(activeArea.getOneFiche());
@@ -33,6 +36,7 @@ public class RedeployingController {
         PlayerController player = gameCon.getCurrentPlayer();
 
         if(activeArea != null){
+            fb.areaUpdateFiches(activeArea.getId(), 0);
             if(activeArea.getOwnerPlayer().getId().equals(player.getId())){
                 if(player.getActiveCombination().getRace().hasEnoughFiches(1)){
                     activeArea.addFiche(player.getActiveCombination().getRace().removeFiche());
