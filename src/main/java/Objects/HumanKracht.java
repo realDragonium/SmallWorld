@@ -23,7 +23,7 @@ public class HumanKracht implements Kracht{
     @Override
     public void doAction() {
         for(AreaController area : raceCon.getAllAreas()){
-            if(area.getAreaType().equals(AreaType.swamp)){
+            if(area.getAreaType().equals(AreaType.farm)){
                 raceCon.getCombiCon().getPlayer().addPoints(1);
             }
         }

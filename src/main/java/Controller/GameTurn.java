@@ -54,10 +54,12 @@ class GameTurn implements FirebaseControllerObserver {
 
         if (currentPlayer.getId().equals(gameCon.getMyPlayerId())) {
             SceneManager.getInstance().switchToPreperationPhase();
+
             if (currentPlayer.hasActiveCombination()) {
                 currentPlayer.returnFiches();
-                SceneManager.getInstance().addToScene("vervalGroup");
                 currentPlayer.getActiveCombination().checkForSpecialActions(currentPhase);
+
+                SceneManager.getInstance().addToScene("vervalGroup");
             } else {
                 SceneManager.getInstance().addToScene("shopGroup");
             }

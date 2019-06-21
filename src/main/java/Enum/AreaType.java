@@ -1,5 +1,5 @@
 package Enum;
 
 public enum AreaType {
-    swamp
+    swamp, farm, forest, hill, mountain, water
 }
