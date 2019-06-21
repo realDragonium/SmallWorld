@@ -3,6 +3,14 @@ package Objects;
 import Controller.RaceController;
 import Enum.TurnFase;
 
+/** The titans kracht class implements Kracht
+ *  handles the logic for the titans kracht
+ *
+ * @author yoran
+ * @version June 2019
+ *
+ */
+
 public class TritansKracht implements Kracht{
 
     private TurnFase phase = TurnFase.conquering;

@@ -7,6 +7,13 @@ import Managers.SceneManager;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.application.Platform;
 
+/** This class handles the game turn logic, it decides what phase it is and what should happen in the phase.
+ * There should only be one GameTurn at a time.
+ *
+ * @author yoran
+ * @version June 2019
+ */
+
 class GameTurn implements FirebaseControllerObserver {
 
     GameController gameCon;

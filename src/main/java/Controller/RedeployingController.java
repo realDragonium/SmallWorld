@@ -3,16 +3,31 @@ package Controller;
 import Firebase.FirebaseServiceOwn;
 import Managers.SceneManager;
 
+/** This controller-class controlls the logic of the methods that can be called in the Redeploying phase
+ *
+ * @author yoran
+ * @version June 2019
+ *
+ */
+
 public class RedeployingController {
 
     GameController gameCon;
     FirebaseServiceOwn fb = SceneManager.getInstance().getApp().getFirebaseService();
+
+    /** Constructor where the view is being initialized
+     *
+     * @param gameCon
+     */
 
     RedeployingController(GameController gameCon){
         this.gameCon = gameCon;
         SceneManager.getInstance().loadRedeploying(this);
 
     }
+
+
+
 
     public void removeFiche() {
         AreaController activeArea = getActiveArea();
@@ -46,6 +61,11 @@ public class RedeployingController {
             }
         }
     }
+
+    /**
+     *
+     * @return returns the selected area
+     */
 
     private AreaController getActiveArea(){
         AreaController activeArea = null;

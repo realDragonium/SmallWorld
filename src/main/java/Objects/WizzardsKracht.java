@@ -5,6 +5,13 @@ import Controller.RaceController;
 import Enum.TurnFase;
 import Enum.AreaProperty;
 
+/** This handles the logic for the wizzard kracht
+ *
+ * @author yoran
+ * @version June 2019
+ *
+ */
+
 public class WizzardsKracht implements Kracht{
 
     private TurnFase phase = TurnFase.redeploying;

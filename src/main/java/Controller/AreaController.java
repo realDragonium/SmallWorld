@@ -15,6 +15,12 @@ import javafx.scene.Group;
 import java.util.List;
 import java.util.Stack;
 
+/** This Controller-class handles the logic for all the functions that can be called for areas
+ *
+ * @author beau
+ * @version June 2019
+ */
+
 public class AreaController implements FirebaseControllerObserver {
 
 
