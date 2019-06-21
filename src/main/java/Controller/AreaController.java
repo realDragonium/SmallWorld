@@ -23,8 +23,6 @@ import java.util.Stack;
  */
 
 public class AreaController implements FirebaseControllerObserver {
-
-
     private Map2DController map2DCon;
     private AreaModel model;
     private GameController gameCon;
