@@ -4,7 +4,15 @@ import Managers.SceneManager;
 import Model.RoundModel;
 import Observer.RoundObserver;
 
+/**
+ * @author : Martijn van der Steen
+ * @version : Juni 2019
+ */
+
 public class RoundController {
+
+
+
     private RoundModel model;
     private GameController gameCon;
 

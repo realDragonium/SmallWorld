@@ -9,10 +9,20 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+/**
+ * @author : Martijn van der Steen
+ * @version : Juni 2019
+ */
+
 public class TurnModel implements TurnObservable {
+
+
     private List<TurnObserver> observers = new ArrayList<>();
     public int currentTurn;
     private int turnPerRound;
+    private List<String> players = new ArrayList<>();
+    public String currentPlayerId = "player1";
+    private int indexcurrentplayer = 0;
     public TurnFase fase;
     private Queue<TurnFase> fases = new LinkedList<>();
 
@@ -21,6 +31,11 @@ public class TurnModel implements TurnObservable {
         this.turnPerRound = turnPerRound;
         currentTurn = 1;
         makeStack();
+        players.add("player1");
+        players.add("player2");
+        players.add("player3");
+        players.add("player4");
+
     }
 
     public int getTurnPerRound(){
@@ -35,7 +50,9 @@ public class TurnModel implements TurnObservable {
     }
 
     public void nextTurn(){
-        currentTurn++;
+        indexcurrentplayer++;
+        if(indexcurrentplayer > 3)indexcurrentplayer = 0;
+        currentPlayerId = players.get(indexcurrentplayer);
         notifyObservers();
     }
 
@@ -52,7 +69,7 @@ public class TurnModel implements TurnObservable {
 
     @Override
     public int getTurn() {
-        return currentTurn;
+        return Integer.parseInt(currentPlayerId.split("yer")[1]);
     }
 
     @Override
