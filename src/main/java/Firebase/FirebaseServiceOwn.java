@@ -252,6 +252,10 @@ public class FirebaseServiceOwn {
         gameRef.collection("Extras").document("Shop").set(map);
     }
 
+    public void changePointsPlayer(String id, int amount){
+        gameRef.collection("Players").document(id).update("punten", amount);
+    }
+
     //Areas setten in firebase
     public void setAreas(String lobbyName) {
         List<QueryDocumentSnapshot> list = null;
