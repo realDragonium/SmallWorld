@@ -42,7 +42,6 @@ public class RedeployingController {
                     }
                     player.getActiveCombination().getRace().addFiche(activeArea.getOneFiche());
                     fb.areaUpdateFiches(activeArea.getId(), activeArea.getFichesAmount());
-
                 }
             }
         }

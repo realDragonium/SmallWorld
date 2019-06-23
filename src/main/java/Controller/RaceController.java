@@ -62,7 +62,14 @@ public class RaceController {
 		updatePlayerFicheAmount();
     }
 
-     void destroyAllFichesButOne(){
+	/**
+	 * De methode destroyAllFichesButOne() roept in de RaceModel de methode removeAllFichesButOne() aan.
+	 * De methode destroyAllFichesButOne() roept in de RaceController de methode updatePlayerFicheAmount() aan.
+	 * @author : Martijn van der Steen.
+	 * @version : Juni 2019
+	 */
+
+	void destroyAllFichesButOne(){
 		model.removeAllFichesButOne();
 		updatePlayerFicheAmount();
 	}

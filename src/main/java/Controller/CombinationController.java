@@ -12,10 +12,6 @@ public class CombinationController {
     private PlayerController player;
     private CombinationModel model;
 
-    public CombinationController() {
-
-    }
-
     public void registerObserver(CombinationObserver obs){
         model.register(obs);
     }
@@ -65,6 +61,9 @@ public class CombinationController {
 
     void setToNonActive() {
         model.setToNonActive();
+        for(AreaController area: getRace().getAllAreas()){
+            area.destroyAllButOne();
+        }
     }
 
     void destroyAllFichesButOne() {

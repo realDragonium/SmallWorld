@@ -12,11 +12,14 @@ import Enum.TurnFase;
 import javafx.scene.text.Text;
 
 
-/**@author Yoran
- *
+/**
+ * @author : Martijn van der Steen
+ * @version : Juni 2019
  */
 
 public class TurnView implements TurnObserver {
+
+
 
     private Group group;
     private TurnController turnCon;

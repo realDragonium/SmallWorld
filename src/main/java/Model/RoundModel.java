@@ -6,20 +6,39 @@ import Observer.RoundObserver;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author : Martijn van der Steen
+ * @version : Juni 2019
+ */
+
 public class RoundModel implements RoundObservable {
+
+
+
     private int maxRounds;
     public int currentRound = 1;
     private List<RoundObserver> observers = new ArrayList<>();
 
 
+    /**
+     *
+     * @param maxRounds
+     */
     public RoundModel(int maxRounds){
         this.maxRounds = maxRounds;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getMaxRounds(){
         return maxRounds;
     }
 
+    /**
+     *
+     */
     public void nextRound(){
         currentRound++;
         notifyObservers();
@@ -38,6 +57,10 @@ public class RoundModel implements RoundObservable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getRound() {
         return currentRound;

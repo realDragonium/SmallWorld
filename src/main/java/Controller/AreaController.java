@@ -15,7 +15,8 @@ import javafx.scene.Group;
 import java.util.List;
 import java.util.Stack;
 
-/** This Controller-class handles the logic for all the functions that can be called for areas
+/**
+ * This Controller-class handles the logic for all the functions that can be called for areas
  *
  * @author beau
  * @version June 2019
@@ -60,7 +61,7 @@ public class AreaController implements FirebaseControllerObserver {
     }
 
     Stack<RaceFiche> removeFiches() {
-        fb.areaUpdateFiches(model.getId(), 0);
+//        fb.areaUpdateFiches(model.getId(), 0);
         return model.getAllFiches();
     }
 
@@ -80,27 +81,20 @@ public class AreaController implements FirebaseControllerObserver {
         map2DCon.selectSingleArea(this);
     }
 
-    public void inVerval() {
-        destroyAllButOne();
-    }
-
     public void destroyAllButOne() {
         model.getAllButOne();
+        fb.areaUpdateFiches("fiches", model.getNumberOfFiches());
     }
 
     void returnAllButOne(RaceController raceController) {
         raceController.pushFiches(model.getAllButOne());
+        fb.areaUpdateFiches("fiches", model.getNumberOfFiches());
     }
 
     private void getAreaInfo() {
         DocumentSnapshot ds = fb.getAreaInfo(model.getId());
         Platform.runLater(() -> {
-            if (model.getPlayer() == gameCon.getMyPlayer()) {
-                model.getPlayer().getActiveCombination().getRace().pushFiches(removeFiches());
-                model.player = null;
-            } else {
-                model.setFiches((int) Math.round(ds.getDouble("fiches")));
-            }
+            model.setFiches((int) Math.round(ds.getDouble("fiches")));
             model.setAreaType(ds.getString("type"));
             model.setBorderArea(ds.getBoolean("borderArea"));
             model.setNeighbours((List<String>) ds.get("neighbours"));
@@ -111,22 +105,21 @@ public class AreaController implements FirebaseControllerObserver {
 
     @Override
     public void update(DocumentSnapshot ds) {
-        if(gameCon.getCurrentPlayer() == gameCon.getMyPlayer()) return;
+        if (gameCon.getCurrentPlayer() == gameCon.getMyPlayer()) return;
         Platform.runLater(() -> {
             if (model.getPlayer() == gameCon.getMyPlayer()) {
                 model.getPlayer().getActiveCombination().getRace().pushFiches(removeFiches());
                 model.player = null;
-            } else {
                 model.setFiches((int) Math.round(ds.getDouble("fiches")));
             }
-            model.notifyObserver();
+            model.setFiches((int) Math.round(ds.getDouble("fiches")));
+            System.out.println(ds.getDouble("fiches"));
         });
     }
 
     public AreaProperty getSpecialProp() {
         return model.getSpecialProp();
     }
-
 
     public boolean isNextToWater() {
         return model.isNextToWater();
@@ -144,11 +137,13 @@ public class AreaController implements FirebaseControllerObserver {
         return model.getAreaType();
     }
 
-    public boolean firstAttackArea(){
+    public boolean firstAttackArea() {
         return model.firstAttackArea();
     }
 
-    public boolean isAttackAble() { return model.isAttackAble();}
+    public boolean isAttackAble() {
+        return model.isAttackAble();
+    }
 
     public List<String> getNeighbours() { return model.getNeigbours();}
 
