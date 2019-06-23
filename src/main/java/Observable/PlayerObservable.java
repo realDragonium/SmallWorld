@@ -1,5 +1,6 @@
 package Observable;
 
+import Controller.CombinationController;
 import Observer.PlayerObserver;
 
 public interface PlayerObservable {
@@ -7,4 +8,7 @@ public interface PlayerObservable {
     void notifyObserver();
     int getFiches();
     int getPunten();
+    CombinationController getActive();
+    CombinationController getDeprec();
+    String getId();
 }

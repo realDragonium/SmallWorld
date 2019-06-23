@@ -28,6 +28,7 @@ public class GameController {
     private ShopController shopCon;
     private GameTurn gameTurn;
     private PlayerController myPlayer;
+    private MyPlayerController myPlayerCon;
     private RedeployingController redCon;
     private String myPlayerId;
     private DiceController diceCon;
@@ -85,6 +86,7 @@ public class GameController {
 
         createAttCon();
         mapCon = new Map2DController(this);
+        myPlayerCon = new MyPlayerController(this);
     }
 
 

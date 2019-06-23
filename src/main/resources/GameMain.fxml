@@ -18,5 +18,6 @@
         <Group id="infoGroup"/>
         <Group id="smallworldGroup"/>
         <Group id="attackGroup"/>
+        <Group id="myPlayerGroup"/>
     </children>
 </Pane>

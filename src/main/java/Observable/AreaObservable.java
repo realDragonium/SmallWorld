@@ -7,4 +7,6 @@ public interface AreaObservable {
     void notifyObserver();
     boolean getActive();
     int getNumberOfFiches();
+
+    boolean isHighLighted();
 }

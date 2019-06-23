@@ -31,6 +31,7 @@ public class PlayerController implements FirebaseControllerObserver {
         System.out.println(getId() + " voegt combinatie toe");
         model.removePoints(costs);
         combinations.add(combo);
+        model.setActiveCombi(combo);
         combo.setPlayer(this);
         setFiches(combo.getRace().fichesCount());
         Map<String, Object> info = new HashMap<>();
