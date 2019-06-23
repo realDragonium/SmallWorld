@@ -74,6 +74,7 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("buttonGroup"));
         pane.getChildren().add(groepen.get("roundGroup"));
         pane.getChildren().add(groepen.get("smallworldGroup"));
+        pane.getChildren().add(groepen.get("myPlayerGroup"));
         for (Node group : standardPane) {
             pane.getChildren().add(group);
         }
@@ -89,6 +90,7 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("buttonGroup"));
         pane.getChildren().add(groepen.get("roundGroup"));
         pane.getChildren().add(groepen.get("smallworldGroup"));
+        pane.getChildren().add(groepen.get("myPlayerGroup"));
         for (Node group : standardPane) {
             pane.getChildren().add(group);
         }
@@ -105,6 +107,7 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("roundGroup"));
         pane.getChildren().add(groepen.get("smallworldGroup"));
         pane.getChildren().add(groepen.get("attackGroup"));
+        pane.getChildren().add(groepen.get("myPlayerGroup"));
         for (Group group : standardPane) {
             pane.getChildren().add(group);
         }
@@ -121,6 +124,7 @@ public class SceneManager {
         pane.getChildren().add(groepen.get("roundGroup"));
         pane.getChildren().add(groepen.get("smallworldGroup"));
         pane.getChildren().add(groepen.get("redeployingGroup"));
+        pane.getChildren().add(groepen.get("myPlayerGroup"));
         for (Node group : standardPane) {
             pane.getChildren().add(group);
         }
@@ -253,6 +257,11 @@ public class SceneManager {
     public void loadPlayer(String playerID, PlayerController playerCon) {
         creators.put(PlayerView.class, (Callable<PlayerView>) () -> new PlayerView(playerID, groepen.get("playerGroup"), playerCon));
         FXMLLOADER("/PlayerView.fxml");
+    }
+
+    public void loadMyPlayer(MyPlayerController playerCon) {
+        creators.put(MyPlayerView.class, (Callable<MyPlayerView>) () -> new MyPlayerView(groepen.get("myPlayerGroup"), playerCon));
+        FXMLLOADER("/MyPlayerView.fxml");
     }
 
     public void loadShop(ShopController shopCon) {

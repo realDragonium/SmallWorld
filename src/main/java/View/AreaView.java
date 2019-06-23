@@ -46,9 +46,19 @@ public class AreaView implements AreaObserver {
         shape.setFill(color.getColor());
     }
 
+    private void highLight() { shape.setFill(color.getColor().brighter());}
+
     @Override
     public void update(AreaObservable ao) {
-        shape.setFill((ao.getActive()) ? color.getColor().darker() : color.getColor());
+        if(ao.getActive()){
+            shape.setFill(color.getColor().darker());
+        }
+        else if (ao.isHighLighted()){
+            shape.setFill(color.getColor().brighter());
+        }
+        else{
+            shape.setFill(color.getColor());
+        }
         int numbers = ao.getNumberOfFiches();
         Platform.runLater( () -> text.setText(String.valueOf(numbers)));
     }

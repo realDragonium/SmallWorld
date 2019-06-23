@@ -22,6 +22,7 @@ public class AreaModel implements AreaObservable {
     private AreaType type;
     private boolean nextToWater = false;
     private boolean borderArea = false;
+    private boolean highLighted = false;
     private AreaProperty specialProperty = AreaProperty.none;
     private List<String> neighbours = new ArrayList<>();
     private boolean attackAble = true;
@@ -150,5 +151,15 @@ public class AreaModel implements AreaObservable {
     @Override
     public int getNumberOfFiches() {
         return raceFiches.size();
+    }
+
+    @Override
+    public boolean isHighLighted() {
+        return highLighted;
+    }
+
+    public void highLight() {
+        highLighted = !highLighted;
+        notifyObserver();
     }
 }

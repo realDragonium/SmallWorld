@@ -23,6 +23,7 @@ public class RoundController {
     }
 
     public void nextRound() {
+        //Als aantal rondes boven maximale rondes is.
         if(model.currentRound >= model.getMaxRounds()) {
             gameCon.endGame();
             return;

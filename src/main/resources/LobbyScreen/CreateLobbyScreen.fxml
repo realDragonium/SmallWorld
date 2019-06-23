@@ -9,7 +9,7 @@
 
 <Group fx:id="root" style="-fx-background-color: yellow;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.LobbyView">
    <children>
-      <ImageView fitHeight="466.0" fitWidth="864.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="1080.0" fitWidth="1920" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@backgroundLobby.jpg" />
          </image></ImageView>

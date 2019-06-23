@@ -77,10 +77,5 @@
 	         </image>
 	      </ImageView>
 	  </HBox>
-      <ImageView fitHeight="1080.0" fitWidth="1920.0">
-         <image>
-            <Image url="@Border_screen.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

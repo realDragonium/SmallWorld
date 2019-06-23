@@ -32,5 +32,9 @@ public interface AreaObservable {
      */
     int getNumberOfFiches();
 
-
+    /**
+     *
+     * @return returns true if the area is highlighted
+     */
+    boolean isHighLighted();
 }

@@ -143,7 +143,9 @@ public class AreaController implements FirebaseControllerObserver {
         return model.isAttackAble();
     }
 
-    public List<String> getNeighbours() {
-        return model.getNeigbours();
+    public List<String> getNeighbours() { return model.getNeigbours();}
+
+    public void highLightArea() {
+        model.highLight();
     }
 }
